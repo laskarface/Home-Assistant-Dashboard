@@ -1,0 +1,48 @@
+type: picture-elements
+image: /local/blank.png
+elements:
+- type: image
+  entity: camera.vminion
+  camera_image: camera.vminion
+  camera_view: live
+  style:
+    left: 50%
+    top: 50%
+    width: 100%
+    height: 100%
+    transform: translate(-50%, -50%)
+- type: image
+  image: /local/VMINION.png
+  style:
+    left: -4%
+    top: 98%
+    width: 150px
+    transform: translate(-0%, -100%)
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.55))
+    opacity: 0.7
+    pointer-events: none
+- type: custom:button-card
+  name: "[[[\n  const x = Number(String(states['sensor.ratrig_vminion_toolhead_position_x']?.state\
+    \ ?? '0').replace(',', '.')) || 0;\n  const y = Number(String(states['sensor.ratrig_vminion_toolhead_position_y']?.state\
+    \ ?? '0').replace(',', '.')) || 0;\n  const z = Number(String(states['sensor.ratrig_vminion_toolhead_position_z']?.state\
+    \ ?? '0').replace(',', '.')) || 0;\n  return `X ${x.toFixed(1)}   Y ${y.toFixed(1)}\
+    \   Z ${z.toFixed(2)} mm`;\n]]]\n"
+  show_icon: false
+  show_name: true
+  styles:
+    card:
+    - background: rgba(10,12,16,0.45)
+    - border: 1px solid rgba(255,255,255,0.12)
+    - border-radius: 12px
+    - padding: 8px 12px
+    - box-shadow: 0 10px 20px rgba(0,0,0,0.55)
+    - backdrop-filter: blur(6px)
+    name:
+    - color: white
+    - font-weight: 700
+    - font-size: 13px
+    - text-shadow: 0 2px 10px rgba(0,0,0,0.85)
+  style:
+    top: 8%
+    left: 50%
+    transform: translate(-50%, -50%)

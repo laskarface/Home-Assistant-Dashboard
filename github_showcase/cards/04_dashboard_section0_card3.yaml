@@ -1,0 +1,502 @@
+type: custom:fold-entity-row
+padding: 0
+clickable: true
+card_mod:
+  style: 'div#head { display: block !important; width: 100% !important; padding: 0
+    !important; margin: 0 !important; --toggle-icon-width: 0px !important; }
+
+    #head { padding: 0 !important; margin: 0 !important; width: 100% !important; cursor:
+    pointer !important; }
+
+    #head ha-icon { display: none !important; }
+
+    div#items { padding: 0 !important; margin: 0 !important; }
+
+    '
+head:
+  type: custom:button-card
+  show_name: false
+  show_icon: false
+  show_state: false
+  styles:
+    card:
+    - padding: 0
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - border-radius: 20px
+    - border: "[[[ \n  const heating = states['binary_sensor.dhwp_actuator_energy_demand_status']?.state\
+        \ === 'on';\n  const color = heating ? '#FFA500' : '#46D278';\n  return `1px\
+        \ solid ${color}80`;\n]]]\n"
+    - box-shadow: "[[[ \n  const heating = states['binary_sensor.dhwp_actuator_energy_demand_status']?.state\
+        \ === 'on';\n  return heating ? '0 0 20px rgba(255, 165, 0, 0.3), 0 8px 32px\
+        \ rgba(0,0,0,0.4)' : '0 8px 32px rgba(0,0,0,0.4)';\n]]]\n"
+    - height: 85px
+    grid:
+    - grid-template-areas: '"icon details" "footer footer"'
+    - grid-template-columns: 130px 1fr
+    - grid-template-rows: 60px 25px
+    custom_fields:
+      icon:
+      - justify-self: stretch
+      - align-self: stretch
+      - border-right: 2px solid rgba(255,255,255,0.6)
+      - border-top-left-radius: 20px
+      - display: flex
+      - align-items: center
+      - justify-content: center
+      details:
+      - justify-self: stretch
+      - align-self: stretch
+      - display: flex
+      - align-items: center
+      - justify-content: center
+      - padding: 0 10px
+  custom_fields:
+    icon: "[[[\n  const heating = states['binary_sensor.dhwp_actuator_energy_demand_status']?.state\
+      \ === 'on';\n  const color = heating ? '#FFA500' : '#46D278';\n  const fanAnim\
+      \ = heating ? 'animation: rotateFan 2s linear infinite;' : '';\n  \n  const\
+      \ svg = `\n    <svg viewBox=\"0 0 100 100\" width=\"55\" height=\"55\" style=\"\
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5));\">\n      <defs>\n        <linearGradient\
+      \ id=\"pacBody\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">\n          <stop\
+      \ offset=\"0%\" style=\"stop-color:#ffffff;stop-opacity:1\" />\n          <stop\
+      \ offset=\"100%\" style=\"stop-color:#f0f0f0;stop-opacity:1\" />\n        </linearGradient>\n\
+      \        <radialGradient id=\"fanGlow\" cx=\"50%\" cy=\"50%\" r=\"50%\">\n \
+      \         <stop offset=\"0%\" style=\"stop-color:${color};stop-opacity:0.3\"\
+      \ />\n          <stop offset=\"100%\" style=\"stop-color:${color};stop-opacity:0\"\
+      \ />\n        </radialGradient>\n      </defs>\n      <rect x=\"30\" y=\"20\"\
+      \ width=\"40\" height=\"60\" rx=\"8\" ry=\"8\" fill=\"url(#pacBody)\" />\n \
+      \     <circle cx=\"50\" cy=\"45\" r=\"14\" fill=\"rgba(0,0,0,0.05)\" stroke=\"\
+      rgba(0,0,0,0.1)\" stroke-width=\"1\" />\n      <g style=\"transform-origin:\
+      \ 50px 45px; ${fanAnim}\">\n        <path d=\"M50,45 L50,33 A1.5,1.5 0 0,1 51.5,33\
+      \ L51.5,45 Z\" fill=\"${color}\" />\n        <path d=\"M50,45 L62,45 A1.5,1.5\
+      \ 0 0,1 62,46.5 L50,46.5 Z\" fill=\"${color}\" />\n        <path d=\"M50,45\
+      \ L50,57 A1.5,1.5 0 0,1 48.5,57 L48.5,45 Z\" fill=\"${color}\" />\n        <path\
+      \ d=\"M50,45 L38,45 A1.5,1.5 0 0,1 38,43.5 L50,43.5 Z\" fill=\"${color}\" />\n\
+      \        <circle cx=\"50\" cy=\"45\" r=\"3\" fill=\"${color}\" />\n      </g>\n\
+      \      <rect x=\"38\" y=\"65\" width=\"24\" height=\"4\" rx=\"1.5\" fill=\"\
+      rgba(0,0,0,0.1)\" />\n      <circle cx=\"50\" cy=\"45\" r=\"18\" fill=\"url(#fanGlow)\"\
+      \ />\n    </svg>\n    <style>@keyframes rotateFan { from { transform: rotate(0deg);\
+      \ } to { transform: rotate(360deg); } }</style>\n  `;\n\n  return `\n    <div\
+      \ style=\"width: 100%; height: 100%; display: flex; flex-direction: column;\
+      \ align-items: center; justify-content: center; background: linear-gradient(135deg,\
+      \ ${color}33 0%, rgba(20, 27, 38, 0) 100%); border-top-left-radius: 20px; box-sizing:\
+      \ border-box; position: relative;\">\n      <div style=\"position: absolute;\
+      \ width: 50px; height: 50px; background: ${color}; border-radius: 50%; filter:\
+      \ blur(25px); opacity: 0.3; animation: pulseGlow 3s infinite alternate ease-in-out;\"\
+      ></div>\n      <div style=\"position: relative; z-index: 1; display: flex; flex-direction:\
+      \ column; align-items: center; justify-content: center;\">\n        ${svg}\n\
+      \        <div style=\"font-size: 8px; font-weight: 900; color: white; text-transform:\
+      \ uppercase; letter-spacing: 0.8px; margin-top: -2px;\">PAC & Eau Chaude</div>\n\
+      \      </div>\n      <style>@keyframes pulseGlow { 0% { transform: scale(0.8);\
+      \ opacity: 0.2; } 100% { transform: scale(1.2); opacity: 0.4; } }</style>\n\
+      \    </div>\n  `;\n]]]\n"
+    details: "[[[\n  const t_maison = (parseFloat(states['sensor.hp_actuator_io_5470820_9_temperature']?.state)\
+      \ || 0).toFixed(1);\n  const t_ext = (parseFloat(states['sensor.hp_actuator_io_5470820_3_temperature']?.state)\
+      \ || 0).toFixed(1);\n  const s3 = states['water_heater.temperature_ballon'];\n\
+      \  const t_ballon = (parseFloat(s3?.attributes?.current_temperature || s3?.attributes?.temperature)\
+      \ || 0).toFixed(1);\n  const conso = (parseFloat(states['sensor.eau_chaude_du_jour_calculee']?.state)\
+      \ || 0).toFixed(0);\n\n  const isMobile = window.innerWidth < 500;\n  const\
+      \ mainGap = isMobile ? \"10px\" : \"25px\";\n  const valSize = isMobile ? \"\
+      14px\" : \"18px\";\n  const labelSize = isMobile ? \"9px\" : \"10px\";\n  const\
+      \ iconSize = isMobile ? \"16px\" : \"20px\";\n\n  return `\n    <div style=\"\
+      display: flex; flex-direction: row; align-items: center; justify-content: center;\
+      \ gap: ${mainGap}; height: 100%; width: 100%;\">\n      <!-- Groupe 1: Maison\
+      \ & Ext -->\n      <div style=\"display: flex; flex-direction: column; gap:\
+      \ 4px; align-items: center;\">\n        <div style=\"display: flex; align-items:\
+      \ baseline; gap: 4px;\">\n          <ha-icon icon=\"mdi:home\" style=\"width:\
+      \ ${iconSize}; height: ${iconSize}; color: #FFA500;\"></ha-icon>\n         \
+      \ <span style=\"font-size: ${valSize}; font-weight: 900; color: white;\">${t_maison}°</span>\n\
+      \        </div>\n        <div style=\"font-size: ${labelSize}; font-weight:\
+      \ 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing:\
+      \ 0.5px;\">Ext. <span style=\"color: #3DDBB8;\">${t_ext}°</span></div>\n   \
+      \   </div>\n\n      <div style=\"width: 1px; height: 30px; background: rgba(255,255,255,0.1);\"\
+      ></div>\n\n      <!-- Groupe 2: Eau Chaude -->\n      <div style=\"display:\
+      \ flex; flex-direction: column; gap: 4px; align-items: center;\">\n        <div\
+      \ style=\"display: flex; align-items: baseline; gap: 4px;\">\n          <ha-icon\
+      \ icon=\"mdi:water-boiler\" style=\"width: ${iconSize}; height: ${iconSize};\
+      \ color: #008CFF;\"></ha-icon>\n          <span style=\"font-size: ${valSize};\
+      \ font-weight: 900; color: white;\">${t_ballon}°</span>\n        </div>\n  \
+      \      <div style=\"font-size: ${labelSize}; font-weight: 700; color: rgba(255,255,255,0.5);\
+      \ text-transform: uppercase; letter-spacing: 0.5px;\">Conso. <span style=\"\
+      color: #78EBFF;\">${conso}L</span></div>\n      </div>\n    </div>\n  `;\n]]]\n"
+    footer: '[[[ return `<div style="display:flex; width:100%; justify-content:center;
+      align-items:center; padding-bottom: 5px;"><ha-icon icon="mdi:chevron-down" style="color:
+      rgba(255,255,255,0.5); width: 16px; height: 16px;"></ha-icon></div>`; ]]]
+
+      '
+entities:
+- type: custom:button-card
+  show_name: false
+  show_icon: false
+  styles:
+    card:
+    - background: transparent
+    - border: none
+    - box-shadow: none
+    - padding: 0
+    - margin-top: 15px
+    grid:
+    - grid-template-areas: '"content"'
+    - grid-template-columns: 100%
+  custom_fields:
+    content:
+      card:
+        type: horizontal-stack
+        cards:
+        - type: custom:button-card
+          entity: climate.hp_actuator_thermostat
+          name: Pompe à Chaleur
+          show_state: true
+          show_icon: false
+          aspect_ratio: 16/9
+          styles:
+            card:
+            - padding: 0
+            - border-radius: 20px
+            - border: "[[[\n  const stateObj = states['binary_sensor.dhwp_actuator_energy_demand_status'];\n\
+                \  const heating = stateObj && stateObj.state === 'on';\n  return\
+                \ heating ? '1px solid rgba(255, 165, 0, 0.5)' : '1px solid rgba(255,255,255,0.1)';\n\
+                ]]]\n"
+            - background: rgba(20, 27, 38, 0.6)
+            - backdrop-filter: blur(20px)
+            - -webkit-backdrop-filter: blur(20px)
+            - box-shadow: "[[[\n  const stateObj = states['binary_sensor.dhwp_actuator_energy_demand_status'];\n\
+                \  const heating = stateObj && stateObj.state === 'on';\n  return\
+                \ heating \n    ? '0 0 20px rgba(255, 165, 0, 0.3), 0 8px 32px rgba(0,0,0,0.3)'\
+                \ \n    : '0 8px 32px rgba(0,0,0,0.3)';\n]]]\n"
+            - overflow: hidden
+            - min-height: 220px
+            - transition: all 0.5s ease
+            name:
+            - position: absolute
+            - z-index: 2
+            - top: 12px
+            - left: 0
+            - right: 0
+            - text-align: center
+            - font-size: 16px
+            - font-weight: 700
+            - letter-spacing: 0.5px
+            - color: white
+            - text-shadow: 0 2px 4px rgba(0,0,0,0.8)
+            state:
+            - position: absolute
+            - z-index: 2
+            - top: 34px
+            - left: 0
+            - right: 0
+            - text-align: center
+            - font-size: 13px
+            - opacity: 0.8
+            - font-weight: 500
+            - color: rgba(255,255,255,0.9)
+            - text-shadow: 0 2px 4px rgba(0,0,0,0.8)
+            custom_fields:
+              bg:
+              - position: absolute
+              - inset: 0
+              - z-index: 0
+              - opacity: 0.9
+              - pointer-events: none
+              overlay:
+              - position: absolute
+              - inset: 0
+              - z-index: 1
+              - background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0)
+                  30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.8) 100%)
+              - pointer-events: none
+              gauge_pac:
+              - position: absolute
+              - z-index: 3
+              - left: 16px
+              - top: 60px
+              - bottom: 40px
+              - width: 14px
+              - border-radius: 10px
+              - background: rgba(0,0,0,0.3)
+              - border: 1px solid rgba(255,255,255,0.1)
+              - box-shadow: 0 4px 10px rgba(0,0,0,0.3)
+              gauge_ext:
+              - position: absolute
+              - z-index: 3
+              - right: 16px
+              - top: 60px
+              - bottom: 40px
+              - width: 14px
+              - border-radius: 10px
+              - background: rgba(0,0,0,0.3)
+              - border: 1px solid rgba(255,255,255,0.1)
+              - box-shadow: 0 4px 10px rgba(0,0,0,0.3)
+              ext_label:
+              - position: absolute
+              - z-index: 4
+              - right: 16px
+              - bottom: 20px
+              - font-size: 11px
+              - font-weight: 600
+              - color: rgba(255,255,255,0.8)
+              - text-shadow: 0 1px 2px rgba(0,0,0,0.8)
+              - text-align: center
+              - width: 40px
+              - margin-right: -13px
+              temp:
+              - position: absolute
+              - z-index: 4
+              - left: 50%
+              - bottom: 35px
+              - transform: translateX(-50%)
+              - font-size: 28px
+              - font-weight: 800
+              - color: white
+              - text-shadow: 0 4px 12px rgba(0,0,0,0.5)
+              - letter-spacing: -0.5px
+              consigne_inline:
+              - position: absolute
+              - z-index: 4
+              - left: 50%
+              - bottom: 15px
+              - transform: translateX(-50%)
+              - font-size: 12px
+              - font-weight: 600
+              - color: rgba(255,255,255,0.7)
+              - background: rgba(0,0,0,0.3)
+              - padding: 2px 8px
+              - border-radius: 10px
+              - border: 1px solid rgba(255,255,255,0.05)
+          custom_fields:
+            overlay: ''
+            bg: "[[[\n  const demand = states['binary_sensor.dhwp_actuator_energy_demand_status'];\n\
+              \  const heating = demand && demand.state === 'on';\n  const bust =\
+              \ (demand && demand.last_changed ? demand.last_changed : Date.now()).toString().replace(/\\\
+              D/g,'');\n  const src = heating\n    ? `/local/pac_atlantic_heating_16_9_nostretch2.png?v=${bust}`\n\
+              \    : `/local/pac_atlantic_idle_16_9_nostretch.png?v=${bust}`;\n  const\
+              \ zoom = heating ? 1.4 : 1.6;\n  const anim = heating ? 'animation:\
+              \ pulse_img_anim 1.2s infinite alternate ease-in-out;' : '';\n  return\
+              \ `\n    <style>\n      @keyframes pulse_img_anim {\n        0% { opacity:\
+              \ 0.35; filter: brightness(0.85); }\n        100% { opacity: 1; filter:\
+              \ brightness(1.15); }\n      }\n    </style>\n    <div style=\"\n  \
+              \    width:100%; height:100%;\n      background: url('${src}') center/contain\
+              \ no-repeat;\n      transform: scale(${zoom});\n      transform-origin:\
+              \ center;\n      transition: transform 0.5s ease;\n      ${anim}\n \
+              \   \"></div>\n  `;\n]]]\n"
+            temp: "[[[\n  var s = states['sensor.hp_actuator_io_5470820_9_temperature'];\n\
+              \  var tRaw = s ? s.state : '—';\n  var t = parseFloat(tRaw.toString().replace(',',\
+              \ '.'));\n  return (isFinite(t) ? t.toFixed(1) : '—') + '°';\n]]]\n"
+            consigne_inline: "[[[\n  const stateObj = states['climate.hp_actuator_thermostat'];\n\
+              \  if (!stateObj || !stateObj.attributes) return 'Cible —°';\n  let\
+              \ raw = stateObj.attributes.temperature;\n  if (raw === undefined ||\
+              \ raw === null) {\n    raw = stateObj.attributes.target_temp_high;\n\
+              \  }\n  const s = parseFloat(raw);\n  return 'Cible ' + (isFinite(s)\
+              \ ? s.toFixed(1) : '—') + '°';\n]]]\n"
+            ext_label: "[[[\n  var s = states['sensor.hp_actuator_io_5470820_3_temperature'];\n\
+              \  var eRaw = s ? s.state : '—';\n  var e = parseFloat(eRaw.toString().replace(',',\
+              \ '.'));\n  return 'Ext\\n' + (isFinite(e) ? e.toFixed(1) : '—') + '°';\n\
+              ]]]\n"
+            gauge_pac: "[[[\n  var s = states['sensor.hp_actuator_io_5470820_9_temperature'];\n\
+              \  var tRaw = s ? s.state : '—';\n  var t = parseFloat(tRaw.toString().replace(',',\
+              \ '.'));\n  var min = -10, max = 38;\n  var safeT = isFinite(t) ? t\
+              \ : min;\n  var pct = Math.max(0, Math.min(100, ((safeT - min) / (max\
+              \ - min)) * 100));\n  var color = 'rgba(255,255,255,0.9)';\n  if (safeT\
+              \ <= 7) color = '#78EBFF';\n  else if (safeT < 19) color = '#008CFF';\n\
+              \  else if (safeT <= 25) color = '#46D278';\n  else if (safeT <= 31)\
+              \ color = '#FFDC78';\n  else color = '#DC5050';\n  return '<div style=\"\
+              width:100%; height:100%; position:relative; border-radius:10px; overflow:hidden;\"\
+              ><div style=\"position:absolute; bottom:0; left:0; right:0; height:'\
+              \ + pct + '%; background:' + color + '; transition: all 1s cubic-bezier(0.4,0,0.2,1);\
+              \ box-shadow: 0 0 10px ' + color + ';\"></div></div>';\n]]]\n"
+            gauge_ext: "[[[\n  var s = states['sensor.hp_actuator_io_5470820_3_temperature'];\n\
+              \  var eRaw = s ? s.state : '—';\n  var e = parseFloat(eRaw.toString().replace(',',\
+              \ '.'));\n  var min = -10, max = 38;\n  var safeT = isFinite(e) ? e\
+              \ : min;\n  var pct = Math.max(0, Math.min(100, ((safeT - min) / (max\
+              \ - min)) * 100));\n  var color = '#ffffff';\n  if (safeT <= 5) color\
+              \ = '#78EBFF';\n  else if (safeT <= 15) color = '#008CFF';\n  else if\
+              \ (safeT <= 25) color = '#46D278';\n  else if (safeT <= 30) color =\
+              \ '#FFDC78';\n  else color = '#DC5050';\n  return '<div style=\"width:100%;\
+              \ height:100%; position:relative; border-radius:10px; overflow:hidden;\"\
+              ><div style=\"position:absolute; bottom:0; left:0; right:0; height:'\
+              \ + pct + '%; background:' + color + '; transition: all 1s cubic-bezier(0.4,0,0.2,1);\
+              \ box-shadow: 0 0 10px ' + color + ';\"></div></div>';\n]]]\n"
+          extra_styles: "@keyframes pulse_img_anim {\n  0% { opacity: 0.4; filter:\
+            \ brightness(0.8); }\n  100% { opacity: 1; filter: brightness(1.2); }\n\
+            }\n"
+        - type: custom:button-card
+          entity: water_heater.temperature_ballon
+          name: Ballon Thermor
+          show_state: true
+          show_icon: false
+          styles:
+            card:
+            - padding: 0
+            - border-radius: 20px
+            - border: "[[[\n  const stateObj = states['binary_sensor.dhwp_actuator_energy_demand_status'];\n\
+                \  const heating = stateObj && stateObj.state === 'on';\n  return\
+                \ heating ? '1px solid rgba(255, 165, 0, 0.5)' : '1px solid rgba(255,255,255,0.1)';\n\
+                ]]]\n"
+            - background: rgba(20, 27, 38, 0.6)
+            - backdrop-filter: blur(20px)
+            - -webkit-backdrop-filter: blur(20px)
+            - box-shadow: "[[[\n  const stateObj = states['binary_sensor.dhwp_actuator_energy_demand_status'];\n\
+                \  const heating = stateObj && stateObj.state === 'on';\n  return\
+                \ heating \n    ? '0 0 20px rgba(255, 165, 0, 0.3), 0 8px 32px rgba(0,0,0,0.3)'\
+                \ \n    : '0 8px 32px rgba(0,0,0,0.3)';\n]]]\n"
+            - overflow: hidden
+            - min-height: 220px
+            - transition: all 0.5s ease
+            name:
+            - position: absolute
+            - z-index: 2
+            - top: 12px
+            - left: 0
+            - right: 0
+            - text-align: center
+            - font-size: 16px
+            - font-weight: 700
+            - letter-spacing: 0.5px
+            - color: white
+            - text-shadow: 0 2px 4px rgba(0,0,0,0.8)
+            state:
+            - position: absolute
+            - z-index: 2
+            - top: 34px
+            - left: 0
+            - right: 0
+            - text-align: center
+            - font-size: 13px
+            - opacity: 0.8
+            - font-weight: 500
+            - color: rgba(255,255,255,0.9)
+            - text-shadow: 0 2px 4px rgba(0,0,0,0.8)
+            custom_fields:
+              bg:
+              - position: absolute
+              - inset: 0
+              - z-index: 0
+              overlay:
+              - position: absolute
+              - inset: 0
+              - z-index: 1
+              - background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0)
+                  30%, rgba(0,0,0,0) 70%, rgba(0,0,0,0.8) 100%)
+              gauge_temp_ballon:
+              - position: absolute
+              - z-index: 3
+              - left: 16px
+              - top: 60px
+              - bottom: 40px
+              - width: 14px
+              - border-radius: 10px
+              - background: rgba(0,0,0,0.3)
+              - border: 1px solid rgba(255,255,255,0.1)
+              - box-shadow: 0 4px 10px rgba(0,0,0,0.3)
+              gauge:
+              - position: absolute
+              - z-index: 3
+              - right: 16px
+              - top: 60px
+              - bottom: 40px
+              - width: auto
+              - display: flex
+              - gap: 4px
+              - align-items: flex-end
+              max_label:
+              - position: absolute
+              - z-index: 4
+              - right: 6px
+              - top: 56%
+              - transform: translateY(-50%) rotate(-90deg)
+              - font-size: 12px
+              - font-weight: 600
+              - color: rgba(255,255,255,0.6)
+              - text-align: center
+              - width: 80px
+              - opacity: 0.8
+              temp:
+              - position: absolute
+              - z-index: 4
+              - left: 50%
+              - bottom: 35px
+              - transform: translateX(-50%)
+              - font-size: 28px
+              - font-weight: 800
+              - color: white
+              - text-shadow: 0 4px 12px rgba(0,0,0,0.5)
+              - letter-spacing: -0.5px
+              conso_inline:
+              - position: absolute
+              - z-index: 4
+              - left: 50%
+              - bottom: 15px
+              - transform: translateX(-50%)
+              - font-size: 12px
+              - font-weight: 600
+              - color: rgba(255,255,255,0.7)
+              - background: rgba(0,0,0,0.4)
+              - padding: 2px 8px
+              - border-radius: 10px
+              - border: 1px solid rgba(255,255,255,0.05)
+          custom_fields:
+            overlay: ''
+            bg: "[[[\n  const stateObj = states['binary_sensor.dhwp_actuator_energy_demand_status'];\n\
+              \  const heating = stateObj && stateObj.state === 'on';\n  const bust\
+              \ = (stateObj && stateObj.last_changed ? stateObj.last_changed : Date.now()).toString().replace(/\\\
+              D/g,'');\n  const src = heating \n    ? `/local/ballon_thermore_200l_heating.png?v=${bust}`\
+              \ \n    : `/local/ballon_thermore_200l.png?v=${bust}`;\n  const anim\
+              \ = heating ? 'animation: pulse_ballon 1.2s infinite alternate ease-in-out;'\
+              \ : '';\n  return `\n    <style>\n      @keyframes pulse_ballon {\n\
+              \        0% { opacity: 0.35; filter: brightness(0.85); }\n        100%\
+              \ { opacity: 1; filter: brightness(1.15); }\n      }\n    </style>\n\
+              \    <div style=\"\n      width:100%; height:100%;\n      background:url('${src}')\
+              \ center/contain no-repeat;\n      transform: scale(0.85);\n      transform-origin:\
+              \ center;\n      ${anim}\n    \"></div>\n  `;\n]]]\n"
+            temp: "[[[\n  const stateObj = states['water_heater.temperature_ballon'];\n\
+              \  const tRaw = stateObj && stateObj.attributes ? (stateObj.attributes.current_temperature\
+              \ || stateObj.attributes.temperature) : '—';\n  const t = parseFloat(tRaw);\n\
+              \  return `${(isFinite(t) ? t.toFixed(1) : '—')}°`;\n]]]\n"
+            conso_inline: "[[[\n  const sensorObj = states['sensor.eau_chaude_du_jour_calculee'];\n\
+              \  const raw = (sensorObj && sensorObj.state) ? sensorObj.state.toString().replace(',',\
+              \ '.') : '0';\n  const v = parseFloat(raw) || 0;\n  return `${v.toFixed(0)}\
+              \ L / jour`;\n]]]\n"
+            max_label: "[[[\n  const sensorObj = states['sensor.eau_chaude_du_jour_calculee'];\n\
+              \  const raw = (sensorObj && sensorObj.state) ? sensorObj.state.toString().replace(',',\
+              \ '.') : '0';\n  const v = parseFloat(raw) || 0;\n  let max = 200;\n\
+              \  let color = 'rgba(255,255,255,0.6)';\n  if (v >= 400) {\n    max\
+              \ = 600;\n    color = '#DC4646'; // Red\n  } else if (v >= 200) {\n\
+              \    max = 400;\n    color = '#FFA500'; // Orange\n  }\n  return `<span\
+              \ style=\"color: ${color}; transition: color 0.5s ease;\">Max ${max}\
+              \ L</span>`;\n]]]\n"
+            gauge_temp_ballon: "[[[\n  const stateObj = states['water_heater.temperature_ballon'];\n\
+              \  const tRaw = stateObj && stateObj.attributes ? (stateObj.attributes.current_temperature\
+              \ || stateObj.attributes.temperature) : '—';\n  const t = parseFloat(tRaw);\n\
+              \  const min = 20, max = 65;\n  const safeT = isFinite(t) ? t : min;\n\
+              \  const pct = Math.max(0, Math.min(100, ((safeT - min) / (max - min))\
+              \ * 100));\n  \n  let color = '#ffffff';\n  if (safeT <= 35) color =\
+              \ '#008CFF';\n  else if (safeT <= 45) color = '#FFD700';\n  else if\
+              \ (safeT <= 55) color = '#FF8C00';\n  else color = '#DC4646';\n  return\
+              \ `\n    <div style=\"width:100%; height:100%; position:relative; border-radius:10px;\
+              \ overflow:hidden;\">\n      <div style=\"position:absolute; bottom:0;\
+              \ left:0; right:0; height:${pct}%; background:${color}; box-shadow:\
+              \ 0 0 12px ${color}; transition: height 1s ease;\"></div>\n    </div>\n\
+              \  `;\n]]]\n"
+            gauge: "[[[\n  var sensorObj = states['sensor.eau_chaude_du_jour_calculee'];\n\
+              \  var raw = (sensorObj && sensorObj.state) ? sensorObj.state.toString().replace(',',\
+              \ '.') : '0';\n  var v = parseFloat(raw) || 0;\n  \n  var color1 = '#00B4FF';\
+              \ // Light blue\n  \n  var barStyle = function() { return `\n    width:\
+              \ 14px; \n    height: 100%; \n    position: relative; \n    border-radius:\
+              \ 10px; \n    background: rgba(0,0,0,0.3); \n    border: 1px solid rgba(255,255,255,0.1);\n\
+              \    overflow: hidden;\n  `; };\n  \n  var innerStyle = function(pct,\
+              \ clr) { return `\n    position: absolute; \n    bottom: 0; left: 0;\
+              \ right: 0; \n    height: ${pct}%; \n    background: ${clr}; \n    box-shadow:\
+              \ 0 0 10px ${clr}; \n    transition: height 0.8s ease;\n  `; };\n  \n\
+              \  var gaugeOutput = '';\n  \n  // Jauge 1 (0-200)\n  var p1 = Math.max(0,\
+              \ Math.min(100, (v / 200) * 100));\n  gaugeOutput += `<div style=\"\
+              ${barStyle()}\"><div style=\"${innerStyle(p1, color1)}\"></div></div>`;\n\
+              \  \n  // Jauge 2 (200-400)\n  if (v >= 200) {\n    var p2 = Math.max(0,\
+              \ Math.min(100, ((v - 200) / 200) * 100));\n    gaugeOutput += `<div\
+              \ style=\"${barStyle()}\"><div style=\"${innerStyle(p2, color1)}\"></div></div>`;\n\
+              \  }\n  \n  // Jauge 3 (400-600)\n  if (v >= 400) {\n    var p3 = Math.max(0,\
+              \ Math.min(100, ((v - 400) / 200) * 100));\n    gaugeOutput += `<div\
+              \ style=\"${barStyle()}\"><div style=\"${innerStyle(p3, color1)}\"></div></div>`;\n\
+              \  }\n  \n  return gaugeOutput;\n]]]\n"
+          extra_styles: "@keyframes pulse {\n  0% { opacity: 0.3; }\n  100% { opacity:\
+            \ 1; }\n}\n"

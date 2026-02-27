@@ -1,0 +1,328 @@
+type: custom:fold-entity-row
+padding: 0
+clickable: true
+card_mod:
+  style: 'div#head { display: block !important; width: 100% !important; padding: 0
+    !important; margin: 0 !important; --toggle-icon-width: 0px !important; }
+
+    #head { padding: 0 !important; margin: 0 !important; width: 100% !important; cursor:
+    pointer !important; pointer-events: auto !important; }
+
+    #head ha-icon { display: none !important; }
+
+    div#items { padding: 0 !important; margin: 0 !important; }
+
+    '
+head:
+  type: custom:button-card
+  entity: sensor.brother_mfc_l3750cdw_series
+  show_name: false
+  show_icon: false
+  tap_action:
+    action: none
+  variables:
+    color: "[[[\n  const state = entity.state.toLowerCase();\n  if (state === 'idle'\
+      \ || state === 'prêt' || state.includes('sleep') || state.includes('veille'))\
+      \ return '#00E676';\n  if (state === 'printing' || state === 'impression') return\
+      \ '#00E5FF';\n  if (state.includes('error') || state.includes('erreur') || state.includes('jam'))\
+      \ return '#FF3232';\n  if (state.includes('warning') || state.includes('attention'))\
+      \ return '#FFAA00';\n  return '#9E9E9E'; // Offline/Indisponible\n]]]\n"
+  styles:
+    card:
+    - padding: 0
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - border-radius: 20px
+    - border: "[[[\n  return `1px solid ${variables.color}80`;\n]]]\n"
+    - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+    - overflow: hidden
+    - margin: 0px
+    - box-sizing: border-box
+    - cursor: pointer
+    - pointer-events: none
+    - height: 125px
+    grid:
+    - grid-template-areas: '"icon title title title title"
+
+        "icon c     m     y     k"
+
+        "icon ref   ref   ref   ref"
+
+        "footer footer footer footer footer"
+
+        '
+    - grid-template-columns: 130px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0,
+        1fr)
+    - grid-template-rows: 35px 35px 20px 35px
+    - gap: 0px
+    - width: 100%
+    - margin: 0
+    custom_fields:
+      icon:
+      - justify-self: stretch
+      - align-self: stretch
+      - border-right: 2px solid rgba(255,255,255,0.6)
+      - border-top-left-radius: 20px
+      - border-bottom-left-radius: 0px
+      - display: flex
+      - align-items: center
+      - justify-content: center
+      - padding: 0
+      title:
+      - justify-self: stretch
+      - align-self: start
+      - display: flex
+      - flex-direction: column
+      - justify-content: flex-start
+      - align-items: flex-start
+      - text-align: left
+      - padding: 10px 10px 0 10px
+      - overflow: hidden
+      c:
+      - width: 100%
+      - justify-self: center
+      - align-self: center
+      - margin-top: 5px
+      m:
+      - width: 100%
+      - justify-self: center
+      - align-self: center
+      - margin-top: 5px
+      y:
+      - width: 100%
+      - justify-self: center
+      - align-self: center
+      - margin-top: 5px
+      k:
+      - width: 100%
+      - justify-self: center
+      - align-self: center
+      - margin-top: 5px
+      ref:
+      - justify-self: center
+      - align-self: start
+      - font-size: 10px
+      - color: rgba(255,255,255,0.4)
+      - font-weight: 600
+      - text-transform: uppercase
+      - letter-spacing: 1px
+      - margin-top: 5px
+      footer:
+      - justify-self: stretch
+      - align-self: stretch
+      - background: rgba(0,0,0,0.2)
+      - border-top: 1px solid rgba(255,255,255,0.05)
+      - display: flex
+      - align-items: center
+      - justify-content: center
+      - border-radius: 0 0 20px 20px
+  custom_fields:
+    ref: Toners TN243 CMYK
+    icon: "[[[\n  const color = variables.color;\n  return `\n    <div style=\"width:\
+      \ 100%; height: 100%; display: flex; flex-direction: column; align-items: center;\
+      \ justify-content: center; background: linear-gradient(135deg, ${color}33 0%,\
+      \ ${color}0D 100%); border-top-left-radius: 20px; border-bottom-left-radius:\
+      \ 0px; box-sizing: border-box; padding: 10px; transform: translateY(-5px);\"\
+      >\n      <img src=\"/local/brother.png\" style=\"width: 100%; max-width: 75px;\
+      \ height: auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)); object-fit:\
+      \ contain; margin-bottom: 2px;\" />\n      <div style=\"font-size: 10px; font-weight:\
+      \ 950; color: white; text-transform: uppercase; letter-spacing: 1.5px; text-align:\
+      \ center; text-shadow: 0 2px 4px rgba(0,0,0,0.5); margin-top: -4px;\">Imprimante</div>\n\
+      \    </div>\n  `;\n]]]\n"
+    title: "[[[\n  return `\n     <div style=\"color: white; font-size: 16px; font-weight:\
+      \ 700; letter-spacing: 0.5px; line-height: 1.2; white-space: nowrap; overflow:\
+      \ hidden; text-overflow: ellipsis;\">\n       BROTHER <span style=\"color: rgba(255,255,255,0.5);\
+      \ font-size: 11px; font-weight: 500; margin-left: 4px;\">MFC-L3750CDW</span>\n\
+      \     </div>\n  `;\n]]]\n"
+    c: "[[[\n  const s = states['sensor.mfc_l3750cdw_toner_cyan_restant'];\n  let\
+      \ v = parseFloat(s?.state ?? '0'); if (isNaN(v)) v = 0; v = Math.max(0, Math.min(100,\
+      \ v));\n  const color = '#00E5FF';\n  let borderStyle = '1px solid rgba(255,255,255,0.1)';\n\
+      \  let shadowStyle = 'inset 0 0 5px rgba(0,0,0,0.3)';\n  if (v < 10) { borderStyle\
+      \ = '1px solid rgba(255, 50, 50, 0.8)'; shadowStyle = '0 0 10px rgba(255, 50,\
+      \ 50, 0.5), inset 0 0 5px rgba(0,0,0,0.3)'; }\n  return `\n    <div style=\"\
+      display:flex;flex-direction:column;align-items:center;width:90%;margin:auto;\"\
+      >\n       <div style=\"width:100%;height:32px;border-radius:6px;\n         \
+      \         background:rgba(0,0,0,0.2);position:relative;overflow:hidden;\n  \
+      \                border:${borderStyle}; box-shadow:${shadowStyle}; transition:\
+      \ box-shadow 0.3s ease;\">\n        <div style=\"position:absolute;bottom:0;left:0;width:100%;height:${v}%;background:linear-gradient(to\
+      \ top, ${color}99, ${color});transition:height 0.5s ease;\"></div>\n       \
+      \ <div style=\"position:absolute;bottom:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;\n\
+      \                    font-size:11px;color:${v > 30 ? 'black' : 'white'};font-weight:800;text-shadow:${v\
+      \ > 30 ? 'none' : '0 1px 2px rgba(0,0,0,0.8)'};\">\n          ${v}%\n      \
+      \  </div>\n      </div>\n    </div>`;\n]]]\n"
+    m: "[[[\n  const s = states['sensor.mfc_l3750cdw_toner_magenta_restant'];\n  let\
+      \ v = parseFloat(s?.state ?? '0'); if (isNaN(v)) v = 0; v = Math.max(0, Math.min(100,\
+      \ v));\n  const color = '#FF00FF';\n  let borderStyle = '1px solid rgba(255,255,255,0.1)';\n\
+      \  let shadowStyle = 'inset 0 0 5px rgba(0,0,0,0.3)';\n  if (v < 10) { borderStyle\
+      \ = '1px solid rgba(255, 50, 50, 0.8)'; shadowStyle = '0 0 10px rgba(255, 50,\
+      \ 50, 0.5), inset 0 0 5px rgba(0,0,0,0.3)'; }\n  return `\n    <div style=\"\
+      display:flex;flex-direction:column;align-items:center;width:90%;margin:auto;\"\
+      >\n       <div style=\"width:100%;height:32px;border-radius:6px;\n         \
+      \         background:rgba(0,0,0,0.2);position:relative;overflow:hidden;\n  \
+      \                border:${borderStyle}; box-shadow:${shadowStyle}; transition:\
+      \ box-shadow 0.3s ease;\">\n        <div style=\"position:absolute;bottom:0;left:0;width:100%;height:${v}%;background:linear-gradient(to\
+      \ top, ${color}99, ${color});transition:height 0.5s ease;\"></div>\n       \
+      \ <div style=\"position:absolute;bottom:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;\n\
+      \                    font-size:11px;color:white;font-weight:800;text-shadow:0\
+      \ 1px 2px rgba(0,0,0,0.8);\">\n          ${v}%\n        </div>\n      </div>\n\
+      \    </div>`;\n]]]\n"
+    y: "[[[\n  const s = states['sensor.mfc_l3750cdw_toner_jaune_restant'];\n  let\
+      \ v = parseFloat(s?.state ?? '0'); if (isNaN(v)) v = 0; v = Math.max(0, Math.min(100,\
+      \ v));\n  const color = '#FFD700';\n  let borderStyle = '1px solid rgba(255,255,255,0.1)';\n\
+      \  let shadowStyle = 'inset 0 0 5px rgba(0,0,0,0.3)';\n  if (v < 10) { borderStyle\
+      \ = '1px solid rgba(255, 50, 50, 0.8)'; shadowStyle = '0 0 10px rgba(255, 50,\
+      \ 50, 0.5), inset 0 0 5px rgba(0,0,0,0.3)'; }\n  return `\n    <div style=\"\
+      display:flex;flex-direction:column;align-items:center;width:90%;margin:auto;\"\
+      >\n       <div style=\"width:100%;height:32px;border-radius:6px;\n         \
+      \         background:rgba(0,0,0,0.2);position:relative;overflow:hidden;\n  \
+      \                border:${borderStyle}; box-shadow:${shadowStyle}; transition:\
+      \ box-shadow 0.3s ease;\">\n        <div style=\"position:absolute;bottom:0;left:0;width:100%;height:${v}%;background:linear-gradient(to\
+      \ top, ${color}99, ${color});transition:height 0.5s ease;\"></div>\n       \
+      \ <div style=\"position:absolute;bottom:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;\n\
+      \                    font-size:11px;color:${v > 30 ? 'black' : 'white'};font-weight:800;text-shadow:${v\
+      \ > 30 ? 'none' : '0 1px 2px rgba(0,0,0,0.8)'};\">\n          ${v}%\n      \
+      \  </div>\n      </div>\n    </div>`;\n]]]\n"
+    k: "[[[\n  const s = states['sensor.mfc_l3750cdw_toner_noir_restant'];\n  let\
+      \ v = parseFloat(s?.state ?? '0'); if (isNaN(v)) v = 0; v = Math.max(0, Math.min(100,\
+      \ v));\n  const color = '#444444';\n  let borderStyle = '1px solid rgba(255,255,255,0.1)';\n\
+      \  let shadowStyle = 'inset 0 0 5px rgba(0,0,0,0.3)';\n  if (v < 10) { borderStyle\
+      \ = '1px solid rgba(255, 50, 50, 0.8)'; shadowStyle = '0 0 10px rgba(255, 50,\
+      \ 50, 0.5), inset 0 0 5px rgba(0,0,0,0.3)'; }\n  return `\n    <div style=\"\
+      display:flex;flex-direction:column;align-items:center;width:90%;margin:auto;\"\
+      >\n       <div style=\"width:100%;height:32px;border-radius:6px;\n         \
+      \         background:rgba(0,0,0,0.2);position:relative;overflow:hidden;\n  \
+      \                border:${borderStyle}; box-shadow:${shadowStyle}; transition:\
+      \ box-shadow 0.3s ease;\">\n        <div style=\"position:absolute;bottom:0;left:0;width:100%;height:${v}%;background:linear-gradient(to\
+      \ top, rgba(0,0,0,0.6), ${color});transition:height 0.5s ease;\"></div>\n  \
+      \      <div style=\"position:absolute;bottom:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;\n\
+      \                    font-size:11px;color:white;font-weight:800;text-shadow:0\
+      \ 1px 2px rgba(0,0,0,0.8);\">\n          ${v}%\n        </div>\n      </div>\n\
+      \    </div>`;\n]]]\n"
+    footer: "[[[\n   return `<ha-icon icon=\"mdi:chevron-down\" style=\"color: rgba(255,255,255,0.5);\
+      \ width: 20px; height: 20px; transition: all 0.3s ease;\"></ha-icon>`;\n]]]\n"
+entities:
+- type: custom:button-card
+  name: TAMBOURS CL
+  styles:
+    card:
+    - background: none
+    - border: none
+    - padding: 15px 15px 5px 15px
+    name:
+    - color: rgba(255,255,255,0.4)
+    - font-size: 10px
+    - font-weight: 800
+    - text-transform: uppercase
+    - justify-self: start
+    - letter-spacing: 1.5px
+- type: custom:button-card
+  styles:
+    card:
+    - background: rgba(0,0,0,0.2)
+    - border-radius: 15px
+    - border: 1px solid rgba(255,255,255,0.05)
+    - margin: 0 10px 15px 10px
+    - padding: 12px
+    grid:
+    - grid-template-areas: '"c m y k" "ref ref ref ref"'
+    - grid-template-columns: repeat(4, 1fr)
+    custom_fields:
+      ref:
+      - justify-self: center
+      - font-size: 10px
+      - color: rgba(255,255,255,0.3)
+      - margin-top: 10px
+      - font-weight: 600
+      - text-transform: uppercase
+  custom_fields:
+    ref: MODÈLES DR243CL
+    c: "[[[\n  const s = states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_cyan'];\n\
+      \  let v = Math.round(parseFloat(s?.state ?? '0')); v = Math.max(0, Math.min(100,\
+      \ v));\n  const color = '#00FFFF';\n  return `<div style=\"display:flex;flex-direction:column;align-items:center;\"\
+      >\n    <ha-icon icon=\"mdi:record-circle-outline\" style=\"width:20px;height:20px;color:${color};margin-bottom:6px;filter:drop-shadow(0\
+      \ 0 5px ${color}80);\"></ha-icon>\n    <div style=\"width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;\"\
+      >\n      <div style=\"width:${v}%;height:100%;background:${color};\"></div>\n\
+      \    </div>\n    <div style=\"font-size:10px;font-weight:700;color:white;margin-top:4px;\"\
+      >${v}%</div>\n  </div>`;\n]]]\n"
+    m: "[[[\n  const s = states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_magenta'];\n\
+      \  let v = Math.round(parseFloat(s?.state ?? '0')); v = Math.max(0, Math.min(100,\
+      \ v));\n  const color = '#FF00FF';\n  return `<div style=\"display:flex;flex-direction:column;align-items:center;\"\
+      >\n    <ha-icon icon=\"mdi:record-circle-outline\" style=\"width:20px;height:20px;color:${color};margin-bottom:6px;filter:drop-shadow(0\
+      \ 0 5px ${color}80);\"></ha-icon>\n    <div style=\"width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;\"\
+      >\n      <div style=\"width:${v}%;height:100%;background:${color};\"></div>\n\
+      \    </div>\n    <div style=\"font-size:10px;font-weight:700;color:white;margin-top:4px;\"\
+      >${v}%</div>\n  </div>`;\n]]]\n"
+    y: "[[[\n  const s = states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_jaune'];\n\
+      \  let v = Math.round(parseFloat(s?.state ?? '0')); v = Math.max(0, Math.min(100,\
+      \ v));\n  const color = '#FFFF00';\n  return `<div style=\"display:flex;flex-direction:column;align-items:center;\"\
+      >\n    <ha-icon icon=\"mdi:record-circle-outline\" style=\"width:20px;height:20px;color:${color};margin-bottom:6px;filter:drop-shadow(0\
+      \ 0 5px ${color}80);\"></ha-icon>\n    <div style=\"width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;\"\
+      >\n      <div style=\"width:${v}%;height:100%;background:${color};\"></div>\n\
+      \    </div>\n    <div style=\"font-size:10px;font-weight:700;color:white;margin-top:4px;\"\
+      >${v}%</div>\n  </div>`;\n]]]\n"
+    k: "[[[\n  const s = states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_noir'];\n\
+      \  let v = Math.round(parseFloat(s?.state ?? '0')); v = Math.max(0, Math.min(100,\
+      \ v));\n  const color = '#888888';\n  return `<div style=\"display:flex;flex-direction:column;align-items:center;\"\
+      >\n    <ha-icon icon=\"mdi:record-circle-outline\" style=\"width:20px;height:20px;color:${color};margin-bottom:6px;filter:drop-shadow(0\
+      \ 0 5px ${color}80);\"></ha-icon>\n    <div style=\"width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;\"\
+      >\n      <div style=\"width:${v}%;height:100%;background:${color};\"></div>\n\
+      \    </div>\n    <div style=\"font-size:10px;font-weight:700;color:white;margin-top:4px;\"\
+      >${v}%</div>\n  </div>`;\n]]]\n"
+- type: custom:button-card
+  name: UNITÉS DE MAINTENANCE
+  styles:
+    card:
+    - background: none
+    - border: none
+    - padding: 5px 15px 5px 15px
+    name:
+    - color: rgba(255,255,255,0.4)
+    - font-size: 10px
+    - font-weight: 800
+    - text-transform: uppercase
+    - justify-self: start
+    - letter-spacing: 1.5px
+- type: custom:button-card
+  styles:
+    card:
+    - background: rgba(0,0,0,0.2)
+    - border-radius: 15px
+    - border: 1px solid rgba(255,255,255,0.05)
+    - margin: 0 10px 15px 10px
+    - padding: 15px
+    grid:
+    - grid-template-areas: '"belt" "fusion" "pf"'
+    - grid-template-rows: repeat(3, 1fr)
+  custom_fields:
+    fusion: "[[[\n  const v = Math.round(parseFloat(states['sensor.mfc_l3750cdw_duree_de_vie_restante_de_l_unite_de_fusion']?.state\
+      \ ?? '0'));\n  const color = '#FF9800'; // Orange\n  return `<div style=\"display:flex;align-items:center;gap:12px;margin-bottom:10px;\"\
+      >\n    <ha-icon icon=\"mdi:printer-3d-nozzle-heat\" style=\"color:${color};width:18px;filter:drop-shadow(0\
+      \ 0 5px ${color}60);\"></ha-icon>\n    <div style=\"flex:1;\">\n      <div style=\"\
+      display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:white;margin-bottom:4px;\"\
+      >\n        <span>UNITÉ DE FUSION</span><span>${v}%</span>\n      </div>\n  \
+      \    <div style=\"width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;\"\
+      >\n        <div style=\"width:${v}%;height:100%;background:${color};box-shadow:\
+      \ 0 0 10px ${color}80;\"></div>\n      </div>\n    </div>\n  </div>`;\n]]]\n"
+    belt: "[[[\n  const v = Math.round(parseFloat(states['sensor.mfc_l3750cdw_duree_de_vie_restante_de_l_unite_de_courroie']?.state\
+      \ ?? '0'));\n  const color = '#4CAF50'; // Green\n  return `<div style=\"display:flex;align-items:center;gap:12px;margin-bottom:10px;\"\
+      >\n    <div style=\"width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:${color};filter:drop-shadow(0\
+      \ 0 5px ${color}60);\">\n       <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"\
+      currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"\
+      round\" style=\"width:100%;height:100%;\">\n        <circle cx=\"6\" cy=\"7\"\
+      \ r=\"2.5\" />\n        <circle cx=\"17\" cy=\"16\" r=\"4.5\" />\n        <path\
+      \ d=\"M4 9 L13 20 M8.5 4.5 L21 14\" />\n      </svg>\n    </div>\n    <div style=\"\
+      flex:1;\">\n      <div style=\"display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:white;margin-bottom:4px;\"\
+      >\n        <span>UNITÉ DE COURROIE</span><span>${v}%</span>\n      </div>\n\
+      \      <div style=\"width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;\"\
+      >\n        <div style=\"width:${v}%;height:100%;background:${color};box-shadow:\
+      \ 0 0 10px ${color}80;\"></div>\n      </div>\n    </div>\n  </div>`;\n]]]\n"
+    pf: "[[[\n  const v = Math.round(parseFloat(states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_kit_pf_1']?.state\
+      \ ?? '0'));\n  const color = '#F44336'; // Red\n  return `<div style=\"display:flex;align-items:center;gap:12px;\"\
+      >\n    <ha-icon icon=\"mdi:tray-arrow-up\" style=\"color:${color};width:18px;filter:drop-shadow(0\
+      \ 0 5px ${color}60);\"></ha-icon>\n    <div style=\"flex:1;\">\n      <div style=\"\
+      display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:white;margin-bottom:4px;\"\
+      >\n        <span>KIT PF (CHARGEUR)</span><span>${v}%</span>\n      </div>\n\
+      \      <div style=\"width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden;\"\
+      >\n        <div style=\"width:${v}%;height:100%;background:${color};box-shadow:\
+      \ 0 0 10px ${color}80;\"></div>\n      </div>\n    </div>\n  </div>`;\n]]]\n"

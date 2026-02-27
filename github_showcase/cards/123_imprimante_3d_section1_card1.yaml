@@ -1,0 +1,236 @@
+type: custom:mod-card
+card_mod:
+  style: "ha-card {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 12px;\n\
+    \  position: relative;\n  background: linear-gradient(160deg,\n    #141b26 0%,\n\
+    \    #111826 45%,\n    #0d121c 100%);\n  box-shadow: 0 10px 22px rgba(0,0,0,0.65);\n\
+    \  border: 1px solid rgba(255,255,255,0.04);\n}\nha-card:before {\n  content:\
+    \ \"\";\n  position: absolute;\n  inset: 0;\n  background: radial-gradient(circle\
+    \ at top left,\n    rgba(255,255,255,0.14),\n    transparent 60%);\n  pointer-events:\
+    \ none;\n}\n"
+card:
+  type: grid
+  title: Homing
+  columns: 4
+  square: false
+  cards:
+  - type: custom:button-card
+    entity: button.ratrig_vminion_home_all_axes
+    name: ALL
+    icon: mdi:axis-arrow
+    show_state: false
+    tap_action:
+      action: call-service
+      service: button.press
+      target:
+        entity_id: button.ratrig_vminion_home_all_axes
+    hold_action:
+      action: more-info
+    custom_fields:
+      pos: '&nbsp;'
+    styles:
+      grid:
+      - grid-template-areas: '"pos" "i" "n"'
+      - grid-template-rows: min-content 1fr min-content
+      custom_fields:
+        pos:
+        - font-size: 13px
+        - font-weight: 700
+        - text-align: center
+        - opacity: 0
+      card:
+      - padding: 10px
+      - border-radius: 10px
+      icon:
+      - color: rgba(255,255,255,0.85)
+      - filter: drop-shadow(0 0 6px rgba(0,0,0,0.7))
+      name:
+      - opacity: 0.9
+  - type: custom:button-card
+    entity: button.ratrig_vminion_home_x_axis
+    name: X
+    icon: mdi:axis-x-arrow
+    show_state: false
+    tap_action:
+      action: call-service
+      service: button.press
+      target:
+        entity_id: button.ratrig_vminion_home_x_axis
+    hold_action:
+      action: more-info
+    custom_fields:
+      pos: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_x'];\n\
+        \  const v = Number(String(s?.state ?? '0').replace(',', '.')) || 0;\n  return\
+        \ `${v.toFixed(1)} mm`;\n]]]\n"
+    extra_styles: "[[[\n  return `\n    @keyframes axis_pulse {\n      0%   { transform:\
+      \ translateY(0); }\n      50%  { transform: translateY(-1px); }\n      100%\
+      \ { transform: translateY(0); }\n    }\n  `;\n]]]\n"
+    styles:
+      grid:
+      - grid-template-areas: '"pos" "i" "n"'
+      - grid-template-rows: min-content 1fr min-content
+      custom_fields:
+        pos:
+        - font-size: 13px
+        - font-weight: 700
+        - text-align: center
+        - color: "[[[\n  const base = 'rgba(70,160,255,0.95)'; // bleu\n  const s\
+            \ = states['sensor.ratrig_vminion_toolhead_position_x'];\n  const recent\
+            \ = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+            \ < 3000) : false;\n  return recent ? 'rgba(110,200,255,1)' : base;\n\
+            ]]]\n"
+        - text-shadow: 0 0 10px rgba(70,160,255,0.35)
+      icon:
+      - color: "[[[\n  const base = 'rgba(70,160,255,0.95)';\n  const s = states['sensor.ratrig_vminion_toolhead_position_x'];\n\
+          \  const recent = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+          \ < 3000) : false;\n  return recent ? 'rgba(110,200,255,1)' : base;\n]]]\n"
+      - filter: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_x'];\n\
+          \  const recent = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+          \ < 3000) : false;\n  return recent\n    ? 'drop-shadow(0 0 10px rgba(70,160,255,0.55))\
+          \ drop-shadow(0 0 2px rgba(0,0,0,0.8))'\n    : 'drop-shadow(0 0 6px rgba(70,160,255,0.25))\
+          \ drop-shadow(0 0 2px rgba(0,0,0,0.8))';\n]]]\n"
+      card:
+      - padding: 10px
+      - border-radius: 10px
+      - animation: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_x'];\n\
+          \  const recent = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+          \ < 3000) : false;\n  return recent ? 'axis_pulse 0.6s ease-in-out infinite'\
+          \ : 'none';\n]]]\n"
+  - type: custom:button-card
+    entity: button.ratrig_vminion_home_y_axis
+    name: Y
+    icon: mdi:axis-y-arrow
+    show_state: false
+    tap_action:
+      action: call-service
+      service: button.press
+      target:
+        entity_id: button.ratrig_vminion_home_y_axis
+    hold_action:
+      action: more-info
+    custom_fields:
+      pos: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_y'];\n\
+        \  const v = Number(String(s?.state ?? '0').replace(',', '.')) || 0;\n  return\
+        \ `${v.toFixed(1)} mm`;\n]]]\n"
+    extra_styles: "[[[\n  return `\n    @keyframes axis_pulse {\n      0%   { transform:\
+      \ translateY(0); }\n      50%  { transform: translateY(-1px); }\n      100%\
+      \ { transform: translateY(0); }\n    }\n  `;\n]]]\n"
+    styles:
+      grid:
+      - grid-template-areas: '"pos" "i" "n"'
+      - grid-template-rows: min-content 1fr min-content
+      custom_fields:
+        pos:
+        - font-size: 13px
+        - font-weight: 700
+        - text-align: center
+        - color: "[[[\n  const base = 'rgba(70,210,120,0.95)'; // vert\n  const s\
+            \ = states['sensor.ratrig_vminion_toolhead_position_y'];\n  const recent\
+            \ = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+            \ < 3000) : false;\n  return recent ? 'rgba(120,255,170,1)' : base;\n\
+            ]]]\n"
+        - text-shadow: 0 0 10px rgba(70,210,120,0.35)
+      icon:
+      - color: "[[[\n  const base = 'rgba(70,210,120,0.95)';\n  const s = states['sensor.ratrig_vminion_toolhead_position_y'];\n\
+          \  const recent = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+          \ < 3000) : false;\n  return recent ? 'rgba(120,255,170,1)' : base;\n]]]\n"
+      - filter: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_y'];\n\
+          \  const recent = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+          \ < 3000) : false;\n  return recent\n    ? 'drop-shadow(0 0 10px rgba(70,210,120,0.55))\
+          \ drop-shadow(0 0 2px rgba(0,0,0,0.8))'\n    : 'drop-shadow(0 0 6px rgba(70,210,120,0.25))\
+          \ drop-shadow(0 0 2px rgba(0,0,0,0.8))';\n]]]\n"
+      card:
+      - padding: 10px
+      - border-radius: 10px
+      - animation: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_y'];\n\
+          \  const recent = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+          \ < 3000) : false;\n  return recent ? 'axis_pulse 0.6s ease-in-out infinite'\
+          \ : 'none';\n]]]\n"
+  - type: custom:button-card
+    entity: button.ratrig_vminion_home_z_axis
+    name: Z
+    icon: mdi:axis-z-arrow
+    show_state: false
+    tap_action:
+      action: call-service
+      service: button.press
+      target:
+        entity_id: button.ratrig_vminion_home_z_axis
+    hold_action:
+      action: more-info
+    custom_fields:
+      pos: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_z'];\n\
+        \  const v = Number(String(s?.state ?? '0').replace(',', '.')) || 0;\n  return\
+        \ `${v.toFixed(2)} mm`;\n]]]\n"
+      zbar_right: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_z'];\n\
+        \  const z = Number(String(s?.state ?? '0').replace(',', '.')) || 0;\n\n \
+        \ const Z_MAX = 180;\n  const pct = Math.max(0, Math.min(100, (z / Z_MAX)\
+        \ * 100)).toFixed(1);\n\n  return `\n    <div style=\"position:absolute; right:8px;\
+        \ top:10px; bottom:10px; width:7px;\n                border-radius:10px; background:\
+        \ rgba(255,255,255,0.10); overflow:hidden;\">\n      <div style=\"position:absolute;\
+        \ left:0; right:0; bottom:0; height:${pct}%;\n                  background:\
+        \ linear-gradient(to top, rgba(170,120,255,0.95), rgba(120,60,220,0.95));\n\
+        \                  box-shadow: 0 0 10px rgba(160,110,255,0.45); transition:\
+        \ height 0.6s ease;\">\n      </div>\n      <div style=\"position:absolute;\
+        \ top:-14px; left:50%; transform:translateX(-50%);\n                  font-size:10px;\
+        \ font-weight:800; color:rgba(255,255,255,0.92);\n                  text-shadow:0\
+        \ 2px 8px rgba(0,0,0,0.85);\">\n        180\n      </div>\n    </div>\n  `;\n\
+        ]]]\n"
+      zbar_left: "[[[\n  const hS = states['sensor.ratrig_vminion_object_height'];\n\
+        \  const H_MAX = Number(String(hS?.state ?? '0').replace(',', '.')) || 0;\n\
+        \n  const zS = states['sensor.ratrig_vminion_toolhead_position_z'];\n  const\
+        \ z = Number(String(zS?.state ?? '0').replace(',', '.')) || 0;\n\n  const\
+        \ denom = (H_MAX > 0) ? H_MAX : 1;\n  const pct = Math.max(0, Math.min(100,\
+        \ (z / denom) * 100)).toFixed(1);\n\n  const label = (H_MAX > 0) ? `${H_MAX.toFixed(1)}`\
+        \ : `—`;\n\n  return `\n    <div style=\"position:absolute; left:8px; top:10px;\
+        \ bottom:10px; width:7px;\n                border-radius:10px; background:\
+        \ rgba(255,255,255,0.10); overflow:hidden;\">\n      <div style=\"position:absolute;\
+        \ left:0; right:0; bottom:0; height:${pct}%;\n                  background:\
+        \ linear-gradient(to top, rgba(0,180,255,0.95), rgba(0,90,255,0.95));\n  \
+        \                box-shadow: 0 0 10px rgba(0,150,255,0.40); transition: height\
+        \ 0.6s ease;\">\n      </div>\n      <div style=\"position:absolute; top:-14px;\
+        \ left:50%; transform:translateX(-50%);\n                  font-size:10px;\
+        \ font-weight:800; color:rgba(255,255,255,0.92);\n                  text-shadow:0\
+        \ 2px 8px rgba(0,0,0,0.85);\">\n        ${label}\n      </div>\n    </div>\n\
+        \  `;\n]]]\n"
+    extra_styles: "[[[\n  return `\n    @keyframes axis_pulse {\n      0%   { transform:\
+      \ translateY(0); }\n      50%  { transform: translateY(-1px); }\n      100%\
+      \ { transform: translateY(0); }\n    }\n  `;\n]]]\n"
+    styles:
+      grid:
+      - grid-template-areas: '"pos" "i" "n"'
+      - grid-template-rows: min-content 1fr min-content
+      custom_fields:
+        pos:
+        - font-size: 13px
+        - font-weight: 700
+        - text-align: center
+        - color: "[[[\n  const base = 'rgba(170,120,255,0.95)'; // violet\n  const\
+            \ s = states['sensor.ratrig_vminion_toolhead_position_z'];\n  const recent\
+            \ = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+            \ < 3000) : false;\n  return recent ? 'rgba(210,170,255,1)' : base;\n\
+            ]]]\n"
+        - text-shadow: 0 0 10px rgba(170,120,255,0.35)
+        zbar_right:
+        - position: absolute
+        - inset: 0
+        - pointer-events: none
+        zbar_left:
+        - position: absolute
+        - inset: 0
+        - pointer-events: none
+      icon:
+      - color: "[[[\n  const base = 'rgba(170,120,255,0.95)';\n  const s = states['sensor.ratrig_vminion_toolhead_position_z'];\n\
+          \  const recent = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+          \ < 3000) : false;\n  return recent ? 'rgba(210,170,255,1)' : base;\n]]]\n"
+      - filter: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_z'];\n\
+          \  const recent = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+          \ < 3000) : false;\n  return recent\n    ? 'drop-shadow(0 0 10px rgba(170,120,255,0.55))\
+          \ drop-shadow(0 0 2px rgba(0,0,0,0.8))'\n    : 'drop-shadow(0 0 6px rgba(170,120,255,0.25))\
+          \ drop-shadow(0 0 2px rgba(0,0,0,0.8))';\n]]]\n"
+      card:
+      - padding: 10px
+      - border-radius: 10px
+      - animation: "[[[\n  const s = states['sensor.ratrig_vminion_toolhead_position_z'];\n\
+          \  const recent = s?.last_changed ? (Date.now() - new Date(s.last_changed).getTime()\
+          \ < 3000) : false;\n  return recent ? 'axis_pulse 0.6s ease-in-out infinite'\
+          \ : 'none';\n]]]\n"

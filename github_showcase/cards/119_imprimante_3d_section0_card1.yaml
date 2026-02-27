@@ -1,0 +1,82 @@
+type: custom:button-card
+card_mod:
+  style: "ha-card{\n  border-radius: 6px;\n  overflow: hidden;\n  padding: 12px;\n\
+    \  position: relative;\n  background: linear-gradient(160deg,#141b26 0%,#111826\
+    \ 45%,#0d121c 100%) !important;\n  box-shadow: 0 10px 22px rgba(0,0,0,0.65) !important;\n\
+    \  border: 1px solid rgba(255,255,255,0.04) !important;\n}\nha-card:before{\n\
+    \  content:\"\";\n  position:absolute;\n  inset:0;\n  background: radial-gradient(circle\
+    \ at top left,rgba(255,255,255,0.14),transparent 60%);\n  pointer-events:none;\n\
+    \  z-index:0;\n"
+entity: sensor.ratrig_vminion_printer_state
+show_state: true
+show_icon: false
+show_name: false
+styles:
+  card:
+  - padding: 12px
+  - border-radius: 5px
+  - overflow: hidden
+  - min-height: 150px
+  - position: relative
+  - background: linear-gradient(160deg,#141b26 0%,#111826 45%,#0d121c 100%)
+  - box-shadow: 0 10px 22px rgba(0,0,0,0.65)
+  - border: 1px solid rgba(255,255,255,0.04)
+  state:
+  - position: absolute
+  - z-index: 4
+  - top: 10px
+  - left: 14px
+  - font-size: 12px
+  - font-weight: 800
+  - opacity: 0.95
+  - color: rgba(255,255,255,0.92)
+  - text-shadow: 0 2px 10px rgba(0,0,0,0.65)
+  custom_fields:
+    lines:
+    - position: absolute
+    - left: 14px
+    - right: 14px
+    - top: 36px
+    - bottom: 12px
+    - z-index: 5
+custom_fields:
+  lines: "[[[\n  const tHot = Number(String(states['sensor.ratrig_vminion_extruder_temperature']?.state\
+    \ ?? '0').replace(',', '.')) || 0;\n  const tBed = Number(String(states['sensor.ratrig_vminion_bed_temperature']?.state\
+    \ ?? '0').replace(',', '.')) || 0;\n\n  const fanRaw = states['sensor.ratrig_vminion_toolhead_cooling_fan']?.state\
+    \ ?? '0';\n  const fanN = Number(String(fanRaw).replace(',', '.'));\n  let fanPct\
+    \ = isFinite(fanN) ? fanN : 0;\n  if (fanPct > 0 && fanPct <= 1) fanPct = fanPct\
+    \ * 100;\n  fanPct = Math.max(0, Math.min(100, fanPct));\n\n  const clamp = (v)\
+    \ => Math.max(0, Math.min(100, v));\n\n  const pctHot = clamp((tHot / 350) * 100);\n\
+    \  const pctBed = clamp((tBed / 130) * 100);\n\n  const colorHot = (temp) => {\n\
+    \    let c = 'rgba(0,180,255,0.90)';\n    if (temp >= 60)  c = 'rgba(0,220,140,0.88)';\n\
+    \    if (temp >= 150) c = 'rgba(255,215,0,0.84)';\n    if (temp >= 210) c = 'rgba(255,140,0,0.82)';\n\
+    \    if (temp >= 240) c = 'rgba(220,80,80,0.78)';\n    return c;\n  };\n\n  const\
+    \ colorBed = (temp) => {\n    let c = 'rgba(0,180,255,0.90)';\n    if (temp >=\
+    \ 30) c = 'rgba(0,220,140,0.88)';\n    if (temp >= 50) c = 'rgba(255,215,0,0.84)';\n\
+    \    if (temp >= 70) c = 'rgba(255,140,0,0.82)';\n    if (temp >= 85) c = 'rgba(220,80,80,0.78)';\n\
+    \    return c;\n  };\n\n  const bar = ({icon, label, value, pct, color, thin=false})\
+    \ => `\n    <div style=\"\n      display:grid;\n      grid-template-columns: 22px\
+    \ 1fr auto;\n      align-items:center;\n      gap:10px;\n    \">\n      <ha-icon\
+    \ icon=\"${icon}\" style=\"\n        width:20px;height:20px;\n        color: rgba(255,255,255,0.92);\n\
+    \        filter: drop-shadow(0 0 8px rgba(0,0,0,0.6));\n      \"></ha-icon>\n\n\
+    \      <div style=\"\n        position:relative;\n        height:${thin ? 8 :\
+    \ 12}px;\n        border-radius:999px;\n        background: rgba(255,255,255,0.14);\n\
+    \        overflow:hidden;\n        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10);\n\
+    \      \">\n        <div style=\"\n          position:absolute; left:0; top:0;\
+    \ bottom:0;\n          width:${pct}%;\n          background:${color};\n      \
+    \    transition: width 0.6s ease, background 0.25s ease;\n          border-radius:999px;\n\
+    \          box-shadow: 0 0 14px rgba(0,0,0,0.25);\n        \"></div>\n       \
+    \ <div style=\"\n          position:absolute; inset:0;\n          background:\
+    \ linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0.05));\n\
+    \          opacity:0.40;\n        \"></div>\n      </div>\n\n      <div style=\"\
+    \n        font-size:12px;\n        font-weight:900;\n        color: rgba(255,255,255,0.95);\n\
+    \        text-shadow: 0 2px 10px rgba(0,0,0,0.65);\n        white-space:nowrap;\n\
+    \      \">${label} ${value}</div>\n    </div>\n  `;\n\n  return `\n    <div style=\"\
+    display:flex;flex-direction:column;gap:10px;\">\n      ${bar({\n        icon:'mdi:printer-3d-nozzle',\n\
+    \        label:'Hotend',\n        value:`${tHot.toFixed(1)}°C`,\n        pct:pctHot,\n\
+    \        color:colorHot(tHot),\n        thin:false\n      })}\n      ${bar({\n\
+    \        icon:'mdi:radiator',\n        label:'Bed',\n        value:`${tBed.toFixed(1)}°C`,\n\
+    \        pct:pctBed,\n        color:colorBed(tBed),\n        thin:false\n    \
+    \  })}\n      ${bar({\n        icon:'mdi:fan',\n        label:'Fan',\n       \
+    \ value:`${fanPct.toFixed(0)}%`,\n        pct:fanPct,\n        color:'rgba(0,170,255,0.85)',\n\
+    \        thin:true\n      })}\n    </div>\n  `;\n]]]\n"

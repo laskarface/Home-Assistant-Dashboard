@@ -1,0 +1,236 @@
+type: grid
+columns: 4
+square: false
+cards:
+- type: conditional
+  conditions:
+  - entity: binary_sensor.machine_a_laver_en_cours
+    state: 'on'
+  card:
+    type: custom:button-card
+    entity: binary_sensor.machine_a_laver_en_cours
+    name: Lave-linge
+    label: En cours
+    icon: mdi:washing-machine
+    variables:
+      color: '#fb8c00'
+    show_state: false
+    show_name: true
+    show_icon: true
+    show_label: true
+    styles:
+      card:
+      - padding: 10px 4px
+      - height: 110px
+      - border-radius: 20px
+      - background: rgba(20, 27, 38, 0.6)
+      - backdrop-filter: blur(10px)
+      - -webkit-backdrop-filter: blur(10px)
+      - transition: transform 0.1s ease
+      - animation: blink 2s ease infinite
+      - box-shadow: '[[[ return `0 0 20px ${variables.color}80, 0 4px 15px rgba(0,0,0,0.2)`;
+          ]]]
+
+          '
+      - border: '[[[ return `1px solid ${variables.color}80`; ]]]
+
+          '
+      grid:
+      - grid-template-areas: '"n" "i" "l"'
+      - grid-template-columns: 1fr
+      - grid-template-rows: min-content 1fr min-content
+      - row-gap: 8px
+      icon:
+      - width: 32px
+      - height: 32px
+      - color: '[[[ return variables.color; ]]]
+
+          '
+      - filter: '[[[ return `drop-shadow(0 0 8px ${variables.color}aa)`; ]]]
+
+          '
+      name:
+      - font-size: 13px
+      - font-weight: 600
+      - color: white
+      - text-align: center
+      label:
+      - font-size: 12px
+      - opacity: 0.8
+      - color: white
+      - text-align: center
+      - font-weight: 500
+- type: conditional
+  conditions:
+  - entity: input_boolean.machine_a_laver_terminee
+    state: 'on'
+  card:
+    type: custom:button-card
+    entity: input_boolean.machine_a_laver_terminee
+    name: Lave-linge
+    label: Terminé
+    icon: mdi:washing-machine-alert
+    variables:
+      color: '#00897b'
+    show_state: false
+    show_name: true
+    show_icon: true
+    show_label: true
+    styles:
+      card:
+      - padding: 10px 4px
+      - height: 110px
+      - border-radius: 20px
+      - background: rgba(20, 27, 38, 0.6)
+      - backdrop-filter: blur(10px)
+      - -webkit-backdrop-filter: blur(10px)
+      - transition: transform 0.1s ease
+      - box-shadow: '[[[ return `0 0 20px ${variables.color}80, 0 4px 15px rgba(0,0,0,0.2)`;
+          ]]]
+
+          '
+      - border: '[[[ return `1px solid ${variables.color}80`; ]]]
+
+          '
+      grid:
+      - grid-template-areas: '"n" "i" "l"'
+      - grid-template-columns: 1fr
+      - grid-template-rows: min-content 1fr min-content
+      - row-gap: 8px
+      icon:
+      - width: 32px
+      - height: 32px
+      - color: '[[[ return variables.color; ]]]
+
+          '
+      - filter: '[[[ return `drop-shadow(0 0 8px ${variables.color}aa)`; ]]]
+
+          '
+      name:
+      - font-size: 13px
+      - font-weight: 600
+      - color: white
+      - text-align: center
+      label:
+      - font-size: 12px
+      - opacity: 0.8
+      - color: white
+      - text-align: center
+      - font-weight: 500
+- type: conditional
+  conditions:
+  - entity: binary_sensor.seche_linge_en_cours
+    state: 'on'
+  card:
+    type: custom:button-card
+    entity: binary_sensor.seche_linge_en_cours
+    name: Sèche-linge
+    label: En cours
+    icon: mdi:tumble-dryer
+    variables:
+      color: '#fb8c00'
+    show_state: false
+    show_name: true
+    show_icon: true
+    show_label: true
+    styles:
+      card:
+      - padding: 10px 4px
+      - height: 110px
+      - border-radius: 20px
+      - background: rgba(20, 27, 38, 0.6)
+      - backdrop-filter: blur(10px)
+      - -webkit-backdrop-filter: blur(10px)
+      - transition: transform 0.1s ease
+      - animation: blink 2s ease infinite
+      - box-shadow: '[[[ return `0 0 20px ${variables.color}80, 0 4px 15px rgba(0,0,0,0.2)`;
+          ]]]
+
+          '
+      - border: '[[[ return `1px solid ${variables.color}80`; ]]]
+
+          '
+      grid:
+      - grid-template-areas: '"n" "i" "l"'
+      - grid-template-columns: 1fr
+      - grid-template-rows: min-content 1fr min-content
+      - row-gap: 8px
+      icon:
+      - width: 32px
+      - height: 32px
+      - color: '[[[ return variables.color; ]]]
+
+          '
+      - filter: '[[[ return `drop-shadow(0 0 8px ${variables.color}aa)`; ]]]
+
+          '
+      name:
+      - font-size: 13px
+      - font-weight: 600
+      - color: white
+      - text-align: center
+      label:
+      - font-size: 12px
+      - opacity: 0.8
+      - color: white
+      - text-align: center
+      - font-weight: 500
+- type: conditional
+  conditions:
+  - entity: input_boolean.seche_linge_termine
+    state: 'on'
+  - entity: binary_sensor.seche_linge_door_status
+    state: 'off'
+  card:
+    type: custom:button-card
+    entity: input_boolean.seche_linge_termine
+    name: Sèche-linge
+    label: Terminé
+    icon: mdi:tumble-dryer-alert
+    variables:
+      color: '#00897b'
+    show_state: false
+    show_name: true
+    show_icon: true
+    show_label: true
+    styles:
+      card:
+      - padding: 10px 4px
+      - height: 110px
+      - border-radius: 20px
+      - background: rgba(20, 27, 38, 0.6)
+      - backdrop-filter: blur(10px)
+      - -webkit-backdrop-filter: blur(10px)
+      - transition: transform 0.1s ease
+      - box-shadow: '[[[ return `0 0 20px ${variables.color}80, 0 4px 15px rgba(0,0,0,0.2)`;
+          ]]]
+
+          '
+      - border: '[[[ return `1px solid ${variables.color}80`; ]]]
+
+          '
+      grid:
+      - grid-template-areas: '"n" "i" "l"'
+      - grid-template-columns: 1fr
+      - grid-template-rows: min-content 1fr min-content
+      - row-gap: 8px
+      icon:
+      - width: 32px
+      - height: 32px
+      - color: '[[[ return variables.color; ]]]
+
+          '
+      - filter: '[[[ return `drop-shadow(0 0 8px ${variables.color}aa)`; ]]]
+
+          '
+      name:
+      - font-size: 13px
+      - font-weight: 600
+      - color: white
+      - text-align: center
+      label:
+      - font-size: 12px
+      - opacity: 0.8
+      - color: white
+      - text-align: center
+      - font-weight: 500

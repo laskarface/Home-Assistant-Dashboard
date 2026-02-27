@@ -1,0 +1,190 @@
+type: conditional
+conditions:
+- condition: numeric_state
+  entity: sensor.colis_17track_actifs
+  above: 0
+card:
+  type: custom:fold-entity-row
+  padding: 0
+  clickable: true
+  card_mod:
+    style: "div#head {\n  display: block !important;\n  width: 100% !important;\n\
+      \  padding: 0 !important;\n  margin: 0 !important;\n  --toggle-icon-width: 0px\
+      \ !important;\n}\n#head {\n  padding: 0 !important;\n  margin: 0 !important;\n\
+      \  width: 100% !important;\n  cursor: pointer !important;\n  pointer-events:\
+      \ auto !important;\n}\n#head ha-icon {\n  display: none !important;\n  width:\
+      \ 0px !important;\n}\ndiv#items {\n  padding: 0 !important;\n  margin: 0 !important;\n\
+      }\n"
+  head:
+    type: custom:button-card
+    entity: sensor.colis_17track_actifs
+    show_name: false
+    show_icon: false
+    show_state: false
+    tap_action:
+      action: none
+    variables:
+      color: '#FF9800'
+    styles:
+      card:
+      - padding: 0
+      - background: rgba(20, 27, 38, 0.6)
+      - backdrop-filter: blur(10px)
+      - -webkit-backdrop-filter: blur(10px)
+      - border-radius: 20px
+      - border: '[[[ return `1px solid ${variables.color}80`; ]]]'
+      - box-shadow: '[[[ return `0 0 20px ${variables.color}80, 0 8px 32px rgba(0,0,0,0.4)`;
+          ]]]'
+      - overflow: hidden
+      - margin: 0px
+      - box-sizing: border-box
+      - position: relative
+      - height: 85px
+      - transition: box-shadow 0.8s ease-in-out, border 0.8s ease-in-out
+      grid:
+      - grid-template-areas: '"icon details" "footer footer"'
+      - grid-template-columns: 130px minmax(0, 1fr)
+      - grid-template-rows: 60px 25px
+      - gap: 0px
+      - width: 100%
+      - margin: 0
+      custom_fields:
+        icon:
+        - justify-self: stretch
+        - align-self: stretch
+        - border-right: 2px solid rgba(255,255,255,0.6)
+        - border-top-left-radius: 20px
+        - display: flex
+        - align-items: center
+        - justify-content: center
+        - padding: 0
+        details:
+        - justify-self: stretch
+        - align-self: stretch
+        - display: flex
+        - flex-direction: column
+        - justify-content: center
+        - align-items: center
+        - padding: 0
+        - overflow: hidden
+        - position: relative
+        footer:
+        - justify-self: stretch
+        - align-self: stretch
+        - background: rgba(0,0,0,0.2)
+        - border-top: 1px solid rgba(255,255,255,0.05)
+        - display: flex
+        - align-items: center
+        - justify-content: center
+        - border-radius: 0 0 20px 20px
+    custom_fields:
+      icon: "[[[\n  const color = variables.color;\n  return `\n    <div style=\"\
+        width: 100%; height: 100%; display: flex; flex-direction: column; align-items:\
+        \ center; justify-content: center; background: linear-gradient(135deg, ${color}33\
+        \ 0%, ${color}0D 100%); border-top-left-radius: 20px; box-sizing: border-box;\
+        \ position: relative;\">\n      <div style=\"position: absolute; width: 50px;\
+        \ height: 50px; background: ${color}; border-radius: 50%; filter: blur(20px);\
+        \ opacity: 0.3; animation: pulseGlow 4s infinite alternate ease-in-out;\"\
+        ></div>\n      <div style=\"font-size: 32px; line-height: 1; filter: drop-shadow(0\
+        \ 0 10px ${color}80); display: flex; align-items: center; justify-content:\
+        \ center; z-index: 1;\">\U0001F4E6</div>\n      <div style=\"font-size: 10px;\
+        \ font-weight: 900; color: white; text-transform: uppercase; letter-spacing:\
+        \ 0.8px; margin-top: 2px; z-index: 1;\">Livraisons</div>\n      <style>@keyframes\
+        \ pulseGlow { from { opacity: 0.2; transform: scale(0.9); } to { opacity:\
+        \ 0.4; transform: scale(1.1); } }</style>\n    </div>\n  `;\n]]]\n"
+      details: "[[[\n  const count = entity.state;\n  const color = variables.color;\n\
+        \  return `\n    <div style=\"width: 100%; height: 100%; display: flex; flex-direction:\
+        \ row; justify-content: center; align-items: center; padding: 0 15px; position:\
+        \ relative; gap: 15px;\">\n      <div style=\"font-size: 38px; font-weight:\
+        \ 900; color: ${color}; line-height: 1; text-shadow: 0 0 15px ${color}80;\"\
+        >${count}</div>\n      <div style=\"display: flex; flex-direction: column;\
+        \ align-items: flex-start; justify-content: center;\">\n        <div style=\"\
+        font-size: 13px; font-weight: 800; color: white; text-transform: uppercase;\
+        \ letter-spacing: 1px;\">COLIS EN ATTENTE</div>\n        <div style=\"font-size:\
+        \ 11px; color: rgba(255,255,255,0.6); margin-top: 4px; display: flex; align-items:\
+        \ center; font-weight: 600;\">\n          SUIVI 17TRACK\n        </div>\n\
+        \      </div>\n    </div>\n  `;\n]]]\n"
+      footer: "[[[\n   setTimeout(() => {\n     const isEditMode = window.location.search.includes('edit=1')\
+        \ || window.location.pathname.includes('edit');\n     if (isEditMode) {\n\
+        \        const el = document.querySelector(\"hui-conditional-card\"); \n \
+        \       if (el) el.style.display = 'block';\n     }\n   }, 1000);\n\n   return\
+        \ `\n     <div style=\"display:flex; width:100%; justify-content:center; align-items:center;\"\
+        >\n       <ha-icon icon=\"mdi:chevron-down\" style=\"color: rgba(255,255,255,0.7);\
+        \ width: 18px; height: 18px;\"></ha-icon>\n     </div>\n   `;\n]]]\n"
+  entities:
+  - type: custom:button-card
+    entity: sensor.colis_17track_actifs
+    show_name: false
+    show_icon: false
+    styles:
+      card:
+      - background: rgba(20, 27, 38, 0.6)
+      - backdrop-filter: blur(10px)
+      - -webkit-backdrop-filter: blur(10px)
+      - border-radius: 20px
+      - border: 1px solid rgba(255, 152, 0, 0.4)
+      - margin-bottom: 20px
+      - margin-top: 10px
+      - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+      - padding: 0
+      grid:
+      - grid-template-areas: '"title" "details"'
+      - grid-template-columns: 1fr
+      - grid-template-rows: min-content 1fr
+      custom_fields:
+        title:
+        - justify-self: stretch
+        - text-align: left
+        - padding: 16px 16px 8px 16px
+        details:
+        - justify-self: stretch
+        - padding: 0 16px 16px 16px
+    custom_fields:
+      title: "[[[\n  return `<div style=\"color: #FF9800; font-weight: 800; font-size:\
+        \ 13px; letter-spacing: 1px; text-transform: uppercase;\">SUIVI DES COLIS</div>`;\n\
+        ]]]\n"
+      details: "[[[\n  try {\n    if (!entity) return `<div style=\"color:red; padding:10px;\"\
+        >Entité en cours de chargement...</div>`;\n    \n    const attr = entity.attributes\
+        \ || {};\n    const packages = attr.packages;\n    \n    if (!packages ||\
+        \ !Array.isArray(packages) || packages.length === 0) {\n       return `<div\
+        \ style=\"color: rgba(255,255,255,0.7); font-size: 13px; text-align: center;\
+        \ padding: 20px 0;\">Aucun colis en attente.</div>`;\n    }\n    \n    const\
+        \ trad_status = {\n      \"In Transit\": \"En transit\",\n      \"Not Found\"\
+        : \"Introuvable\",\n      \"Expired\": \"Expiré\",\n      \"Ready to be picked\
+        \ up\": \"À retirer\",\n      \"Undelivered\": \"Non distribué\",\n      \"\
+        Alert\": \"Alerte\",\n      \"Delivered\": \"Livré\",\n      \"Pending\":\
+        \ \"En attente\"\n    };\n    \n    const trad_phrases = {\n      \"Departed\
+        \ from departure country/region\": \"Départ du pays d’origine\",\n      \"\
+        Left from departure country/region\": \"Colis parti du pays d’origine\",\n\
+        \      \"Destination country/region arrived\": \"Arrivé dans le pays de destination\"\
+        ,\n      \"Arrived at sorting center\": \"Arrivé au centre de tri\",\n   \
+        \   \"Item dispatched\": \"Colis expédié\",\n      \"Out for delivery\": \"\
+        En cours de livraison\",\n      \"Shipment information received\": \"Informations\
+        \ d’expédition reçues\",\n      \"Handed over from linehaul office\": \"Pris\
+        \ en charge par le hub principal\",\n      \"At destination country/region\"\
+        : \"dans le pays de destination\"\n    };\n    \n    let html = '<div style=\"\
+        display: flex; flex-direction: column; gap: 12px; margin-top: 10px;\">';\n\
+        \    \n    packages.forEach(pkg => {\n      const name = pkg.friendly_name\
+        \ || pkg.tracking_number || \"Colis inconnu\";\n      const status_en = pkg.status\
+        \ || \"\";\n      const status_fr = trad_status[status_en] || status_en ||\
+        \ \"Inconnu\";\n      \n      let base_text = String(pkg.info_text || \"\"\
+        ).replace(/\\n/g, ' ').replace('Carrier note:', '').trim();\n      \n    \
+        \  for (const eng in trad_phrases) {\n        base_text = base_text.split(eng).join(trad_phrases[eng]);\n\
+        \      }\n      \n      html += `\n        <div style=\"background: rgba(0,0,0,0.2);\
+        \ border-radius: 12px; padding: 12px; border: 1px solid rgba(255,255,255,0.05);\"\
+        >\n          <div style=\"color: white; font-weight: 700; font-size: 14px;\
+        \ margin-bottom: 8px; display: flex; align-items: center; gap: 8px;\">\n \
+        \           \U0001F4E6 <span style=\"letter-spacing: 0.5px; white-space: normal;\
+        \ word-break: break-word;\">${name}</span>\n          </div>\n          <div\
+        \ style=\"color: rgba(255,255,255,0.8); font-size: 12px; margin-bottom: 6px;\
+        \ display: flex; align-items: flex-start; gap: 8px; line-height: 1.4;\">\n\
+        \            <span>✈️</span> <span style=\"flex: 1; white-space: normal; word-break:\
+        \ break-word;\">${base_text}</span>\n          </div>\n          <div style=\"\
+        color: #FF9800; font-size: 12px; font-weight: 700; display: flex; align-items:\
+        \ center; gap: 8px;\">\n            <span>\U0001F4CD</span> <span style=\"\
+        white-space: normal; word-break: break-word;\">Statut : ${status_fr}</span>\n\
+        \          </div>\n        </div>\n      `;\n    });\n    \n    html += '</div>';\n\
+        \    return html;\n    \n  } catch (error) {\n    return `<div style=\"color:\
+        \ #ff4444; font-family: monospace; font-size: 11px; padding: 10px; background:\
+        \ rgba(0,0,0,0.5); border-radius: 8px;\">Erreur JS: ${error.message}</div>`;\n\
+        \  }\n]]]\n"

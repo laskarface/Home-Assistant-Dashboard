@@ -1,0 +1,4 @@
+show_name: true
+show_icon: true
+type: button
+entity: light.lumieres_morgan_z

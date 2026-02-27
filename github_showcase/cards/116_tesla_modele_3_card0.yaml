@@ -1,0 +1,28 @@
+type: custom:button-card
+icon: mdi:home-variant-outline
+name: Accueil
+show_name: true
+tap_action:
+  action: navigate
+  navigation_path: /lovelace/0
+styles:
+  card:
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(8px)
+  - -webkit-backdrop-filter: blur(8px)
+  - border-radius: 12px
+  - border: 1px solid rgba(255, 255, 255, 0.1)
+  - padding: 6px 12px
+  - width: fit-content
+  - margin: 0 auto 10px 0
+  grid:
+  - grid-template-areas: '"i n"'
+  - grid-template-columns: auto auto
+  - column-gap: 8px
+  icon:
+  - width: 18px
+  - color: '#00bfff'
+  name:
+  - font-size: 12px
+  - font-weight: 700
+  - color: rgba(255, 255, 255, 0.9)

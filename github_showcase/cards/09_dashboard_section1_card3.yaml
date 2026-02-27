@@ -1,0 +1,126 @@
+type: custom:button-card
+entity: binary_sensor.tesla_model_3_status
+show_icon: false
+show_name: false
+show_state: false
+tap_action:
+  action: navigate
+  navigation_path: /lovelace/tesla_modele_3
+variables:
+  color: "[[[\n  const isCharging = states['binary_sensor.tesla_model_3_charging']?.state\
+    \ === 'on';\n  const batteryState = parseFloat(states['sensor.tesla_model_3_niveau_de_batterie']?.state\
+    \ || 0);\n  if (isCharging) return '#00D2FF';\n  if (batteryState <= 20) return\
+    \ '#FF3232';\n  if (batteryState <= 30) return '#FFAA00';\n  return '#00E676';\n\
+    ]]]\n"
+styles:
+  card:
+  - padding: 0
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(10px)
+  - -webkit-backdrop-filter: blur(10px)
+  - border-radius: 20px
+  - border: "[[[\n  return `1px solid ${variables.color}80`;\n]]]\n"
+  - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+  - overflow: hidden
+  - margin: 0px
+  - box-sizing: border-box
+  - position: relative
+  grid:
+  - grid-template-areas: '"img info"'
+  - grid-template-columns: 130px minmax(0, 1fr)
+  - grid-template-rows: 100px
+  - gap: 0px
+  - width: 100%
+  - margin: 0
+  custom_fields:
+    img:
+    - justify-self: stretch
+    - align-self: stretch
+    - border-right: 2px solid rgba(255,255,255,0.6)
+    - display: flex
+    - align-items: center
+    - justify-content: center
+    - padding: 0
+    info:
+    - justify-self: stretch
+    - align-self: stretch
+    - display: flex
+    - flex-direction: column
+    - justify-content: center
+    - align-items: flex-start
+    - text-align: left
+    - padding: 12px 15px
+    - overflow: hidden
+    - position: relative
+    wake:
+    - position: absolute
+    - left: 145px
+    - top: 12px
+    - z-index: 2
+custom_fields:
+  img: "[[[\n  const color = variables.color;\n  const isOn = states['binary_sensor.tesla_model_3_status']?.state\
+    \ === 'on';\n  const isCharging = states['binary_sensor.tesla_model_3_charging']?.state\
+    \ === 'on';\n  \n  let statusText = isOn ? 'CONNECTÉE' : 'VEILLE';\n  if (isCharging)\
+    \ statusText = 'EN CHARGE ⚡';\n\n  return `\n    <div style=\"width: 100%; height:\
+    \ 100%; display: flex; flex-direction: column; align-items: center; justify-content:\
+    \ center; background: linear-gradient(135deg, ${color}33 0%, ${color}0D 100%);\
+    \ border-top-left-radius: 20px; border-bottom-left-radius: 20px; box-sizing: border-box;\
+    \ padding: 10px;\">\n      <img src=\"/local/tesla-car-image.png\" style=\"width:\
+    \ 100%; max-width: 100px; height: auto; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));\
+    \ object-fit: contain; margin-bottom: 8px;\" />\n      <div style=\"font-size:\
+    \ 11px; color: rgba(255,255,255,0.7); font-weight: 700; text-transform: uppercase;\
+    \ letter-spacing: 1.5px;\">\n        ${statusText}\n      </div>\n    </div>\n\
+    \  `;\n]]]\n"
+  info: "[[[\n  const isCharging = states['binary_sensor.tesla_model_3_charging']?.state\
+    \ === 'on';\n  const rawBattery = states['sensor.tesla_model_3_niveau_de_batterie']?.state;\n\
+    \  const rawRange   = states['sensor.tesla_model_3_autonomie_de_batterie']?.state;\n\
+    \  \n  let batterie = Math.round(Number(rawBattery));\n  let autonomie = Math.round(Number(rawRange));\n\
+    \  \n  const pct = Number.isFinite(batterie) ? Math.max(0, Math.min(100, batterie))\
+    \ : 0;\n  const fillColor = variables.color;\n  const glow = `0 0 10px ${fillColor}99`;\n\
+    \  \n  const bar = `\n    <div style=\"height:8px; border-radius:4px;\n      \
+    \          background: rgba(0,0,0,0.3);\n                overflow:hidden; box-shadow:\
+    \ inset 0 1px 3px rgba(0,0,0,0.4); margin-top: 6px;\">\n      <div style=\"\n\
+    \        height:100%;\n        width:${pct}%;\n        background:${fillColor};\n\
+    \        box-shadow: ${glow};\n        border-radius:4px;\n        transition:\
+    \ width 0.5s ease, background 0.5s ease;\">\n      </div>\n    </div>\n  `;\n\
+    \  \n  const displayBat = Number.isFinite(batterie) ? batterie + \"%\" : \"--%\"\
+    ;\n  const displayRange = Number.isFinite(autonomie) ? autonomie + \" km\" : \"\
+    -- km\";\n  \n  return `\n    <div style=\"width: 100%;\">\n      <div style=\"\
+    display:flex; align-items:center; justify-content: flex-end; gap:6px; margin-bottom:\
+    \ 2px; padding-left: 42px;\">\n        <div style=\"font-size: 16px; font-weight:\
+    \ 700; color: white; letter-spacing: 0.5px; text-align: right; width: 100%;\"\
+    >\n          TESLA MODEL 3\n        </div>\n      </div>\n      \n      <div style=\"\
+    width: 100%; margin-top: 15px;\">\n        <div style=\"display:flex; justify-content:space-between;\
+    \ align-items: flex-end;\">\n          <span style=\"font-size: 11px; color: rgba(255,255,255,0.7);\
+    \ font-weight: 600;\">BATTERIE</span>\n          <span style=\"font-size: 13px;\
+    \ font-weight: 800; color: white;\">${displayBat} <span style=\"font-size: 11px;\
+    \ color: rgba(255,255,255,0.4); margin: 0 4px;\">|</span> ${displayRange}</span>\n\
+    \        </div>\n        ${bar}\n      </div>\n    </div>\n  `;\n]]]\n"
+  wake:
+    card:
+      type: custom:button-card
+      entity: button.tesla_model_3_wake
+      icon: mdi:power
+      show_name: false
+      show_state: false
+      size: 18px
+      styles:
+        card:
+        - width: 32px
+        - height: 32px
+        - border-radius: 10px
+        - padding: 0
+        - background: rgba(0,0,0,0.3)
+        - border: 1px solid rgba(255,255,255,0.1)
+        - backdrop-filter: blur(6px)
+        - box-shadow: 0 4px 8px rgba(0,0,0,0.2)
+        - margin: 0
+        icon:
+        - color: rgba(255,255,255,0.8)
+        - width: 18px
+        - transition: all 0.3s ease
+      tap_action:
+        action: call-service
+        service: button.press
+        service_data:
+          entity_id: button.tesla_model_3_wake

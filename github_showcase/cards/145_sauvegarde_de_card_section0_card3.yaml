@@ -1,0 +1,182 @@
+type: custom:button-card
+entity: sensor.brother_mfc_l3750cdw_series
+name: Brother
+show_name: false
+color: green
+show_state: false
+show_icon: false
+show_entity_picture: false
+styles:
+  card:
+  - padding: 12px
+  - border-radius: 20px
+  - border: 1px solid rgba(255,255,255,0.1)
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(10px)
+  - -webkit-backdrop-filter: blur(10px)
+  - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+  grid:
+  - grid-template-areas: '"printer caps  caps  caps  caps"
+
+      "printer c     m     y     k"
+
+      "printer ref   ref   ref   ref"
+
+      "printer lc2   lm2   ly2   lk2"
+
+      "printer dr    dr    dr    dr"
+
+      "s       s     s     s     s"
+
+      '
+  - grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr
+  - grid-template-rows: auto auto 1.3em 1.8em 1.0em 0em
+  - row-gap: 4px
+  custom_fields:
+    printer:
+    - justify-self: center
+    - align-self: center
+    - width: 100%
+    caps:
+    - justify-self: stretch
+    - align-self: end
+    - padding: 0 6px 8px 6px
+    k:
+    - width: 90%
+    - margin: auto
+    c:
+    - width: 90%
+    - margin: auto
+    m:
+    - width: 90%
+    - margin: auto
+    y:
+    - width: 90%
+    - margin: auto
+    ref:
+    - justify-self: center
+    - font-size: 0.70em
+    - color: rgba(255,255,255,0.6)
+    - margin-top: 4px
+    - font-weight: 500
+    lc2:
+    - width: 90%
+    - justify-self: center
+    lm2:
+    - width: 90%
+    - justify-self: center
+    ly2:
+    - width: 90%
+    - justify-self: center
+    lk2:
+    - width: 90%
+    - justify-self: center
+    dr:
+    - justify-self: center
+    - font-size: 0.70em
+    - color: rgba(255,255,255,0.6)
+    - margin-top: 2px
+    - font-weight: 500
+custom_fields:
+  printer: "[[[\n  return `\n    <div style=\"\n      display:flex;\n      flex-direction:column;\n\
+    \      align-items:center;\n      justify-content:center;\n      height:100%;\n\
+    \    \">\n      <img src=\"/local/brother.png\"\n           style=\"width:72px;height:auto;margin-bottom:8px;filter:drop-shadow(0\
+    \ 4px 8px rgba(0,0,0,0.3));\" />\n      <div style=\"font-size:0.85em;font-weight:700;color:white;letter-spacing:0.5px;\"\
+    >\n        BROTHER\n      </div>\n      <div style=\"font-size:0.6em;color:rgba(255,255,255,0.6);\"\
+    >\n        MFC-L3750CDW\n      </div>\n    </div>\n  `;\n]]]\n"
+  k: "[[[\n  const s = states['sensor.mfc_l3750cdw_toner_noir_restant'];\n  let v\
+    \ = parseFloat(s?.state ?? '0');\n  if (isNaN(v)) v = 0;\n  v = Math.max(0, Math.min(100,\
+    \ v));\n  const color = '#000000'; \n  return `\n    <div style=\"display:flex;flex-direction:column;align-items:center;width:100%;\"\
+    >\n       <div style=\"width:100%;height:32px;border-radius:4px;\n           \
+    \       background:rgba(255,255,255,0.1);position:relative;overflow:hidden;\n\
+    \                  border:1px solid rgba(255,255,255,0.1); box-shadow:inset 0\
+    \ 0 4px rgba(0,0,0,0.2);\">\n        <div style=\"position:absolute;bottom:0;left:0;width:100%;height:${v}%;background:${color};transition:height\
+    \ 0.5s ease;\"></div>\n        <div style=\"position:absolute;bottom:2px;left:0;width:100%;text-align:center;\n\
+    \                    font-size:0.7em;color:${v > 40 ? 'white' : 'rgba(255,255,255,0.8)'};font-weight:700;text-shadow:0\
+    \ 0 2px rgba(0,0,0,0.5);\">\n          ${v}%\n        </div>\n      </div>\n \
+    \   </div>`;\n]]]\n"
+  c: "[[[\n  const s = states['sensor.mfc_l3750cdw_toner_cyan_restant'];\n  let v\
+    \ = parseFloat(s?.state ?? '0');\n  if (isNaN(v)) v = 0;\n  v = Math.max(0, Math.min(100,\
+    \ v));\n  const color = '#00FFFF';\n  return `\n    <div style=\"display:flex;flex-direction:column;align-items:center;width:100%;\"\
+    >\n       <div style=\"width:100%;height:32px;border-radius:4px;\n           \
+    \       background:rgba(255,255,255,0.1);position:relative;overflow:hidden;\n\
+    \                  border:1px solid rgba(255,255,255,0.1); box-shadow:inset 0\
+    \ 0 4px rgba(0,0,0,0.2);\">\n        <div style=\"position:absolute;bottom:0;left:0;width:100%;height:${v}%;background:${color};transition:height\
+    \ 0.5s ease;\"></div>\n        <div style=\"position:absolute;bottom:2px;left:0;width:100%;text-align:center;\n\
+    \                    font-size:0.7em;color:rgba(0,0,0,0.7);font-weight:700;\"\
+    >\n          ${v}%\n        </div>\n      </div>\n    </div>`;\n]]]\n"
+  m: "[[[\n  const s = states['sensor.mfc_l3750cdw_toner_magenta_restant'];\n  let\
+    \ v = parseFloat(s?.state ?? '0');\n  if (isNaN(v)) v = 0;\n  v = Math.max(0,\
+    \ Math.min(100, v));\n  const color = '#FF00FF';\n  return `\n    <div style=\"\
+    display:flex;flex-direction:column;align-items:center;width:100%;\">\n       <div\
+    \ style=\"width:100%;height:32px;border-radius:4px;\n                  background:rgba(255,255,255,0.1);position:relative;overflow:hidden;\n\
+    \                  border:1px solid rgba(255,255,255,0.1); box-shadow:inset 0\
+    \ 0 4px rgba(0,0,0,0.2);\">\n        <div style=\"position:absolute;bottom:0;left:0;width:100%;height:${v}%;background:${color};transition:height\
+    \ 0.5s ease;\"></div>\n        <div style=\"position:absolute;bottom:2px;left:0;width:100%;text-align:center;\n\
+    \                    font-size:0.7em;color:white;font-weight:700;text-shadow:0\
+    \ 0 2px rgba(0,0,0,0.5);\">\n          ${v}%\n        </div>\n      </div>\n \
+    \   </div>`;\n]]]\n"
+  y: "[[[\n  const s = states['sensor.mfc_l3750cdw_toner_jaune_restant'];\n  let v\
+    \ = parseFloat(s?.state ?? '0');\n  if (isNaN(v)) v = 0;\n  v = Math.max(0, Math.min(100,\
+    \ v));\n  const color = '#FFFF00';\n  return `\n    <div style=\"display:flex;flex-direction:column;align-items:center;width:100%;\"\
+    >\n       <div style=\"width:100%;height:32px;border-radius:4px;\n           \
+    \       background:rgba(255,255,255,0.1);position:relative;overflow:hidden;\n\
+    \                  border:1px solid rgba(255,255,255,0.1); box-shadow:inset 0\
+    \ 0 4px rgba(0,0,0,0.2);\">\n        <div style=\"position:absolute;bottom:0;left:0;width:100%;height:${v}%;background:${color};transition:height\
+    \ 0.5s ease;\"></div>\n        <div style=\"position:absolute;bottom:2px;left:0;width:100%;text-align:center;\n\
+    \                    font-size:0.7em;color:rgba(0,0,0,0.7);font-weight:700;\"\
+    >\n          ${v}%\n        </div>\n      </div>\n    </div>`;\n]]]\n"
+  ref: Toners TN243 CMYK
+  dr: Tambours DR243CL
+  caps: "[[[\n  function clamp(v) {\n    v = parseFloat(v);\n    if (isNaN(v)) v =\
+    \ 0;\n    return Math.max(0, Math.min(100, v));\n  }\n  function colorFor(value)\
+    \ {\n    const h = (value / 100) * 120;\n    return `hsla(${h}, 80%, 50%, 0.7)`;\
+    \ \n  }\n  const f  = clamp(states['sensor.mfc_l3750cdw_duree_de_vie_restante_de_l_unite_de_fusion']?.state);\n\
+    \  const c  = clamp(states['sensor.mfc_l3750cdw_duree_de_vie_restante_de_l_unite_de_courroie']?.state);\n\
+    \  const pf = clamp(states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_kit_pf_1']?.state);\n\
+    \  function block(label, value) {\n    const col = colorFor(value);\n    return\
+    \ `\n      <div style=\"flex:1; text-align:center; font-size:0.75em; color:rgba(255,255,255,0.8);\"\
+    >\n        <div style=\"margin-bottom:3px;\">${label}</div>\n        <div style=\"\
+    \n          width:100%;\n          height:6px;\n          border-radius:3px;\n\
+    \          background:rgba(255,255,255,0.1);\n          position:relative;\n \
+    \         overflow:hidden;\n        \">\n          <div style=\"width:${value}%;\
+    \ height:100%; background:${col}; border-radius:3px;\"></div>\n        </div>\n\
+    \      </div>`;\n  }\n  return `\n    <div style=\"display:flex; gap:12px; width:100%;\"\
+    >\n      ${block('Fusion', f)}\n      ${block('Courroie', c)}\n      ${block('Kit\
+    \ PF', pf)}\n    </div>\n  `;\n]]]\n"
+  lc2: "[[[\n  const s = states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_cyan'];\n\
+    \  let v = parseFloat(s?.state ?? '0');\n  if (isNaN(v)) v = 0;\n  v = Math.max(0,\
+    \ Math.min(100, v));\n  const color = '#00FFFF';\n  return `\n    <div style=\"\
+    display:flex;flex-direction:column;align-items:center;width:100%;\">\n      <ha-icon\
+    \ icon=\"mdi:record-circle-outline\"\n        style=\"width:16px;height:16px;color:${color};\
+    \ opacity:0.8; margin-bottom:4px; filter:drop-shadow(0 0 4px ${color});\">\n \
+    \     </ha-icon>\n      <div style=\"width:100%;height:4px;border-radius:2px;background:rgba(255,255,255,0.1);overflow:hidden;\"\
+    >\n        <div style=\"width:${v}%;height:100%;background:${color};opacity:0.6;\"\
+    ></div>\n      </div>\n    </div>`;\n]]]\n"
+  lm2: "[[[\n  const s = states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_magenta'];\n\
+    \  let v = parseFloat(s?.state ?? '0');\n  if (isNaN(v)) v = 0;\n  v = Math.max(0,\
+    \ Math.min(100, v));\n  const color = '#FF00FF';\n  return `\n    <div style=\"\
+    display:flex;flex-direction:column;align-items:center;width:100%;\">\n      <ha-icon\
+    \ icon=\"mdi:record-circle-outline\"\n        style=\"width:16px;height:16px;color:${color};\
+    \ opacity:0.8; margin-bottom:4px; filter:drop-shadow(0 0 4px ${color});\">\n \
+    \     </ha-icon>\n      <div style=\"width:100%;height:4px;border-radius:2px;background:rgba(255,255,255,0.1);overflow:hidden;\"\
+    >\n        <div style=\"width:${v}%;height:100%;background:${color};opacity:0.6;\"\
+    ></div>\n      </div>\n    </div>`;\n]]]\n"
+  ly2: "[[[\n  const s = states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_jaune'];\n\
+    \  let v = parseFloat(s?.state ?? '0');\n  if (isNaN(v)) v = 0;\n  v = Math.max(0,\
+    \ Math.min(100, v));\n  const color = '#FFFF00';\n  return `\n    <div style=\"\
+    display:flex;flex-direction:column;align-items:center;width:100%;\">\n      <ha-icon\
+    \ icon=\"mdi:record-circle-outline\"\n        style=\"width:16px;height:16px;color:${color};\
+    \ opacity:0.8; margin-bottom:4px; filter:drop-shadow(0 0 4px ${color});\">\n \
+    \     </ha-icon>\n      <div style=\"width:100%;height:4px;border-radius:2px;background:rgba(255,255,255,0.1);overflow:hidden;\"\
+    >\n        <div style=\"width:${v}%;height:100%;background:${color};opacity:0.6;\"\
+    ></div>\n      </div>\n    </div>`;\n]]]\n"
+  lk2: "[[[\n  const s = states['sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_noir'];\n\
+    \  let v = parseFloat(s?.state ?? '0');\n  if (isNaN(v)) v = 0;\n  v = Math.max(0,\
+    \ Math.min(100, v));\n  const color = '#888888';\n  return `\n    <div style=\"\
+    display:flex;flex-direction:column;align-items:center;width:100%;\">\n      <ha-icon\
+    \ icon=\"mdi:record-circle-outline\"\n        style=\"width:16px;height:16px;color:${color};\
+    \ opacity:0.8; margin-bottom:4px; filter:drop-shadow(0 0 4px ${color});\">\n \
+    \     </ha-icon>\n      <div style=\"width:100%;height:4px;border-radius:2px;background:rgba(255,255,255,0.1);overflow:hidden;\"\
+    >\n        <div style=\"width:${v}%;height:100%;background:${color};opacity:0.6;\"\
+    ></div>\n      </div>\n    </div>`;\n]]]\n"

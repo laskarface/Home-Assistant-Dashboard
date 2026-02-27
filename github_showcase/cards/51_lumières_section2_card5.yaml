@@ -1,0 +1,29 @@
+type: custom:bubble-card
+card_type: separator
+name: Salles de bain
+card_layout: normal
+sub_button: []
+styles: ".bubble-line {\n  background: linear-gradient(90deg, rgba(255,110,0,1) 0%,\
+  \ rgba(255,255,255,0.5) 50%, rgba(255,110,0,1) 100%) !important;\n  opacity: 0.8\
+  \ !important;\n  height: 3px !important;\n  border-radius: 2px !important;\n}\n\
+  .bubble-name {\n  font-size: 18px !important;\n  font-weight: 700 !important;\n\
+  \  color: rgba(255,255,255,0.95) !important;\n  text-shadow: 0 2px 4px rgba(0,0,0,0.3)\
+  \ !important;\n}\n.bubble-icon {\n  color: #FF6E00 !important;\n}\n"
+slider_fill_orientation: left
+card_mod:
+  style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+    \ blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 20px !important;\n\
+    \  margin-top: 8px;\n  position: relative;\n  border: none !important; /* On enlève\
+    \ la bordure standard */\n}\n\n/* CRÉATION DE LA BORDURE DÉGRADÉE EN PSEUDO-ÉLÉMENT\
+    \ */\nha-card::before {\n  content: \"\";\n  position: absolute;\n  top: 0; left:\
+    \ 0; right: 0; bottom: 0;\n  border-radius: 20px;\n  padding: 1.5px; /* Épaisseur\
+    \ de la bordure */\n  \n  /* LE DÉGRADÉ : Orange vers Transparent si OFF, Gris\
+    \ si ON */\n  background: {% if is_state('light.bar', 'off') %} \n           \
+    \     linear-gradient(90deg, #FFB03B 0%, rgba(255, 75, 43, 0) 90%) \n        \
+    \      {% else %} \n                rgba(255,255,255,0.1) \n              {% endif\
+    \ %};\n  \n  /* MAGIE DU MASQUAGE : On ne garde que la bordure, on vide l'intérieur\
+    \ */\n  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff\
+    \ 0 0);\n  -webkit-mask-composite: xor;\n  mask-composite: exclude;\n  pointer-events:\
+    \ none;\n}\n"
+slider_value_position: right
+light_slider_type: brightness

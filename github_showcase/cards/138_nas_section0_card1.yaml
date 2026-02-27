@@ -1,0 +1,53 @@
+type: custom:button-card
+entity: sensor.chrisnas_volume_utilise_datavol1
+name: STOCKAGE DATAVOL1
+icon: mdi:database
+show_state: true
+styles:
+  card:
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(20px)
+  - border-radius: 20px
+  - border: 1px solid rgba(255, 255, 255, 0.1)
+  - padding: 15px
+  grid:
+  - grid-template-areas: '"i n s" "bar bar bar" "stats stats stats"'
+  - grid-template-columns: 30px 1fr auto
+  - align-items: center
+  icon:
+  - color: '#00ff88'
+  - width: 22px
+  name:
+  - justify-self: start
+  - font-weight: 900
+  - font-size: 12px
+  - color: '#ffffff'
+  - text-transform: uppercase
+  state:
+  - justify-self: end
+  - font-size: 14px
+  - font-weight: 900
+  - color: '#ffffff'
+  custom_fields:
+    bar:
+    - background: rgba(255, 255, 255, 0.05)
+    - border-radius: 6px
+    - height: 8px
+    - width: 100%
+    - margin: 12px 0
+    - position: relative
+    - overflow: hidden
+    stats:
+    - display: flex
+    - justify-content: space-between
+    - font-size: 14px
+    - color: rgba(255, 255, 255, 0.7)
+custom_fields:
+  bar: "[[[\n  const val = parseFloat(entity.state);\n  const color = val > 90 ? '#ff1111'\
+    \ : val > 75 ? '#ff9900' : '#00ff88';\n  return `<div style=\"background: ${color};\
+    \ width: ${val}%; height: 100%; border-radius: 6px; box-shadow: 0 0 10px ${color};\
+    \ transition: width 1s;\"></div>`;\n]]]\n"
+  stats: "[[[\n  const free = states['sensor.chrisnas_espace_libre_datavol1'].state;\n\
+    \  const total = states['sensor.chrisnas_volume_size'].state;\n  return `<span>Libre:\
+    \ ${Math.round(free)} GiB</span><span>Total: ${Math.round(total)} GiB</span>`;\n\
+    ]]]\n"

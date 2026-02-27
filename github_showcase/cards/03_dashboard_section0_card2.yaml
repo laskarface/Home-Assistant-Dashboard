@@ -1,0 +1,467 @@
+type: conditional
+conditions:
+- condition: state
+  entity: binary_sensor.commute_workday
+  state: 'on'
+card:
+  type: custom:fold-entity-row
+  padding: 0
+  clickable: true
+  card_mod:
+    style: "div#head {\n  display: block !important;\n  width: 100% !important;\n\
+      \  padding: 0 !important;\n  margin: 0 !important;\n  --toggle-icon-width: 0px\
+      \ !important;\n}\n#head {\n  padding: 0 !important;\n  margin: 0 !important;\n\
+      \  width: 100% !important;\n  cursor: pointer !important;\n  pointer-events:\
+      \ auto !important;\n}\n#head ha-icon {\n  display: none !important;\n  width:\
+      \ 0px !important;\n}\ndiv#items {\n  padding: 0 !important;\n  margin: 0 !important;\n\
+      }\n"
+  head:
+    type: custom:button-card
+    entity: input_boolean.commute_card_flip
+    show_name: false
+    show_icon: false
+    show_state: false
+    tap_action:
+      action: none
+    variables:
+      is_home: "[[[\n  const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state\
+        \ === 'on';\n  const is_pm = new Date().getHours() >= 12;\n  return (is_pm\
+        \ && !flip) || (!is_pm && flip);\n]]]\n"
+    styles:
+      card:
+      - padding: 0
+      - background: rgba(20, 27, 38, 0.6)
+      - backdrop-filter: blur(10px)
+      - -webkit-backdrop-filter: blur(10px)
+      - border-radius: 20px
+      - border: "[[[ \n  const is_home = variables.is_home;\n  return is_home ? '1px\
+          \ solid rgba(255, 165, 0, 0.5)' : '1px solid rgba(61, 219, 184, 0.5)';\n\
+          ]]]\n"
+      - box-shadow: "[[[ \n  return '0 8px 32px rgba(0,0,0,0.4)';\n]]]\n"
+      - overflow: hidden
+      - margin: 0px
+      - box-sizing: border-box
+      - position: relative
+      - transition: box-shadow 0.4s ease-in-out, border 0.4s ease-in-out
+      grid:
+      - grid-template-areas: '"icon details switch" "footer footer footer"'
+      - grid-template-columns: 130px 1fr 60px
+      - grid-template-rows: "[[[ \n  return \"80px 30px\";\n]]]\n"
+      - gap: 0px
+      - width: 100%
+      - margin: 0
+      custom_fields:
+        icon:
+        - justify-self: stretch
+        - align-self: stretch
+        - border-right: 2px solid rgba(255,255,255,0.6)
+        - border-top-left-radius: 20px
+        - display: flex
+        - align-items: center
+        - justify-content: center
+        - padding: 0
+        details:
+        - justify-self: stretch
+        - align-self: stretch
+        - display: flex
+        - flex-direction: column
+        - justify-content: center
+        - align-items: center
+        - padding-right: 15px
+        - overflow: hidden
+        - position: relative
+        switch:
+        - justify-self: stretch
+        - align-self: stretch
+        - display: flex
+        - justify-content: center
+        - align-items: center
+        - border-left: 1px solid rgba(255,255,255,0.1)
+        - cursor: pointer
+        - pointer-events: auto
+        footer:
+        - justify-self: stretch
+        - align-self: stretch
+        - background: rgba(0,0,0,0.2)
+        - border-top: 1px solid rgba(255,255,255,0.05)
+        - display: flex
+        - align-items: center
+        - justify-content: center
+        - border-radius: 0 0 20px 20px
+    custom_fields:
+      icon: "[[[\n  const is_home = variables.is_home;\n  const color = is_home ?\
+        \ '#FFA500' : '#3DDBB8';\n  \n  const svg = `\n    <svg viewBox=\"0 0 100\
+        \ 100\" width=\"70\" height=\"70\">\n      <defs>\n        <linearGradient\
+        \ id=\"roadGradient\" x1=\"0%\" y1=\"0%\" x2=\"0%\" y2=\"100%\">\n       \
+        \   <stop offset=\"0%\" style=\"stop-color:#2c3e50;stop-opacity:1\" />\n \
+        \         <stop offset=\"100%\" style=\"stop-color:#000000;stop-opacity:1\"\
+        \ />\n        </linearGradient>\n        <filter id=\"roadInnerShadow\">\n\
+        \           <feOffset dx=\"0\" dy=\"2\"/>\n           <feGaussianBlur stdDeviation=\"\
+        2\" result=\"offset-blur\"/>\n           <feComposite operator=\"out\" in=\"\
+        SourceGraphic\" in2=\"offset-blur\" result=\"inverse\"/>\n           <feFlood\
+        \ flood-color=\"black\" flood-opacity=\"0.8\" result=\"color\"/>\n       \
+        \    <feComposite operator=\"in\" in=\"color\" in2=\"inverse\" result=\"shadow\"\
+        />\n           <feComponentTransfer in=\"shadow\" result=\"shadow\">\n   \
+        \          <feFuncA type=\"linear\" slope=\"0.5\"/>\n           </feComponentTransfer>\n\
+        \           <feComposite operator=\"over\" in=\"shadow\" in2=\"SourceGraphic\"\
+        />\n        </filter>\n      </defs>\n      \n      <!-- Road Shape with Perspective\
+        \ -->\n      <path d=\"M20,90 L40,15 L60,15 L80,90 Z\" fill=\"url(#roadGradient)\"\
+        \ filter=\"url(#roadInnerShadow)\" />\n      \n      <!-- Lane Markings (Dashed)\
+        \ -->\n      <line x1=\"50\" y1=\"20\" x2=\"50\" y2=\"85\" stroke=\"white\"\
+        \ stroke-width=\"2\" stroke-dasharray=\"8,8\" opacity=\"0.8\" />\n      \n\
+        \      <!-- Horizon / Depth Line -->\n      <line x1=\"40\" y1=\"15\" x2=\"\
+        60\" y2=\"15\" stroke=\"white\" stroke-width=\"1\" opacity=\"0.3\" />\n  \
+        \    \n      <!-- Gloss Overlays -->\n      <path d=\"M20,90 L40,15 L45,15\
+        \ L25,90 Z\" fill=\"white\" opacity=\"0.05\" />\n      <path d=\"M75,90 L55,15\
+        \ L60,15 L80,90 Z\" fill=\"white\" opacity=\"0.03\" />\n    </svg>\n  `;\n\
+        \  \n  return `\n    <div style=\"width: 100%; height: 100%; display: flex;\
+        \ flex-direction: column; align-items: center; justify-content: center; background:\
+        \ linear-gradient(135deg, ${color}44 0%, rgba(20, 27, 38, 0) 100%); border-top-left-radius:\
+        \ 20px; box-sizing: border-box; position: relative;\">\n       <!-- Pulsing\
+        \ Glow -->\n       <div style=\"position: absolute; width: 60px; height: 60px;\
+        \ background: ${color}; border-radius: 50%; filter: blur(25px); opacity: 0.3;\
+        \ animation: pulseGlow 3s infinite alternate ease-in-out;\"></div>\n     \
+        \  <div style=\"position: relative; z-index: 1; filter: drop-shadow(0 0 12px\
+        \ ${color}80); display: flex; flex-direction: column; align-items: center;\
+        \ justify-content: center;\">\n         ${svg}\n         <div style=\"font-size:\
+        \ 9px; font-weight: 900; color: white; text-transform: uppercase; letter-spacing:\
+        \ 1px; margin-top: -5px;\">Trajets</div>\n       </div>\n       <style>\n\
+        \         @keyframes pulseGlow {\n           0% { transform: scale(0.8); opacity:\
+        \ 0.2; }\n           100% { transform: scale(1.2); opacity: 0.4; }\n     \
+        \    }\n       </style>\n    </div>\n  `;\n]]]\n"
+      details: "[[[\n  const is_home = variables.is_home;\n  const color = is_home\
+        \ ? '#FFA500' : '#3DDBB8';\n  const text = is_home ? 'RETOUR MAISON' : 'ALLER\
+        \ TRAVAIL';\n  const icon = is_home ? 'mdi:home' : 'mdi:office-building';\n\
+        \  \n  const a_sid = is_home ? 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';\n\
+        \  const c_sid = is_home ? 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';\n\
+        \  \n  const a_val = states[a_sid] ? Math.round(states[a_sid].state) : '?';\n\
+        \  const c_val = states[c_sid] ? Math.round(states[c_sid].state) : '?';\n\n\
+        \  const getTrafficColor = (val, normal_id) => {\n    const normal = Math.round(parseFloat(states[normal_id]?.state)\
+        \ || val);\n    const delay = val - normal;\n    if (delay > 25) return '#DC5050';\n\
+        \    if (delay > 10) return '#FFA500';\n    if (delay > 5) return 'white';\n\
+        \    return '#3DDBB8';\n  };\n\n  const a_pic = states['person.user_2']?.attributes.entity_picture;\n\
+        \  const c_pic = states['person.user_1']?.attributes.entity_picture;\n  const\
+        \ a_color = getTrafficColor(a_val, 'input_number.aline_commute_normal');\n\
+        \  const c_color = getTrafficColor(c_val, 'input_number.chris_commute_normal');\n\
+        \  \n  return `\n    <div style=\"width: 100%; height: 100%; display: flex;\
+        \ flex-direction: column; justify-content: center; align-items: center; gap:\
+        \ 4px; padding-right: 5px;\">\n      <div style=\"display: flex; flex-direction:\
+        \ row; align-items: center; gap: 6px; margin-bottom: 2px;\">\n        <ha-icon\
+        \ icon=\"${icon}\" style=\"width: 14px; height: 14px; color: ${color}; opacity:\
+        \ 0.8;\"></ha-icon>\n        <div style=\"font-size: 10px; font-weight: 900;\
+        \ color: white; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8;\"\
+        >${text}</div>\n      </div>\n      <div style=\"display: flex; flex-direction:\
+        \ row; justify-content: center; gap: 12px; width: 100%;\">\n        <div style=\"\
+        display: flex; flex-direction: row; align-items: center; gap: 8px; background:\
+        \ rgba(255,255,255,0.03); padding: 4px 10px 4px 4px; border-radius: 20px;\
+        \ border: 1px solid rgba(255,255,255,0.05);\">\n          <img src=\"${a_pic}\"\
+        \ style=\"width: 36px; height: 36px; border-radius: 50%; border: 2px solid\
+        \ ${a_color}; flex-shrink: 0; filter: drop-shadow(0 0 5px ${a_color}60);\"\
+        \ />\n          <div style=\"display: flex; flex-direction: column; align-items:\
+        \ flex-start; line-height: 1;\">\n            <div style=\"font-size: 13px;\
+        \ font-weight: 900; color: white;\">${a_val}</div>\n            <div style=\"\
+        font-size: 8px; font-weight: 700; opacity: 0.6; text-transform: uppercase;\"\
+        >MIN</div>\n          </div>\n        </div>\n        <div style=\"display:\
+        \ flex; flex-direction: row; align-items: center; gap: 8px; background: rgba(255,255,255,0.03);\
+        \ padding: 4px 10px 4px 4px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);\"\
+        >\n          <img src=\"${c_pic}\" style=\"width: 36px; height: 36px; border-radius:\
+        \ 50%; border: 2px solid ${c_color}; flex-shrink: 0; filter: drop-shadow(0\
+        \ 0 5px ${c_color}60);\" />\n          <div style=\"display: flex; flex-direction:\
+        \ column; align-items: flex-start; line-height: 1;\">\n            <div style=\"\
+        font-size: 13px; font-weight: 900; color: white;\">${c_val}</div>\n      \
+        \      <div style=\"font-size: 8px; font-weight: 700; opacity: 0.6; text-transform:\
+        \ uppercase;\">MIN</div>\n          </div>\n        </div>\n      </div>\n\
+        \    </div>\n  `;\n]]]\n"
+      switch: "[[[\n  const is_home = variables.is_home;\n  const color = is_home\
+        \ ? '#FFA500' : '#3DDBB8';\n  return `\n    <div onclick=\"event.stopPropagation();\
+        \ window.event && window.event.preventDefault(); this.style.transform='scale(0.8)';\
+        \ setTimeout(()=>this.style.transform='scale(1)', 150); document.querySelector('home-assistant').hass.callService('input_boolean',\
+        \ 'toggle', {entity_id: 'input_boolean.commute_card_flip'});\" \n        \
+        \ onpointerdown=\"event.stopPropagation();\"\n         ontouchstart=\"event.stopPropagation();\"\
+        \n         ontouchend=\"event.stopPropagation();\"\n         style=\"width:\
+        \ 100%; height: 100%; display: flex; align-items: center; justify-content:\
+        \ center; background: rgba(255,255,255,0.03); transition: all 0.2s ease;\"\
+        >\n      <ha-icon icon=\"mdi:swap-horizontal\" style=\"width: 24px; height:\
+        \ 24px; color: ${color}; filter: drop-shadow(0 0 8px ${color}aa); pointer-events:\
+        \ none;\"></ha-icon>\n    </div>\n  `;\n]]]\n"
+      footer: "[[[\n   setTimeout(() => {\n     const isEditMode = window.location.search.includes('edit=1')\
+        \ || window.location.pathname.includes('edit');\n     if (isEditMode) {\n\
+        \        const el = document.querySelector(\"hui-conditional-card\"); \n \
+        \       if (el) el.style.display = 'block';\n     }\n   }, 1000);\n\n   return\
+        \ (function() {\n     return `\n       <div style=\"display:flex; width:100%;\
+        \ justify-content:center; align-items:center;\">\n         <ha-icon icon=\"\
+        mdi:chevron-down\" style=\"color: rgba(255,255,255,0.7); width: 18px; height:\
+        \ 18px;\"></ha-icon>\n       </div>\n     `;\n   })();\n]]]\n"
+  entities:
+  - type: custom:button-card
+    show_name: false
+    show_icon: false
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - box-shadow: none
+      - padding: 0
+      - margin-top: 15px
+      grid:
+      - grid-template-areas: '"content"'
+      - grid-template-columns: 100%
+    custom_fields:
+      content:
+        card:
+          type: horizontal-stack
+          cards:
+          - type: custom:button-card
+            entity: "[[[\n  const flip = states['input_boolean.commute_card_flip']\
+              \ && states['input_boolean.commute_card_flip'].state === 'on';\n  const\
+              \ is_pm = new Date().getHours() >= 12;\n  const is_home = (is_pm &&\
+              \ !flip) || (!is_pm && flip);\n  return is_home ? 'sensor.aline_travail_maison'\
+              \ : 'sensor.trajet_maison_travail_aline';\n]]]\n"
+            name: "[[[\n  // --- RESPONSIVE ---\n  const isMobile = window.innerWidth\
+              \ < 500;\n  const carSize = isMobile ? '30px' : '38px';\n  const titleSize\
+              \ = isMobile ? '12px' : '14px';\n  const journeyScale = isMobile ? '1.05'\
+              \ : '1.2';\n  const timeSize = isMobile ? '18px' : '20px';\n  const\
+              \ statusSize = isMobile ? '12px' : '14px';\n  const metricSize = isMobile\
+              \ ? '10px' : '11px';\n  const topMargin = isMobile ? '-4px' : '-6px';\n\
+              \  const titleLeftShift = isMobile ? '-10px' : '-14px'; \n  // --- LOGIC\
+              \ ---\n  const t_red = 25; const t_orange = 10; const t_white = 5;\n\
+              \  const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state\
+              \ === 'on';\n  const is_pm = new Date().getHours() >= 12;\n  const is_home\
+              \ = (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ? 'sensor.aline_travail_maison'\
+              \ : 'sensor.trajet_maison_travail_aline';\n  const s1_sid = is_home\
+              \ ? 'sensor.trajet_aline_retour_semaine_derniere' : 'sensor.trajet_aline_semaine_derniere';\n\
+              \  const avg_sid = is_home ? 'sensor.trajet_aline_retour_moyenne' :\
+              \ 'sensor.trajet_aline_moyenne';\n  const normal_sid = 'input_number.aline_commute_normal';\n\
+              \  const main_entity = states[sid];\n  if (!main_entity) return 'Chargement...';\n\
+              \  \n  const current = Math.round(parseFloat(main_entity.state) || 0);\n\
+              \  const normal = Math.round(parseFloat(states[normal_sid]?.state) ||\
+              \ 0);\n  const delay = current - normal;\n  \n  let status = 'Fluide';\
+              \ let statusColor = '#3DDBB8';\n  if (delay > t_red) { status = 'Bouché';\
+              \ statusColor = '#DC5050'; }\n  else if (delay > t_orange) { status\
+              \ = 'Dense'; statusColor = '#FFA500'; }\n  else if (delay > t_white)\
+              \ { status = 'Normal'; statusColor = 'white'; }\n  \n  const arrow =\
+              \ is_home ? 'mdi:arrow-left-bold' : 'mdi:arrow-right-bold';\n  const\
+              \ green = '#3DDBB8';\n  const homeColor = is_home ? 'white' : green;\n\
+              \  const workColor = is_home ? green : 'white';\n  const delayNotice\
+              \ = delay > 0 ? ` (+${Math.abs(delay)} min)` : '';\n  const deadline\
+              \ = new Date('2026-02-01T07:20:00');\n  const isLearning = new Date()\
+              \ < deadline;\n  \n  const getStatDisplay = (sid, isLearn) => {\n  \
+              \  const state = states[sid]?.state;\n    if (!state || state === 'unavailable'\
+              \ || state === 'unknown') return 'Indisp.';\n    const val = parseFloat(state);\n\
+              \    if (isNaN(val) || val <= 0) return isLearn ? 'Appre.' : 'Indisp.';\n\
+              \    return `${Math.round(val)} min`;\n  };\n\n  const avg7d_display\
+              \ = getStatDisplay(avg_sid, isLearning);\n  const s1_display = getStatDisplay(s1_sid,\
+              \ isLearning);\n  \n  const avatar = states['person.user_2']?.attributes.entity_picture;\n\
+              \  const avatar_html = avatar \n    ? `<img src=\"${avatar}\" style=\"\
+              width: ${carSize}; height: ${carSize}; border-radius: 50%; border: 2px\
+              \ solid ${statusColor}; flex-shrink: 0; filter: drop-shadow(0 0 5px\
+              \ ${statusColor}80);\" />`\n    : `<ha-icon icon=\"mdi:car\" style=\"\
+              width: ${carSize}; height: ${carSize}; color: ${statusColor}; flex-shrink:\
+              \ 0;\"></ha-icon>`;\n\n  return `\n    <div style=\"display: flex; flex-direction:\
+              \ column; align-items: flex-start; width: 100%; overflow: visible;\"\
+              >\n      <div style=\"display: flex; align-items: center; justify-content:\
+              \ flex-start; gap: 8px; margin-bottom: 2px; margin-top: ${topMargin};\
+              \ margin-left: ${titleLeftShift}; width: 100%; overflow: visible;\"\
+              >\n        ${avatar_html}\n        <span style=\"font-weight: 900; font-size:\
+              \ ${titleSize}; color: white; flex-shrink: 0; margin-left: -2px;\">Trajet\
+              \ User 2</span>\n        <div style=\"display: flex; align-items: center;\
+              \ gap: 2px; transform: scale(${journeyScale}); transform-origin: left\
+              \ center; margin-left: 6px; flex-shrink: 0; overflow: visible;\">\n\
+              \          <ha-icon icon=\"mdi:home-variant\" style=\"width: 14px; height:\
+              \ 14px; color: ${homeColor};\"></ha-icon>\n          <ha-icon icon=\"\
+              ${arrow}\" style=\"width: 16px; height: 16px; color: #FFA500;\"></ha-icon>\n\
+              \          <ha-icon icon=\"mdi:office-building\" style=\"width: 14px;\
+              \ height: 14px; color: ${workColor};\"></ha-icon>\n        </div>\n\
+              \      </div>\n      <div style=\"line-height: 0.85em; text-align: left;\
+              \ width: 100%; margin-top: 4px; overflow: visible;\">\n        <div\
+              \ style=\"font-weight: 800; color: white; font-size: ${statusSize};\
+              \ margin-bottom: 3px; white-space: nowrap;\">\n          <span style=\"\
+              font-size: ${timeSize};\">${current} min</span> • <span style=\"color:\
+              \ ${statusColor}\">${status}</span>${delayNotice}\n        </div>\n\
+              \        <div style=\"font-weight: 700; color: white; font-size: ${metricSize};\
+              \ opacity: 0.9;\">Même heure (S-1) : ${s1_display}</div>\n        <div\
+              \ style=\"font-weight: 700; color: white; font-size: ${metricSize};\
+              \ opacity: 0.9; margin-top: 1px;\">Moyenne 7j : ${avg7d_display}</div>\n\
+              \        <div style=\"font-weight: 800; color: white; font-size: ${metricSize};\
+              \ opacity: 0.9; margin-top: 4px;\">Sans bouchon : ${normal} min</div>\n\
+              \      </div>\n    </div>\n  `;\n]]]\n"
+            show_state: false
+            show_label: false
+            show_icon: false
+            styles:
+              card:
+              - padding: '[[[ return window.innerWidth < 500 ? ''12px 10px'' : ''15px
+                  15px''; ]]]
+
+                  '
+              - border-radius: 20px
+              - border: "[[[\n  const t_red = 25; const t_orange = 10; const t_white\
+                  \ = 5;\n  const flip = states['input_boolean.commute_card_flip']\
+                  \ && states['input_boolean.commute_card_flip'].state === 'on';\n\
+                  \  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+                  \ (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ?\
+                  \ 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';\n\
+                  \  const duration = Math.round(parseFloat(states[sid]?.state) ||\
+                  \ 0);\n  const normal = Math.round(parseFloat(states['input_number.aline_commute_normal']?.state)\
+                  \ || duration);\n  const delay = duration - normal;\n  if (delay\
+                  \ > t_red) return '1px solid rgba(220, 80, 80, 0.5)';\n  if (delay\
+                  \ > t_orange) return '1px solid rgba(255, 165, 0, 0.5)';\n  if (delay\
+                  \ > t_white) return '1px solid rgba(255, 255, 255, 0.2)';\n  return\
+                  \ '1px solid rgba(61, 219, 184, 0.5)';\n]]]\n"
+              - background: "[[[\n  const t_red = 25; const t_orange = 10; const t_white\
+                  \ = 5;\n  const flip = states['input_boolean.commute_card_flip']\
+                  \ && states['input_boolean.commute_card_flip'].state === 'on';\n\
+                  \  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+                  \ (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ?\
+                  \ 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';\n\
+                  \  const duration = Math.round(parseFloat(states[sid]?.state) ||\
+                  \ 0);\n  const normal = Math.round(parseFloat(states['input_number.aline_commute_normal']?.state)\
+                  \ || duration);\n  const delay = duration - normal;\n  if (delay\
+                  \ > t_red) return 'linear-gradient(145deg, rgba(220, 80, 80, 0.3),\
+                  \ rgba(20, 27, 38, 0.8))';\n  if (delay > t_orange) return 'linear-gradient(145deg,\
+                  \ rgba(255, 165, 0, 0.3), rgba(20, 27, 38, 0.8))';\n  if (delay\
+                  \ > t_white) return 'linear-gradient(145deg, rgba(255, 255, 255,\
+                  \ 0.08), rgba(20, 27, 38, 0.8))';\n  return 'linear-gradient(145deg,\
+                  \ rgba(61, 219, 184, 0.2), rgba(20, 27, 38, 0.8))';\n]]]\n"
+              - backdrop-filter: blur(20px)
+              - -webkit-backdrop-filter: blur(20px)
+              - box-shadow: 0 4px 15px rgba(0,0,0,0.3)
+              - margin-top: 15px
+              - transition: all 0.3s ease
+              grid:
+              - grid-template-areas: '"n"'
+              - grid-template-columns: 100%
+              name:
+              - justify-self: start
+              - width: 100%
+              - overflow: visible
+            tap_action:
+              action: more-info
+          - type: custom:button-card
+            entity: "[[[\n  const flip = states['input_boolean.commute_card_flip']\
+              \ && states['input_boolean.commute_card_flip'].state === 'on';\n  const\
+              \ is_pm = new Date().getHours() >= 12;\n  const is_home = (is_pm &&\
+              \ !flip) || (!is_pm && flip);\n  return is_home ? 'sensor.chris_travail_maison'\
+              \ : 'sensor.trajet_maison_travail_chris';\n]]]\n"
+            name: "[[[\n  // --- RESPONSIVE ---\n  const isMobile = window.innerWidth\
+              \ < 500;\n  const carSize = isMobile ? '30px' : '38px';\n  const titleSize\
+              \ = isMobile ? '12px' : '14px';\n  const journeyScale = isMobile ? '1.05'\
+              \ : '1.2';\n  const timeSize = isMobile ? '18px' : '20px';\n  const\
+              \ statusSize = isMobile ? '12px' : '14px';\n  const metricSize = isMobile\
+              \ ? '10px' : '11px';\n  const topMargin = isMobile ? '-4px' : '-6px';\n\
+              \  const titleLeftShift = isMobile ? '-10px' : '-14px'; \n  // --- LOGIC\
+              \ ---\n  const t_red = 25; const t_orange = 10; const t_white = 5;\n\
+              \  const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state\
+              \ === 'on';\n  const is_pm = new Date().getHours() >= 12;\n  const is_home\
+              \ = (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ? 'sensor.chris_travail_maison'\
+              \ : 'sensor.trajet_maison_travail_chris';\n  const s1_sid = is_home\
+              \ ? 'sensor.trajet_chris_retour_semaine_derniere' : 'sensor.trajet_chris_semaine_derniere';\n\
+              \  const avg_sid = is_home ? 'sensor.trajet_chris_retour_moyenne' :\
+              \ 'sensor.trajet_chris_moyenne';\n  const normal_sid = 'input_number.chris_commute_normal';\n\
+              \  const main_entity = states[sid];\n  if (!main_entity) return 'Chargement...';\n\
+              \  \n  const current = Math.round(parseFloat(main_entity.state) || 0);\n\
+              \  const normal = Math.round(parseFloat(states[normal_sid]?.state) ||\
+              \ 0);\n  const delay = current - normal;\n  \n  let status = 'Fluide';\
+              \ let statusColor = '#3DDBB8';\n  if (delay > t_red) { status = 'Bouché';\
+              \ statusColor = '#DC5050'; }\n  else if (delay > t_orange) { status\
+              \ = 'Dense'; statusColor = '#FFA500'; }\n  else if (delay > t_white)\
+              \ { status = 'Normal'; statusColor = 'white'; }\n  \n  const arrow =\
+              \ is_home ? 'mdi:arrow-left-bold' : 'mdi:arrow-right-bold';\n  const\
+              \ green = '#3DDBB8';\n  const homeColor = is_home ? 'white' : green;\n\
+              \  const workColor = is_home ? green : 'white';\n  const delayNotice\
+              \ = delay > 0 ? ` (+${Math.abs(delay)} min)` : '';\n  const deadline\
+              \ = new Date('2026-02-01T07:20:00');\n  const isLearning = new Date()\
+              \ < deadline;\n\n  const getStatDisplay = (sid, isLearn) => {\n    const\
+              \ state = states[sid]?.state;\n    if (!state || state === 'unavailable'\
+              \ || state === 'unknown') return 'Indisp.';\n    const val = parseFloat(state);\n\
+              \    if (isNaN(val) || val <= 0) return isLearn ? 'Appre.' : 'Indisp.';\n\
+              \    return `${Math.round(val)} min`;\n  };\n\n  const avg7d_display\
+              \ = getStatDisplay(avg_sid, isLearning);\n  const s1_display = getStatDisplay(s1_sid,\
+              \ isLearning);\n  \n  const avatar = states['person.user_1']?.attributes.entity_picture;\n\
+              \  const avatar_html = avatar \n    ? `<img src=\"${avatar}\" style=\"\
+              width: ${carSize}; height: ${carSize}; border-radius: 50%; border: 2px\
+              \ solid ${statusColor}; flex-shrink: 0; filter: drop-shadow(0 0 5px\
+              \ ${statusColor}80);\" />`\n    : `<ha-icon icon=\"mdi:car\" style=\"\
+              width: ${carSize}; height: ${carSize}; color: ${statusColor}; flex-shrink:\
+              \ 0;\"></ha-icon>`;\n\n  return `\n    <div style=\"display: flex; flex-direction:\
+              \ column; align-items: flex-start; width: 100%; overflow: visible;\"\
+              >\n      <div style=\"display: flex; align-items: center; justify-content:\
+              \ flex-start; gap: 8px; margin-bottom: 2px; margin-top: ${topMargin};\
+              \ margin-left: ${titleLeftShift}; width: 100%; overflow: visible;\"\
+              >\n        ${avatar_html}\n        <span style=\"font-weight: 900; font-size:\
+              \ ${titleSize}; color: white; flex-shrink: 0; margin-left: -2px;\">Trajet\
+              \ User 1</span>\n        <div style=\"display: flex; align-items: center;\
+              \ gap: 2px; transform: scale(${journeyScale}); transform-origin: left\
+              \ center; margin-left: 6px; flex-shrink: 0; overflow: visible;\">\n\
+              \          <ha-icon icon=\"mdi:home-variant\" style=\"width: 14px; height:\
+              \ 14px; color: ${homeColor};\"></ha-icon>\n          <ha-icon icon=\"\
+              ${arrow}\" style=\"width: 16px; height: 16px; color: #FFA500;\"></ha-icon>\n\
+              \          <ha-icon icon=\"mdi:office-building\" style=\"width: 14px;\
+              \ height: 14px; color: ${workColor};\"></ha-icon>\n        </div>\n\
+              \      </div>\n      <div style=\"line-height: 0.85em; text-align: left;\
+              \ width: 100%; margin-top: 4px; overflow: visible;\">\n        <div\
+              \ style=\"font-weight: 800; color: white; font-size: ${statusSize};\
+              \ margin-bottom: 3px; white-space: normal;\">\n          <span style=\"\
+              font-size: ${timeSize};\">${current} min</span> • <span style=\"color:\
+              \ ${statusColor}\">${status}</span>${delayNotice}\n        </div>\n\
+              \        <div style=\"font-weight: 700; color: white; font-size: ${metricSize};\
+              \ opacity: 0.9; white-space: normal; word-wrap: break-word;\">Même heure\
+              \ (S-1) : ${s1_display}</div>\n        <div style=\"font-weight: 700;\
+              \ color: white; font-size: ${metricSize}; opacity: 0.9; margin-top:\
+              \ 1px; white-space: normal; word-wrap: break-word;\">Moyenne 7j : ${avg7d_display}</div>\n\
+              \        <div style=\"font-weight: 800; color: white; font-size: ${metricSize};\
+              \ opacity: 0.9; margin-top: 4px; white-space: normal; word-wrap: break-word;\"\
+              >Sans bouchon : ${normal} min</div>\n      </div>\n    </div>\n  `;\n\
+              ]]]\n"
+            show_state: false
+            show_label: false
+            show_icon: false
+            styles:
+              card:
+              - padding: '[[[ return window.innerWidth < 500 ? ''12px 10px'' : ''15px
+                  15px''; ]]]
+
+                  '
+              - border-radius: 20px
+              - border: "[[[\n  const t_red = 25; const t_orange = 10; const t_white\
+                  \ = 5;\n  const flip = states['input_boolean.commute_card_flip']\
+                  \ && states['input_boolean.commute_card_flip'].state === 'on';\n\
+                  \  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+                  \ (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ?\
+                  \ 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';\n\
+                  \  const duration = Math.round(parseFloat(states[sid]?.state) ||\
+                  \ 0);\n  const normal = Math.round(parseFloat(states['input_number.chris_commute_normal']?.state)\
+                  \ || duration);\n  const delay = duration - normal;\n  if (delay\
+                  \ > t_red) return '1px solid rgba(220, 80, 80, 0.5)';\n  if (delay\
+                  \ > t_orange) return '1px solid rgba(255, 165, 0, 0.5)';\n  if (delay\
+                  \ > t_white) return '1px solid rgba(255, 255, 255, 0.2)';\n  return\
+                  \ '1px solid rgba(61, 219, 184, 0.5)';\n]]]\n"
+              - background: "[[[\n  const t_red = 25; const t_orange = 10; const t_white\
+                  \ = 5;\n  const flip = states['input_boolean.commute_card_flip']\
+                  \ && states['input_boolean.commute_card_flip'].state === 'on';\n\
+                  \  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+                  \ (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ?\
+                  \ 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';\n\
+                  \  const duration = Math.round(parseFloat(states[sid]?.state) ||\
+                  \ 0);\n  const normal = Math.round(parseFloat(states['input_number.chris_commute_normal']?.state)\
+                  \ || duration);\n  const delay = duration - normal;\n  if (delay\
+                  \ > t_red) return 'linear-gradient(145deg, rgba(220, 80, 80, 0.3),\
+                  \ rgba(20, 27, 38, 0.8))';\n  if (delay > t_orange) return 'linear-gradient(145deg,\
+                  \ rgba(255, 165, 0, 0.3), rgba(20, 27, 38, 0.8))';\n  if (delay\
+                  \ > t_white) return 'linear-gradient(145deg, rgba(255, 255, 255,\
+                  \ 0.08), rgba(20, 27, 38, 0.8))';\n  return 'linear-gradient(145deg,\
+                  \ rgba(61, 219, 184, 0.2), rgba(20, 27, 38, 0.8))';\n]]]\n"
+              - backdrop-filter: blur(20px)
+              - -webkit-backdrop-filter: blur(20px)
+              - box-shadow: 0 4px 15px rgba(0,0,0,0.3)
+              - margin-top: 15px
+              - transition: all 0.3s ease
+              grid:
+              - grid-template-areas: '"n"'
+              - grid-template-columns: 100%
+              name:
+              - justify-self: start
+              - width: 100%
+              - overflow: visible
+            tap_action:
+              action: more-info

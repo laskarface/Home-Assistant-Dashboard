@@ -1,0 +1,57 @@
+type: custom:button-card
+entity: sensor.chrisnas_etat
+name: SYSTÈME NAS
+icon: mdi:nas
+show_state: true
+styles:
+  card:
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(20px)
+  - -webkit-backdrop-filter: blur(20px)
+  - border-radius: 20px
+  - border: 1px solid rgba(255, 255, 255, 0.1)
+  - padding: 15px
+  grid:
+  - grid-template-areas: '"i n" "i s" "uptime uptime" "temp temp"'
+  - grid-template-columns: 45px 1fr
+  - align-items: center
+  icon:
+  - color: '[[[ return entity.state === ''good'' ? ''#00ff88'' : ''#ff1111'' ]]]
+
+      '
+  - width: 28px
+  - filter: '[[[ return entity.state === ''good'' ? ''drop-shadow(0 0 5px #00ff88)''
+      : ''drop-shadow(0 0 5px #ff1111)'' ]]]
+
+      '
+  name:
+  - justify-self: start
+  - font-weight: 900
+  - font-size: 14px
+  - color: '#ffffff'
+  - text-transform: uppercase
+  - letter-spacing: 2px
+  state:
+  - justify-self: start
+  - font-weight: bold
+  - font-size: 12px
+  - color: rgba(255, 255, 255, 0.6)
+  - text-transform: uppercase
+  custom_fields:
+    uptime:
+    - margin-top: 15px
+    - padding-top: 10px
+    - border-top: 1px solid rgba(255, 255, 255, 0.05)
+    - font-size: 14px
+    - color: rgba(255, 255, 255, 0.6)
+    temp:
+    - margin-top: 5px
+    - font-size: 16px
+    - color: rgba(255, 255, 255, 0.6)
+custom_fields:
+  uptime: "[[[\n  const uptime = states['sensor.chrisnas_uptime'].state;\n  return\
+    \ `<ha-icon icon=\"mdi:clock-outline\" style=\"width:14px;vertical-align:middle;margin-right:5px;\"\
+    ></ha-icon> Uptime: ${new Date(uptime).toLocaleString()}`;\n]]]\n"
+  temp: "[[[\n  const stemp = states['sensor.chrisnas_temperature_du_systeme'].state;\n\
+    \  return `<ha-icon icon=\"mdi:thermometer\" style=\"width:14px;vertical-align:middle;margin-right:5px;\"\
+    ></ha-icon> Temp. Système: ${stemp}°C`;\n]]]\n"

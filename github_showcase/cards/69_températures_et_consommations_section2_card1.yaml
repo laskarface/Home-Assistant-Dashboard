@@ -1,0 +1,35 @@
+type: custom:bubble-card
+card_type: button
+name: Salle de Bain Parentale
+button_type: state
+sub_button:
+  main:
+  - entity: sensor.sonoff_acc8000899_temperature
+    show_background: false
+    show_state: true
+  - show_name: false
+    show_state: true
+    tap_action:
+      action: toggle
+    select_attribute: hvac_modes
+    show_arrow: false
+    show_attribute: true
+    double_tap_action:
+      action: more-info
+    entity: sensor.sonoff_acc8000899_humidity
+    sub_button_type: select
+  bottom: []
+card_layout: normal
+modules: []
+styles: "ha-card {\n  --bubble-main-background-color: transparent !important;\n  --bubble-button-background-color:\
+  \ transparent !important;\n  --bubble-button-border-radius: 20px;\n}\n"
+show_state: false
+scrolling_effect: false
+entity: sensor.sonoff_acc8000899_temperature
+slider_fill_orientation: left
+slider_value_position: right
+card_mod:
+  style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+    \ blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 20px !important;\n\
+    \  border: 1px solid rgba(255,255,255,0.1) !important;\n  box-shadow: 0 4px 15px\
+    \ rgba(0,0,0,0.2) !important;\n  margin-top: 8px;\n}\n"

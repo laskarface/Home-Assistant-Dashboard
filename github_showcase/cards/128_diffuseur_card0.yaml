@@ -1,0 +1,491 @@
+type: vertical-stack
+cards:
+- type: vertical-stack
+  cards:
+  - type: vertical-stack
+    cards:
+    - type: custom:button-card
+      name: Diffuseur huile
+      show_icon: false
+      show_state: false
+      triggers_update:
+      - timer.diffuseur_huile
+      - light.smart_humidifier_24080828541213641101c4e7ae093c61
+      - select.smart_humidifier_24080828541213641101c4e7ae093c61_spray
+      styles:
+        card:
+        - position: relative
+        - padding: 2px
+        - border-radius: 20px
+        - overflow: hidden
+        - min-height: 420px
+        - background: rgba(20, 27, 38, 0.6)
+        - backdrop-filter: blur(10px)
+        - -webkit-backdrop-filter: blur(10px)
+        - border: 1px solid rgba(255,255,255,0.1)
+        - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+        name:
+        - position: absolute
+        - z-index: 3
+        - top: 16px
+        - left: 20px
+        - font-size: 16px
+        - font-weight: 700
+        - color: rgba(255,255,255,0.95)
+        - text-shadow: 0 2px 10px rgba(0,0,0,0.8)
+        custom_fields:
+          back:
+          - position: absolute
+          - z-index: 5
+          - top: 48px
+          - left: 20px
+          bg:
+          - position: absolute
+          - inset: 0
+          - z-index: 1
+          status:
+          - position: absolute
+          - z-index: 4
+          - top: 16px
+          - right: 20px
+          - font-size: 12px
+          - font-weight: 700
+          - padding: 6px 12px
+          - border-radius: 12px
+          - color: rgba(255,255,255,0.95)
+          - text-shadow: 0 2px 8px rgba(0,0,0,0.9)
+          legend:
+          - position: absolute
+          - z-index: 4
+          - left: 20px
+          - right: 140px
+          - bottom: 16px
+          - font-size: 12px
+          - font-weight: 600
+          - color: rgba(255,255,255,0.90)
+          - text-shadow: 0 2px 8px rgba(0,0,0,0.85)
+          timer_card:
+          - position: absolute
+          - z-index: 6
+          - right: 16px
+          - bottom: 12px
+          - width: 126px
+      custom_fields:
+        back:
+          card:
+            type: custom:button-card
+            icon: mdi:home-outline
+            name: Accueil
+            show_name: true
+            tap_action:
+              action: navigate
+              navigation_path: /lovelace/0
+            styles:
+              card:
+              - padding: 4px 10px
+              - background: rgba(255, 255, 255, 0.08)
+              - border-radius: 8px
+              - border: 1px solid rgba(255, 255, 255, 0.12)
+              - width: fit-content
+              - backdrop-filter: blur(5px)
+              - -webkit-backdrop-filter: blur(5px)
+              grid:
+              - grid-template-areas: '"i n"'
+              - grid-template-columns: auto auto
+              - column-gap: 6px
+              icon:
+              - width: 16px
+              - color: rgba(255, 255, 255, 0.8)
+              name:
+              - font-size: 11px
+              - font-weight: 600
+              - text-transform: uppercase
+              - color: rgba(255, 255, 255, 0.8)
+        bg: "[[[\n  const lightOn = (states['light.smart_humidifier_24080828541213641101c4e7ae093c61']?.state\
+          \ || '').toLowerCase() === 'on';\n  const spray = (states['select.smart_humidifier_24080828541213641101c4e7ae093c61_spray']?.state\
+          \ || 'off').toLowerCase();\n  const diffOn = spray !== 'off';\n  const sig\
+          \ = `${lightOn ? 1 : 0}${diffOn ? 1 : 0}`;\n  let baseSrc = '/local/diffuseur_eteint.png';\n\
+          \  if (lightOn) baseSrc = '/local/diffuseur_lumiere.png';\n  const overlaySrc\
+          \ = '/local/diffuseur_overlay_diffusion.png';\n  return `\n    <!-- Glow\
+          \ -->\n    <div style=\"\n      position:absolute; inset:0;\n      background:\
+          \ radial-gradient(circle at top left, rgba(255,255,255,0.14), transparent\
+          \ 60%);\n      pointer-events:none;\n      z-index:2;\n    \"></div>\n \
+          \   <!-- Image BASE -->\n    <div style=\"\n      position:absolute; inset:0;\n\
+          \      display:flex; align-items:center; justify-content:center;\n     \
+          \ padding: 46px 10px 46px 10px;\n      z-index:1;\n      pointer-events:none;\n\
+          \    \">\n      <img src=\"${baseSrc}?s=${sig}\" style=\"\n        width:\
+          \ 100%;\n        max-width: 520px;\n        height: auto;\n        display:block;\n\
+          \        filter: drop-shadow(0 12px 18px rgba(0,0,0,0.35));\n      \">\n\
+          \    </div>\n    <!-- Overlay DIFFUSION -->\n    ${diffOn ? `\n      <div\
+          \ style=\"\n        position:absolute;\n        top:0; left:0; right:0;\n\
+          \        display:flex;\n        justify-content:center;\n        align-items:flex-start;\n\
+          \        padding-top: 0px;\n        z-index:3;\n        pointer-events:none;\n\
+          \      \">\n        <style>\n          @keyframes pulse_smoke {\n      \
+          \      0% { opacity: 0.3; filter: brightness(0.85); }\n            100%\
+          \ { opacity: 1; filter: brightness(1.15); }\n          }\n        </style>\n\
+          \        <img src=\"${overlaySrc}?s=${sig}\" style=\"\n          width:\
+          \ 100%;\n          max-width: 520px;\n          height: auto;\n        \
+          \  display:block;\n          filter: brightness(1.1) contrast(1.05)\n  \
+          \                drop-shadow(0 8px 14px rgba(0,0,0,0.25));\n          mix-blend-mode:\
+          \ normal;\n          opacity: 0.95;\n          animation: pulse_smoke 1.5s\
+          \ infinite alternate ease-in-out;\n        \">\n      </div>\n    ` : ``}\n\
+          \  `;\n]]]\n"
+        status: "[[[\n  const lightOn = (states['light.smart_humidifier_24080828541213641101c4e7ae093c61']?.state\
+          \ || '').toLowerCase() === 'on';\n  const spray = (states['select.smart_humidifier_24080828541213641101c4e7ae093c61_spray']?.state\
+          \ || 'off').toLowerCase();\n  const diffOn = spray !== 'off';\n  let label\
+          \ = 'Éteint';\n  let bg = 'rgba(255,255,255,0.10)';\n  let bd = 'rgba(255,255,255,0.18)';\n\
+          \  if (diffOn && lightOn) { label = 'Diffusion + Lumière'; bg='rgba(0,170,255,0.22)';\
+          \ bd='rgba(0,170,255,0.55)'; }\n  else if (diffOn)       { label = `Diffusion:\
+          \ ${spray.toUpperCase()}`; bg='rgba(255,180,0,0.20)'; bd='rgba(255,180,0,0.55)';\
+          \ }\n  else if (lightOn)      { label = 'Lumière'; bg='rgba(70,210,120,0.18)';\
+          \ bd='rgba(70,210,120,0.55)'; }\n  return `<span style=\"\n    display:inline-block;\n\
+          \    background:${bg};\n    border:1px solid ${bd};\n    padding:4px 10px;\n\
+          \    border-radius:12px;\n    box-shadow:0 6px 14px rgba(0,0,0,0.35);\n\
+          \  \">${label}</span>`;\n]]]\n"
+        legend: "[[[\n  const lightOn = (states['light.smart_humidifier_24080828541213641101c4e7ae093c61']?.state\
+          \ || '').toLowerCase() === 'on';\n  const spray = (states['select.smart_humidifier_24080828541213641101c4e7ae093c61_spray']?.state\
+          \ || 'off').toLowerCase();\n  return `\n    <div style=\"display:flex;gap:14px;flex-wrap:wrap;align-items:center;\"\
+          >\n      <div>\U0001F4A1 Lumière <b>${lightOn ? 'ON' : 'OFF'}</b></div>\n\
+          \      <div>\U0001F32B️ Diffusion <b>${spray.toUpperCase()}</b></div>\n\
+          \    </div>\n  `;\n]]]\n"
+        timer_card:
+          card:
+            type: entities
+            show_header_toggle: false
+            entities:
+            - entity: timer.diffuseur_huile
+              name: ' '
+            card_mod:
+              style: "ha-card{\n  background: transparent !important;\n  border: none\
+                \ !important;\n  box-shadow: none !important;\n  padding: 0 !important;\n\
+                }\n.card-content{\n  padding: 0 !important;\n}\nhui-generic-entity-row{\n\
+                \  margin: 0 !important;\n  min-height: 0 !important;\n}\n/* cache\
+                \ nom + icone */\n.name, .icon{\n  display:none !important;\n}\n/*\
+                \ style du temps restant */\n.state{\n  font-weight: 500 !important;\n\
+                \  font-size: 12px !important;\n  color: rgba(255,255,255,0.92) !important;\n\
+                \  text-shadow: 0 2px 8px rgba(0,0,0,0.85) !important;\n  letter-spacing:\
+                \ 0.3px;\n}\n"
+  - type: custom:mod-card
+    card_mod:
+      style: "ha-card{\n  border-radius: 16px;\n  background: linear-gradient(160deg,#141b26\
+        \ 0%,#111826 45%,#0d121c 100%);\n  box-shadow: 0 10px 22px rgba(0,0,0,0.65);\n\
+        \  border: 1px solid rgba(255,255,255,0.04);\n  overflow: hidden;\n}\n"
+    card:
+      type: vertical-stack
+      cards:
+      - type: markdown
+        content: '## Contrôles
+
+          '
+        card_mod:
+          style: "ha-card{\n  background: transparent;\n  box-shadow: none;\n  border:\
+            \ none;\n  padding: 14px 16px 6px;\n}\n"
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+        - type: custom:button-card
+          entity: light.smart_humidifier_24080828541213641101c4e7ae093c61
+          name: Lumière
+          icon: mdi:lightbulb
+          show_state: false
+          tap_action:
+            action: toggle
+          custom_fields:
+            glow: "[[[\n  const on = (entity?.state || 'off') === 'on';\n  if (!on)\
+              \ return '';\n\n  const eff = (entity?.attributes?.effect || '').toString();\n\
+              \  const isRainbow = eff === 'Rainbow';\n\n  const rgb = entity?.attributes?.rgb_color;\n\
+              \  const hs  = entity?.attributes?.hs_color;\n\n  let c = 'rgba(0,170,255,0.85)';\n\
+              \  if (rgb && rgb.length === 3) c = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;\n\
+              \  else if (hs && hs.length === 2) c = `hsl(${hs[0]}, 100%, 60%)`;\n\
+              \n  if (isRainbow) {\n    return `\n      <div class=\"rainbowGlow\"\
+              ></div>\n      <style>\n        @keyframes hueSpin { from { filter:\
+              \ hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }\n       \
+              \ .rainbowGlow{\n          position:absolute; inset:-3px;\n        \
+              \  border-radius:12px;\n          background: conic-gradient(from 0deg,\n\
+              \            rgba(255,0,0,.55),\n            rgba(255,180,0,.55),\n\
+              \            rgba(0,255,0,.55),\n            rgba(0,170,255,.55),\n\
+              \            rgba(170,0,255,.55),\n            rgba(255,0,0,.55)\n \
+              \         );\n          opacity:.60;\n          filter: blur(10px);\n\
+              \          animation: hueSpin 2.2s linear infinite;\n          pointer-events:none;\n\
+              \        }\n      </style>\n    `;\n  }\n\n  return `\n    <div style=\"\
+              \n      position:absolute; inset:-3px;\n      border-radius:12px;\n\
+              \      background:${c};\n      opacity:0.32;\n      filter: blur(10px);\n\
+              \      pointer-events:none;\n    \"></div>\n  `;\n]]]\n"
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 12px
+            - overflow: hidden
+            - position: relative
+            - background: "[[[\n  const on = (entity?.state || 'off') === 'on';\n\
+                \  return on ? 'rgba(255,255,255,0.14)' : 'rgba(255,255,255,0.06)';\n\
+                ]]]\n"
+            - border: "[[[\n  const on = (entity?.state || 'off') === 'on';\n  return\
+                \ on ? '1px solid rgba(255,255,255,0.28)' : '1px solid rgba(255,255,255,0.10)';\n\
+                ]]]\n"
+            grid:
+            - grid-template-areas: '"i n"'
+            - grid-template-columns: auto 1fr
+            - column-gap: 8px
+            - justify-items: start
+            - align-items: center
+            icon:
+            - width: 20px
+            - color: rgba(255,255,255,0.92)
+            - z-index: 2
+            name:
+            - font-weight: 900
+            - font-size: 14px
+            - color: rgba(255,255,255,0.95)
+            - text-shadow: 0 2px 10px rgba(0,0,0,0.65)
+            - z-index: 2
+            custom_fields:
+              glow:
+              - position: absolute
+              - inset: 0
+              - z-index: 0
+        - type: custom:button-card
+          entity: light.smart_humidifier_24080828541213641101c4e7ae093c61
+          name: Couleur
+          icon: mdi:palette
+          show_state: false
+          tap_action:
+            action: more-info
+            entity: light.smart_humidifier_24080828541213641101c4e7ae093c61
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 12px
+            - background: rgba(255,255,255,0.06)
+            - border: 1px solid rgba(255,255,255,0.10)
+            grid:
+            - grid-template-areas: '"i n"'
+            - grid-template-columns: auto 1fr
+            - column-gap: 8px
+            - justify-items: start
+            - align-items: center
+            icon:
+            - width: 20px
+            - color: rgba(255,255,255,0.92)
+            name:
+            - font-weight: 900
+            - font-size: 14px
+            - color: rgba(255,255,255,0.95)
+            - text-shadow: 0 2px 10px rgba(0,0,0,0.65)
+        card_mod:
+          style: "ha-card{\n  background: transparent;\n  box-shadow: none;\n  border:\
+            \ none;\n  padding: 0 6px 6px;\n}\n"
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+        - type: custom:button-card
+          name: 'OFF'
+          icon: mdi:water-off
+          show_state: false
+          tap_action:
+            action: call-service
+            service: select.select_option
+            target:
+              entity_id: select.smart_humidifier_24080828541213641101c4e7ae093c61_spray
+            data:
+              option: 'off'
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 12px
+            - background: "[[[\n  const v = (states['select.smart_humidifier_24080828541213641101c4e7ae093c61_spray']?.state\
+                \ || 'off');\n  return (v === 'off') ? 'rgba(255,255,255,0.14)' :\
+                \ 'rgba(255,255,255,0.06)';\n]]]\n"
+            - border: "[[[\n  const v = (states['select.smart_humidifier_24080828541213641101c4e7ae093c61_spray']?.state\
+                \ || 'off');\n  return (v === 'off') ? '1px solid rgba(255,255,255,0.28)'\
+                \ : '1px solid rgba(255,255,255,0.10)';\n]]]\n"
+            name:
+            - font-weight: 900
+            - font-size: 12px
+            - color: rgba(255,255,255,0.95)
+            icon:
+            - width: 22px
+            - color: rgba(255,255,255,0.95)
+        - type: custom:button-card
+          name: ECO
+          icon: mdi:leaf
+          show_state: false
+          tap_action:
+            action: call-service
+            service: select.select_option
+            target:
+              entity_id: select.smart_humidifier_24080828541213641101c4e7ae093c61_spray
+            data:
+              option: eco
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 12px
+            - background: "[[[\n  const v = (states['select.smart_humidifier_24080828541213641101c4e7ae093c61_spray']?.state\
+                \ || 'off');\n  return (v === 'eco') ? 'rgba(70,210,120,0.18)' : 'rgba(255,255,255,0.06)';\n\
+                ]]]\n"
+            - border: "[[[\n  const v = (states['select.smart_humidifier_24080828541213641101c4e7ae093c61_spray']?.state\
+                \ || 'off');\n  return (v === 'eco') ? '1px solid rgba(70,210,120,0.55)'\
+                \ : '1px solid rgba(255,255,255,0.10)';\n]]]\n"
+            name:
+            - font-weight: 900
+            - font-size: 12px
+            - color: rgba(255,255,255,0.95)
+            icon:
+            - width: 22px
+            - color: rgba(255,255,255,0.95)
+        - type: custom:button-card
+          name: 'ON'
+          icon: mdi:water
+          show_state: false
+          tap_action:
+            action: call-service
+            service: select.select_option
+            target:
+              entity_id: select.smart_humidifier_24080828541213641101c4e7ae093c61_spray
+            data:
+              option: 'on'
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 12px
+            - background: "[[[\n  const v = (states['select.smart_humidifier_24080828541213641101c4e7ae093c61_spray']?.state\
+                \ || 'off');\n  return (v === 'on') ? 'rgba(0,170,255,0.18)' : 'rgba(255,255,255,0.06)';\n\
+                ]]]\n"
+            - border: "[[[\n  const v = (states['select.smart_humidifier_24080828541213641101c4e7ae093c61_spray']?.state\
+                \ || 'off');\n  return (v === 'on') ? '1px solid rgba(0,170,255,0.55)'\
+                \ : '1px solid rgba(255,255,255,0.10)';\n]]]\n"
+            name:
+            - font-weight: 900
+            - font-size: 12px
+            - color: rgba(255,255,255,0.95)
+            icon:
+            - width: 22px
+            - color: rgba(255,255,255,0.95)
+      - type: grid
+        columns: 5
+        square: false
+        cards:
+        - type: custom:button-card
+          name: 15m
+          icon: mdi:timer-outline
+          show_state: false
+          tap_action:
+            action: call-service
+            service: timer.start
+            target:
+              entity_id: timer.diffuseur_huile
+            data:
+              duration: 00:15:00
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 10px
+            - background: rgba(255,255,255,0.06)
+            - border: 1px solid rgba(255,255,255,0.10)
+            name:
+            - font-weight: 900
+            - font-size: 12px
+            - color: rgba(255,255,255,0.95)
+            icon:
+            - width: 18px
+            - color: rgba(255,255,255,0.92)
+        - type: custom:button-card
+          name: 30m
+          icon: mdi:timer-outline
+          show_state: false
+          tap_action:
+            action: call-service
+            service: timer.start
+            target:
+              entity_id: timer.diffuseur_huile
+            data:
+              duration: 00:30:00
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 10px
+            - background: rgba(255,255,255,0.06)
+            - border: 1px solid rgba(255,255,255,0.10)
+            name:
+            - font-weight: 900
+            - font-size: 12px
+            - color: rgba(255,255,255,0.95)
+            icon:
+            - width: 18px
+            - color: rgba(255,255,255,0.92)
+        - type: custom:button-card
+          name: 1H
+          icon: mdi:timer-outline
+          show_state: false
+          tap_action:
+            action: call-service
+            service: timer.start
+            target:
+              entity_id: timer.diffuseur_huile
+            data:
+              duration: 01:00:00
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 10px
+            - background: rgba(255,255,255,0.06)
+            - border: 1px solid rgba(255,255,255,0.10)
+            name:
+            - font-weight: 900
+            - font-size: 12px
+            - color: rgba(255,255,255,0.95)
+            icon:
+            - width: 18px
+            - color: rgba(255,255,255,0.92)
+        - type: custom:button-card
+          name: 2H
+          icon: mdi:timer-outline
+          show_state: false
+          tap_action:
+            action: call-service
+            service: timer.start
+            target:
+              entity_id: timer.diffuseur_huile
+            data:
+              duration: 02:00:00
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 10px
+            - background: rgba(255,255,255,0.06)
+            - border: 1px solid rgba(255,255,255,0.10)
+            name:
+            - font-weight: 900
+            - font-size: 12px
+            - color: rgba(255,255,255,0.95)
+            icon:
+            - width: 18px
+            - color: rgba(255,255,255,0.92)
+        - type: custom:button-card
+          name: Stop
+          icon: mdi:timer-off-outline
+          show_state: false
+          tap_action:
+            action: call-service
+            service: timer.cancel
+            target:
+              entity_id: timer.diffuseur_huile
+          styles:
+            card:
+            - border-radius: 12px
+            - padding: 10px
+            - background: rgba(220,70,70,0.12)
+            - border: 1px solid rgba(220,70,70,0.35)
+            name:
+            - font-weight: 900
+            - font-size: 12px
+            - color: rgba(255,255,255,0.95)
+            icon:
+            - width: 18px
+            - color: rgba(255,255,255,0.92)
+        card_mod:
+          style: "ha-card{\n  background: transparent;\n  box-shadow: none;\n  border:\
+            \ none;\n  padding: 0 6px 12px;\n}\n"

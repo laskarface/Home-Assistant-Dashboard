@@ -1,0 +1,19 @@
+type: sensor
+entity: sensor.prise_seche_linge_z_power
+name: Sèche Linge
+graph: line
+detail: 1
+card_mod:
+  style: "/* 1. On force la variable de couleur partout */\n:host {\n  --accent-color:\
+    \ #7F00FF !important;\n  --sensor-color: #7F00FF !important;\n  --primary-color:\
+    \ #7F00FF !important;\n}\n\n/* 2. On cible l'élément de graphique lui-même */\n\
+    .graph svg polyline {\n  stroke: #FFB400 !important;\n}\n.graph svg path {\n \
+    \ fill: #FFB400 !important;\n  opacity: 0.15 !important;\n}\n/* 3. Vos styles\
+    \ de fond et flou */\nha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n\
+    \  backdrop-filter: blur(10px) !important;\n  -webkit-backdrop-filter: blur(10px)\
+    \ !important;\n  border-radius: 20px !important;\n  border: 1px solid rgba(255,255,255,0.1)\
+    \ !important;\n  box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;\n}\n.header\
+    \ { padding: 16px 16px 0 16px !important; }\n.name { font-size: 14px !important;\
+    \ font-weight: 600 !important; color: rgba(255,255,255,0.8) !important; }\n.value\
+    \ { font-size: 24px !important; font-weight: 700 !important; color: #FFFFFF !important;\
+    \ }\n.measurement { font-size: 14px !important; opacity: 0.6 !important; }\n"

@@ -1,0 +1,34 @@
+type: custom:bubble-card
+card_type: climate
+name: 'Bar '
+entity: climate.smart_thermostat_valve_03009970
+sub_button:
+  main:
+  - show_name: false
+    show_state: false
+    tap_action:
+      action: toggle
+    select_attribute: hvac_modes
+    show_arrow: false
+    entity: climate.smart_thermostat_valve_03009970
+    show_attribute: true
+    attribute: current_temperature
+    double_tap_action:
+      action: more-info
+    sub_button_type: select
+    show_icon: true
+  bottom: []
+card_layout: normal
+modules: []
+show_attribute: false
+attribute: hvac_modes
+hide_temperature: false
+state_color: false
+styles: "ha-card {\n  --bubble-climate-main-background-color: transparent !important;\n\
+  \  --bubble-climate-border-radius: 20px;\n}\n.bubble-climate-container {\n  background:\
+  \ transparent !important;\n}\n"
+card_mod:
+  style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+    \ blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 20px !important;\n\
+    \  border: 1px solid rgba(255,255,255,0.1) !important;\n  box-shadow: 0 4px 15px\
+    \ rgba(0,0,0,0.2) !important;\n  margin-top: 8px;\n}\n"

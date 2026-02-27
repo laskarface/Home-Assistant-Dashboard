@@ -1,0 +1,34 @@
+type: custom:mod-card
+card:
+  type: custom:atomic-calendar-revive
+  name: ''
+  language: fr
+  firstDayOfWeek: 1
+  dateFormat: DD/MM/YYYY
+  dateFormatShort: DD/MM
+  entities:
+  - calendar.chris_billet_gmail_com
+  - calendar.icloud
+  - calendar.paris_saint_germain
+  - calendar.jours_feries_et_autres_fetes_en_france
+  - calendar.anniversaires
+  maxDaysToShow: 3
+  maxEventCount: 10
+  showMonth: false
+  showWeekDay: true
+  showDate: true
+  sortByStartTime: true
+  showLocation: true
+  showDescription: false
+  showNoEventsForToday: true
+  card_mod:
+    style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+      \ blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 20px\
+      \ !important;\n  border: 1px solid rgba(255,255,255,0.1) !important;\n  box-shadow:\
+      \ 0 4px 15px rgba(0,0,0,0.2) !important;\n  --primary-text-color: white;\n \
+      \ --secondary-text-color: rgba(255,255,255,0.7);\n}\n/* Cible les titres des\
+      \ jours/dates */\n.day-header {\n   color: rgba(255,255,255,0.9) !important;\n\
+      \   font-weight: 700 !important;\n}\n/* Cible les événements */\n.event-title\
+      \ {\n  color: white !important;\n}\n.event-location {\n  color: rgba(255,255,255,0.6)\
+      \ !important;\n}\n/* Masque les lignes de séparation si trop visibles */\n.event-leftCurrentDay\
+      \ {\n  border-color: rgba(255,255,255,0.1) !important; \n}\n"

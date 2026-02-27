@@ -1,0 +1,112 @@
+type: custom:mod-card
+card_mod:
+  style: "ha-card {\n  border-radius: 6px;\n  overflow: hidden;\n  padding: 12px;\n\
+    \  position: relative;\n  background: linear-gradient(160deg,#141b26 0%,#111826\
+    \ 45%,#0d121c 100%) !important;\n  box-shadow: 0 10px 22px rgba(0,0,0,0.65) !important;\n\
+    \  border: 1px solid rgba(255,255,255,0.04) !important;\n}\nha-card:before{\n\
+    \  content:\"\";\n  position:absolute;\n  inset:0;\n  background: radial-gradient(circle\
+    \ at top left,rgba(255,255,255,0.14),transparent 60%);\n  pointer-events:none;\n\
+    \  z-index:0;\n}\n"
+card:
+  type: custom:button-card
+  name: RatRig — Octopus & Raspberry Pi
+  show_icon: false
+  show_state: false
+  styles:
+    card:
+    - position: relative
+    - padding: 0
+    - height: 260px
+    - background: transparent
+    - box-shadow: none
+    - border: none
+    - overflow: hidden
+    name:
+    - position: absolute
+    - top: 10px
+    - left: 14px
+    - z-index: 5
+    - font-size: 14px
+    - font-weight: 800
+    - color: rgba(255,255,255,0.95)
+    - text-shadow: 0 2px 10px rgba(0,0,0,0.8)
+    custom_fields:
+      left:
+      - position: absolute
+      - left: 14px
+      - top: 42px
+      - bottom: 12px
+      - width: 46%
+      - z-index: 4
+      right:
+      - position: absolute
+      - right: 14px
+      - top: 42px
+      - bottom: 12px
+      - width: 46%
+      - z-index: 4
+  custom_fields:
+    left: "[[[\n  const num = (eid) => {\n    const raw = states[eid]?.state ?? '';\n\
+      \    const n = Number(String(raw).replace(',', '.'));\n    return isFinite(n)\
+      \ ? n : null;\n  };\n  const fmtPctSmart = (n) => {\n    if (n === null) return\
+      \ '—';\n    // ratio 0..1 => %\n    if (n >= 0 && n <= 1) return `${(n*100).toFixed(0)}%`;\n\
+      \    // déjà en % 1..100\n    if (n > 1 && n <= 100) return `${n.toFixed(0)}%`;\n\
+      \    // au-delà : on affiche brut (ou clamp si tu préfères)\n    return `${n.toFixed(0)}%`;\n\
+      \  };\n\n  const t = num('sensor.ratrig_vminion_octopus_temp');\n  const tempTxt\
+      \ = (t === null) ? '—' : `${t.toFixed(1)}°C`;\n\n  const awake = num('sensor.ratrig_vminion_mcu_awake');\n\
+      \  const awakeTxt = fmtPctSmart(awake);\n\n  const fan = num('sensor.ratrig_vminion_controller_fan');\n\
+      \  const fanTxt = fmtPctSmart(fan);\n\n  return `\n    <div style=\"\n     \
+      \ height:100%;\n      border-radius:14px;\n      overflow:hidden;\n      position:relative;\n\
+      \      border:1px solid rgba(255,255,255,0.06);\n      background: rgba(255,255,255,0.04);\n\
+      \    \">\n\n      <img src=\"/local/vminion_mcu_octopus_transparent.png\" style=\"\
+      \n        position:absolute;\n        bottom:0;\n        left:50%;\n       \
+      \ transform:translateX(-50%);\n        width:75%;\n        opacity:0.95;\n \
+      \       filter: drop-shadow(0 18px 20px rgba(0,0,0,0.55));\n        z-index:1;\n\
+      \        pointer-events:none;\n      \"/>\n\n      <div style=\"\n        position:absolute;\n\
+      \        inset:0;\n        background: linear-gradient(\n          180deg,\n\
+      \          rgba(0,0,0,0.75) 0%,\n          rgba(0,0,0,0.55) 35%,\n         \
+      \ rgba(0,0,0,0.15) 70%,\n          rgba(0,0,0,0.0) 100%\n        );\n      \
+      \  z-index:2;\n        pointer-events:none;\n      \"></div>\n\n      <div style=\"\
+      position:relative; z-index:3; padding:12px;\">\n        <div style=\"display:flex;justify-content:space-between;margin-bottom:10px;\"\
+      >\n          <div style=\"font-size:12px;font-weight:900;\">Octopus</div>\n\
+      \          <div style=\"\n            font-size:11px;font-weight:900;padding:4px\
+      \ 8px;border-radius:999px;\n            background:rgba(0,170,255,0.25);\n \
+      \           border:1px solid rgba(0,170,255,0.55);\n          \">Awake ${awakeTxt}</div>\n\
+      \        </div>\n\n        <div style=\"display:grid;gap:8px;font-size:12px;\"\
+      >\n          <div style=\"display:flex;justify-content:space-between;\">\n \
+      \           <span>\U0001F321️ Temp</span><b>${tempTxt}</b>\n          </div>\n\
+      \          <div style=\"display:flex;justify-content:space-between;\">\n   \
+      \         <span>\U0001F300 Fan</span><b>${fanTxt}</b>\n          </div>\n  \
+      \      </div>\n      </div>\n    </div>\n  `;\n]]]\n"
+    right: "[[[\n  const num = (eid) => {\n    const raw = states[eid]?.state ?? '';\n\
+      \    const n = Number(String(raw).replace(',', '.'));\n    return isFinite(n)\
+      \ ? n : null;\n  };\n\n  const fmtPctSmart = (n) => {\n    if (n === null) return\
+      \ '—';\n    if (n >= 0 && n <= 1) return `${(n*100).toFixed(0)}%`;\n    if (n\
+      \ > 1 && n <= 100) return `${n.toFixed(0)}%`;\n    return `${n.toFixed(0)}%`;\n\
+      \  };\n\n  const t = num('sensor.ratrig_vminion_raspberry_pi_temp');\n  const\
+      \ tTxt = (t === null) ? '—' : `${t.toFixed(1)}°C`;\n\n  const mcuLoad = num('sensor.ratrig_vminion_mcu_load');\n\
+      \  const mcuTxt = fmtPctSmart(mcuLoad);\n\n  // \U0001F449 Mémoire RPi (déjà\
+      \ en % propre)\n  const mem = num('sensor.ratrig_vminion_memory_used');\n  const\
+      \ memTxt = (mem === null) ? '—' : `${mem.toFixed(0)}%`;\n\n  return `\n    <div\
+      \ style=\"\n      height:100%;\n      border-radius:14px;\n      overflow:hidden;\n\
+      \      position:relative;\n      border:1px solid rgba(255,255,255,0.06);\n\
+      \      background: rgba(255,255,255,0.04);\n    \">\n\n      <img src=\"/local/vminion_rpi_transparent.png\"\
+      \ style=\"\n        position:absolute;\n        bottom:0;\n        left:50%;\n\
+      \        transform:translateX(-50%);\n        width:65%;\n        opacity:0.95;\n\
+      \        filter: drop-shadow(0 18px 20px rgba(0,0,0,0.55));\n        z-index:1;\n\
+      \        pointer-events:none;\n      \"/>\n\n      <div style=\"\n        position:absolute;\n\
+      \        inset:0;\n        background: linear-gradient(\n          180deg,\n\
+      \          rgba(0,0,0,0.75) 0%,\n          rgba(0,0,0,0.55) 35%,\n         \
+      \ rgba(0,0,0,0.15) 70%,\n          rgba(0,0,0,0.0) 100%\n        );\n      \
+      \  z-index:2;\n        pointer-events:none;\n      \"></div>\n\n      <div style=\"\
+      position:relative; z-index:3; padding:12px;\">\n        <div style=\"display:flex;justify-content:space-between;margin-bottom:10px;\"\
+      >\n          <div style=\"font-size:12px;font-weight:900;\">Raspberry Pi</div>\n\
+      \          <div style=\"\n            font-size:11px;font-weight:900;padding:4px\
+      \ 8px;border-radius:999px;\n            background:rgba(0,170,255,0.25);\n \
+      \           border:1px solid rgba(0,170,255,0.55);\n          \">MCU Load ${mcuTxt}</div>\n\
+      \        </div>\n\n        <div style=\"display:grid;gap:8px;font-size:12px;\"\
+      >\n          <div style=\"display:flex;justify-content:space-between;\">\n \
+      \           <span>\U0001F321️ Temp</span><b>${tTxt}</b>\n          </div>\n\
+      \          <div style=\"display:flex;justify-content:space-between;\">\n   \
+      \         <span>\U0001F9E0 Mémoire</span><b>${memTxt}</b>\n          </div>\n\
+      \        </div>\n      </div>\n    </div>\n  `;\n]]]\n"

@@ -1,0 +1,132 @@
+type: custom:stack-in-card
+keep:
+  margin: false
+  box_shadow: false
+  background: false
+card_mod:
+  style: "ha-card {\n  /* Style de Base (Glassmorphism) */\n  background: rgba(20,\
+    \ 27, 38, 0.6) !important;\n  backdrop-filter: blur(20px) !important;\n  -webkit-backdrop-filter:\
+    \ blur(20px) !important;\n  border-radius: 20px !important;\n  overflow: hidden\
+    \ !important;\n  transition: box-shadow 0.5s ease-in-out, border 0.5s ease-in-out;\n\
+    \  \n  /* LOGIQUE DYNAMIQUE DU HALO (Chauffage actif) */\n  {% if is_state_attr('climate.smart_socket_thermostat_24092307359107600802c4e7ae0be3df',\
+    \ 'hvac_action', 'heating') %}\n    /* Halo Orange Vif quand ca chauffe \U0001F525\
+    \ */\n    border: 1px solid rgba(255, 69, 0, 0.6) !important;\n    box-shadow:\
+    \ 0 0 25px rgba(255, 69, 0, 0.4), 0 8px 32px rgba(0,0,0,0.3) !important;\n  {%\
+    \ else %}\n    /* Style Normal (Verre) */\n    border: 1px solid rgba(255,255,255,0.1)\
+    \ !important;\n    box-shadow: 0 8px 32px rgba(0,0,0,0.3) !important;\n  {% endif\
+    \ %}\n}\n"
+cards:
+- type: custom:button-card
+  name: Chauffage d'Appoint Lison
+  icon: mdi:radiator
+  styles:
+    card:
+    - background: transparent
+    - border: none
+    - padding: 16px
+    grid:
+    - grid-template-areas: '"i n t" "i s t"'
+    - grid-template-columns: 50px 1fr auto
+    icon:
+    - width: 32px
+    - color: "[[[ \n  if (states['binary_sensor.fenetre_lison_contact'].state == 'on')\
+        \ return '#FF0000'; \n  var action = states['climate.smart_socket_thermostat_24092307359107600802c4e7ae0be3df'].attributes.hvac_action;\n\
+        \  if (action == 'heating') return '#FF4500';\n  var temp = states['climate.smart_socket_thermostat_24092307359107600802c4e7ae0be3df'].attributes.temperature;\n\
+        \  return (temp == 22) ? '#00D2FF' : 'rgba(255,255,255,0.4)';\n]]]\n"
+    name:
+    - justify-self: start
+    - font-size: 15px
+    - font-weight: 700
+    - color: rgba(255,255,255,0.9)
+    custom_fields:
+      s:
+      - justify-self: start
+      - font-size: 11px
+      - font-weight: 500
+      - color: "[[[ \n  if (states['binary_sensor.fenetre_lison_contact'].state ==\
+          \ 'on') return '#FF0000';\n  var action = states['climate.smart_socket_thermostat_24092307359107600802c4e7ae0be3df'].attributes.hvac_action;\n\
+          \  if (action == 'heating') return '#FF4500';\n  var temp = states['climate.smart_socket_thermostat_24092307359107600802c4e7ae0be3df'].attributes.temperature;\n\
+          \  return (temp == 22) ? '#00D2FF' : 'rgba(255,255,255,0.4)';\n]]]\n"
+      t:
+      - justify-self: end
+      - font-size: 24px
+      - font-weight: 900
+      - color: rgba(255,255,255,0.9)
+      - margin-top: -4px
+  custom_fields:
+    s: "[[[ \n  if (states['binary_sensor.fenetre_lison_contact'].state == 'on') return\
+      \ \"\U0001FA9F FENÊTRE OUVERTE (STOP)\";\n  var action = states['climate.smart_socket_thermostat_24092307359107600802c4e7ae0be3df'].attributes.hvac_action;\n\
+      \  var temp = states['climate.smart_socket_thermostat_24092307359107600802c4e7ae0be3df'].attributes.temperature;\n\
+      \  \n  if (action == 'heating') return \"\U0001F525 CHAUFFE EN COURS\";\n  if\
+      \ (temp == 22) return \"⌛ PRÊT (Consigne 22°C)\";\n  return \"\U0001F4A4 REPOS\
+      \ (ECO)\";\n]]]\n"
+    t: "[[[\n  var cur = states['climate.smart_socket_thermostat_24092307359107600802c4e7ae0be3df'].attributes.current_temperature;\n\
+      \  return cur ? cur + \"°\" : \"--°\";\n]]]\n"
+- type: horizontal-stack
+  cards:
+  - type: custom:button-card
+    entity: input_boolean.lison_heater_force_manual
+    name: Forçage Manu
+    icon: mdi:hand-back-right
+    show_state: false
+    styles:
+      card:
+      - height: 90px
+      - background: '[[[ return entity.state === ''on'' ? ''rgba(255, 187, 0, 0.15)''
+          : ''transparent'' ]]]
+
+          '
+      - border-radius: 0
+      - border: none
+      - border-right: 1px solid rgba(255,255,255,0.05)
+      icon:
+      - color: '[[[ return entity.state === ''on'' ? ''#FFBB00'' : ''rgba(255,255,255,0.3)''
+          ]]]
+
+          '
+      name:
+      - font-size: 12px
+      - font-weight: 600
+      - color: rgba(255,255,255,0.6)
+  - type: custom:button-card
+    entity: input_boolean.lison_heater_force_schedule
+    name: Planning
+    icon: mdi:calendar-clock
+    show_state: false
+    styles:
+      card:
+      - height: 90px
+      - background: '[[[ return entity.state === ''on'' ? ''rgba(0, 210, 255, 0.15)''
+          : ''transparent'' ]]]
+
+          '
+      - border-radius: 0
+      - border: none
+      icon:
+      - color: '[[[ return entity.state === ''on'' ? ''#00D2FF'' : ''rgba(255,255,255,0.3)''
+          ]]]
+
+          '
+      name:
+      - font-size: 12px
+      - font-weight: 600
+      - color: rgba(255,255,255,0.6)
+- type: conditional
+  conditions:
+  - entity: input_boolean.lison_heater_force_schedule
+    state: 'on'
+  card:
+    type: entities
+    entities:
+    - entity: input_datetime.lison_heater_force_start
+      name: Début
+      icon: mdi:clock-start
+    - entity: input_datetime.lison_heater_force_end
+      name: Fin
+      icon: mdi:clock-end
+    card_mod:
+      style: "ha-card {\n  background: rgba(0,0,0,0.2) !important;\n  border-radius:\
+        \ 0 !important;\n  border: none !important;\n  padding: 8px 0 !important;\n\
+        \  margin: 0 !important;\n}\n.card-content {\n  padding: 0 16px !important;\n\
+        }\n:host {\n  --paper-item-icon-color: rgba(255,255,255,0.4);\n  --primary-text-color:\
+        \ rgba(255,255,255,0.8);\n}\n"

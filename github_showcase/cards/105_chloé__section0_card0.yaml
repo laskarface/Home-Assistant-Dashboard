@@ -1,0 +1,54 @@
+type: custom:button-card
+entity: sensor.91_weather_alert
+show_name: false
+show_icon: false
+show_state: false
+styles:
+  card:
+  - background: transparent
+  - border: none
+  - box-shadow: none
+  - padding: 0px
+  - margin: 0px
+  - display: "[[[\n  if (!entity || !entity.attributes) return 'none';\n  const p_list\
+      \ = ['Vent violent', 'Pluie-inondation', 'Orages', 'Inondation', 'Neige-verglas',\
+      \ 'Canicule', 'Grand froid', 'Avalanches', 'Vagues-submersion'];\n  return p_list.some(p\
+      \ => ['Jaune', 'Orange', 'Rouge'].includes(entity.attributes[p])) ? 'block'\
+      \ : 'none';\n]]]\n"
+  grid:
+  - grid-template-areas: '"alerts_container"'
+  - grid-template-columns: 1fr
+custom_fields:
+  alerts_container: "[[[\n  if (!entity || !entity.attributes) return \"\";\n  \n\
+    \  const pheno_configs = [\n    { id: 'Vent violent', icon: 'mdi:weather-windy'\
+    \ },\n    { id: 'Pluie-inondation', icon: 'mdi:weather-pouring' },\n    { id:\
+    \ 'Orages', icon: 'mdi:weather-lightning' },\n    { id: 'Inondation', icon: 'mdi:home-flood'\
+    \ },\n    { id: 'Neige-verglas', icon: 'mdi:weather-snowy' },\n    { id: 'Canicule',\
+    \ icon: 'mdi:weather-sunny-alert' },\n    { id: 'Grand froid', icon: 'mdi:snowflake'\
+    \ },\n    { id: 'Avalanches', icon: 'mdi:image-filter-hdr' },\n    { id: 'Vagues-submersion',\
+    \ icon: 'mdi:waves' }\n  ];\n  \n  const p_levels = ['Rouge', 'Orange', 'Jaune'];\n\
+    \  const p_colors = { 'Rouge': '#ff1111', 'Orange': '#ff9900', 'Jaune': '#ffff00'\
+    \ };\n  \n  let final_html = '<div style=\"display: flex; flex-direction: column;\
+    \ gap: 8px;\">';\n  let has_any = false;\n  p_levels.forEach(lvl => {\n    pheno_configs.forEach(conf\
+    \ => {\n      if (entity.attributes[conf.id] === lvl) {\n        has_any = true;\n\
+    \        const c = p_colors[lvl];\n        final_html += `\n          <div style=\"\
+    \n            background: rgba(20, 27, 38, 0.6);\n            backdrop-filter:\
+    \ blur(20px);\n            -webkit-backdrop-filter: blur(20px);\n            border:\
+    \ 1px solid rgba(255, 255, 255, 0.1);\n            border-radius: 20px;\n    \
+    \        height: 35px;\n            display: flex;\n            align-items: center;\n\
+    \            padding: 0 15px;\n          \">\n            <div style=\"width:\
+    \ 35px; min-width: 35px; display: flex; align-items: center;\">\n            \
+    \  <ha-icon icon=\"${conf.icon}\" style=\"\n                color: ${c};\n   \
+    \             filter: drop-shadow(0 0 5px ${c});\n                --mdc-icon-size:\
+    \ 22px;\n                animation: dash_blink 2s infinite;\n              \"\
+    ></ha-icon>\n            </div>\n            <div style=\"\n              font-weight:\
+    \ 900;\n              font-size: 11px;\n              text-transform: uppercase;\n\
+    \              letter-spacing: 1px;\n              color: ${c};\n            \
+    \  text-shadow: 0 0 10px rgba(0,0,0,0.5);\n              animation: dash_blink\
+    \ 2s infinite;\n            \">\n              VIGILANCE ${lvl} : ${conf.id}\n\
+    \            </div>\n          </div>\n        `;\n      }\n    });\n  });\n \
+    \ \n  final_html += '</div>';\n  return has_any ? final_html : \"\";\n]]]\n"
+card_mod:
+  style: "ha-card {\n  background: transparent !important;\n  border: none !important;\n\
+    \  box-shadow: none !important;\n}\n@keyframes dash_blink {\n  0% { opacity: 1;\
+    \ }\n  50% { opacity: 0.3; }\n  100% { opacity: 1; }\n}\n"

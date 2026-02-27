@@ -1,0 +1,40 @@
+type: conditional
+conditions:
+- condition: numeric_state
+  entity: sensor.colis_17track_actifs
+  above: 0
+card:
+  type: markdown
+  title: 📦 Suivi des colis
+  content: "{% set packages = state_attr('sensor.colis_17track_actifs', 'packages')\
+    \ or [] %} {# Traduction des statuts #} {% set trad_status = {\n  \"In Transit\"\
+    : \"En transit\",\n  \"Not Found\": \"Introuvable\",\n  \"Expired\": \"Expiré\"\
+    ,\n  \"Ready to be picked up\": \"À retirer\",\n  \"Undelivered\": \"Non distribué\"\
+    ,\n  \"Alert\": \"Alerte\",\n  \"Delivered\": \"Livré\",\n  \"Pending\": \"En\
+    \ attente\"\n} %} {# Fragments de texte à traduire #} {% set trad_phrases = {\n\
+    \  \"Departed from departure country/region\": \"Départ du pays d’origine\",\n\
+    \  \"Left from departure country/region\": \"Colis parti du pays d’origine\",\n\
+    \  \"Destination country/region arrived\": \"Arrivé dans le pays de destination\"\
+    ,\n  \"Arrived at sorting center\": \"Arrivé au centre de tri\",\n  \"Item dispatched\"\
+    : \"Colis expédié\",\n  \"Out for delivery\": \"En cours de livraison\",\n  \"\
+    Shipment information received\": \"Informations d’expédition reçues\",\n  \"Handed\
+    \ over from linehaul office\": \"Pris en charge par le hub principal\",\n  \"\
+    At destination country/region\": \"dans le pays de destination\"\n} %} {% for\
+    \ package in packages %}\n  {% set name = package.friendly_name or package.tracking_number\
+    \ %}\n  {% set status_en = package.status or \"\" %}\n  {% set status_fr = trad_status.get(status_en,\
+    \ status_en) %}\n  {# Texte brut : on enlève sauts de ligne + \"Carrier note:\"\
+    \ #}\n  {% set base_text = (package.info_text or \"\") | replace('\\n',' ') %}\n\
+    \  {% set base_text = base_text.replace('Carrier note:', '') | trim %}\n  {# On\
+    \ applique les traductions avec un namespace pour conserver les changements #}\n\
+    \  {% set ns = namespace(txt=base_text) %}\n  {% for eng, fr in trad_phrases.items()\
+    \ %}\n    {% set ns.txt = ns.txt.replace(eng, fr) %}\n  {% endfor %}\n  \U0001F4E6\
+    \ **{{ name }}**  \n  ✈️ {{ ns.txt }}  \n  \U0001F4CD Statut : {{ status_fr }}\n\
+    {% endfor %}\n"
+  card_mod:
+    style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+      \ blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 20px\
+      \ !important;\n  border: 1px solid rgba(255,255,255,0.1) !important;\n  box-shadow:\
+      \ 0 4px 15px rgba(0,0,0,0.2) !important;\n  --primary-text-color: rgba(255,255,255,0.9);\n\
+      }\nha-markdown {\n  padding: 16px !important;\n}\nh1.card-header {\n  color:\
+      \ white !important;\n  font-weight: 700 !important;\n  padding-bottom: 0 !important;\n\
+      \  font-size: 18px !important;\n}\n"

@@ -1,0 +1,150 @@
+type: conditional
+conditions:
+- condition: state
+  entity: light.lumieres_maison
+  state: 'on'
+card:
+  type: custom:fold-entity-row
+  padding: 0
+  clickable: true
+  card_mod:
+    style: "div#head {\n  display: block !important;\n  width: 100% !important;\n\
+      \  padding: 0 !important;\n  margin: 0 !important;\n  --toggle-icon-width: 0px\
+      \ !important;\n}\n#head {\n  padding: 0 !important;\n  margin: 0 !important;\n\
+      \  width: 100% !important;\n  cursor: pointer !important;\n  pointer-events:\
+      \ auto !important;\n}\n#head ha-icon {\n  display: none !important;\n  width:\
+      \ 0px !important;\n}\ndiv#items {\n  padding: 0 !important;\n  margin: 0 !important;\n\
+      }\n"
+  head:
+    type: custom:button-card
+    entity: light.lumieres_maison
+    show_name: false
+    show_icon: false
+    show_state: false
+    tap_action:
+      action: none
+    variables:
+      color: '#FFB300'
+    styles:
+      card:
+      - padding: 0
+      - background: rgba(20, 27, 38, 0.6)
+      - backdrop-filter: blur(10px)
+      - -webkit-backdrop-filter: blur(10px)
+      - border-radius: 20px
+      - border: '[[[ return `1px solid ${variables.color}80`; ]]]'
+      - box-shadow: '[[[ return `0 0 20px ${variables.color}40, 0 8px 32px rgba(0,0,0,0.4)`;
+          ]]]'
+      - overflow: hidden
+      - margin: 0px
+      - box-sizing: border-box
+      - position: relative
+      - height: 85px
+      - transition: box-shadow 0.8s ease-in-out, border 0.8s ease-in-out
+      grid:
+      - grid-template-areas: '"icon details" "footer footer"'
+      - grid-template-columns: 130px minmax(0, 1fr)
+      - grid-template-rows: 60px 25px
+      - gap: 0px
+      - width: 100%
+      - margin: 0
+      custom_fields:
+        icon:
+        - justify-self: stretch
+        - align-self: stretch
+        - border-right: 2px solid rgba(255,255,255,0.6)
+        - border-top-left-radius: 20px
+        - display: flex
+        - align-items: center
+        - justify-content: center
+        - padding: 0
+        details:
+        - justify-self: stretch
+        - align-self: stretch
+        - display: flex
+        - flex-direction: column
+        - justify-content: center
+        - align-items: center
+        - padding: 0
+        - overflow: hidden
+        - position: relative
+        footer:
+        - justify-self: stretch
+        - align-self: stretch
+        - background: rgba(0,0,0,0.2)
+        - border-top: 1px solid rgba(255,255,255,0.05)
+        - display: flex
+        - align-items: center
+        - justify-content: center
+        - border-radius: 0 0 20px 20px
+    custom_fields:
+      icon: "[[[\n  const color = variables.color;\n  return `\n    <div style=\"\
+        width: 100%; height: 100%; display: flex; flex-direction: column; align-items:\
+        \ center; justify-content: center; background: linear-gradient(135deg, ${color}33\
+        \ 0%, ${color}0D 100%); border-top-left-radius: 20px; box-sizing: border-box;\
+        \ position: relative;\">\n      <div style=\"position: absolute; width: 50px;\
+        \ height: 50px; background: ${color}; border-radius: 50%; filter: blur(20px);\
+        \ opacity: 0.3; animation: pulseGlow 4s infinite alternate ease-in-out;\"\
+        ></div>\n      <div style=\"font-size: 32px; line-height: 1; filter: drop-shadow(0\
+        \ 0 10px ${color}80); display: flex; align-items: center; justify-content:\
+        \ center; z-index: 1;\">\U0001F4A1</div>\n      <div style=\"font-size: 10px;\
+        \ font-weight: 900; color: white; text-transform: uppercase; letter-spacing:\
+        \ 0.8px; margin-top: 2px; z-index: 1;\">Lumieres</div>\n      <style>@keyframes\
+        \ pulseGlow { from { opacity: 0.2; transform: scale(0.9); } to { opacity:\
+        \ 0.4; transform: scale(1.1); } }</style>\n    </div>\n  `;\n]]]\n"
+      details: "[[[\n  let count = 0;\n  if (entity && entity.attributes && entity.attributes.entity_id)\
+        \ {\n    const entities = entity.attributes.entity_id;\n    const on_entities\
+        \ = entities.filter(id => states[id] && states[id].state === 'on');\n    count\
+        \ = on_entities.length;\n  } else {\n     count = entity && entity.state ===\
+        \ 'on' ? 1 : 0;\n  }\n  \n  const color = variables.color;\n  const titleText\
+        \ = count > 1 ? 'LUMIÈRES' : 'LUMIÈRE';\n  const subText = count > 1 ? 'ALLUMÉES\
+        \ DANS LA MAISON' : 'ALLUMÉE DANS LA MAISON';\n  \n  return `\n    <div style=\"\
+        width: 100%; height: 100%; display: flex; flex-direction: row; justify-content:\
+        \ center; align-items: center; padding: 0 15px; position: relative; gap: 15px;\"\
+        >\n      <div style=\"font-size: 38px; font-weight: 900; color: ${color};\
+        \ line-height: 1; text-shadow: 0 0 15px ${color}80;\">${count}</div>\n   \
+        \   <div style=\"display: flex; flex-direction: column; align-items: flex-start;\
+        \ justify-content: center;\">\n        <div style=\"font-size: 13px; font-weight:\
+        \ 800; color: white; text-transform: uppercase; letter-spacing: 1px;\">${titleText}</div>\n\
+        \        <div style=\"font-size: 11px; color: rgba(255,255,255,0.6); margin-top:\
+        \ 4px; display: flex; align-items: center; font-weight: 600;\">\n        \
+        \  ${subText}\n        </div>\n      </div>\n    </div>\n  `;\n]]]\n"
+      footer: "[[[\n   setTimeout(() => {\n     const isEditMode = window.location.search.includes('edit=1')\
+        \ || window.location.pathname.includes('edit');\n     if (isEditMode) {\n\
+        \        const el = document.querySelector(\"hui-conditional-card\"); \n \
+        \       if (el) el.style.display = 'block';\n     }\n   }, 1000);\n\n   return\
+        \ `\n     <div style=\"display:flex; width:100%; justify-content:center; align-items:center;\"\
+        >\n       <ha-icon icon=\"mdi:chevron-down\" style=\"color: rgba(255,255,255,0.7);\
+        \ width: 18px; height: 18px;\"></ha-icon>\n     </div>\n   `;\n]]]\n"
+  entities:
+  - type: custom:auto-entities
+    show_empty: false
+    unique: true
+    card:
+      type: grid
+      columns: 3
+      square: false
+      card_mod:
+        style: "ha-card {\n  background: transparent !important;\n  box-shadow: none\
+          \ !important;\n  border: none !important;\n  padding: 0 !important;\n  margin-top:\
+          \ 20px !important;\n}\n"
+    card_param: cards
+    filter:
+      include:
+      - group: light.lumieres_maison
+        state: 'on'
+        options:
+          type: custom:mushroom-light-card
+          use_light_color: true
+          show_brightness_control: false
+          show_color_temp_control: false
+          show_color_control: false
+          card_mod:
+            style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n \
+              \ backdrop-filter: blur(10px) !important;\n  -webkit-backdrop-filter:\
+              \ blur(10px) !important;\n  border-radius: 15px !important;\n  border:\
+              \ 1px solid rgba(255, 179, 0, 0.4) !important;\n  box-shadow: 0 4px\
+              \ 15px rgba(0,0,0,0.2) !important;\n  transition: all 0.3s ease-in-out;\n\
+              }\n"
+      exclude:
+      - entity_id: light.lumieres_maison

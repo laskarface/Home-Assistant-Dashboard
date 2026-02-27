@@ -1,0 +1,7 @@
+# Home Assistant Configuration
+# Put your configuration.yaml content here
+
+default_config:
+
+git:
+

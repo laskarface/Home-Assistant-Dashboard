@@ -1,0 +1,24 @@
+type: custom:button-card
+name: Menu
+icon: mdi:menu
+styles:
+  card:
+  - background: none
+  - border: none
+  - padding: 8px 15px
+  grid:
+  - grid-template-areas: '"i n"'
+  - grid-template-columns: min-content 1fr
+  - gap: 10px
+  icon:
+  - width: 24px
+  - color: '#00D2FF'
+  - filter: drop-shadow(0 0 5px rgba(0, 210, 255, 0.4))
+  name:
+  - justify-self: start
+  - font-weight: 900
+  - font-size: 15px
+  - color: '#00D2FF'
+  - text-transform: uppercase
+  - letter-spacing: 1px
+  - text-shadow: 0 0 10px rgba(0, 210, 255, 0.3)

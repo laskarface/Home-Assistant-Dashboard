@@ -1,0 +1,162 @@
+type: custom:mod-card
+card_mod:
+  style: "ha-card {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 8px; \n\
+    \  position: relative;\n  background: linear-gradient(160deg,#141b26 0%,#111826\
+    \ 45%,#0d121c 100%);\n  box-shadow: 0 8px 18px rgba(0,0,0,0.60);\n  border: 1px\
+    \ solid rgba(255,255,255,0.04);\n}\n\nha-card:before {\n  content:\"\";\n  position:absolute;\n\
+    \  inset:0;\n  background: radial-gradient(circle at top left,rgba(255,255,255,0.14),transparent\
+    \ 60%);\n  pointer-events:none;\n}\n\n/* ✅ TITRE flottant (ne prend aucune hauteur)\
+    \ */\nha-card:after {\n  content: \"Températures\";\n  position: absolute;\n \
+    \ left: 10px;\n  top: 6px;\n  font-size: 16px;\n  font-weight: 950;\n  line-height:\
+    \ 1;\n  opacity: .95;\n  pointer-events: none;\n  z-index: 2;\n}\n"
+card:
+  type: vertical-stack
+  cards:
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+    - type: entities
+      show_header_toggle: false
+      entities:
+      - entity: number.ratrig_vminion_extruder_target
+        name: Buse
+        icon: mdi:printer-3d-nozzle-heat
+      card_mod:
+        style: "ha-card{\n  border-radius: 10px;\n  background: linear-gradient(145deg,#202a38,#161d29);\n\
+          \  border: 1px solid rgba(255,255,255,0.06);\n  box-shadow: inset 0 1px\
+          \ 0 rgba(255,255,255,0.08), 0 3px 8px rgba(0,0,0,0.45);\n  padding: 0 6px;\n\
+          \  min-height: 40px;\n}\n.card-content { padding: 0 !important; }\n#states\
+          \ { padding: 0 !important; margin: 0 !important; }\nhui-generic-entity-row\
+          \ { margin: 0 !important; }\nhui-slider { height: 8px !important; }\nhui-slider\
+          \ {\n  --paper-slider-knob-color: rgba(255,255,255,0.95);\n  --paper-slider-active-color:\
+          \ rgba(0,160,255,0.95);\n  --paper-slider-container-color: rgba(255,255,255,0.22);\n\
+          }\n"
+    - type: custom:button-card
+      entity: number.ratrig_vminion_extruder_target
+      show_icon: false
+      show_name: false
+      show_state: true
+      state_display: "[[[\n  const v = Number(entity?.state ?? 0);\n  return `${Math.round(v)}\
+        \ °C`;\n]]]\n"
+      styles:
+        card:
+        - border-radius: 10px
+        - background: linear-gradient(145deg,#202a38,#161d29)
+        - border: 1px solid rgba(255,255,255,0.06)
+        - box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 3px 8px rgba(0,0,0,0.45)
+        - padding: 0
+        - min-height: 40px
+        state:
+        - font-size: 16px
+        - font-weight: 900
+        - align-self: center
+        - justify-self: center
+        - line-height: 1
+    - type: custom:button-card
+      entity: sensor.ratrig_vminion_extruder_temperature
+      show_name: false
+      show_icon: true
+      icon: mdi:thermometer
+      show_state: true
+      state_display: "[[[\n  const v = Number(String(entity?.state ?? '0').replace(',',\
+        \ '.')) || 0;\n  return `${v.toFixed(1)}°`;\n]]]\n"
+      styles:
+        card:
+        - border-radius: 10px
+        - background: linear-gradient(145deg,#202a38,#161d29)
+        - border: 1px solid rgba(255,255,255,0.06)
+        - box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 3px 8px rgba(0,0,0,0.45)
+        - padding: 0 6px
+        - min-height: 40px
+        grid:
+        - grid-template-areas: '"i s"'
+        - grid-template-columns: 16px 1fr
+        - align-items: center
+        - column-gap: 6px
+        icon:
+        - width: 24px
+        - height: 24px
+        - color: rgba(255,255,255,0.85)
+        - justify-self: start
+        state:
+        - font-size: 16px
+        - font-weight: 950
+        - letter-spacing: 0.2px
+        - justify-self: start
+        - line-height: 1
+    - type: entities
+      show_header_toggle: false
+      entities:
+      - entity: number.ratrig_vminion_bed_target
+        name: Plateau
+        icon: mdi:radiator
+      card_mod:
+        style: "ha-card{\n  border-radius: 10px;\n  background: linear-gradient(145deg,#202a38,#161d29);\n\
+          \  border: 1px solid rgba(255,255,255,0.06);\n  box-shadow: inset 0 1px\
+          \ 0 rgba(255,255,255,0.08), 0 3px 8px rgba(0,0,0,0.45);\n  padding: 0 6px;\n\
+          \  min-height: 40px;\n}\n.card-content { padding: 0 !important; }\n#states\
+          \ { padding: 0 !important; margin: 0 !important; }\nhui-generic-entity-row\
+          \ { margin: 0 !important; }\nhui-slider { height: 8px !important; }\nhui-slider\
+          \ {\n  --paper-slider-knob-color: rgba(255,255,255,0.95);\n  --paper-slider-active-color:\
+          \ rgba(0,160,255,0.95);\n  --paper-slider-container-color: rgba(255,255,255,0.22);\n\
+          }\n"
+    - type: custom:button-card
+      entity: number.ratrig_vminion_bed_target
+      show_icon: false
+      show_name: false
+      show_state: true
+      state_display: "[[[\n  const v = Number(entity?.state ?? 0);\n  return `${Math.round(v)}\
+        \ °C`;\n]]]\n"
+      styles:
+        card:
+        - border-radius: 10px
+        - background: linear-gradient(145deg,#202a38,#161d29)
+        - border: 1px solid rgba(255,255,255,0.06)
+        - box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 3px 8px rgba(0,0,0,0.45)
+        - padding: 0
+        - min-height: 40px
+        state:
+        - font-size: 16px
+        - font-weight: 900
+        - align-self: center
+        - justify-self: center
+        - line-height: 1
+    - type: custom:button-card
+      entity: sensor.ratrig_vminion_bed_temperature
+      show_name: false
+      show_icon: true
+      icon: mdi:thermometer
+      show_state: true
+      state_display: "[[[\n  const v = Number(String(entity?.state ?? '0').replace(',',\
+        \ '.')) || 0;\n  return `${v.toFixed(1)}°`;\n]]]\n"
+      styles:
+        card:
+        - border-radius: 10px
+        - background: linear-gradient(145deg,#202a38,#161d29)
+        - border: 1px solid rgba(255,255,255,0.06)
+        - box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 3px 8px rgba(0,0,0,0.45)
+        - padding: 0 6px
+        - min-height: 40px
+        grid:
+        - grid-template-areas: '"i s"'
+        - grid-template-columns: 16px 1fr
+        - align-items: center
+        - column-gap: 6px
+        icon:
+        - width: 24px
+        - height: 24px
+        - color: rgba(255,255,255,0.85)
+        - justify-self: start
+        state:
+        - font-size: 16px
+        - font-weight: 950
+        - letter-spacing: 0.2px
+        - justify-self: start
+        - line-height: 1
+    card_mod:
+      style: "ha-card { background: transparent; border: none; box-shadow: none; padding:\
+        \ 0; }\n\n/* ✅ on pousse le grid sous le titre (mais très proche) */\n#root\
+        \ {\n  grid-template-columns: 2fr 1fr 1fr !important;\n  column-gap: 5px !important;\n\
+        \  row-gap: 4px !important;\n  margin-top: 18px !important; /* ajuste ici\
+        \ si tu veux + proche : 14px / 12px */\n}\n"

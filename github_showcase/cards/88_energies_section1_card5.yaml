@@ -1,0 +1,53 @@
+type: custom:apexcharts-card
+grid_options:
+  columns: 6
+  rows: 2
+header:
+  show: true
+  title: Conso Cookéeo Jour
+  show_states: true
+  colorize_states: true
+graph_span: 24h
+series:
+- entity: sensor.prise_cuisine_energy_today
+  name: ' '
+  type: area
+  color: '#FFB400'
+  stroke_width: 3
+  opacity: 0.5
+  transform: return Math.round(parseFloat(x));
+  group_by:
+    func: max
+    duration: 1h
+card_mod:
+  style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+    \ blur(10px) !important;\n  -webkit-backdrop-filter: blur(10px) !important;\n\
+    \  border-radius: 20px !important;\n  border: 1px solid rgba(255,255,255,0.1)\
+    \ !important;\n  box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;\n  height:\
+    \ 120px !important;\n  padding: 0px !important;\n  overflow: hidden !important;\n\
+    }\n.apexcharts-canvas {\n  margin-top: -30px;\n}\n.apexcharts-header {\n  padding:\
+    \ 12px 14px 0px 14px !important;\n  z-index: 10;\n}\n.apexcharts-header-title\
+    \ {\n  font-size: 11px !important; \n  font-weight: 600 !important;\n  color:\
+    \ rgba(255,255,255,0.6) !important;\n}\n.apexcharts-state-value {\n  font-size:\
+    \ 20px !important; \n  font-weight: 900 !important;\n  color: #FFFFFF !important;\n\
+    }\n.apexcharts-state-unit {\n  font-size: 11px !important;\n  opacity: 0.5 !important;\n\
+    }\n"
+apex_config:
+  chart:
+    height: 70px
+    sparkline:
+      enabled: true
+    offsetY: 0
+  stroke:
+    curve: smooth
+  fill:
+    type: gradient
+    gradient:
+      type: horizontal
+      shadeIntensity: 0
+      opacityFrom: 0.4
+      opacityTo: 0.1
+      stops:
+      - 0
+      - 90
+      - 100

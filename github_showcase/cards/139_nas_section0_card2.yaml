@@ -1,0 +1,157 @@
+type: vertical-stack
+cards:
+- type: custom:button-card
+  name: ÉTAT DES DISQUES
+  icon: mdi:harddisk
+  styles:
+    card:
+    - background: rgba(30, 39, 54, 0.8)
+    - border-radius: 15px 15px 0 0
+    - border: 1px solid rgba(255, 255, 255, 0.1)
+    - height: 40px
+    grid:
+    - grid-template-areas: '"i n"'
+    - grid-template-columns: 40px 1fr
+    - align-items: center
+    icon:
+    - color: '#00ff88'
+    - width: 22px
+    name:
+    - font-weight: 900
+    - font-size: 12px
+    - justify-self: start
+- type: grid
+  columns: 3
+  square: false
+  cards:
+  - type: custom:button-card
+    entity: sensor.chrisnas_etat_du_lecteur_0_1
+    name: HDD 1
+    show_state: false
+    custom_fields:
+      t: '[[[ return states[''sensor.chrisnas_temperature_du_lecteur_0_1''].state
+        + ''°'' ]]]
+
+        '
+      sn: '[[[ return entity.attributes[''Serial #''] ? entity.attributes[''Serial
+        #''].slice(-4) : ''...'' ]]]
+
+        '
+    styles:
+      card:
+      - background: rgba(20, 27, 38, 0.6)
+      - border-radius: 0
+      - border: 1px solid rgba(255, 255, 255, 0.1)
+      - border-top: none
+      - padding: 8px
+      grid:
+      - grid-template-areas: '"n" "i" "t" "sn"'
+      - align-items: center
+      name:
+      - font-size: 12px
+      - color: rgba(255, 255, 255, 0.3)
+      icon:
+      - width: 22px
+      - color: '[[[ return entity.state === ''OK'' ? ''#00ff88'' : ''#ff1111'' ]]]
+
+          '
+      custom_fields:
+        t:
+        - font-size: 14px
+        - font-weight: bold
+        - color: '#ffffff'
+        sn:
+        - font-size: 10px
+        - color: rgba(255
+        - 255
+        - 255
+        - 0.2)
+        - text-transform: uppercase
+  - type: custom:button-card
+    entity: sensor.chrisnas_etat_du_lecteur_0_2
+    name: HDD 2
+    show_state: false
+    custom_fields:
+      t: '[[[ return states[''sensor.chrisnas_temperature_du_lecteur_0_2''].state
+        + ''°'' ]]]
+
+        '
+      sn: '[[[ return entity.attributes[''Serial #''] ? entity.attributes[''Serial
+        #''].slice(-4) : ''...'' ]]]
+
+        '
+    styles:
+      card:
+      - background: rgba(20, 27, 38, 0.6)
+      - border-radius: 0
+      - border: 1px solid rgba(255, 255, 255, 0.1)
+      - border-top: none
+      - border-left: none
+      - padding: 8px
+      grid:
+      - grid-template-areas: '"n" "i" "t" "sn"'
+      - align-items: center
+      name:
+      - font-size: 12px
+      - color: rgba(255, 255, 255, 0.3)
+      icon:
+      - width: 22px
+      - color: '[[[ return entity.state === ''OK'' ? ''#00ff88'' : ''#ff1111'' ]]]
+
+          '
+      custom_fields:
+        t:
+        - font-size: 14px
+        - font-weight: bold
+        - color: '#ffffff'
+        sn:
+        - font-size: 10px
+        - color: rgba(255
+        - 255
+        - 255
+        - 0.2)
+        - text-transform: uppercase
+  - type: custom:button-card
+    entity: sensor.chrisnas_etat_du_lecteur_0_3
+    name: HDD 3
+    show_state: false
+    custom_fields:
+      t: '[[[ return states[''sensor.chrisnas_temperature_du_lecteur_0_3''].state
+        + ''°'' ]]]
+
+        '
+      sn: '[[[ return entity.attributes[''Serial #''] ? entity.attributes[''Serial
+        #''].slice(-4) : ''...'' ]]]
+
+        '
+    styles:
+      card:
+      - background: rgba(20, 27, 38, 0.6)
+      - border-radius: 0 0 15px 0
+      - border: 1px solid rgba(255, 255, 255, 0.1)
+      - border-top: none
+      - border-left: none
+      - padding: 8px
+      grid:
+      - grid-template-areas: '"n" "i" "t" "sn"'
+      - align-items: center
+      name:
+      - font-size: 12px
+      - color: rgba(255, 255, 255, 0.3)
+      icon:
+      - width: 22px
+      - color: '[[[ return entity.state === ''OK'' ? ''#00ff88'' : ''#ff1111'' ]]]
+
+          '
+      custom_fields:
+        t:
+        - font-size: 14px
+        - font-weight: bold
+        - color: '#ffffff'
+        sn:
+        - font-size: 10px
+        - color: rgba(255
+        - 255
+        - 255
+        - 0.2)
+        - text-transform: uppercase

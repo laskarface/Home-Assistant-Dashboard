@@ -1,0 +1,9 @@
+type: tile
+entity: light.smart_rgb_pro_led_strip_24060640872589560f01c4e7ae04b91f
+vertical: false
+features_position: inline
+card_mod:
+  style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+    \ blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 20px !important;\n\
+    \  border: 1px solid rgba(255,255,255,0.1) !important;\n  box-shadow: 0 4px 15px\
+    \ rgba(0,0,0,0.2) !important;\n}\n"

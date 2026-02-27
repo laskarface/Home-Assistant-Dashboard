@@ -1,0 +1,195 @@
+type: conditional
+conditions:
+- entity: binary_sensor.commute_workday
+  state: 'on'
+card:
+  type: horizontal-stack
+  cards:
+  - type: custom:button-card
+    entity: "[[[\n  const flip = states['input_boolean.commute_card_flip']?.state\
+      \ === 'on';\n  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+      \ (is_pm && !flip) || (!is_pm && flip);\n  return is_home ? 'sensor.aline_travail_maison'\
+      \ : 'sensor.trajet_maison_travail_aline';\n]]]\n"
+    name: "[[[\n  // --- RESPONSIVE ---\n  const isMobile = window.innerWidth < 500;\n\
+      \  const carSize = isMobile ? '30px' : '38px';\n  const titleSize = isMobile\
+      \ ? '12px' : '14px';\n  const journeyScale = isMobile ? '1.05' : '1.2';\n  const\
+      \ timeSize = isMobile ? '18px' : '20px';\n  const statusSize = isMobile ? '12px'\
+      \ : '14px';\n  const metricSize = isMobile ? '10px' : '11px';\n  const topMargin\
+      \ = isMobile ? '-4px' : '-6px';\n  const titleLeftShift = isMobile ? '-10px'\
+      \ : '-14px'; \n  // --- LOGIC ---\n  const t_red = 25; const t_orange = 10;\
+      \ const t_white = 5;\n  const flip = states['input_boolean.commute_card_flip']?.state\
+      \ === 'on';\n  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+      \ (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ? 'sensor.aline_travail_maison'\
+      \ : 'sensor.trajet_maison_travail_aline';\n  const s1_sid = is_home ? 'sensor.trajet_aline_retour_semaine_derniere'\
+      \ : 'sensor.trajet_aline_semaine_derniere';\n  const avg_sid = is_home ? 'sensor.trajet_aline_retour_moyenne'\
+      \ : 'sensor.trajet_aline_moyenne';\n  const normal_sid = 'input_number.aline_commute_normal';\n\
+      \  const main_entity = states[sid];\n  if (!main_entity) return 'Chargement...';\n\
+      \  \n  const current = Math.round(parseFloat(main_entity.state) || 0);\n  const\
+      \ normal = Math.round(parseFloat(states[normal_sid]?.state) || 0);\n  const\
+      \ delay = current - normal;\n  \n  let status = 'Fluide'; let statusColor =\
+      \ '#3DDBB8';\n  if (delay > t_red) { status = 'Bouché'; statusColor = '#DC5050';\
+      \ }\n  else if (delay > t_orange) { status = 'Dense'; statusColor = '#FFA500';\
+      \ }\n  else if (delay > t_white) { status = 'Normal'; statusColor = 'white';\
+      \ }\n  \n  const arrow = is_home ? 'mdi:arrow-left-bold' : 'mdi:arrow-right-bold';\n\
+      \  const green = '#3DDBB8';\n  const homeColor = is_home ? 'white' : green;\n\
+      \  const workColor = is_home ? green : 'white';\n  const delayNotice = delay\
+      \ > 0 ? ` (+${Math.abs(delay)} min)` : '';\n  const deadline = new Date('2026-02-23T07:20:00');\n\
+      \  const isLearning = new Date() < deadline;\n  const avg7d_val = parseFloat(states[avg_sid]?.state);\n\
+      \  const avg7d_display = (isLearning || isNaN(avg7d_val) || avg7d_val <= 0)\
+      \ ? 'Appre.' : `${Math.round(avg7d_val)} min`;\n  const s1_val = parseFloat(states[s1_sid]?.state);\n\
+      \  const s1_display = (isLearning || isNaN(s1_val) || s1_val <= 0) ? 'Appre.'\
+      \ : `${Math.round(s1_val)} min`;\n  return `\n    <div style=\"display: flex;\
+      \ flex-direction: column; align-items: flex-start; width: 100%; overflow: visible;\"\
+      >\n      <div style=\"display: flex; align-items: center; justify-content: flex-start;\
+      \ gap: 0px; margin-bottom: 2px; margin-top: ${topMargin}; margin-left: ${titleLeftShift};\
+      \ width: 100%; overflow: visible;\">\n        <ha-icon icon=\"mdi:car\" style=\"\
+      width: ${carSize}; height: ${carSize}; color: ${statusColor}; flex-shrink: 0;\"\
+      ></ha-icon>\n        <span style=\"font-weight: 900; font-size: ${titleSize};\
+      \ color: white; flex-shrink: 0; margin-left: -2px;\">Trajet User 2</span>\n \
+      \       <div style=\"display: flex; align-items: center; gap: 2px; transform:\
+      \ scale(${journeyScale}); transform-origin: left center; margin-left: 6px; flex-shrink:\
+      \ 0; overflow: visible;\">\n          <ha-icon icon=\"mdi:home-variant\" style=\"\
+      width: 14px; height: 14px; color: ${homeColor};\"></ha-icon>\n          <ha-icon\
+      \ icon=\"${arrow}\" style=\"width: 16px; height: 16px; color: #FFA500;\"></ha-icon>\n\
+      \          <ha-icon icon=\"mdi:office-building\" style=\"width: 14px; height:\
+      \ 14px; color: ${workColor};\"></ha-icon>\n        </div>\n      </div>\n  \
+      \    <div style=\"line-height: 0.85em; text-align: left; width: 100%; margin-top:\
+      \ 4px; overflow: visible;\">\n        <div style=\"font-weight: 800; color:\
+      \ white; font-size: ${statusSize}; margin-bottom: 3px; white-space: nowrap;\"\
+      >\n          <span style=\"font-size: ${timeSize};\">${current} min</span> •\
+      \ <span style=\"color: ${statusColor}\">${status}</span>${delayNotice}\n   \
+      \     </div>\n        <div style=\"font-weight: 700; color: white; font-size:\
+      \ ${metricSize}; opacity: 0.9;\">Même heure (S-1) : ${s1_display}</div>\n  \
+      \      <div style=\"font-weight: 700; color: white; font-size: ${metricSize};\
+      \ opacity: 0.9; margin-top: 1px;\">Moyenne 7j : ${avg7d_display}</div>\n   \
+      \     <div style=\"font-weight: 800; color: white; font-size: ${metricSize};\
+      \ opacity: 0.9; margin-top: 4px;\">Sans bouchon : ${normal} min</div>\n    \
+      \  </div>\n    </div>\n  `;\n]]]\n"
+    show_state: false
+    show_label: false
+    show_icon: false
+    styles:
+      card:
+      - padding: '[[[ return window.innerWidth < 500 ? ''8px 6px'' : ''10px 10px'';
+          ]]]
+
+          '
+      - border-radius: 20px
+      - border: 1px solid rgba(255,255,255,0.1)
+      - background: "[[[\n  const t_red = 25; const t_orange = 10; const t_white =\
+          \ 5;\n  const flip = states['input_boolean.commute_card_flip']?.state ===\
+          \ 'on';\n  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+          \ (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ? 'sensor.aline_travail_maison'\
+          \ : 'sensor.trajet_maison_travail_aline';\n  const duration = Math.round(parseFloat(states[sid]?.state)\
+          \ || 0);\n  const normal = Math.round(parseFloat(states['input_number.aline_commute_normal']?.state)\
+          \ || duration);\n  const delay = duration - normal;\n  if (delay > t_red)\
+          \ return 'linear-gradient(145deg, rgba(220, 80, 80, 0.45), rgba(0, 0, 0,\
+          \ 0.8))';\n  if (delay > t_orange) return 'linear-gradient(145deg, rgba(255,\
+          \ 165, 0, 0.4), rgba(0, 0, 0, 0.8))';\n  if (delay > t_white) return 'linear-gradient(145deg,\
+          \ rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.8))';\n  return 'linear-gradient(145deg,\
+          \ rgba(61, 219, 184, 0.25), rgba(0, 0, 0, 0.8))';\n]]]\n"
+      - backdrop-filter: blur(20px)
+      - -webkit-backdrop-filter: blur(20px)
+      grid:
+      - grid-template-areas: '"n"'
+      - grid-template-columns: 100%
+      name:
+      - justify-self: start
+      - width: 100%
+      - overflow: visible
+    tap_action:
+      action: more-info
+  - type: custom:button-card
+    entity: "[[[\n  const flip = states['input_boolean.commute_card_flip']?.state\
+      \ === 'on';\n  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+      \ (is_pm && !flip) || (!is_pm && flip);\n  return is_home ? 'sensor.chris_travail_maison'\
+      \ : 'sensor.trajet_maison_travail_chris';\n]]]\n"
+    name: "[[[\n  // --- RESPONSIVE ---\n  const isMobile = window.innerWidth < 500;\n\
+      \  const carSize = isMobile ? '30px' : '38px';\n  const titleSize = isMobile\
+      \ ? '12px' : '14px';\n  const journeyScale = isMobile ? '1.05' : '1.2';\n  const\
+      \ timeSize = isMobile ? '18px' : '20px';\n  const statusSize = isMobile ? '12px'\
+      \ : '14px';\n  const metricSize = isMobile ? '10px' : '11px';\n  const topMargin\
+      \ = isMobile ? '-4px' : '-6px';\n  const titleLeftShift = isMobile ? '-10px'\
+      \ : '-14px'; \n  // --- LOGIC ---\n  const t_red = 25; const t_orange = 10;\
+      \ const t_white = 5;\n  const flip = states['input_boolean.commute_card_flip']?.state\
+      \ === 'on';\n  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+      \ (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ? 'sensor.chris_travail_maison'\
+      \ : 'sensor.trajet_maison_travail_chris';\n  const s1_sid = is_home ? 'sensor.trajet_chris_retour_semaine_derniere'\
+      \ : 'sensor.trajet_chris_semaine_derniere';\n  const avg_sid = is_home ? 'sensor.trajet_chris_retour_moyenne'\
+      \ : 'sensor.trajet_chris_moyenne';\n  const normal_sid = 'input_number.chris_commute_normal';\n\
+      \  const main_entity = states[sid];\n  if (!main_entity) return 'Chargement...';\n\
+      \  \n  const current = Math.round(parseFloat(main_entity.state) || 0);\n  const\
+      \ normal = Math.round(parseFloat(states[normal_sid]?.state) || 0);\n  const\
+      \ delay = current - normal;\n  \n  let status = 'Fluide'; let statusColor =\
+      \ '#3DDBB8';\n  if (delay > t_red) { status = 'Bouché'; statusColor = '#DC5050';\
+      \ }\n  else if (delay > t_orange) { status = 'Dense'; statusColor = '#FFA500';\
+      \ }\n  else if (delay > t_white) { status = 'Normal'; statusColor = 'white';\
+      \ }\n  \n  const arrow = is_home ? 'mdi:arrow-left-bold' : 'mdi:arrow-right-bold';\n\
+      \  const green = '#3DDBB8';\n  const homeColor = is_home ? 'white' : green;\n\
+      \  const workColor = is_home ? green : 'white';\n  const delayNotice = delay\
+      \ > 0 ? ` (+${Math.abs(delay)} min)` : '';\n  const deadline = new Date('2026-02-23T07:20:00');\n\
+      \  const isLearning = new Date() < deadline;\n  const avg7d_val = parseFloat(states[avg_sid]?.state);\n\
+      \  const avg7d_display = (isLearning || isNaN(avg7d_val) || avg7d_val <= 0)\
+      \ ? 'Appre.' : `${Math.round(avg7d_val)} min`;\n  const s1_val = parseFloat(states[s1_sid]?.state);\n\
+      \  const s1_display = (isLearning || isNaN(s1_val) || s1_val <= 0) ? 'Appre.'\
+      \ : `${Math.round(s1_val)} min`;\n  return `\n    <div style=\"display: flex;\
+      \ flex-direction: column; align-items: flex-start; width: 100%; overflow: visible;\"\
+      >\n      <div style=\"display: flex; align-items: center; justify-content: flex-start;\
+      \ gap: 0px; margin-bottom: 2px; margin-top: ${topMargin}; margin-left: ${titleLeftShift};\
+      \ width: 100%; overflow: visible;\">\n        <ha-icon icon=\"mdi:car\" style=\"\
+      width: ${carSize}; height: ${carSize}; color: ${statusColor}; flex-shrink: 0;\"\
+      ></ha-icon>\n        <span style=\"font-weight: 900; font-size: ${titleSize};\
+      \ color: white; flex-shrink: 0; margin-left: -2px;\">Trajet User 1</span>\n \
+      \       <div style=\"display: flex; align-items: center; gap: 2px; transform:\
+      \ scale(${journeyScale}); transform-origin: left center; margin-left: 6px; flex-shrink:\
+      \ 0; overflow: visible;\">\n          <ha-icon icon=\"mdi:home-variant\" style=\"\
+      width: 14px; height: 14px; color: ${homeColor};\"></ha-icon>\n          <ha-icon\
+      \ icon=\"${arrow}\" style=\"width: 16px; height: 16px; color: #FFA500;\"></ha-icon>\n\
+      \          <ha-icon icon=\"mdi:office-building\" style=\"width: 14px; height:\
+      \ 14px; color: ${workColor};\"></ha-icon>\n        </div>\n      </div>\n  \
+      \    <div style=\"line-height: 0.85em; text-align: left; width: 100%; margin-top:\
+      \ 4px; overflow: visible;\">\n        <div style=\"font-weight: 800; color:\
+      \ white; font-size: ${statusSize}; margin-bottom: 3px; white-space: nowrap;\"\
+      >\n          <span style=\"font-size: ${timeSize};\">${current} min</span> •\
+      \ <span style=\"color: ${statusColor}\">${status}</span>${delayNotice}\n   \
+      \     </div>\n        <div style=\"font-weight: 700; color: white; font-size:\
+      \ ${metricSize}; opacity: 0.9;\">Même heure (S-1) : ${s1_display}</div>\n  \
+      \      <div style=\"font-weight: 700; color: white; font-size: ${metricSize};\
+      \ opacity: 0.9; margin-top: 1px;\">Moyenne 7j : ${avg7d_display}</div>\n   \
+      \     <div style=\"font-weight: 800; color: white; font-size: ${metricSize};\
+      \ opacity: 0.9; margin-top: 4px;\">Sans bouchon : ${normal} min</div>\n    \
+      \  </div>\n    </div>\n  `;\n]]]\n"
+    show_state: false
+    show_label: false
+    show_icon: false
+    styles:
+      card:
+      - padding: '[[[ return window.innerWidth < 500 ? ''8px 6px'' : ''10px 10px'';
+          ]]]
+
+          '
+      - border-radius: 20px
+      - border: 1px solid rgba(255,255,255,0.1)
+      - background: "[[[\n  const t_red = 25; const t_orange = 10; const t_white =\
+          \ 5;\n  const flip = states['input_boolean.commute_card_flip']?.state ===\
+          \ 'on';\n  const is_pm = new Date().getHours() >= 12;\n  const is_home =\
+          \ (is_pm && !flip) || (!is_pm && flip);\n  const sid = is_home ? 'sensor.chris_travail_maison'\
+          \ : 'sensor.trajet_maison_travail_chris';\n  const duration = Math.round(parseFloat(states[sid]?.state)\
+          \ || 0);\n  const normal = Math.round(parseFloat(states['input_number.chris_commute_normal']?.state)\
+          \ || duration);\n  const delay = duration - normal;\n  if (delay > t_red)\
+          \ return 'linear-gradient(145deg, rgba(220, 80, 80, 0.45), rgba(0, 0, 0,\
+          \ 0.8))';\n  if (delay > t_orange) return 'linear-gradient(145deg, rgba(255,\
+          \ 165, 0, 0.4), rgba(0, 0, 0, 0.8))';\n  if (delay > t_white) return 'linear-gradient(145deg,\
+          \ rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.8))';\n  return 'linear-gradient(145deg,\
+          \ rgba(61, 219, 184, 0.25), rgba(0, 0, 0, 0.8))';\n]]]\n"
+      - backdrop-filter: blur(20px)
+      - -webkit-backdrop-filter: blur(20px)
+      grid:
+      - grid-template-areas: '"n"'
+      - grid-template-columns: 100%
+      name:
+      - justify-self: start
+      - width: 100%
+      - overflow: visible
+    tap_action:
+      action: more-info

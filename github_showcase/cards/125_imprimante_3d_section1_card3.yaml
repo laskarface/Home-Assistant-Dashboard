@@ -1,0 +1,18 @@
+type: custom:mod-card
+card_mod:
+  style: "ha-card{\n  border-radius: 6px;\n  overflow: hidden;\n  padding: 10px 12px;\n\
+    \  position: relative;\n  background: linear-gradient(160deg,#141b26 0%,#111826\
+    \ 45%,#0d121c 100%) !important;\n  box-shadow: 0 10px 22px rgba(0,0,0,0.65) !important;\n\
+    \  border: 1px solid rgba(255,255,255,0.04) !important;\n}\nha-card:before{\n\
+    \  content:\"\";\n  position:absolute;\n  inset:0;\n  background: radial-gradient(circle\
+    \ at top left,rgba(255,255,255,0.14),transparent 60%);\n  pointer-events:none;\n\
+    \  z-index:0;\n}\n"
+card:
+  type: entities
+  show_header_toggle: false
+  card_mod:
+    style: "ha-card{\n  background: transparent !important;\n  box-shadow: none !important;\n\
+      \  border: none !important;\n  padding: 0 !important;\n}\n"
+  entities:
+  - entity: number.ratrig_vminion_speed_factor
+    name: Speed Factor

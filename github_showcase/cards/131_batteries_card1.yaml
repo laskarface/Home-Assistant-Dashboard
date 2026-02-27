@@ -1,0 +1,93 @@
+type: vertical-stack
+cards:
+- type: custom:auto-entities
+  card:
+    type: entities
+    title: 🔥 Batteries Critiques (<= 10%)
+    card_mod:
+      style: "ha-card {\n  background: rgba(220, 20, 60, 0.2) !important;\n  backdrop-filter:\
+        \ blur(10px) !important;\n  border-radius: 20px !important;\n  border: 1px\
+        \ solid rgba(255, 50, 50, 0.4) !important;\n  margin-bottom: 20px !important;\n\
+        }\n.card-header { color: #ff4444 !important; font-weight: 700 !important;\
+        \ }\n"
+  filter:
+    template: "{%- set sensors = states.sensor \n  | selectattr('attributes.device_class',\
+      \ 'defined')\n  | selectattr('attributes.device_class', 'eq', 'battery')\n \
+      \ | selectattr('state', 'is_number')\n  | rejectattr('entity_id', 'search',\
+      \ 'iphone', ignorecase=true)\n  | rejectattr('entity_id', 'eq', 'sensor.ci_tesla_battery')\n\
+      \  | list -%}\n{%- for s in sensors if s.state | int <= 10 -%}\n  {{ {\n   \
+      \ 'entity': s.entity_id,\n    'name': s.attributes.friendly_name,\n    'secondary_info':\
+      \ area_name(s.entity_id) or 'Pièce non définie',\n    'card_mod': {\n      'style':\
+      \ ':host { --paper-item-icon-color: #ff4444; color: white; }'\n    }\n  } }},\n\
+      {%- endfor -%}\n"
+  sort:
+    method: state
+    numeric: true
+- type: custom:auto-entities
+  card:
+    type: entities
+    title: ⚠️ À surveiller (11% - 30%)
+    card_mod:
+      style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+        \ blur(10px) !important;\n  border-radius: 20px !important;\n  border: 1px\
+        \ solid rgba(255,255,255,0.1) !important;\n  margin-bottom: 20px !important;\n\
+        }\n.card-header { color: #ff9800 !important; font-weight: 700 !important;\
+        \ }\n"
+  filter:
+    template: "{%- set sensors = states.sensor \n  | selectattr('attributes.device_class',\
+      \ 'defined')\n  | selectattr('attributes.device_class', 'eq', 'battery')\n \
+      \ | selectattr('state', 'is_number')\n  | rejectattr('entity_id', 'search',\
+      \ 'iphone', ignorecase=true)\n  | rejectattr('entity_id', 'eq', 'sensor.ci_tesla_battery')\n\
+      \  | list -%}\n{%- for s in sensors if s.state | int > 10 and s.state | int\
+      \ <= 30 -%}\n  {{ {\n    'entity': s.entity_id,\n    'name': s.attributes.friendly_name,\n\
+      \    'secondary_info': area_name(s.entity_id) or 'Pièce non définie',\n    'card_mod':\
+      \ {\n      'style': ':host { --paper-item-icon-color: #ff9800; color: white;\
+      \ }'\n    }\n  } }},\n{%- endfor -%}\n"
+  sort:
+    method: state
+    numeric: true
+- type: custom:auto-entities
+  card:
+    type: entities
+    title: 🔋 État Moyen (31% - 50%)
+    card_mod:
+      style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+        \ blur(10px) !important;\n  border-radius: 20px !important;\n  border: 1px\
+        \ solid rgba(255,255,255,0.1) !important;\n  margin-bottom: 20px !important;\n\
+        }\n.card-header { color: #ffeb3b !important; font-weight: 700 !important;\
+        \ }\n"
+  filter:
+    template: "{%- set sensors = states.sensor \n  | selectattr('attributes.device_class',\
+      \ 'defined')\n  | selectattr('attributes.device_class', 'eq', 'battery')\n \
+      \ | selectattr('state', 'is_number')\n  | rejectattr('entity_id', 'search',\
+      \ 'iphone', ignorecase=true)\n  | rejectattr('entity_id', 'eq', 'sensor.ci_tesla_battery')\n\
+      \  | list -%}\n{%- for s in sensors if s.state | int > 30 and s.state | int\
+      \ <= 50 -%}\n  {{ {\n    'entity': s.entity_id,\n    'name': s.attributes.friendly_name,\n\
+      \    'secondary_info': area_name(s.entity_id) or 'Pièce non définie',\n    'card_mod':\
+      \ {\n      'style': ':host { --paper-item-icon-color: #ffeb3b; color: white;\
+      \ }'\n    }\n  } }},\n{%- endfor -%}\n"
+  sort:
+    method: state
+    numeric: true
+- type: custom:auto-entities
+  card:
+    type: entities
+    title: ✅ Bon État (51% - 100%)
+    card_mod:
+      style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+        \ blur(10px) !important;\n  border-radius: 20px !important;\n  border: 1px\
+        \ solid rgba(255,255,255,0.1) !important;\n}\n.card-header { color: #4caf50\
+        \ !important; font-weight: 700 !important; }\n"
+  filter:
+    template: "{%- set sensors = states.sensor \n  | selectattr('attributes.device_class',\
+      \ 'defined')\n  | selectattr('attributes.device_class', 'eq', 'battery')\n \
+      \ | selectattr('state', 'is_number')\n  | rejectattr('entity_id', 'search',\
+      \ 'iphone', ignorecase=true)\n  | rejectattr('entity_id', 'eq', 'sensor.ci_tesla_battery')\n\
+      \  | list -%}\n{%- for s in sensors if s.state | int > 50 -%}\n  {{ {\n    'entity':\
+      \ s.entity_id,\n    'name': s.attributes.friendly_name,\n    'secondary_info':\
+      \ area_name(s.entity_id) or 'Pièce non définie',\n    'card_mod': {\n      'style':\
+      \ ':host { --paper-item-icon-color: #4caf50; color: white; }'\n    }\n  } }},\n\
+      {%- endfor -%}\n"
+  sort:
+    method: state
+    numeric: true

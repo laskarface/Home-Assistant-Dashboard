@@ -1,0 +1,155 @@
+type: vertical-stack
+cards:
+- type: horizontal-stack
+  cards:
+  - type: custom:button-card
+    icon: mdi:medical-bag
+    name: Suivi Post-Greffe
+    label: 'À faire aujourd''hui :'
+    show_name: true
+    show_icon: true
+    show_label: true
+    styles:
+      card:
+      - padding: 16px
+      - height: 100px
+      - border-radius: 20px
+      - border: 1px solid rgba(255,255,255,0.1) !important
+      - background: rgba(20, 27, 38, 0.6) !important
+      - backdrop-filter: blur(10px) !important
+      - -webkit-backdrop-filter: blur(10px) !important
+      - box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important
+      grid:
+      - grid-template-areas: '"i n" "i l"'
+      - grid-template-columns: min-content 1fr
+      - column-gap: 16px
+      icon:
+      - width: 32px
+      - height: 32px
+      - color: '#4fc3f7'
+      - filter: drop-shadow(0 0 8px rgba(79, 195, 247, 0.4))
+      name:
+      - justify-self: start
+      - font-size: 16px
+      - font-weight: 700
+      - color: white
+      label:
+      - justify-self: start
+      - font-size: 13px
+      - opacity: 0.7
+      - font-weight: 500
+    tap_action:
+      action: none
+  - type: custom:button-card
+    entity: sensor.suivi_greffe_jour
+    show_name: false
+    show_icon: false
+    show_state: true
+    show_label: true
+    label: "[[[\n  const start = new Date('2025-10-24T00:00:00');\n  const now = new\
+      \ Date();\n  let months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth()\
+      \ - start.getMonth());\n  let days = now.getDate() - start.getDate();\n  if\
+      \ (days < 0) {\n    months--;\n    const prevMonthLastDay = new Date(now.getFullYear(),\
+      \ now.getMonth(), 0).getDate();\n    days += prevMonthLastDay;\n  }\n  return\
+      \ months + \" mois et \" + days + (days > 1 ? \" jours\" : \" jour\");\n]]]\n"
+    custom_fields:
+      celebration: "[[[\n  var now = new Date();\n  if (now.getDate() !== 24) return\
+        \ \"\";\n  var confettiHtml = '<div class=\"confetti-wrapper\">';\n  for (var\
+        \ i = 0; i < 15; i++) {\n    var color = [\"#FFD700\", \"#FF4500\", \"#ADFF2F\"\
+        , \"#00BFFF\", \"#FF1493\"][i % 5];\n    var left = Math.floor(Math.random()\
+        \ * 100);\n    var delay = (Math.random() * 2).toFixed(1);\n    confettiHtml\
+        \ += '<div class=\"confetti\" style=\"left: ' + left + '%; background: ' +\
+        \ color + '; animation-delay: ' + delay + 's;\"></div>';\n  }\n  return confettiHtml\
+        \ + '</div>';\n]]]\n"
+    styles:
+      card:
+      - padding: 16px 0
+      - height: 100px
+      - border-radius: 20px
+      - border: 1px solid rgba(255,255,255,0.1) !important
+      - background: rgba(20, 27, 38, 0.6) !important
+      - backdrop-filter: blur(10px) !important
+      - -webkit-backdrop-filter: blur(10px) !important
+      - box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important
+      - display: flex
+      - flex-direction: column
+      - justify-content: start
+      - align-items: center
+      - text-align: center
+      - overflow: hidden
+      state:
+      - font-size: 34px
+      - font-weight: 900
+      - color: white
+      - text-shadow: 0 0 10px rgba(255,255,255,0.3)
+      - line-height: 0.8
+      - margin: 0
+      - margin-top: -2px
+      - z-index: 2
+      label:
+      - font-size: 16px
+      - font-weight: 600
+      - color: rgba(255,255,255,0.6)
+      - margin-top: 15px
+      - margin-bottom: 0
+      - z-index: 2
+      custom_fields:
+        celebration:
+        - position: absolute
+        - inset: 0
+        - z-index: 1
+        - pointer-events: none
+    tap_action:
+      action: none
+- type: custom:button-card
+  entity: sensor.suivi_greffe_jour
+  show_name: false
+  show_icon: false
+  styles:
+    card:
+    - background: none
+    - box-shadow: none
+    - border: none
+    - padding: 0
+    grid:
+    - grid-template-areas: '"tasks"'
+    - grid-template-columns: 1fr
+    - grid-template-rows: auto
+    custom_fields:
+      tasks:
+      - width: 100%
+  custom_fields:
+    tasks: "[[[\n  if (!entity || !entity.attributes) return `<div style=\"padding:20px;color:rgba(255,255,255,0.5);\"\
+      >Chargement...</div>`;\n  var tasks = [\n    { key: 'shampoing_aujourdhui',\
+      \ name: 'Shampoing', icon: 'mdi:shower', color: '#1e88e5' },\n    { key: 'vitamine_aujourdhui',\
+      \ name: 'Vitamines', icon: 'mdi:pill-multiple', color: '#2e7d32' },\n    { key:\
+      \ 'serum_ozone_aujourdhui', name: 'Sérum ozonée', icon: 'mdi:beaker-outline',\
+      \ color: '#8e24aa' },\n    { key: 'dermaroller_serum_aujourdhui', name: 'Dermaroller',\
+      \ icon: 'mdi:needle', color: '#fb8c00' },\n    { key: 'huile_capillaire_aujourdhui',\
+      \ name: 'Huile', icon: 'mdi:eyedropper-variant', color: '#6d4c41' },\n    {\
+      \ key: 'massage_cuir_chevelu_aujourdhui', name: 'Massage', icon: 'mdi:hand-back-right',\
+      \ color: '#00897b' },\n    { key: 'prp_aujourdhui', name: 'PRP', icon: 'mdi:hospital-marker',\
+      \ color: '#e91e63' }\n  ];\n  var html = '<div style=\"display:flex; flex-wrap:wrap;\
+      \ gap:8px;\">';\n  var count = 0;\n  for (var i = 0; i < tasks.length; i++)\
+      \ {\n    var t = tasks[i];\n    var val = entity.attributes[t.key];\n    if\
+      \ (val) {\n      count++;\n      var displayVal = (val === true) ? 'À faire'\
+      \ : val;\n      html += '<div style=\"flex: 1 1 30%; min-width: 100px; height:\
+      \ 100px; box-sizing: border-box; padding: 12px; border-radius: 20px; border:\
+      \ 1px solid rgba(255,255,255,0.1); background: rgba(20, 27, 38, 0.6); backdrop-filter:\
+      \ blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 4px 15px rgba(0,0,0,0.2);\
+      \ display: flex; flex-direction: column; align-items: center; justify-content:\
+      \ center;\">'\n          + '<ha-icon icon=\"' + t.icon + '\" style=\"--mdc-icon-size:\
+      \ 32px; color: ' + t.color + '; filter: drop-shadow(0 0 8px ' + t.color + 'aa);\
+      \ margin-bottom: 8px;\"></ha-icon>'\n          + '<div style=\"font-size: 13px;\
+      \ font-weight: 600; color: white;\">' + t.name + '</div>'\n          + '<div\
+      \ style=\"font-size: 11px; opacity: 0.7; margin-top: 4px; color: white;\">'\
+      \ + displayVal + '</div>'\n        + '</div>';\n    }\n  }\n  html += '</div>';\n\
+      \  if (count === 0) return '<div style=\"padding: 20px; text-align: center;\
+      \ color: rgba(255,255,255,0.5);\">Rien à faire aujourd\\'hui !</div>';\n  return\
+      \ html;\n]]]\n"
+extra_styles: ".confetti-wrapper {\n  position: absolute;\n  width: 100%;\n  height:\
+  \ 100%;\n  overflow: hidden;\n}\n.confetti {\n  position: absolute;\n  width: 6px;\n\
+  \  height: 12px;\n  opacity: 0.8;\n  top: -20px;\n  border-radius: 2px;\n  animation:\
+  \ confetti-fall 3s linear infinite;\n}\n@keyframes confetti-fall {\n  0% { transform:\
+  \ translateY(0) rotate(0deg); opacity: 1; }\n  100% { transform: translateY(120px)\
+  \ rotate(360deg); opacity: 0; }\n}\n"

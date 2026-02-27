@@ -1,0 +1,68 @@
+type: vertical-stack
+cards:
+- type: custom:button-card
+  name: RÉSEAU TRAFIC
+  icon: mdi:lan
+  styles:
+    card:
+    - background: rgba(30, 39, 54, 0.8)
+    - border-radius: 15px 15px 0 0
+    - border: 1px solid rgba(255, 255, 255, 0.1)
+    - height: 40px
+    grid:
+    - grid-template-areas: '"i n"'
+    - grid-template-columns: 40px 1fr
+    - align-items: center
+    icon:
+    - color: '#00ccff'
+    - width: 22px
+    name:
+    - font-weight: 900
+    - font-size: 16px
+    - color: '#ffffff'
+    - justify-self: start
+- type: custom:mini-graph-card
+  entities:
+  - entity: sensor.chrisnas_eth0_download
+    name: Down (0)
+    color: '#00ff88'
+  - entity: sensor.chrisnas_eth0_upload
+    name: Up (0)
+    color: '#ff9900'
+  line_width: 2
+  show:
+    fill: fade
+    legend: true
+  style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  border-radius:\
+    \ 0 !important;\n  border: 1px solid rgba(255, 255, 255, 0.1) !important;\n  border-top:\
+    \ none !important;\n  padding-bottom: 10px !important;\n}\n"
+- type: custom:button-card
+  name: STATS LIAISONS
+  styles:
+    card:
+    - background: rgba(20, 27, 38, 0.6)
+    - border-radius: 0 0 15px 15px
+    - border: 1px solid rgba(255, 255, 255, 0.1)
+    - border-top: none
+    - padding: 10px
+    grid:
+    - grid-template-areas: '"eth0 eth1"'
+    - grid-template-columns: 1fr 1fr
+    custom_fields:
+      eth0:
+      - justify-self: start
+      - font-size: 10px
+      - line-height: 1.2
+      eth1:
+      - justify-self: end
+      - font-size: 10px
+      - line-height: 1.2
+      - text-align: right
+  custom_fields:
+    eth0: "[[[\n  const link = states['sensor.chrisnas_eth0_link'].state;\n  const\
+      \ err = states['sensor.chrisnas_eth0_packet_errors'].state;\n  return `ETH0:\
+      \ <span style=\"color:#00ff88\">${link}</span><br>Err: ${err}`;\n]]]\n"
+    eth1: "[[[\n  const link = states['sensor.chrisnas_eth1_link'].state;\n  const\
+      \ err = states['sensor.chrisnas_eth1_packet_errors'].state;\n  return `ETH1:\
+      \ <span style=\"color:${link === 'Up' ? '#00ff88' : '#757575'}\">${link}</span><br>Err:\
+      \ ${err}`;\n]]]\n"

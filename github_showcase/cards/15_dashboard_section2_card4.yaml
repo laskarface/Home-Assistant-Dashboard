@@ -1,0 +1,117 @@
+type: custom:button-card
+show_name: false
+show_icon: false
+show_state: false
+styles:
+  card:
+  - padding: 0
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(10px)
+  - -webkit-backdrop-filter: blur(10px)
+  - border-radius: 20px
+  - box-shadow: 0 0 20px rgba(79, 195, 247, 0.4), 0 4px 15px rgba(0,0,0,0.2)
+  - overflow: hidden
+  - margin: 0px
+  - box-sizing: border-box
+  - position: relative
+  - display: "[[[\n  var isEditMode = window.location.search.includes('edit=1') ||\
+      \ window.location.pathname.includes('edit');\n  var w_on = states['binary_sensor.machine_a_laver_en_cours']?.state\
+      \ === 'on';\n  var w_door = states['binary_sensor.capteur_ouverture_lave_linge_contact']?.state\
+      \ === 'on';\n  var w_done = (states['input_boolean.machine_a_laver_terminee']?.state\
+      \ === 'on') && !w_door;\n  var d_on = states['binary_sensor.seche_linge_en_cours']?.state\
+      \ === 'on';\n  var d_door = states['binary_sensor.seche_linge_door_status']?.state\
+      \ === 'on';\n  var d_done = (states['input_boolean.seche_linge_termine']?.state\
+      \ === 'on') && !d_door;\n  if (isEditMode || w_on || w_done || d_on || d_done)\
+      \ return 'flex';\n  return 'none !important';\n]]]\n"
+  - border: 1px solid rgba(79, 195, 247, 0.3)
+  grid:
+  - grid-template-areas: '"img info"'
+  - grid-template-columns: 130px minmax(0, 1fr)
+  - grid-template-rows: 80px
+  - align-items: stretch
+  custom_fields:
+    img:
+    - justify-self: stretch
+    - align-self: stretch
+    - border-right: 2px solid rgba(255, 255, 255, 0.6)
+    - padding: 0
+    info:
+    - justify-self: stretch
+    - align-self: stretch
+    - width: 100%
+    - box-sizing: border-box
+custom_fields:
+  img: "[[[\n  const blue = \"#4fc3f7\";\n  const svg = `\n    <svg viewBox=\"0 0\
+    \ 100 100\" width=\"55\" height=\"55\" style=\"filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));\"\
+    >\n      <defs>\n        <linearGradient id=\"basketGrad\" x1=\"0%\" y1=\"0%\"\
+    \ x2=\"0%\" y2=\"100%\">\n          <stop offset=\"0%\" style=\"stop-color:#eeeeee;stop-opacity:1\"\
+    \ />\n          <stop offset=\"100%\" style=\"stop-color:#bdbdbd;stop-opacity:1\"\
+    \ />\n        </linearGradient>\n        <linearGradient id=\"cloth1\" x1=\"0%\"\
+    \ y1=\"0%\" x2=\"100%\" y2=\"100%\">\n          <stop offset=\"0%\" style=\"stop-color:#ffffff;stop-opacity:1\"\
+    \ />\n          <stop offset=\"100%\" style=\"stop-color:#e0e0e0;stop-opacity:1\"\
+    \ />\n        </linearGradient>\n        <linearGradient id=\"cloth2\" x1=\"0%\"\
+    \ y1=\"0%\" x2=\"100%\" y2=\"100%\">\n          <stop offset=\"0%\" style=\"stop-color:#b3e5fc;stop-opacity:1\"\
+    \ />\n          <stop offset=\"100%\" style=\"stop-color:#4fc3f7;stop-opacity:1\"\
+    \ />\n        </linearGradient>\n      </defs>\n      \n      <!-- Clothes Inside\
+    \ -->\n      <path d=\"M30,50 Q40,35 55,45 Q70,35 75,55 L75,65 L25,65 Z\" fill=\"\
+    url(#cloth1)\" />\n      <path d=\"M40,55 Q55,40 70,50 L70,60 L35,60 Z\" fill=\"\
+    url(#cloth2)\" opacity=\"0.8\" />\n      \n      <!-- Basket Body -->\n      <path\
+    \ d=\"M20,55 L80,55 L75,90 L25,90 Z\" fill=\"url(#basketGrad)\" stroke=\"#9e9e9e\"\
+    \ stroke-width=\"1\" />\n      <!-- Basket Holes/Pattern -->\n      <g opacity=\"\
+    0.3\" fill=\"#616161\">\n        <rect x=\"28\" y=\"62\" width=\"6\" height=\"\
+    4\" rx=\"1\" />\n        <rect x=\"40\" y=\"62\" width=\"6\" height=\"4\" rx=\"\
+    1\" />\n        <rect x=\"52\" y=\"62\" width=\"6\" height=\"4\" rx=\"1\" />\n\
+    \        <rect x=\"64\" y=\"62\" width=\"6\" height=\"4\" rx=\"1\" />\n      \
+    \  \n        <rect x=\"30\" y=\"70\" width=\"6\" height=\"4\" rx=\"1\" />\n  \
+    \      <rect x=\"42\" y=\"70\" width=\"6\" height=\"4\" rx=\"1\" />\n        <rect\
+    \ x=\"54\" y=\"70\" width=\"6\" height=\"4\" rx=\"1\" />\n        <rect x=\"66\"\
+    \ y=\"70\" width=\"6\" height=\"4\" rx=\"1\" />\n\n        <rect x=\"32\" y=\"\
+    78\" width=\"6\" height=\"4\" rx=\"1\" />\n        <rect x=\"44\" y=\"78\" width=\"\
+    6\" height=\"4\" rx=\"1\" />\n        <rect x=\"56\" y=\"78\" width=\"6\" height=\"\
+    4\" rx=\"1\" />\n        <rect x=\"68\" y=\"78\" width=\"6\" height=\"4\" rx=\"\
+    1\" />\n      </g>\n      \n      <!-- Basket Rim -->\n      <rect x=\"18\" y=\"\
+    52\" width=\"64\" height=\"6\" rx=\"3\" fill=\"#eeeeee\" stroke=\"#bdbdbd\" stroke-width=\"\
+    0.5\" />\n      \n      <!-- Shine on Rim -->\n      <rect x=\"22\" y=\"53.5\"\
+    \ width=\"20\" height=\"1.5\" rx=\"1\" fill=\"white\" opacity=\"0.4\" />\n   \
+    \ </svg>\n  `;\n\n  return `\n    <div style=\"width: 100%; height: 100%; display:\
+    \ flex; flex-direction: column; align-items: center; justify-content: center;\
+    \ background: linear-gradient(135deg, rgba(79, 195, 247, 0.2) 0%, rgba(79, 195,\
+    \ 247, 0) 100%); border-top-left-radius: 20px; position: relative;\">\n      <div\
+    \ style=\"position: absolute; width: 50px; height: 50px; background: ${blue};\
+    \ border-radius: 50%; filter: blur(20px); opacity: 0.3; animation: pulseGlow 4s\
+    \ infinite alternate ease-in-out;\"></div>\n      <div style=\"position: relative;\
+    \ z-index: 1;\">${svg}</div>\n      <div style=\"font-size: 9px; font-weight:\
+    \ 900; color: white; text-transform: uppercase; letter-spacing: 0.5px; margin-top:\
+    \ 4px; z-index: 1;\">BUANDERIE</div>\n      <style>@keyframes pulseGlow { from\
+    \ { opacity: 0.2; transform: scale(0.9); } to { opacity: 0.4; transform: scale(1.1);\
+    \ } }</style>\n    </div>\n  `;\n]]]\n"
+  info: "[[[\n  var isEditMode = window.location.search.includes('edit=1') || window.location.pathname.includes('edit');\n\
+    \  var w_on = states['binary_sensor.machine_a_laver_en_cours']?.state === 'on';\n\
+    \  var w_door = states['binary_sensor.capteur_ouverture_lave_linge_contact']?.state\
+    \ === 'on';\n  var w_done = (states['input_boolean.machine_a_laver_terminee']?.state\
+    \ === 'on') && !w_door;\n  var d_on = states['binary_sensor.seche_linge_en_cours']?.state\
+    \ === 'on';\n  var d_door = states['binary_sensor.seche_linge_door_status']?.state\
+    \ === 'on';\n  var d_done = (states['input_boolean.seche_linge_termine']?.state\
+    \ === 'on') && !d_door;\n\n  var items = [];\n  if (w_on) items.push({ name: 'Lave-linge',\
+    \ label: 'En cours', icon: 'mdi:washing-machine', color: '#fb8c00', blink: true\
+    \ });\n  if (w_done) items.push({ name: 'Lave-linge', label: 'Terminé', icon:\
+    \ 'mdi:washing-machine-alert', color: '#00897b', blink: false });\n  if (d_on)\
+    \ items.push({ name: 'Sèche-linge', label: 'En cours', icon: 'mdi:tumble-dryer',\
+    \ color: '#fb8c00', blink: true });\n  if (d_done) items.push({ name: 'Sèche-linge',\
+    \ label: 'Terminé', icon: 'mdi:tumble-dryer-alert', color: '#00897b', blink: false\
+    \ });\n\n  if (items.length === 0) return isEditMode ? '<div style=\"display:\
+    \ flex; align-items: center; justify-content: center; height: 100%; width: 100%;\
+    \ color: rgba(255,255,255,0.4); font-size: 11px;\">Mode Édition</div>' : '';\n\
+    \n  var html = '<style>@keyframes blink-machine { 0% { opacity: 1; } 50% { opacity:\
+    \ 0.4; } 100% { opacity: 1; } }</style>';\n  html += '<div style=\"display: flex;\
+    \ gap: 8px; align-items: center; justify-content: center; height: 100%; padding:\
+    \ 0 10px;\">';\n  for (var i = 0; i < items.length; i++) {\n    var c = items[i];\n\
+    \    html += `<div style=\"flex: 1; height: 60px; border-radius: 12px; background:\
+    \ rgba(20, 27, 38, 0.4); border: 1px solid ${c.color}60; display: flex; flex-direction:\
+    \ column; justify-content: center; align-items: center; ${c.blink ? 'animation:\
+    \ blink-machine 2s ease infinite;' : ''}\">`;\n    html += `<ha-icon icon=\"${c.icon}\"\
+    \ style=\"--mdc-icon-size: 22px; color: ${c.color}; margin-bottom: 2px;\"></ha-icon>`;\n\
+    \    html += `<div style=\"font-size: 10px; font-weight: 700; color: white; line-height:\
+    \ 1.1;\">${c.name}</div>`;\n    html += `<div style=\"font-size: 9px; color: white;\
+    \ opacity: 0.7; line-height: 1.1;\">${c.label}</div>`;\n    html += '</div>';\n\
+    \  }\n  return html + '</div>';\n]]]\n"

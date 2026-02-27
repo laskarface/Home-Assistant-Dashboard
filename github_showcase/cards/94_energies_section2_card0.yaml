@@ -1,0 +1,27 @@
+type: custom:button-card
+name: "[[[ \n  const date = new Date();\n  const mois = ['Janvier', 'Février', 'Mars',\
+  \ 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre',\
+  \ 'Décembre'];\n  return 'Conso du Mois - ' + mois[date.getMonth()] + ' ' + date.getFullYear();\n\
+  ]]]\n"
+icon: mdi:calendar-month
+styles:
+  card:
+  - background: none
+  - border: none
+  - padding: 8px 15px
+  grid:
+  - grid-template-areas: '"i n"'
+  - grid-template-columns: min-content 1fr
+  - gap: 10px
+  icon:
+  - width: 24px
+  - color: '#FFB03B'
+  - filter: drop-shadow(0 0 5px rgba(255, 176, 59, 0.4))
+  name:
+  - justify-self: start
+  - font-weight: 900
+  - font-size: 15px
+  - color: '#FFB03B'
+  - text-transform: uppercase
+  - letter-spacing: 1px
+  - text-shadow: 0 0 10px rgba(255, 176, 59, 0.3)

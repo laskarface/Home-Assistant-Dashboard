@@ -1,0 +1,144 @@
+type: custom:mod-card
+card_mod:
+  style: "ha-card {\n  border-radius: 6px;\n  overflow: hidden;\n  padding: 12px;\n\
+    \  position: relative;\n  background: linear-gradient(160deg,#141b26 0%,#111826\
+    \ 45%,#0d121c 100%) !important;\n  box-shadow: 0 10px 22px rgba(0,0,0,0.65) !important;\n\
+    \  border: 1px solid rgba(255,255,255,0.04) !important;\n}\n\n/* Glossy highlight\
+    \ Apple (comme tes autres cards) */\nha-card:before {\n  content:\"\";\n  position:absolute;\n\
+    \  inset:0;\n  background: radial-gradient(circle at top left,rgba(255,255,255,0.14),transparent\
+    \ 60%);\n  pointer-events:none;\n  z-index: 0;\n}\n"
+card:
+  type: custom:button-card
+  entity: sensor.ratrig_vminion_current_print_state
+  name: RatRig V-Minion
+  show_icon: false
+  show_state: false
+  styles:
+    card:
+    - position: relative
+    - height: 170px
+    - padding: 0
+    - background: transparent
+    - box-shadow: none
+    - border: none
+    name:
+    - position: absolute
+    - top: 10px
+    - left: 14px
+    - z-index: 3
+    - font-size: 14px
+    - font-weight: 800
+    - color: rgba(255,255,255,0.95)
+    - text-shadow: 0 2px 10px rgba(0,0,0,0.8)
+    custom_fields:
+      status:
+      - position: absolute
+      - top: 12px
+      - right: 14px
+      - z-index: 3
+      - font-size: 12px
+      - font-weight: 800
+      - padding: 4px 8px
+      - border-radius: 10px
+      - color: rgba(255,255,255,0.95)
+      - text-shadow: 0 2px 8px rgba(0,0,0,0.9)
+      controls:
+      - position: absolute
+      - left: 14px
+      - top: 36px
+      - z-index: 4
+      progress:
+      - position: absolute
+      - left: 14px
+      - right: 14px
+      - bottom: 60px
+      - z-index: 3
+      meta:
+      - position: absolute
+      - left: 14px
+      - right: 14px
+      - bottom: 6px
+      - z-index: 3
+      - font-size: 12px
+      - font-weight: 700
+      - color: rgba(255,255,255,0.92)
+      - text-shadow: 0 2px 8px rgba(0,0,0,0.85)
+  custom_fields:
+    status: "[[[\n  const st = states['sensor.ratrig_vminion_current_print_state']?.state\
+      \ ?? 'unknown';\n  const map = {\n    printing:  { label:'Impression',  bg:'rgba(0,170,255,0.28)',\
+      \ border:'rgba(0,170,255,0.55)' },\n    paused:    { label:'Pause',      bg:'rgba(255,180,0,0.25)',\
+      \ border:'rgba(255,180,0,0.55)' },\n    complete:  { label:'Terminé',    bg:'rgba(70,210,120,0.22)',\
+      \ border:'rgba(70,210,120,0.55)' },\n    standby:   { label:'Standby',    bg:'rgba(255,255,255,0.12)',\
+      \ border:'rgba(255,255,255,0.22)' },\n    error:     { label:'Erreur',     bg:'rgba(220,70,70,0.22)',\
+      \ border:'rgba(220,70,70,0.55)' },\n    cancelled: { label:'Annulé',     bg:'rgba(220,70,70,0.18)',\
+      \ border:'rgba(220,70,70,0.45)' },\n  };\n  const o = map[st] || { label: st,\
+      \ bg:'rgba(255,255,255,0.10)', border:'rgba(255,255,255,0.18)' };\n  return\
+      \ `<span style=\"\n    display:inline-block;\n    padding:4px 8px;\n    border-radius:10px;\n\
+      \    background:${o.bg};\n    border:1px solid ${o.border};\n    box-shadow:0\
+      \ 6px 14px rgba(0,0,0,0.35);\n  \">${o.label}</span>`;\n]]]\n"
+    controls: "[[[\n  const st = states['sensor.ratrig_vminion_current_print_state']?.state\
+      \ ?? 'unknown';\n  const canPause = (st === 'printing');\n  const canResume\
+      \ = (st === 'paused');\n  const label = canResume ? 'Reprendre' : 'Pause';\n\
+      \  const icon  = canResume ? 'mdi:play' : 'mdi:pause';\n  const action = canResume\
+      \ ? 'button.ratrig_vminion_resume_print' : 'button.ratrig_vminion_pause_print';\n\
+      \  const disabled = !(canPause || canResume);\n\n  const bg = disabled ? 'rgba(255,255,255,0.10)'\
+      \ : 'rgba(255,255,255,0.18)';\n  const bd = disabled ? 'rgba(255,255,255,0.14)'\
+      \ : 'rgba(255,255,255,0.25)';\n\n  return `\n    <div style=\"display:flex;gap:10px;align-items:center;\"\
+      >\n      <div style=\"\n        display:inline-flex;align-items:center;gap:8px;\n\
+      \        padding:8px 12px;border-radius:999px;\n        background:${bg};border:1px\
+      \ solid ${bd};\n        box-shadow:0 10px 24px rgba(0,0,0,0.35);\n        cursor:${disabled\
+      \ ? 'default' : 'pointer'};\n        user-select:none;\n      \" onclick=\"\n\
+      \        if(!${disabled}) {\n          this.closest('ha-card').dispatchEvent(new\
+      \ CustomEvent('hass-call-service', {\n            bubbles:true, composed:true,\n\
+      \            detail:{ domain:'button', service:'press', serviceData:{ entity_id:'${action}'\
+      \ } }\n          }));\n        }\n      \">\n        <ha-icon icon=\"${icon}\"\
+      \ style=\"\n          width:18px;height:18px;color:rgba(255,255,255,0.95);\n\
+      \          filter: drop-shadow(0 0 6px rgba(0,0,0,0.8));\n        \"></ha-icon>\n\
+      \        <span style=\"font-size:12px;font-weight:800;color:rgba(255,255,255,0.95);\"\
+      >${label}</span>\n      </div>\n\n      <div style=\"\n        display:inline-flex;align-items:center;justify-content:center;\n\
+      \        width:38px;height:38px;border-radius:12px;\n        background:rgba(220,70,70,0.20);\n\
+      \        border:1px solid rgba(220,70,70,0.55);\n        box-shadow:0 10px 24px\
+      \ rgba(0,0,0,0.35);\n        cursor:pointer;user-select:none;\n      \" onclick=\"\
+      \n        this.closest('ha-card').dispatchEvent(new CustomEvent('hass-call-service',\
+      \ {\n          bubbles:true, composed:true,\n          detail:{ domain:'button',\
+      \ service:'press', serviceData:{ entity_id:'button.ratrig_vminion_cancel_print'\
+      \ } }\n        }));\n      \">\n        <ha-icon icon=\"mdi:stop\" style=\"\n\
+      \          width:20px;height:20px;color:rgba(255,255,255,0.95);\n          filter:\
+      \ drop-shadow(0 0 6px rgba(0,0,0,0.8));\n        \"></ha-icon>\n      </div>\n\
+      \    </div>\n  `;\n]]]\n"
+    progress: "[[[\n  const p = parseFloat(states['sensor.ratrig_vminion_progress']?.state\
+      \ ?? '0') || 0;\n  const pct = Math.max(0, Math.min(100, p));\n  const glow\
+      \ = pct > 0 ? `0 0 14px rgba(0,255,180,0.35)` : 'none';\n\n  return `\n    <div\
+      \ style=\"width:100%;\">\n      <div style=\"display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;\"\
+      >\n        <div style=\"font-size:12px;font-weight:800;color:rgba(255,255,255,0.95);text-shadow:0\
+      \ 2px 8px rgba(0,0,0,0.85);\">\n          Progression\n        </div>\n    \
+      \    <div style=\"font-size:12px;font-weight:900;color:rgba(255,255,255,0.95);\"\
+      >\n          ${pct.toFixed(1)}%\n        </div>\n      </div>\n\n      <div\
+      \ style=\"height:12px;border-radius:999px;background:rgba(255,255,255,0.16);overflow:hidden;box-shadow:\
+      \ inset 0 0 0 1px rgba(255,255,255,0.10);\">\n        <div style=\"\n      \
+      \    width:${pct}%;\n          height:100%;\n          border-radius:999px;\n\
+      \          background: linear-gradient(90deg, rgba(0,255,170,0.95), rgba(0,170,255,0.95));\n\
+      \          box-shadow: ${glow};\n          transition: width 0.6s ease;\n  \
+      \        position: relative;\n        \">\n          <div style=\"\n       \
+      \     position:absolute;inset:0;\n            background: linear-gradient(to\
+      \ bottom, rgba(255,255,255,0.40), rgba(255,255,255,0.05));\n            opacity:0.55;\n\
+      \          \"></div>\n        </div>\n      </div>\n    </div>\n  `;\n]]]\n"
+    meta: "[[[\n  const leftH = parseFloat(states['sensor.ratrig_vminion_print_time_left']?.state\
+      \ ?? '0') || 0;\n  const leftMin = Math.round(leftH * 60);\n\n  const eta =\
+      \ states['sensor.ratrig_vminion_print_eta']?.state ?? 'unknown';\n  const etaTxt\
+      \ = (eta && eta !== 'unknown')\n    ? new Date(eta).toLocaleTimeString('fr-FR',\
+      \ { hour:'2-digit', minute:'2-digit' })\n    : '—';\n\n  const fmtDur = (m)\
+      \ => {\n    if (!isFinite(m) || m <= 0) return '—';\n    const h = Math.floor(m/60);\n\
+      \    const mm = Math.round(m%60);\n    return h > 0 ? `${h}h${String(mm).padStart(2,'0')}`\
+      \ : `${mm} min`;\n  };\n\n  // --- Filament utilisé ---\n  const fu = states['sensor.ratrig_vminion_filament_used'];\n\
+      \  const raw = (fu?.state ?? '').toString().replace(',', '.');\n  const unit\
+      \ = (fu?.attributes?.unit_of_measurement ?? '').toString();\n  const n = Number(raw);\n\
+      \n  let filamentTxt = '—';\n  if (isFinite(n)) {\n    if (unit.toLowerCase()\
+      \ === 'mm') filamentTxt = `${(n/1000).toFixed(2)} m`;\n    else if (unit.toLowerCase()\
+      \ === 'm') filamentTxt = `${n.toFixed(2)} m`;\n    else if (unit) filamentTxt\
+      \ = `${n.toFixed(2)} ${unit}`;\n    else filamentTxt = `${n.toFixed(2)}`;\n\
+      \  } else if (raw) {\n    filamentTxt = unit ? `${raw} ${unit}` : raw;\n  }\n\
+      \n  return `\n    <div style=\"display:flex;gap:14px;flex-wrap:wrap;\">\n  \
+      \    <div>⏳ Restant <b>${fmtDur(leftMin)}</b></div>\n      <div>\U0001F552 ETA\
+      \ <b>${etaTxt}</b></div>\n      <div>\U0001F9F5 Filament <b>${filamentTxt}</b></div>\n\
+      \    </div>\n  `;\n]]]\n"

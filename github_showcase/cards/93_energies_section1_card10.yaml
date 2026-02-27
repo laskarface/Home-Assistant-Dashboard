@@ -1,0 +1,35 @@
+type: custom:mini-graph-card
+grid_options:
+  columns: 6
+  rows: 2
+entities:
+- entity: sensor.lison_conso_jour_kwh_2
+  name: Lison Appoint Jour
+unit: kWh
+decimals: 0
+hours_to_show: 24
+points_per_hour: 4
+line_width: 4
+line_color: '#3DDBB8'
+lower_bound: 0
+show:
+  labels: false
+  extrema: false
+  average: false
+  fill: fade
+  icon: false
+card_mod:
+  style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+    \ blur(15px) !important;\n  -webkit-backdrop-filter: blur(15px) !important;\n\
+    \  border-radius: 20px !important;\n  border: 1px solid rgba(255,255,255,0.1)\
+    \ !important;\n  box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;\n  height:\
+    \ 110px !important;\n}\n/* ON SUPPRIME L'OEIL (Icône) DÉFINITIVEMENT */\n.header\
+    \ .icon, .header ha-icon, ha-icon {\n  display: none !important;\n  visibility:\
+    \ hidden !important;\n}\n.header {\n  padding: 1px 1px 0px 14px !important;\n\
+    }\n.name {\n  font-size: 14px !important; \n  font-weight: 500 !important;\n \
+    \ color: rgba(255, 255, 255, 1) !important;\n  text-transform: none !important;\n\
+    }\n/* Chiffre en vert mint */\n.state {\n  font-size: 14px !important; \n  font-weight:\
+    \ 500 !important;\n  color: #3DDBB8 !important;\n}\n/* kWh en blanc pur (forcé)\
+    \ */\n.uom, .state .uom, span.uom {\n  color: #FFFFFF !important;\n  opacity:\
+    \ 1 !important;\n  font-size: 10px !important;\n}\n.graph {\n  margin-top: 5px\
+    \ !important;\n  height: 20px !important;\n}\n"

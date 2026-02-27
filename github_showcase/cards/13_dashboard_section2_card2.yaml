@@ -1,0 +1,356 @@
+type: custom:button-card
+show_name: false
+show_icon: false
+styles:
+  card:
+  - padding: 0
+  - background: none
+  - border: none
+  - box-shadow: none
+  - display: "[[[\n  // --- VISIBILITY LOGIC ---\n  const isEditMode = window.location.search.includes('edit=1')\
+      \ || window.location.pathname.includes('edit');\n  \n  let count = 0;\n  const\
+      \ exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|chrisnas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;\n\
+      \  \n  for (const s of Object.values(hass.states)) {\n    if (!s.entity_id.startsWith('sensor.'))\
+      \ continue;\n    const val = parseFloat(String(s.state).replace('°C','').replace(',','.'));\n\
+      \    if (!isNaN(val) && (val > 25 || val < 19)) {\n      const name = (s.attributes.friendly_name\
+      \ || \"\").toLowerCase();\n      const eid = s.entity_id.toLowerCase();\n  \
+      \    if (s.attributes.device_class === 'temperature' || s.attributes.unit_of_measurement\
+      \ === '°C') {\n        if (!exclusions.test(eid) && !exclusions.test(name))\
+      \ {\n          count++;\n        }\n      }\n    }\n  }\n  \n  return (isEditMode\
+      \ || count > 0) ? 'block' : 'none';\n]]]\n"
+  grid:
+  - grid-template-areas: '"content"'
+  - grid-template-columns: 100%
+custom_fields:
+  content:
+    card:
+      type: entities
+      card_mod:
+        style: "ha-card {\n  background: transparent !important;\n  box-shadow: none\
+          \ !important;\n  border: none !important;\n  padding: 0 !important;\n  margin:\
+          \ 0 !important;\n  width: 100% !important;\n}\n.card-content {\n  padding:\
+          \ 0 !important;\n  margin: 0 !important;\n  width: 100% !important;\n}\n"
+      entities:
+      - type: custom:fold-entity-row
+        full_row: true
+        padding: 0
+        clickable: true
+        card_mod:
+          style: ':host { --toggle-icon-width: 0px !important; }
+
+            #head ha-icon, #head ha-icon-button { display: none !important; width:
+            0px !important; visibility: hidden !important; }
+
+            div#head { display: block !important; width: 100% !important; padding:
+            0 !important; margin: 0 !important; }
+
+            #head { padding: 0 !important; margin: 0 !important; width: 100% !important;
+            cursor: pointer !important; }
+
+            #head > * { width: 100% !important; max-width: 100% !important; }
+
+            div#items { padding: 14px 0 0 0 !important; margin: 0 !important; width:
+            100% !important; box-sizing: border-box !important; }
+
+            '
+        head:
+          type: custom:button-card
+          show_name: false
+          show_icon: false
+          show_state: false
+          tap_action:
+            action: none
+          variables:
+            color: '#FF5722'
+          styles:
+            card:
+            - padding: 0
+            - background: rgba(20, 27, 38, 0.6)
+            - backdrop-filter: blur(10px)
+            - -webkit-backdrop-filter: blur(10px)
+            - border-radius: 20px
+            - border: '[[[ return `1px solid ${variables.color}80`; ]]]'
+            - box-shadow: '[[[ return `0 0 20px ${variables.color}40, 0 8px 32px rgba(0,0,0,0.4)`;
+                ]]]'
+            - overflow: hidden
+            - margin: 0px
+            - box-sizing: border-box
+            - position: relative
+            - height: 85px
+            - width: 100%
+            grid:
+            - grid-template-areas: '"icon details" "footer footer"'
+            - grid-template-columns: 130px minmax(0, 1fr)
+            - grid-template-rows: 60px 25px
+            - gap: 0px
+            - width: 100%
+            - margin: 0
+            custom_fields:
+              icon:
+              - justify-self: stretch
+              - align-self: stretch
+              - border-right: 2px solid rgba(255,255,255,0.6)
+              - border-top-left-radius: 20px
+              - display: flex
+              - align-items: center
+              - justify-content: center
+              - padding: 0
+              details:
+              - justify-self: stretch
+              - align-self: stretch
+              - display: flex
+              - flex-direction: column
+              - justify-content: center
+              - align-items: center
+              - padding: 0
+              - overflow: hidden
+              - position: relative
+              footer:
+              - justify-self: stretch
+              - align-self: stretch
+              - background: rgba(0,0,0,0.2)
+              - border-top: 1px solid rgba(255,255,255,0.05)
+              - display: flex
+              - align-items: center
+              - justify-content: center
+              - border-radius: 0 0 20px 20px
+          custom_fields:
+            icon: "[[[\n  const color = variables.color;\n  return `\n    <div style=\"\
+              width: 100%; height: 100%; display: flex; flex-direction: column; align-items:\
+              \ center; justify-content: center; background: linear-gradient(135deg,\
+              \ ${color}33 0%, ${color}0D 100%); border-top-left-radius: 20px; box-sizing:\
+              \ border-box; position: relative;\">\n      <div style=\"position: absolute;\
+              \ width: 50px; height: 50px; background: ${color}; border-radius: 50%;\
+              \ filter: blur(20px); opacity: 0.3; animation: pulseGlow 4s infinite\
+              \ alternate ease-in-out;\"></div>\n      <div style=\"font-size: 32px;\
+              \ line-height: 1; filter: drop-shadow(0 0 10px ${color}80); display:\
+              \ flex; align-items: center; justify-content: center; z-index: 1;\"\
+              >\U0001F321️</div>\n      <div style=\"font-size: 10px; font-weight:\
+              \ 900; color: white; text-transform: uppercase; letter-spacing: 0.8px;\
+              \ margin-top: 2px; z-index: 1;\">Température</div>\n    </div>\n  `;\n\
+              ]]]\n"
+            details: "[[[\n  let count = 0;\n  const exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|chrisnas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;\n\
+              \  for (const s of Object.values(hass.states)) {\n    if (!s.entity_id.startsWith('sensor.'))\
+              \ continue;\n    const val = parseFloat(String(s.state).replace('°C','').replace(',','.'));\n\
+              \    if (!isNaN(val) && (val > 25 || val < 19)) {\n      const name\
+              \ = (s.attributes.friendly_name || \"\").toLowerCase();\n      const\
+              \ eid = s.entity_id.toLowerCase();\n      if (s.attributes.device_class\
+              \ === 'temperature' || s.attributes.unit_of_measurement === '°C') {\n\
+              \        if (!exclusions.test(eid) && !exclusions.test(name)) {\n  \
+              \        count++;\n        }\n      }\n    }\n  }\n  const label = count\
+              \ > 1 ? 'PIÈCES TEMP. ANORMALE' : 'PIÈCE TEMP. ANORMALE';\n  return\
+              \ `\n    <div style=\"width: 100%; height: 100%; display: flex; flex-direction:\
+              \ row; justify-content: center; align-items: center; padding: 0 15px;\
+              \ position: relative; gap: 15px;\">\n      <div style=\"font-size: 38px;\
+              \ font-weight: 900; color: ${variables.color}; line-height: 1; text-shadow:\
+              \ 0 0 15px ${variables.color}80;\">${count}</div>\n      <div style=\"\
+              display: flex; flex-direction: column; align-items: flex-start; justify-content:\
+              \ center;\">\n        <div style=\"font-size: 13px; font-weight: 800;\
+              \ color: white; text-transform: uppercase; letter-spacing: 1px;\">${label}</div>\n\
+              \        <div style=\"font-size: 11px; color: rgba(255,255,255,0.6);\
+              \ margin-top: 4px; display: flex; align-items: center; font-weight:\
+              \ 600;\">ALERTE < 19°C OU > 25°C</div>\n      </div>\n    </div>\n \
+              \ `;\n]]]\n"
+            footer: '[[[ return `<div style="display:flex; width:100%; justify-content:center;
+              align-items:center;"><ha-icon icon="mdi:chevron-down" style="color:
+              rgba(255,255,255,0.7); width: 18px; height: 18px;"></ha-icon></div>`;
+              ]]]
+
+              '
+        entities:
+        - type: custom:button-card
+          color_type: blank-card
+          styles:
+            card:
+            - height: 14px
+        - type: custom:auto-entities
+          show_empty: false
+          card:
+            type: grid
+            columns: 2
+            square: false
+            card_mod:
+              style: 'ha-card { background: transparent !important; box-shadow: none
+                !important; border: none !important; padding: 0 !important; margin:
+                0 !important; width: 100% !important; }
+
+                '
+          card_param: cards
+          filter:
+            include:
+            - domain: sensor
+              attributes:
+                device_class: temperature
+              state: '> 25'
+              options:
+                type: custom:button-card
+                layout: horizontal
+                show_name: true
+                show_state: true
+                show_icon: true
+                styles:
+                  card:
+                  - background: rgba(20, 27, 38, 0.6)
+                  - backdrop-filter: blur(10px)
+                  - -webkit-backdrop-filter: blur(10px)
+                  - border-radius: 20px
+                  - border: 1px solid rgba(255, 87, 34, 0.4)
+                  - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+                  - height: 60px
+                  grid:
+                  - grid-template-areas: '"i n s"'
+                  - grid-template-columns: 45px 1fr 50px
+                  icon:
+                  - color: '#FF5722'
+                  - width: 22px
+                  - height: 22px
+                  - justify-self: center
+                  name:
+                  - color: white
+                  - font-weight: 800
+                  - font-size: 11px
+                  - justify-self: start
+                  - text-align: left
+                  state:
+                  - color: '#FF5722'
+                  - font-weight: 900
+                  - font-size: 13px
+                  - justify-self: end
+            - domain: sensor
+              attributes:
+                device_class: temperature
+              state: < 19
+              options:
+                type: custom:button-card
+                layout: horizontal
+                show_name: true
+                show_state: true
+                show_icon: true
+                styles:
+                  card:
+                  - background: rgba(20, 27, 38, 0.6)
+                  - backdrop-filter: blur(10px)
+                  - -webkit-backdrop-filter: blur(10px)
+                  - border-radius: 20px
+                  - border: 1px solid rgba(255, 87, 34, 0.4)
+                  - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+                  - height: 60px
+                  grid:
+                  - grid-template-areas: '"i n s"'
+                  - grid-template-columns: 45px 1fr 50px
+                  icon:
+                  - color: '#FF5722'
+                  - width: 22px
+                  - height: 22px
+                  - justify-self: center
+                  name:
+                  - color: white
+                  - font-weight: 800
+                  - font-size: 11px
+                  - justify-self: start
+                  - text-align: left
+                  state:
+                  - color: '#FF5722'
+                  - font-weight: 900
+                  - font-size: 13px
+                  - justify-self: end
+            - name: '*temp*'
+              state: '> 25'
+              options:
+                type: custom:button-card
+                layout: horizontal
+                show_name: true
+                show_state: true
+                show_icon: true
+                styles:
+                  card:
+                  - background: rgba(20, 27, 38, 0.6)
+                  - backdrop-filter: blur(10px)
+                  - -webkit-backdrop-filter: blur(10px)
+                  - border-radius: 20px
+                  - border: 1px solid rgba(255, 87, 34, 0.4)
+                  - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+                  - height: 60px
+                  grid:
+                  - grid-template-areas: '"i n s"'
+                  - grid-template-columns: 45px 1fr 50px
+                  icon:
+                  - color: '#FF5722'
+                  - width: 22px
+                  - height: 22px
+                  - justify-self: center
+                  name:
+                  - color: white
+                  - font-weight: 800
+                  - font-size: 11px
+                  - justify-self: start
+                  - text-align: left
+                  state:
+                  - color: '#FF5722'
+                  - font-weight: 900
+                  - font-size: 13px
+                  - justify-self: end
+            - name: '*temp*'
+              state: < 19
+              options:
+                type: custom:button-card
+                layout: horizontal
+                show_name: true
+                show_state: true
+                show_icon: true
+                styles:
+                  card:
+                  - background: rgba(20, 27, 38, 0.6)
+                  - backdrop-filter: blur(10px)
+                  - -webkit-backdrop-filter: blur(10px)
+                  - border-radius: 20px
+                  - border: 1px solid rgba(255, 87, 34, 0.4)
+                  - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+                  - height: 60px
+                  grid:
+                  - grid-template-areas: '"i n s"'
+                  - grid-template-columns: 45px 1fr 50px
+                  icon:
+                  - color: '#FF5722'
+                  - width: 22px
+                  - height: 22px
+                  - justify-self: center
+                  name:
+                  - color: white
+                  - font-weight: 800
+                  - font-size: 11px
+                  - justify-self: start
+                  - text-align: left
+                  state:
+                  - color: '#FF5722'
+                  - font-weight: 900
+                  - font-size: 13px
+                  - justify-self: end
+            exclude:
+            - entity_id: '*battery*'
+            - entity_id: '*voltage*'
+            - entity_id: '*signal*'
+            - entity_id: '*ecojoko*'
+            - entity_id: '*home*'
+            - entity_id: '*oil*'
+            - entity_id: '*diffus*'
+            - entity_id: '*chrisnas*'
+            - entity_id: '*dhwp*'
+            - entity_id: '*tesla*'
+            - entity_id: '*comfort*'
+            - entity_id: '*adjust*'
+            - entity_id: '*away*'
+            - name: '*home*'
+            - name: '*ecojoko*'
+            - name: '*oil*'
+            - name: '*diffus*'
+            - name: '*chrisnas*'
+            - name: '*dhwp*'
+            - name: '*tesla*'
+            - name: '*comfort*'
+            - name: '*adjust*'
+            - name: '*away*'
+            - name: '*extérieure*'
+            - name: '*exterieure*'
+            - name: '*intérieure*'
+            - name: '*interieure*'

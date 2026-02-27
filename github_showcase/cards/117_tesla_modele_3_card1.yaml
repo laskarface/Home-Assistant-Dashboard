@@ -1,0 +1,1165 @@
+type: custom:vehicle-status-card
+name: Tesla Modèle 3
+layout_config:
+  button_grid:
+    rows: 2
+    columns: 2
+    swipe: true
+  images_swipe:
+    height: 150
+  section_order:
+  - range_info
+  - images
+  - indicators
+  - mini_map
+  - buttons
+  range_info_config:
+    layout: row
+mini_map:
+  enable_popup: true
+  device_tracker: device_tracker.tesla_model_3_location
+  use_zone_name: false
+  user_location: false
+range_info:
+- energy_level:
+    tap_action:
+      action: more-info
+    value_alignment: end
+    value_position: inside
+    entity: sensor.tesla_model_3_niveau_de_batterie
+  range_level:
+    value_position: outside
+    entity: sensor.tesla_model_3_autonomie_de_batterie
+  charging_entity: binary_sensor.tesla_model_3_charging
+  progress_color: '#d60000'
+  charging_template: '{{ true }}'
+  color_blocks: false
+  color_thresholds:
+  - value: 0
+    color: '#ff0000'
+  - value: 20
+    color: '#ff7300'
+  - value: 40
+    color: '#ffbb00'
+  - value: 60
+    color: '#eeff00'
+  - value: 80
+    color: '#44ff00'
+  bar_radius: 10
+- energy_level:
+    tap_action:
+      action: more-info
+    value_alignment: end
+    value_position: inside
+    entity: sensor.tesla_model_3_charge_energy_added
+    hide_icon: false
+    max_value: 50
+  range_level:
+    value_position: inside
+    icon: mdi:ev-station
+  progress_color: '#fbff00'
+  color_blocks: false
+  color_thresholds:
+  - value: 0
+    color: '#fbff00'
+  - value: 20
+    color: '#aeff00'
+  - value: 40
+    color: '#4dff00'
+  - value: 60
+    color: '#00ffbf'
+  - value: 80
+    color: '#00bfff'
+  bar_radius: 10
+  charging_entity: sensor.tesla_model_3_vitesse_de_charge
+- charging_entity: binary_sensor.ci_tesla_charging
+  progress_color: '#8ce73a'
+  energy_level:
+    entity: sensor.tesla_model_3_compteur
+    max_value: 150
+    value_position: inside
+    hide_icon: true
+    value_alignment: end
+  color_thresholds:
+  - value: 0
+    color: '#40e762'
+  - value: 30
+    color: '#9ade1b'
+  - value: 60
+    color: '#8fba17'
+  - value: 90
+    color: '#968013'
+  - value: 120
+    color: '#b21301'
+  color_blocks: false
+  bar_radius: 10
+images:
+- image: /api/image/serve/2f279a2aa6f54dc602c787bdef31a69f/512x512
+button_cards:
+- show_icon: true
+  show_primary: true
+  show_secondary: true
+  layout: horizontal
+  tap_action:
+    action: more-info
+  card_type: custom
+  icon_type: icon
+  primary_info: name
+  name: Climatisation
+  entity: climate.tesla_model_3_climate
+  button_type: default
+  sub_card:
+    custom_card:
+    - type: vertical-stack
+      cards:
+      - type: conditional
+        conditions:
+        - entity: climate.tesla_model_3_climate
+          state_not: 'off'
+        - entity: climate.tesla_model_3_climate
+          state_not: unavailable
+        - entity: climate.tesla_model_3_climate
+          state_not: unknown
+        card:
+          type: picture-elements
+          image: /local/tesla.clim-on.png
+          aspect_ratio: '16:9'
+          elements:
+          - type: state-label
+            entity: climate.tesla_model_3_climate
+            attribute: current_temperature
+            style:
+              left: 92%
+              top: 10%
+              color: white
+              font-size: 26px
+              font-weight: 700
+              text-shadow: 0px 0px 6px rgba(0,0,0,0.85)
+          - type: icon
+            icon: mdi:temperature-celsius
+            style:
+              left: 98%
+              top: 10%
+              color: rgba(255,255,255,0.8)
+              --mdc-icon-size: 18px
+            tap_action:
+              action: more-info
+              entity: climate.tesla_model_3_climate
+          - type: icon
+            entity: climate.tesla_model_3_climate
+            icon: mdi:power
+            style:
+              left: 5%
+              top: 10%
+              --mdc-icon-size: 53px
+            tap_action:
+              action: call-service
+              service: climate.toggle
+              target:
+                entity_id: climate.tesla_model_3_climate
+            hold_action:
+              action: more-info
+              entity: climate.tesla_model_3_climate
+            card_mod:
+              style: "ha-state-icon, ha-icon {\n  {% set s = states('climate.tesla_model_3_climate')\
+                \ %}\n  color: {% if s in ['off','unavailable','unknown'] %}\n   \
+                \ rgba(255,255,255,0.35)\n  {% else %}\n    rgb(255, 70, 70)\n  {%\
+                \ endif %} !important;\n  filter: {% if s in ['off','unavailable','unknown']\
+                \ %}\n    none\n  {% else %}\n    drop-shadow(0 0 6px rgba(255,0,0,0.85))\n\
+                \    drop-shadow(0 0 14px rgba(255,0,0,0.35))\n  {% endif %};\n  animation:\
+                \ {% if s in ['off','unavailable','unknown'] %}\n    none\n  {% else\
+                \ %}\n    teslaPulse 1.6s ease-in-out infinite\n  {% endif %};\n \
+                \ transform-origin: center;\n}\n@keyframes teslaPulse {\n  0%   {\
+                \ transform: scale(1);    opacity: 0.85; }\n  50%  { transform: scale(1.10);\
+                \ opacity: 1;    }\n  100% { transform: scale(1);    opacity: 0.85;\
+                \ }\n}\n"
+          - type: icon
+            entity: switch.tesla_model_3_defrost
+            icon: mdi:snowflake
+            style:
+              left: 16%
+              top: 10%
+              --mdc-icon-size: 43px
+            tap_action:
+              action: call-service
+              service: switch.toggle
+              target:
+                entity_id: switch.tesla_model_3_defrost
+            hold_action:
+              action: more-info
+              entity: switch.tesla_model_3_defrost
+            card_mod:
+              style: "ha-state-icon, ha-icon {\n  color: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    rgb(255, 70, 70)\n  {% else %}\n    rgba(255,255,255,0.35)\n\
+                \  {% endif %} !important;\n  filter: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    drop-shadow(0 0 6px rgba(255,0,0,0.85))\n    drop-shadow(0\
+                \ 0 14px rgba(255,0,0,0.35))\n  {% else %}\n    none\n  {% endif %};\n\
+                \  animation: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    teslaPulseDef 1.6s ease-in-out infinite\n  {% else %}\n\
+                \    none\n  {% endif %};\n  transform-origin: center;\n}\n@keyframes\
+                \ teslaPulseDef {\n  0%   { transform: scale(1);    opacity: 0.85;\
+                \ }\n  50%  { transform: scale(1.10); opacity: 1;    }\n  100% { transform:\
+                \ scale(1);    opacity: 0.85; }\n}\n"
+          - type: icon
+            icon: mdi:chevron-left
+            style:
+              left: 42%
+              top: 10%
+              color: rgba(255,255,255,0.9)
+              --mdc-icon-size: 50px
+            tap_action:
+              action: call-service
+              service: script.tesla_temp_plus_0_5
+          - type: state-label
+            entity: climate.tesla_model_3_climate
+            attribute: temperature
+            style:
+              left: 50%
+              top: 10%
+              color: rgba(255,255,255,0.95)
+              font-size: 20px
+              font-weight: 700
+              text-shadow: 0px 0px 6px rgba(0,0,0,0.85)
+          - type: icon
+            icon: mdi:temperature-celsius
+            style:
+              left: 56%
+              top: 10%
+              color: rgba(255,255,255,0.7)
+              --mdc-icon-size: 14px
+          - type: icon
+            icon: mdi:chevron-right
+            style:
+              left: 60%
+              top: 10%
+              color: rgba(255,255,255,0.9)
+              --mdc-icon-size: 50px
+            tap_action:
+              action: call-service
+              service: script.tesla_temp_moins_0_5
+          - type: image
+            entity: select.tesla_model_3_seat_heater_front_left
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 37%
+              top: 77%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_conducteur
+          - type: image
+            entity: select.tesla_model_3_seat_heater_front_right
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 38%
+              top: 42%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_passager
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_left
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 67%
+              top: 75%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_gauche
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_center
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 66%
+              top: 58%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_centre
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_right
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 65%
+              top: 42%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_droit
+      - type: conditional
+        conditions:
+        - entity: climate.tesla_model_3_climate
+          state: 'off'
+        card:
+          type: picture-elements
+          image: /local/tesla.clim.png
+          aspect_ratio: '16:9'
+          elements:
+          - type: state-label
+            entity: climate.tesla_model_3_climate
+            attribute: current_temperature
+            style:
+              left: 92%
+              top: 10%
+              color: white
+              font-size: 23px
+              font-weight: 700
+              text-shadow: 0px 0px 6px rgba(0,0,0,0.85)
+          - type: icon
+            icon: mdi:temperature-celsius
+            style:
+              left: 98%
+              top: 10%
+              color: rgba(255,255,255,0.8)
+              --mdc-icon-size: 18px
+            tap_action:
+              action: more-info
+              entity: climate.tesla_model_3_climate
+          - type: icon
+            entity: climate.tesla_model_3_climate
+            icon: mdi:power
+            style:
+              left: 5%
+              top: 10%
+              --mdc-icon-size: 53px
+            tap_action:
+              action: call-service
+              service: climate.toggle
+              target:
+                entity_id: climate.tesla_model_3_climate
+            hold_action:
+              action: more-info
+              entity: climate.tesla_model_3_climate
+            card_mod:
+              style: "ha-state-icon, ha-icon {\n  {% set s = states('climate.tesla_model_3_climate')\
+                \ %}\n  color: {% if s in ['off','unavailable','unknown'] %}\n   \
+                \ rgba(255,255,255,0.35)\n  {% else %}\n    rgb(255, 70, 70)\n  {%\
+                \ endif %} !important;\n  filter: {% if s in ['off','unavailable','unknown']\
+                \ %}\n    none\n  {% else %}\n    drop-shadow(0 0 6px rgba(255,0,0,0.85))\n\
+                \    drop-shadow(0 0 14px rgba(255,0,0,0.35))\n  {% endif %};\n  animation:\
+                \ {% if s in ['off','unavailable','unknown'] %}\n    none\n  {% else\
+                \ %}\n    teslaPulse 1.6s ease-in-out infinite\n  {% endif %};\n \
+                \ transform-origin: center;\n}\n@keyframes teslaPulse {\n  0%   {\
+                \ transform: scale(1);    opacity: 0.85; }\n  50%  { transform: scale(1.10);\
+                \ opacity: 1;    }\n  100% { transform: scale(1);    opacity: 0.85;\
+                \ }\n}\n"
+          - type: icon
+            entity: switch.tesla_model_3_defrost
+            icon: mdi:snowflake
+            style:
+              left: 16%
+              top: 10%
+              --mdc-icon-size: 43px
+            tap_action:
+              action: call-service
+              service: switch.toggle
+              target:
+                entity_id: switch.tesla_model_3_defrost
+            hold_action:
+              action: more-info
+              entity: switch.tesla_model_3_defrost
+            card_mod:
+              style: "ha-state-icon, ha-icon {\n  color: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    rgb(255, 70, 70)\n  {% else %}\n    rgba(255,255,255,0.35)\n\
+                \  {% endif %} !important;\n  filter: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    drop-shadow(0 0 6px rgba(255,0,0,0.85))\n    drop-shadow(0\
+                \ 0 14px rgba(255,0,0,0.35))\n  {% else %}\n    none\n  {% endif %};\n\
+                \  animation: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    teslaPulseDef 1.6s ease-in-out infinite\n  {% else %}\n\
+                \    none\n  {% endif %};\n  transform-origin: center;\n}\n@keyframes\
+                \ teslaPulseDef {\n  0%   { transform: scale(1);    opacity: 0.85;\
+                \ }\n  50%  { transform: scale(1.10); opacity: 1;    }\n  100% { transform:\
+                \ scale(1);    opacity: 0.85; }\n}\n"
+          - type: icon
+            icon: mdi:chevron-left
+            style:
+              left: 42%
+              top: 10%
+              color: rgba(255,255,255,0.9)
+              --mdc-icon-size: 50px
+            tap_action:
+              action: call-service
+              service: script.tesla_temp_plus_0_5
+          - type: state-label
+            entity: climate.tesla_model_3_climate
+            attribute: temperature
+            style:
+              left: 50%
+              top: 10%
+              color: rgba(255,255,255,0.95)
+              font-size: 20px
+              font-weight: 700
+              text-shadow: 0px 0px 6px rgba(0,0,0,0.85)
+          - type: icon
+            icon: mdi:temperature-celsius
+            style:
+              left: 56%
+              top: 10%
+              color: rgba(255,255,255,0.7)
+              --mdc-icon-size: 14px
+          - type: icon
+            icon: mdi:chevron-right
+            style:
+              left: 60%
+              top: 10%
+              color: rgba(255,255,255,0.9)
+              --mdc-icon-size: 50px
+            tap_action:
+              action: call-service
+              service: script.tesla_temp_moins_0_5
+          - type: image
+            entity: select.tesla_model_3_seat_heater_front_left
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 37%
+              top: 77%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_conducteur
+          - type: image
+            entity: select.tesla_model_3_seat_heater_front_right
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 38%
+              top: 42%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_passager
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_left
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 67%
+              top: 75%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_gauche
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_center
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 66%
+              top: 58%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_centre
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_right
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 65%
+              top: 42%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_droit
+      - type: conditional
+        conditions:
+        - entity: climate.tesla_model_3_climate
+          state: unavailable
+        card:
+          type: picture-elements
+          image: /local/tesla.clim.png
+          aspect_ratio: '16:9'
+          elements:
+          - type: state-label
+            entity: climate.tesla_model_3_climate
+            attribute: current_temperature
+            style:
+              left: 92%
+              top: 10%
+              color: white
+              font-size: 23px
+              font-weight: 700
+              text-shadow: 0px 0px 6px rgba(0,0,0,0.85)
+          - type: icon
+            icon: mdi:temperature-celsius
+            style:
+              left: 98%
+              top: 10%
+              color: rgba(255,255,255,0.8)
+              --mdc-icon-size: 18px
+            tap_action:
+              action: more-info
+              entity: climate.tesla_model_3_climate
+          - type: icon
+            entity: climate.tesla_model_3_climate
+            icon: mdi:power
+            style:
+              left: 5%
+              top: 10%
+              --mdc-icon-size: 53px
+            tap_action:
+              action: call-service
+              service: climate.toggle
+              target:
+                entity_id: climate.tesla_model_3_climate
+            hold_action:
+              action: more-info
+              entity: climate.tesla_model_3_climate
+            card_mod:
+              style: "ha-state-icon, ha-icon {\n  {% set s = states('climate.tesla_model_3_climate')\
+                \ %}\n  color: {% if s in ['off','unavailable','unknown'] %}\n   \
+                \ rgba(255,255,255,0.35)\n  {% else %}\n    rgb(255, 70, 70)\n  {%\
+                \ endif %} !important;\n  filter: {% if s in ['off','unavailable','unknown']\
+                \ %}\n    none\n  {% else %}\n    drop-shadow(0 0 6px rgba(255,0,0,0.85))\n\
+                \    drop-shadow(0 0 14px rgba(255,0,0,0.35))\n  {% endif %};\n  animation:\
+                \ {% if s in ['off','unavailable','unknown'] %}\n    none\n  {% else\
+                \ %}\n    teslaPulse 1.6s ease-in-out infinite\n  {% endif %};\n \
+                \ transform-origin: center;\n}\n@keyframes teslaPulse {\n  0%   {\
+                \ transform: scale(1);    opacity: 0.85; }\n  50%  { transform: scale(1.10);\
+                \ opacity: 1;    }\n  100% { transform: scale(1);    opacity: 0.85;\
+                \ }\n}\n"
+          - type: icon
+            entity: switch.tesla_model_3_defrost
+            icon: mdi:snowflake
+            style:
+              left: 16%
+              top: 10%
+              --mdc-icon-size: 43px
+            tap_action:
+              action: call-service
+              service: switch.toggle
+              target:
+                entity_id: switch.tesla_model_3_defrost
+            hold_action:
+              action: more-info
+              entity: switch.tesla_model_3_defrost
+            card_mod:
+              style: "ha-state-icon, ha-icon {\n  color: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    rgb(255, 70, 70)\n  {% else %}\n    rgba(255,255,255,0.35)\n\
+                \  {% endif %} !important;\n  filter: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    drop-shadow(0 0 6px rgba(255,0,0,0.85))\n    drop-shadow(0\
+                \ 0 14px rgba(255,0,0,0.35))\n  {% else %}\n    none\n  {% endif %};\n\
+                \  animation: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    teslaPulseDef 1.6s ease-in-out infinite\n  {% else %}\n\
+                \    none\n  {% endif %};\n  transform-origin: center;\n}\n@keyframes\
+                \ teslaPulseDef {\n  0%   { transform: scale(1);    opacity: 0.85;\
+                \ }\n  50%  { transform: scale(1.10); opacity: 1;    }\n  100% { transform:\
+                \ scale(1);    opacity: 0.85; }\n}\n"
+          - type: icon
+            icon: mdi:chevron-left
+            style:
+              left: 42%
+              top: 10%
+              color: rgba(255,255,255,0.9)
+              --mdc-icon-size: 50px
+            tap_action:
+              action: call-service
+              service: script.tesla_temp_plus_0_5
+          - type: state-label
+            entity: climate.tesla_model_3_climate
+            attribute: temperature
+            style:
+              left: 50%
+              top: 10%
+              color: rgba(255,255,255,0.95)
+              font-size: 20px
+              font-weight: 700
+              text-shadow: 0px 0px 6px rgba(0,0,0,0.85)
+          - type: icon
+            icon: mdi:temperature-celsius
+            style:
+              left: 56%
+              top: 10%
+              color: rgba(255,255,255,0.7)
+              --mdc-icon-size: 14px
+          - type: icon
+            icon: mdi:chevron-right
+            style:
+              left: 60%
+              top: 10%
+              color: rgba(255,255,255,0.9)
+              --mdc-icon-size: 50px
+            tap_action:
+              action: call-service
+              service: script.tesla_temp_moins_0_5
+          - type: image
+            entity: select.tesla_model_3_seat_heater_front_left
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 37%
+              top: 77%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_conducteur
+          - type: image
+            entity: select.tesla_model_3_seat_heater_front_right
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 38%
+              top: 42%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_passager
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_left
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 67%
+              top: 75%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_gauche
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_center
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 66%
+              top: 58%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_centre
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_right
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 65%
+              top: 42%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_droit
+      - type: conditional
+        conditions:
+        - entity: climate.tesla_model_3_climate
+          state: unknown
+        card:
+          type: picture-elements
+          image: /local/tesla.clim.png
+          aspect_ratio: '16:9'
+          elements:
+          - type: state-label
+            entity: climate.tesla_model_3_climate
+            attribute: current_temperature
+            style:
+              left: 92%
+              top: 10%
+              color: white
+              font-size: 23px
+              font-weight: 700
+              text-shadow: 0px 0px 6px rgba(0,0,0,0.85)
+          - type: icon
+            icon: mdi:temperature-celsius
+            style:
+              left: 98%
+              top: 10%
+              color: rgba(255,255,255,0.8)
+              --mdc-icon-size: 18px
+            tap_action:
+              action: more-info
+              entity: climate.tesla_model_3_climate
+          - type: icon
+            entity: climate.tesla_model_3_climate
+            icon: mdi:power
+            style:
+              left: 5%
+              top: 10%
+              --mdc-icon-size: 53px
+            tap_action:
+              action: call-service
+              service: climate.toggle
+              target:
+                entity_id: climate.tesla_model_3_climate
+            hold_action:
+              action: more-info
+              entity: climate.tesla_model_3_climate
+            card_mod:
+              style: "ha-state-icon, ha-icon {\n  {% set s = states('climate.tesla_model_3_climate')\
+                \ %}\n  color: {% if s in ['off','unavailable','unknown'] %}\n   \
+                \ rgba(255,255,255,0.35)\n  {% else %}\n    rgb(255, 70, 70)\n  {%\
+                \ endif %} !important;\n  filter: {% if s in ['off','unavailable','unknown']\
+                \ %}\n    none\n  {% else %}\n    drop-shadow(0 0 6px rgba(255,0,0,0.85))\n\
+                \    drop-shadow(0 0 14px rgba(255,0,0,0.35))\n  {% endif %};\n  animation:\
+                \ {% if s in ['off','unavailable','unknown'] %}\n    none\n  {% else\
+                \ %}\n    teslaPulse 1.6s ease-in-out infinite\n  {% endif %};\n \
+                \ transform-origin: center;\n}\n@keyframes teslaPulse {\n  0%   {\
+                \ transform: scale(1);    opacity: 0.85; }\n  50%  { transform: scale(1.10);\
+                \ opacity: 1;    }\n  100% { transform: scale(1);    opacity: 0.85;\
+                \ }\n}\n"
+          - type: icon
+            entity: switch.tesla_model_3_defrost
+            icon: mdi:snowflake
+            style:
+              left: 16%
+              top: 10%
+              --mdc-icon-size: 43px
+            tap_action:
+              action: call-service
+              service: switch.toggle
+              target:
+                entity_id: switch.tesla_model_3_defrost
+            hold_action:
+              action: more-info
+              entity: switch.tesla_model_3_defrost
+            card_mod:
+              style: "ha-state-icon, ha-icon {\n  color: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    rgb(255, 70, 70)\n  {% else %}\n    rgba(255,255,255,0.35)\n\
+                \  {% endif %} !important;\n  filter: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    drop-shadow(0 0 6px rgba(255,0,0,0.85))\n    drop-shadow(0\
+                \ 0 14px rgba(255,0,0,0.35))\n  {% else %}\n    none\n  {% endif %};\n\
+                \  animation: {% if is_state('switch.tesla_model_3_defrost','on')\
+                \ %}\n    teslaPulseDef 1.6s ease-in-out infinite\n  {% else %}\n\
+                \    none\n  {% endif %};\n  transform-origin: center;\n}\n@keyframes\
+                \ teslaPulseDef {\n  0%   { transform: scale(1);    opacity: 0.85;\
+                \ }\n  50%  { transform: scale(1.10); opacity: 1;    }\n  100% { transform:\
+                \ scale(1);    opacity: 0.85; }\n}\n"
+          - type: icon
+            icon: mdi:chevron-left
+            style:
+              left: 42%
+              top: 10%
+              color: rgba(255,255,255,0.9)
+              --mdc-icon-size: 50px
+            tap_action:
+              action: call-service
+              service: script.tesla_temp_plus_0_5
+          - type: state-label
+            entity: climate.tesla_model_3_climate
+            attribute: temperature
+            style:
+              left: 50%
+              top: 10%
+              color: rgba(255,255,255,0.95)
+              font-size: 20px
+              font-weight: 700
+              text-shadow: 0px 0px 6px rgba(0,0,0,0.85)
+          - type: icon
+            icon: mdi:temperature-celsius
+            style:
+              left: 56%
+              top: 10%
+              color: rgba(255,255,255,0.7)
+              --mdc-icon-size: 14px
+          - type: icon
+            icon: mdi:chevron-right
+            style:
+              left: 60%
+              top: 10%
+              color: rgba(255,255,255,0.9)
+              --mdc-icon-size: 50px
+            tap_action:
+              action: call-service
+              service: script.tesla_temp_moins_0_5
+          - type: image
+            entity: select.tesla_model_3_seat_heater_front_left
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 37%
+              top: 77%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_conducteur
+          - type: image
+            entity: select.tesla_model_3_seat_heater_front_right
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 38%
+              top: 42%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_passager
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_left
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 67%
+              top: 75%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_gauche
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_center
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 66%
+              top: 58%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_centre
+          - type: image
+            entity: select.tesla_model_3_seat_heater_rear_right
+            image: /local/icons/seat_heat_off.svg
+            state_image:
+              'off': /local/icons/seat_heat_off.svg
+              low: /local/icons/seat_heat_low.svg
+              medium: /local/icons/seat_heat_medium.svg
+              high: /local/icons/seat_heat_high.svg
+            style:
+              left: 65%
+              top: 42%
+              width: 6%
+            tap_action:
+              action: call-service
+              service: script.tesla_cycle_siege_arriere_droit
+- show_icon: true
+  show_primary: true
+  show_secondary: true
+  layout: horizontal
+  tap_action:
+    action: more-info
+  icon_type: icon
+  primary_info: name
+  name: Pression
+  entity: sensor.pression
+  button_type: default
+  card_type: tire
+  sub_card:
+    tire_card:
+      background:
+        media_content_id: media-source://image_upload/504d2b73a9cd503bc02999ab8a71670a
+        media_content_type: image/png
+        metadata:
+          title: pngegg (1).png
+          thumbnail: /api/image/serve/504d2b73a9cd503bc02999ab8a71670a/256x256
+          media_class: image
+          children_media_class: null
+          navigateIds:
+          - {}
+          - media_content_type: app
+            media_content_id: media-source://image_upload
+      front_left:
+        entity: sensor.tesla_model_3_pression_pneu_avant_gauche
+        name: Avant gauche
+      front_right:
+        entity: sensor.tesla_model_3_pression_pneu_avant_droit
+        name: avant droit
+      rear_left:
+        entity: sensor.tesla_model_3_pression_pneu_arriere_gauche
+        name: arriere gauche
+      rear_right:
+        entity: sensor.tesla_model_3_pression_pneu_arriere_droit
+        name: arriere droit
+- show_icon: true
+  show_primary: true
+  show_secondary: true
+  layout: horizontal
+  tap_action:
+    action: more-info
+  card_type: custom
+  icon_type: icon
+  primary_info: name
+  name: Portes & Coffres
+  entity: lock.tesla_model_3_lock
+  button_type: default
+  sub_card:
+    custom_card:
+    - type: picture-elements
+      image: /local/Teslatop3.png
+      aspect_ratio: 735:735
+      elements:
+      - type: custom:button-card
+        entity: lock.tesla_model_3_lock
+        name: PORTES
+        show_name: true
+        show_state: true
+        show_icon: true
+        icon: mdi:lock
+        state:
+        - value: unlocked
+          state_display: Ouvertes
+          icon: mdi:lock-open
+          styles:
+            icon:
+            - color: red
+            name:
+            - color: red
+            state:
+            - color: red
+        - value: locked
+          state_display: Fermées
+          icon: mdi:lock
+          styles:
+            icon:
+            - color: rgba(255,255,255,0.9)
+            name:
+            - color: rgba(255,255,255,0.85)
+            state:
+            - color: rgba(255,255,255,0.75)
+        styles:
+          card:
+          - background: transparent
+          - box-shadow: none
+          - padding: 6px
+          grid:
+          - grid-template-areas: '"i" "n" "s"'
+          - grid-template-rows: 30px min-content min-content
+          name:
+          - font-size: 11px
+          - font-weight: 700
+          - letter-spacing: 0.8px
+          state:
+          - font-size: 11px
+          - font-weight: 600
+        tap_action:
+          action: call-service
+          service: lock.toggle
+          target:
+            entity_id: lock.tesla_model_3_lock
+        style:
+          left: 12%
+          top: 9%
+          width: 22%
+      - type: custom:button-card
+        entity: binary_sensor.tesla_model_3_porte_avant_conducteur
+        show_icon: false
+        show_name: false
+        show_state: true
+        state_display: "[[[\n  const open = entity.state === \"on\";\n  return `\n\
+          \    <div style=\"text-align:center; line-height:1.15;\">\n      <div style=\"\
+          font-size:12px;font-weight:600;letter-spacing:0.6px;color:${open?'red':'rgba(255,255,255,0.8)'};\"\
+          >Porte</div>\n      <div style=\"font-size:12px;font-weight:700;letter-spacing:1px;color:${open?'red':'rgba(255,255,255,0.95)'};\"\
+          >AVANT GAUCHE</div>\n      <div style=\"font-size:12px;font-weight:600;letter-spacing:0.6px;color:${open?'red':'rgba(255,255,255,0.8)'};\"\
+          >${open?'Ouverte':'Fermée'}</div>\n    </div>`;\n]]]\n"
+        styles:
+          card:
+          - background: transparent
+          - box-shadow: none
+        style:
+          left: 19%
+          top: 47%
+          width: 30%
+      - type: custom:button-card
+        entity: binary_sensor.tesla_model_3_porte_avant_passager
+        show_icon: false
+        show_name: false
+        show_state: true
+        state_display: "[[[\n  const open = entity.state === \"on\";\n  return `\n\
+          \    <div style=\"text-align:center; line-height:1.15;\">\n      <div style=\"\
+          font-size:12px;font-weight:600;letter-spacing:0.6px;color:${open?'red':'rgba(255,255,255,0.8)'};\"\
+          >Porte</div>\n      <div style=\"font-size:12px;font-weight:700;letter-spacing:1px;color:${open?'red':'rgba(255,255,255,0.95)'};\"\
+          >AVANT DROIT</div>\n      <div style=\"font-size:12px;font-weight:600;letter-spacing:0.6px;color:${open?'red':'rgba(255,255,255,0.8)'};\"\
+          >${open?'Ouverte':'Fermée'}</div>\n    </div>`;\n]]]\n"
+        styles:
+          card:
+          - background: transparent
+          - box-shadow: none
+        style:
+          left: 81%
+          top: 47%
+          width: 30%
+      - type: custom:button-card
+        entity: binary_sensor.tesla_model_3_porte_arriere_conducteur
+        show_icon: false
+        show_name: false
+        show_state: true
+        state_display: "[[[\n  const open = entity.state === \"on\";\n  return `\n\
+          \    <div style=\"text-align:center; line-height:1.15;\">\n      <div style=\"\
+          font-size:12px;font-weight:600;letter-spacing:0.6px;color:${open?'red':'rgba(255,255,255,0.8)'};\"\
+          >Porte</div>\n      <div style=\"font-size:12px;font-weight:700;letter-spacing:1px;color:${open?'red':'rgba(255,255,255,0.95)'};\"\
+          >ARRIÈRE GAUCHE</div>\n      <div style=\"font-size:12px;font-weight:600;letter-spacing:0.6px;color:${open?'red':'rgba(255,255,255,0.8)'};\"\
+          >${open?'Ouverte':'Fermée'}</div>\n    </div>`;\n]]]\n"
+        styles:
+          card:
+          - background: transparent
+          - box-shadow: none
+        style:
+          left: 19%
+          top: 66%
+          width: 34%
+      - type: custom:button-card
+        entity: binary_sensor.tesla_model_3_porte_arriere_passager
+        show_icon: false
+        show_name: false
+        show_state: true
+        state_display: "[[[\n  const open = entity.state === \"on\";\n  return `\n\
+          \    <div style=\"text-align:center; line-height:1.15;\">\n      <div style=\"\
+          font-size:12px;font-weight:600;letter-spacing:0.6px;color:${open?'red':'rgba(255,255,255,0.8)'};\"\
+          >Porte</div>\n      <div style=\"font-size:12px;font-weight:700;letter-spacing:1px;color:${open?'red':'rgba(255,255,255,0.95)'};\"\
+          >ARRIÈRE DROIT</div>\n      <div style=\"font-size:12px;font-weight:600;letter-spacing:0.6px;color:${open?'red':'rgba(255,255,255,0.8)'};\"\
+          >${open?'Ouverte':'Fermée'}</div>\n    </div>`;\n]]]\n"
+        styles:
+          card:
+          - background: transparent
+          - box-shadow: none
+        style:
+          left: 81%
+          top: 66%
+          width: 34%
+      - type: custom:button-card
+        entity: cover.tesla_model_3_trappe_de_charge
+        show_icon: true
+        show_name: false
+        show_state: true
+        icon: mdi:ev-plug-tesla
+        state_display: "[[[\n  return `CHARGE<br>${entity.state === \"open\" ? \"\
+          OUVERTE\" : \"FERMÉE\"}`;\n]]]\n"
+        styles:
+          card:
+          - background: transparent
+          - box-shadow: none
+          icon:
+          - width: 24px
+          - margin-bottom: 4px
+          - color: "[[[\n  return entity.state === \"open\"\n    ? \"red\"\n    :\
+              \ \"rgba(255,255,255,0.9)\";\n]]]\n"
+          state:
+          - font-size: 12px
+          - font-weight: 700
+          - text-align: center
+          - color: "[[[\n  return entity.state === \"open\"\n    ? \"red\"\n    :\
+              \ \"rgba(255,255,255,0.85)\";\n]]]\n"
+        style:
+          left: 20%
+          top: 86%
+          width: 22%
+- show_icon: true
+  show_primary: true
+  show_secondary: true
+  layout: horizontal
+  button_type: action
+  card_type: default
+  icon_type: icon
+  primary_info: name
+  name: WAKE
+  entity: button.tesla_model_3_wake
+  tap_action:
+    action: toggle
+indicator_rows:
+- row_items:
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    show_entity_picture: false
+    include_state_template: false
+    tap_action:
+      action: more-info
+    entity: binary_sensor.tesla_model_3_status
+    name: Statut
+    ignore_global: false
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    show_entity_picture: false
+    include_state_template: false
+    tap_action:
+      action: more-info
+    entity: sensor.tesla_model_3_charging
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    show_entity_picture: false
+    include_state_template: false
+    tap_action:
+      action: more-info
+    entity: switch.tesla_model_3_sentry_mode_2
+card_mod:
+  style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+    \ blur(10px) !important;\n  -webkit-backdrop-filter: blur(10px) !important;\n\
+    \  border-radius: 20px !important;\n  border: 1px solid rgba(255,255,255,0.1)\
+    \ !important;\n  box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;\n}\n.vsc-range-info-row,\
+    \ .vsc-indicators-row, .vsc-buttons-grid {\n  background: transparent !important;\n\
+    }\n/* Ensure internal buttons in swipes are also glass-friendly */\n.vsc-button-card\
+    \ {\n  background: rgba(255,255,255,0.05) !important;\n  border-radius: 12px !important;\n\
+    }\n"

@@ -1,0 +1,82 @@
+type: custom:button-card
+name: Consommation & Énergie (Ce jour)
+styles:
+  card:
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(10px)
+  - -webkit-backdrop-filter: blur(10px)
+  - border-radius: 24px
+  - border: 1px solid rgba(255,255,255,0.1)
+  - box-shadow: 0 8px 32px rgba(0,0,0,0.3)
+  - padding: 20px
+  grid:
+  - grid-template-areas: '"n" "table"'
+  - grid-template-rows: auto auto
+  name:
+  - font-size: 16px
+  - font-weight: 700
+  - color: rgba(255,255,255,0.9)
+  - margin-bottom: 20px
+  - text-align: left
+  - justify-self: start
+custom_fields:
+  table:
+    card:
+      type: custom:button-card
+      styles:
+        card:
+        - background: transparent
+        - border: none
+        - box-shadow: none
+        - padding: 0
+        grid:
+        - grid-template-areas: '"header" "solaire" "reseau" "batterie"'
+        - grid-template-columns: 1fr
+      custom_fields:
+        header: "[[[\n  return `\n    <div style=\"display: grid; grid-template-columns:\
+          \ 1fr 100px 100px; padding: 0 10px 10px 10px; border-bottom: 1px solid rgba(255,255,255,0.1);\
+          \ font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform:\
+          \ uppercase; letter-spacing: 1px;\">\n      <div>Source</div>\n      <div\
+          \ style=\"text-align: right;\">Produit</div>\n      <div style=\"text-align:\
+          \ right;\">Consommé</div>\n    </div>\n  `;\n]]]\n"
+        solaire: "[[[\n  const p = states['sensor.production_solaire_today']?.state\
+          \ || '0'; \n  const isProd = states['sensor.production_solaire_today'] !==\
+          \ undefined;\n  if (!isProd) return `<div style=\"display:none\"></div>`;\n\
+          \  return `\n    <div style=\"display: grid; grid-template-columns: 1fr\
+          \ 100px 100px; padding: 15px 10px; border-bottom: 1px solid rgba(255,255,255,0.05);\
+          \ align-items: center;\">\n      <div style=\"display: flex; align-items:\
+          \ center; gap: 10px;\">\n        <div style=\"color: #FFD700; display: flex;\"\
+          ><ha-icon icon=\"mdi:solar-power\" style=\"--mdc-icon-size: 20px;\"></ha-icon></div>\n\
+          \        <div style=\"font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.9);\"\
+          >Solaire</div>\n      </div>\n      <div style=\"text-align: right; font-size:\
+          \ 14px; font-weight: 700; color: #FFD700;\">${p} kWh</div>\n      <div style=\"\
+          text-align: right; font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.4);\"\
+          >—</div>\n    </div>\n  `;\n]]]\n"
+        reseau: "[[[\n  const c = states['sensor.ecojoko_consommation_reseau']?.state\
+          \ || '0';\n  const r = states['sensor.grid_return_today']?.state || '0';\n\
+          \  const unit = states['sensor.ecojoko_consommation_reseau']?.attributes?.unit_of_measurement\
+          \ || 'kWh';\n  return `\n    <div style=\"display: grid; grid-template-columns:\
+          \ 1fr 100px 100px; padding: 15px 10px; border-bottom: 1px solid rgba(255,255,255,0.05);\
+          \ align-items: center;\">\n      <div style=\"display: flex; align-items:\
+          \ center; gap: 10px;\">\n        <div style=\"color: #00B4FF; display: flex;\"\
+          ><ha-icon icon=\"mdi:transmission-tower\" style=\"--mdc-icon-size: 20px;\"\
+          ></ha-icon></div>\n        <div style=\"font-size: 14px; font-weight: 600;\
+          \ color: rgba(255,255,255,0.9);\">Réseau</div>\n      </div>\n      <div\
+          \ style=\"text-align: right; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.9);\"\
+          >${r === '0' ? '—' : r + ' kWh'}</div>\n      <div style=\"text-align: right;\
+          \ font-size: 14px; font-weight: 700; color: #00B4FF;\">${c} ${unit}</div>\n\
+          \    </div>\n  `;\n]]]\n"
+        batterie: "[[[\n  const isBat = states['sensor.battery_charge_today'] !==\
+          \ undefined;\n  if (!isBat) return `<div style=\"display:none\"></div>`;\n\
+          \  const ch = states['sensor.battery_charge_today']?.state || '0';\n  const\
+          \ dch = states['sensor.battery_discharge_today']?.state || '0';\n  return\
+          \ `\n    <div style=\"display: grid; grid-template-columns: 1fr 100px 100px;\
+          \ padding: 15px 10px; align-items: center;\">\n      <div style=\"display:\
+          \ flex; align-items: center; gap: 10px;\">\n        <div style=\"color:\
+          \ #00FF00; display: flex;\"><ha-icon icon=\"mdi:battery-high\" style=\"\
+          --mdc-icon-size: 20px;\"></ha-icon></div>\n        <div style=\"font-size:\
+          \ 14px; font-weight: 600; color: rgba(255,255,255,0.9);\">Batterie</div>\n\
+          \      </div>\n      <div style=\"text-align: right; font-size: 14px; font-weight:\
+          \ 700; color: rgba(255,255,255,0.9);\">${ch} kWh</div>\n      <div style=\"\
+          text-align: right; font-size: 14px; font-weight: 700; color: #00FF00;\"\
+          >${dch} kWh</div>\n    </div>\n  `;\n]]]\n"

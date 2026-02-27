@@ -1,0 +1,353 @@
+type: custom:mod-card
+card_mod:
+  style: "ha-card{\n  border-radius: 16px;\n  background: linear-gradient(160deg,#141b26\
+    \ 0%,#111826 45%,#0d121c 100%);\n  box-shadow: 0 10px 22px rgba(0,0,0,0.65);\n\
+    \  border: 1px solid rgba(255,255,255,0.04);\n  overflow: hidden;\n}\n"
+card:
+  type: vertical-stack
+  cards:
+  - type: custom:button-card
+    entity: media_player.salon
+    name: Salon
+    icon: mdi:apple
+    show_state: false
+    tap_action:
+      action: more-info
+      entity: media_player.salon
+    styles:
+      card:
+      - background: transparent
+      - border: none
+      - box-shadow: none
+      - padding: 10px 12px 0
+      grid:
+      - grid-template-areas: '"i n app"'
+      - grid-template-columns: 18px 1fr auto
+      - column-gap: 8px
+      - align-items: center
+      icon:
+      - width: 18px
+      - color: rgba(255,255,255,0.92)
+      name:
+      - justify-self: start
+      - font-weight: 900
+      - font-size: 13px
+      - color: rgba(255,255,255,0.95)
+      custom_fields:
+        app:
+        - justify-self: end
+        - align-self: center
+    custom_fields:
+      app: "[[[\n  const mp = states['media_player.salon'];\n  const a = (mp?.attributes?.app_name\
+        \ || mp?.attributes?.source || '').toString().toLowerCase();\n  const label\
+        \ = (mp?.attributes?.app_name || mp?.attributes?.source || 'App').toString();\n\
+        \n  let ic = 'mdi:apps';\n  if (a.includes('netflix')) ic = 'mdi:netflix';\n\
+        \  else if (a.includes('youtube')) ic = 'mdi:youtube';\n  else if (a.includes('music'))\
+        \ ic = 'mdi:music';\n  else if (a.includes('apple tv')) ic = 'mdi:apple-tv';\n\
+        \  else if (a.includes('iptv')) ic = 'mdi:television-play';\n\n  return `\n\
+        \    <div style=\"\n      display:flex; align-items:center; gap:8px;\n   \
+        \   padding:6px 10px;\n      border-radius:999px;\n      background: rgba(255,255,255,0.07);\n\
+        \      border: 1px solid rgba(255,255,255,0.10);\n    \">\n      <ha-icon\
+        \ icon=\"${ic}\" style=\"width:18px;height:18px;color:rgba(255,255,255,0.92)\"\
+        ></ha-icon>\n      <span style=\"\n        font-weight:900;\n        font-size:12px;\n\
+        \        color: rgba(255,255,255,0.90);\n        max-width:140px;\n      \
+        \  overflow:hidden;\n        text-overflow:ellipsis;\n        white-space:nowrap;\n\
+        \      \">${label}</span>\n    </div>\n  `;\n]]]\n"
+  - type: media-control
+    entity: media_player.salon
+    card_mod:
+      style: "ha-card{\n  background: transparent;\n  border: none;\n  box-shadow:\
+        \ none;\n  padding: 6px 10px 2px;\n}\n"
+  - type: grid
+    columns: 3
+    square: false
+    cards:
+    - type: custom:button-card
+      name: POWER
+      icon: mdi:power
+      show_state: false
+      tap_action:
+        action: call-service
+        service: remote.send_command
+        target:
+          entity_id: remote.salon
+        data:
+          command: suspend
+      hold_action:
+        action: call-service
+        service: remote.send_command
+        target:
+          entity_id: remote.salon
+        data:
+          command: wakeup
+      styles:
+        card:
+        - border-radius: 12px
+        - padding: 9px
+        - background: rgba(255,255,255,0.06)
+        - border: 1px solid rgba(255,255,255,0.10)
+        - height: 52px
+        grid:
+        - grid-template-areas: '"i" "n"'
+        - grid-template-rows: 20px min-content
+        - row-gap: 4px
+        - justify-items: center
+        - align-items: center
+        icon:
+        - width: 18px
+        - color: rgba(255,255,255,0.92)
+        name:
+        - font-weight: 900
+        - font-size: 10px
+        - color: rgba(255,255,255,0.95)
+    - type: custom:button-card
+      name: HOME
+      icon: mdi:home-variant
+      show_state: false
+      tap_action:
+        action: call-service
+        service: remote.send_command
+        target:
+          entity_id: remote.salon
+        data:
+          command: home
+      styles:
+        card:
+        - border-radius: 12px
+        - padding: 9px
+        - background: rgba(255,255,255,0.06)
+        - border: 1px solid rgba(255,255,255,0.10)
+        - height: 52px
+        grid:
+        - grid-template-areas: '"i" "n"'
+        - grid-template-rows: 20px min-content
+        - row-gap: 4px
+        - justify-items: center
+        - align-items: center
+        icon:
+        - width: 18px
+        - color: rgba(255,255,255,0.92)
+        name:
+        - font-weight: 900
+        - font-size: 10px
+        - color: rgba(255,255,255,0.95)
+    - type: custom:button-card
+      name: RETOUR
+      icon: mdi:undo-variant
+      show_state: false
+      tap_action:
+        action: call-service
+        service: remote.send_command
+        target:
+          entity_id: remote.salon
+        data:
+          command: menu
+      styles:
+        card:
+        - border-radius: 12px
+        - padding: 9px
+        - background: rgba(255,255,255,0.06)
+        - border: 1px solid rgba(255,255,255,0.10)
+        - height: 52px
+        grid:
+        - grid-template-areas: '"i" "n"'
+        - grid-template-rows: 20px min-content
+        - row-gap: 4px
+        - justify-items: center
+        - align-items: center
+        icon:
+        - width: 18px
+        - color: rgba(255,255,255,0.92)
+        name:
+        - font-weight: 900
+        - font-size: 10px
+        - color: rgba(255,255,255,0.95)
+    card_mod:
+      style: "ha-card{\n  background: transparent;\n  border: none;\n  box-shadow:\
+        \ none;\n  padding: 0 10px 8px;\n}\n"
+  - type: custom:layout-card
+    layout_type: custom:grid-layout
+    layout:
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+      grid-column-gap: 10px
+      align-items: stretch
+    cards:
+    - type: grid
+      columns: 3
+      square: false
+      view_layout:
+        grid-column: 1 / span 4
+      cards:
+      - type: custom:button-card
+        color_type: blank-card
+      - type: custom:button-card
+        icon: mdi:chevron-up
+        show_name: false
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          target:
+            entity_id: remote.salon
+          data:
+            command: up
+        styles:
+          card:
+          - border-radius: 12px
+          - padding: 12px
+          - background: rgba(255,255,255,0.06)
+          - border: 1px solid rgba(255,255,255,0.10)
+          - height: 112px
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          icon:
+          - width: 26px
+          - color: rgba(255,255,255,0.95)
+      - type: custom:button-card
+        color_type: blank-card
+      - type: custom:button-card
+        icon: mdi:chevron-left
+        show_name: false
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          target:
+            entity_id: remote.salon
+          data:
+            command: left
+        styles:
+          card:
+          - border-radius: 12px
+          - padding: 12px
+          - background: rgba(255,255,255,0.06)
+          - border: 1px solid rgba(255,255,255,0.10)
+          - height: 112px
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          icon:
+          - width: 26px
+          - color: rgba(255,255,255,0.95)
+      - type: custom:button-card
+        name: ''
+        icon: mdi:circle-slice-8
+        show_state: false
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          target:
+            entity_id: remote.salon
+          data:
+            command: select
+        styles:
+          card:
+          - border-radius: 12px
+          - background: rgba(255,255,255,0.10)
+          - border: 1px solid rgba(255,255,255,0.16)
+          - height: 112px
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          icon:
+          - width: 28px
+          - color: rgba(255,255,255,0.95)
+      - type: custom:button-card
+        icon: mdi:chevron-right
+        show_name: false
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          target:
+            entity_id: remote.salon
+          data:
+            command: right
+        styles:
+          card:
+          - border-radius: 12px
+          - padding: 12px
+          - background: rgba(255,255,255,0.06)
+          - border: 1px solid rgba(255,255,255,0.10)
+          - height: 112px
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          icon:
+          - width: 26px
+          - color: rgba(255,255,255,0.95)
+      - type: custom:button-card
+        color_type: blank-card
+      - type: custom:button-card
+        icon: mdi:chevron-down
+        show_name: false
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          target:
+            entity_id: remote.salon
+          data:
+            command: down
+        styles:
+          card:
+          - border-radius: 12px
+          - padding: 12px
+          - background: rgba(255,255,255,0.06)
+          - border: 1px solid rgba(255,255,255,0.10)
+          - height: 112px
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          icon:
+          - width: 26px
+          - color: rgba(255,255,255,0.95)
+      - type: custom:button-card
+        color_type: blank-card
+    - type: vertical-stack
+      view_layout:
+        grid-column: 5 / span 1
+      cards:
+      - type: custom:button-card
+        name: ''
+        icon: mdi:volume-plus
+        show_state: false
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          target:
+            entity_id: remote.salon
+          data:
+            command: volume_up
+        styles:
+          card:
+          - border-radius: 12px
+          - background: rgba(255,255,255,0.06)
+          - border: 1px solid rgba(255,255,255,0.10)
+          - height: 172px
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          icon:
+          - width: 26px
+          - color: rgba(255,255,255,0.92)
+      - type: custom:button-card
+        name: ''
+        icon: mdi:volume-minus
+        show_state: false
+        tap_action:
+          action: call-service
+          service: remote.send_command
+          target:
+            entity_id: remote.salon
+          data:
+            command: volume_down
+        styles:
+          card:
+          - border-radius: 12px
+          - background: rgba(255,255,255,0.06)
+          - border: 1px solid rgba(255,255,255,0.10)
+          - height: 172px
+          - display: flex
+          - align-items: center
+          - justify-content: center
+          icon:
+          - width: 26px
+          - color: rgba(255,255,255,0.92)

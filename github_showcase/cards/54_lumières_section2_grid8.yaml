@@ -1,0 +1,89 @@
+type: grid
+columns: 5
+square: true
+cards:
+- type: custom:button-card
+  entity: switch.smart_switch_2210204886342554060148e1e9ac3905_outlet_1
+  icon: mdi:hair-dryer-outline
+  show_name: false
+  styles:
+    card:
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - border-radius: 20px
+    - border: 1px solid rgba(255,255,255,0.1)
+    - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+    icon:
+    - color: "[[[\n  if (entity.state === 'on') return '#00AAFF';\n  return 'rgba(255,255,255,0.5)';\n\
+        ]]]\n"
+  tap_action:
+    action: toggle
+- type: custom:button-card
+  entity: switch.smart_switch_2210204886342554060148e1e9ac3905_outlet_2
+  icon: mdi:power-socket-eu
+  show_name: false
+  styles:
+    card:
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - border-radius: 20px
+    - border: 1px solid rgba(255,255,255,0.1)
+    - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+    icon:
+    - color: "[[[\n  if (entity.state === 'on') return '#00AAFF';\n  return 'rgba(255,255,255,0.5)';\n\
+        ]]]\n"
+  tap_action:
+    action: toggle
+- type: custom:button-card
+  entity: switch.smart_switch_2210204886342554060148e1e9ac3905_outlet_3
+  icon: mdi:power-socket-eu
+  show_name: false
+  styles:
+    card:
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - border-radius: 20px
+    - border: 1px solid rgba(255,255,255,0.1)
+    - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+    icon:
+    - color: "[[[\n  if (entity.state === 'on') return '#00AAFF';\n  return 'rgba(255,255,255,0.5)';\n\
+        ]]]\n"
+  tap_action:
+    action: toggle
+- type: custom:button-card
+  entity: switch.smart_switch_2210204886342554060148e1e9ac3905_outlet_4
+  icon: mdi:content-cut
+  show_name: false
+  styles:
+    card:
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - border-radius: 20px
+    - border: 1px solid rgba(255,255,255,0.1)
+    - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+    icon:
+    - color: "[[[\n  if (entity.state === 'on') return '#00AAFF';\n  return 'rgba(255,255,255,0.5)';\n\
+        ]]]\n"
+  tap_action:
+    action: toggle
+- type: custom:button-card
+  entity: switch.smart_switch_2210204886342554060148e1e9ac3905_outlet_5
+  icon: mdi:usb
+  show_name: false
+  styles:
+    card:
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - border-radius: 20px
+    - border: 1px solid rgba(255,255,255,0.1)
+    - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+    icon:
+    - color: "[[[\n  if (entity.state === 'on') return '#00AAFF';\n  return 'rgba(255,255,255,0.5)';\n\
+        ]]]\n"
+  tap_action:
+    action: toggle

@@ -1,0 +1,94 @@
+type: grid
+columns: 3
+square: false
+cards:
+- type: custom:button-card
+  name: Accueil
+  icon: mdi:home
+  tap_action:
+    action: navigate
+    navigation_path: /lovelace/dashboard
+  styles:
+    card:
+    - padding: 12px
+    - height: 85px
+    - border-radius: 20px
+    - border: 1px solid rgba(255,255,255,0.1)
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+    - transition: transform 0.1s ease
+    icon:
+    - width: 28px
+    - height: 28px
+    - color: '#00FF00'
+    - filter: drop-shadow(0 0 8px rgba(0, 255, 0, 0.4))
+    - margin-bottom: 8px
+    name:
+    - font-size: 13px
+    - font-weight: 600
+    - color: rgba(255,255,255,0.9)
+    grid:
+    - grid-template-areas: '"i" "n"'
+    - grid-template-rows: 1fr min-content
+- type: custom:button-card
+  name: Lumières
+  icon: mdi:home-lightbulb-outline
+  tap_action:
+    action: navigate
+    navigation_path: /lovelace/lumieres
+  styles:
+    card:
+    - padding: 12px
+    - height: 85px
+    - border-radius: 20px
+    - border: 1px solid rgba(255,255,255,0.1)
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+    - transition: transform 0.1s ease
+    icon:
+    - width: 28px
+    - height: 28px
+    - color: '#ffd54a'
+    - filter: drop-shadow(0 0 8px rgba(255, 213, 74, 0.4))
+    - margin-bottom: 8px
+    name:
+    - font-size: 13px
+    - font-weight: 600
+    - color: rgba(255,255,255,0.9)
+    grid:
+    - grid-template-areas: '"i" "n"'
+    - grid-template-rows: 1fr min-content
+- type: custom:button-card
+  name: Energies
+  icon: mdi:home-lightning-bolt-outline
+  tap_action:
+    action: navigate
+    navigation_path: /lovelace/energies
+  styles:
+    card:
+    - padding: 12px
+    - height: 85px
+    - border-radius: 20px
+    - border: 1px solid rgba(255,255,255,0.1)
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+    - transition: transform 0.1s ease
+    icon:
+    - width: 28px
+    - height: 28px
+    - color: '#0080ff'
+    - filter: drop-shadow(0 0 8px rgba(0, 128, 255, 0.4))
+    - margin-bottom: 8px
+    name:
+    - font-size: 13px
+    - font-weight: 600
+    - color: rgba(255,255,255,0.9)
+    grid:
+    - grid-template-areas: '"i" "n"'
+    - grid-template-rows: 1fr min-content

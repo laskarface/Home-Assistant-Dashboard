@@ -1,0 +1,42 @@
+type: custom:bubble-card
+card_type: climate
+name: Chambre Lison
+styles: "ha-card {\n  --bubble-climate-main-background-color: transparent !important;\n\
+  \  --bubble-climate-border-radius: 20px;\n}\n.bubble-climate-container {\n  background:\
+  \ transparent !important;\n}\n"
+sub_button:
+  main:
+  - show_icon: true
+    show_attribute: false
+    attribute: unit_of_measurement
+    show_state: true
+    state_background: false
+    entity: binary_sensor.fenetre_lison_contact
+  - show_name: false
+    show_state: false
+    tap_action:
+      action: toggle
+    select_attribute: hvac_modes
+    show_arrow: false
+    entity: climate.smart_thermostat_valve_0300d436
+    show_attribute: true
+    attribute: current_temperature
+    double_tap_action:
+      action: more-info
+    sub_button_type: select
+  bottom: []
+card_layout: large-2-rows
+modules: []
+show_attribute: false
+attribute: hvac_modes
+hide_temperature: false
+state_color: false
+entity: climate.smart_thermostat_valve_0300d436
+scrolling_effect: false
+show_icon: true
+rows: 1.125
+card_mod:
+  style: "ha-card {\n  background: rgba(20, 27, 38, 0.6) !important;\n  backdrop-filter:\
+    \ blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border-radius: 20px !important;\n\
+    \  border: 1px solid rgba(255,255,255,0.1) !important;\n  box-shadow: 0 4px 15px\
+    \ rgba(0,0,0,0.2) !important;\n  margin-top: 8px;\n}\n"

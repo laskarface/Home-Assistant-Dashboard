@@ -1,0 +1,57 @@
+type: custom:button-card
+entity: media_player.samsung_smart_tv
+name: En Direct
+aspect_ratio: 16/9
+show_name: true
+show_icon: false
+styles:
+  card:
+  - border-radius: 24px
+  - border: 1px solid rgba(255,255,255,0.1)
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(20px)
+  - box-shadow: 0 8px 32px rgba(0,0,0,0.3)
+  - overflow: hidden
+  - padding: 0
+  grid:
+  - grid-template-areas: '"n" "controls"'
+  - grid-template-rows: 1fr auto
+  name:
+  - justify-self: start
+  - align-self: start
+  - padding: 16px
+  - font-size: 14px
+  - font-weight: 700
+  - color: white
+  - text-shadow: 0 2px 10px rgba(0,0,0,0.8)
+  - z-index: 2
+  custom_fields:
+    bg:
+    - position: absolute
+    - inset: 0
+    - z-index: 0
+    overlay:
+    - position: absolute
+    - inset: 0
+    - z-index: 1
+    - background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%)
+    controls:
+    - padding: 12px 16px
+    - z-index: 2
+    - background: rgba(0,0,0,0.3)
+custom_fields:
+  bg: "[[[\n  const pic = entity?.attributes?.entity_picture;\n  const state = entity?.state;\n\
+    \  if (state === 'off' || state === 'unavailable') {\n     return `<div style=\"\
+    width:100%; height:100%; background: #111; display:flex; align-items:center; justify-content:center;\
+    \ color:#444;\">ÉTEINT</div>`;\n  }\n  if (pic) {\n    return `<div style=\"width:100%;\
+    \ height:100%; background: url('${pic}') center/cover no-repeat; transition: all\
+    \ 0.5s ease;\"></div>`;\n  }\n  return `<div style=\"width:100%; height:100%;\
+    \ background: linear-gradient(45deg, #141b26, #111826);\"></div>`;\n]]]\n"
+  controls: "[[[\n  const vol = entity?.attributes?.volume_level ? Math.round(entity.attributes.volume_level\
+    \ * 100) : '--';\n  return `\n    <div style=\"display:flex; justify-content:space-between;\
+    \ align-items:center;\">\n      <div style=\"color:white; font-size:12px; font-weight:600;\"\
+    >\U0001F508 ${vol}%</div>\n      <div style=\"display:flex; gap:15px;\">\n   \
+    \      <ha-icon icon=\"mdi:skip-previous\" style=\"width:20px; color:white;\"\
+    ></ha-icon>\n         <ha-icon icon=\"mdi:pause\" style=\"width:20px; color:white;\"\
+    ></ha-icon>\n         <ha-icon icon=\"mdi:skip-next\" style=\"width:20px; color:white;\"\
+    ></ha-icon>\n      </div>\n    </div>\n  `;\n]]]\n"

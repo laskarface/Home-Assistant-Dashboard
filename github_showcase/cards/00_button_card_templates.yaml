@@ -1,0 +1,294 @@
+button_card_templates:
+  inkwell:
+    show_name: false
+    show_state: true
+    extra_styles: "[[[\n  return `\n    @keyframes pulse {\n      5% {\n        background-color:\
+      \ ${variables.color};\n      }\n    }\n  `;\n]]]\n"
+    styles:
+      icon:
+      - opacity: 1
+      - color: '[[[ return variables.color ]]]'
+      - filter: "[[[\n  const glow = 'drop-shadow(0 0 3px rgba(255,255,255,0.95))';\n\
+          \  const edge = 'drop-shadow(0 0 1px rgba(0,0,0,0.7))';\n  return glow +\
+          \ ' ' + edge;\n]]]\n"
+      state:
+      - font-size: 0.8em
+      - font-weight: bold
+      - text-shadow: 0 0 3px black
+      - overflow: visible
+      card:
+      - border: none
+      - border-radius: 4px
+      - box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6)
+      - background: "[[[\n  let level = parseFloat(entity.state);\n  if (isNaN(level))\
+          \ level = 0;\n  level = Math.max(0, Math.min(100, level));\n\n  // couleur\
+          \ d'encre avec 70% de transparence\n  const c = variables.color;\n\n  const\
+          \ fillColor = (c.startsWith('#'))\n    ? `${c}B3`     // HEX → alpha \"\
+          B3\" ≈ 70%\n    : `rgba(${{\n        cyan: '0,255,255',\n        magenta:\
+          \ '255,0,255',\n        yellow: '255,255,0',\n        black: '0,0,0'\n \
+          \     }[c] || '255,255,255'}, 0.3)`;   // 0.3 = 70% de transparence\n\n\
+          \  const fill = `linear-gradient(\n    to top,\n    ${fillColor},\n    ${fillColor}\
+          \ ${level}%,\n    rgba(255,255,255,0.10) ${level}%\n  )`;\n\n  const gloss\
+          \ = `linear-gradient(\n    to bottom,\n    rgba(255,255,255,0.45),\n   \
+          \ rgba(255,255,255,0.10) 0%,\n    transparent 0%\n  )`;\n\n  return `${gloss},\
+          \ ${fill}`;\n]]]\n"
+      - animation: "[[[\n  let level = parseFloat(entity.state);\n  if (isNaN(level))\
+          \ level = 0;\n  return level < 2 ? 'pulse ease-in-out 1s infinite' : 'none';\n\
+          ]]]\n"
+  energy_half:
+    show_name: true
+    show_state: true
+    state_display: "[[[\n  if (!entity || entity.state === 'unavailable' || entity.state\
+      \ === 'unknown') return '0.00 kWh';\n  const val = parseFloat(entity.state);\n\
+      \  // On n'affiche que 2 décimales pour la propreté\n  return isNaN(val) ? '0.00\
+      \ kWh' : val.toFixed(2) + ' kWh';\n]]]\n"
+    styles:
+      card:
+      - background: rgba(20, 27, 38, 0.6)
+      - backdrop-filter: blur(10px)
+      - -webkit-backdrop-filter: blur(10px)
+      - border-radius: 20px
+      - border: 1px solid rgba(255,255,255,0.1)
+      - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+      - padding: 12px
+      - height: 110px
+      grid:
+      - grid-template-areas: '"n" "s" "graph"'
+      - grid-template-rows: auto auto 1fr
+      name:
+      - font-size: 13px
+      - font-weight: 600
+      - color: rgba(255,255,255,0.8)
+      - justify-self: start
+      state:
+      - font-size: 18px
+      - font-weight: 700
+      - color: '#FFFFFF'
+      - justify-self: start
+      - margin-top: 5px
+    custom_fields:
+      graph:
+        card:
+          type: sensor
+          entity: '[[[ return entity.entity_id ]]]'
+          graph: line
+          detail: 1
+          card_mod:
+            style: 'ha-card { background: transparent !important; border: none !important;
+              }
+
+              .header, .value, .name, .measurement { display: none !important; }
+
+              .graph { padding: 0 !important; }
+
+              '
+  greffe_task_glossy:
+    show_name: true
+    show_icon: true
+    show_state: false
+    layout: vertical
+    tap_action:
+      action: none
+    hidden: "[[[\n  if (!entity) return true;\n\n  const attr = variables.attr;\n\
+      \  if (attr) {\n    const v = entity.attributes?.[attr];\n    return !(v ===\
+      \ true || v === 'true' || v === 'True' || v === 1);\n  }\n\n  // fallback =\
+      \ ne montrer la carte que si l'entité est \"on\"\n  return entity.state !==\
+      \ 'on';\n]]]\n"
+    styles:
+      card:
+      - border: none
+      - border-radius: 4px
+      - box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6)
+      - height: 64px
+      - padding: 6px 10px
+      - background: "[[[\n  const c = variables.color || '#4CAF50';\n  const fill\
+          \ = `linear-gradient(to bottom, ${c}DD, ${c}AA)`;\n  const gloss =\n   \
+          \ 'linear-gradient(to bottom,' +\n    'rgba(255,255,255,0.45),' +\n    'rgba(255,255,255,0.10)\
+          \ 0%,' +\n    'transparent 0%)';\n  return `${gloss}, ${fill}`;\n]]]\n"
+      grid:
+      - grid-template-areas: '"i" "n"'
+      - grid-template-rows: auto auto
+      - grid-template-columns: 1fr
+      - row-gap: 2px
+      - align-items: center
+      - justify-items: center
+      icon:
+      - width: 26px
+      - height: 26px
+      - color: white
+      - filter: drop-shadow(0 0 4px rgba(0,0,0,0.9))
+      name:
+      - font-size: 0.8rem
+      - font-weight: 500
+      - text-overflow: ellipsis
+      - white-space: nowrap
+      - overflow: hidden
+  notif_glossy:
+    show_icon: false
+    show_state: false
+    show_name: true
+    layout: vertical
+    tap_action:
+      action: more-info
+    variables:
+      color: '#ff3b30'
+    styles:
+      card:
+      - border-radius: 4px
+      - border: none
+      - padding: 6px 10px
+      - height: 54px
+      - box-shadow: 0 4px 10px rgba(0,0,0,0.6)
+      - overflow: hidden
+      - background: "[[[\n  const c = variables.color || '#ff3b30';\n  const fill\
+          \ = `linear-gradient(to bottom, ${c}DD, ${c}AA)`;\n  const gloss =\n   \
+          \ 'linear-gradient(to bottom,' +\n    'rgba(255,255,255,0.45),' +\n    'rgba(255,255,255,0.10)\
+          \ 0%,' +\n    'transparent 0%)';\n  return `${gloss}, ${fill}`;\n]]]\n"
+      name:
+      - font-size: 0.9rem
+      - font-weight: 600
+      - text-align: center
+      - white-space: normal
+      - overflow: visible
+      - text-overflow: unset
+      - line-height: 1.1rem
+      - padding: 0 4px
+      - color: white
+  nav_glossy:
+    show_icon: true
+    show_name: true
+    color_type: card
+    aspect_ratio: 2/1
+    variables:
+      accent_color: rgba(0, 160, 255, 1)
+    styles:
+      card:
+      - border-radius: 18px
+      - padding: 10px
+      - border: 1px solid rgba(255,255,255,0.10)
+      - box-shadow: 0 6px 14px rgba(0,0,0,0.55)
+      - background: "[[[\n  const c = variables.accent_color || 'rgba(0,160,255,1)';\n\
+          \  return `linear-gradient(145deg,\n            rgba(0,0,0,0.75),\n    \
+          \        rgba(15,15,15,0.95) 40%,\n            ${c} 140%)`;\n]]]\n"
+      icon:
+      - width: 48%
+      - color: '[[[ return variables.accent_color || "var(--primary-color)" ]]]'
+      - filter: drop-shadow(0 0 6px rgba(0,0,0,0.9))
+      name:
+      - padding-top: 6px
+      - font-weight: 700
+      - font-size: 0.95em
+      - text-align: center
+      - color: '#ffffff'
+      - text-shadow: 0 0 4px rgba(0,0,0,0.9)
+  nav_minimal:
+    show_icon: true
+    show_name: true
+    color_type: icon
+    aspect_ratio: 2/1
+    variables:
+      accent_color: rgba(0, 160, 255, 1)
+    styles:
+      card:
+      - border-radius: 4px
+      - padding: 8px 12px
+      - background: 'var(--ha-card-background, rgba(18, 22, 33, 0.98))
+
+          '
+      - box-shadow: 0 4px 8px rgba(0,0,0,0.35)
+      - border: 1px solid rgba(255,255,255,0.04)
+      icon:
+      - color: "[[[\n  return variables.accent_color || 'rgba(0,160,255,1)';\n]]]\n"
+      - width: 32px
+      - height: 32px
+      name:
+      - color: var(--primary-text-color)
+      - font-weight: 500
+      - font-size: 14px
+  weather_forecast_row:
+    show_icon: false
+    show_state: false
+    show_name: false
+    custom_fields:
+      day: "[[[\n  return states['weather.home'].attributes.forecast[variables.index].datetime\n\
+        \    ? new Date(states['weather.home'].attributes.forecast[variables.index].datetime).toLocaleDateString('fr-FR',\
+        \ { weekday: 'short' })\n    : '-';\n]]]\n"
+      icon: "[[[\n  return states['weather.home'].attributes.forecast[variables.index].condition;\n\
+        ]]]\n"
+      temp_min: "[[[\n  return Math.round(states['weather.home'].attributes.forecast[variables.index].templow)\
+        \ + \"°C\";\n]]]\n"
+      temp_max: "[[[\n  return Math.round(states['weather.home'].attributes.forecast[variables.index].temperature)\
+        \ + \"°C\";\n]]]\n"
+      bar: "[[[\n  const f = states['weather.home'].attributes.forecast;\n  const\
+        \ min = Math.min(...f.map(x => x.templow));\n  const max = Math.max(...f.map(x\
+        \ => x.temperature));\n  const tmin = f[variables.index].templow;\n  const\
+        \ tmax = f[variables.index].temperature;\n\n  const total = max - min;\n \
+        \ const start = ((tmin - min) / total) * 100;\n  const end = ((tmax - min)\
+        \ / total) * 100;\n\n  return `\n    <div style=\"width:100%;height:10px;background:#dfeffa;border-radius:20px;position:relative;\"\
+        >\n      <div style=\"\n        position:absolute;\n        left:${start}%;\n\
+        \        width:${end - start}%;\n        height:10px;\n        background:linear-gradient(90deg,#7dd3fc,#86efac);\n\
+        \        border-radius:20px;\">\n      </div>\n    </div>\n  `;\n]]]\n"
+    styles:
+      card:
+      - padding: 2px 0
+      - background: transparent
+      - box-shadow: none
+      - height: 28px
+      grid:
+      - grid-template-columns: 30px 1fr 30px 50px
+      custom_fields:
+        day:
+        - justify-self: start
+        - font-size: 14px
+        - color: white
+        icon:
+        - justify-self: start
+        - font-size: 18px
+        temp_min:
+        - justify-self: end
+        - font-size: 14px
+        - color: white
+        temp_max:
+        - justify-self: start
+        - font-size: 14px
+        - color: white
+  button_card_templates:
+    modern_task_glass:
+      show_state: false
+      show_name: true
+      show_icon: true
+      styles:
+        card:
+        - padding: 12px
+        - height: 100px
+        - border-radius: 20px
+        - border: 1px solid rgba(255,255,255,0.1)
+        - background: rgba(20, 27, 38, 0.6)
+        - backdrop-filter: blur(10px)
+        - -webkit-backdrop-filter: blur(10px)
+        - box-shadow: 0 4px 15px rgba(0,0,0,0.2)
+        - transition: transform 0.1s ease
+        icon:
+        - width: 32px
+        - height: 32px
+        - margin-bottom: 8px
+        - color: '[[[ return variables.color; ]]]
+
+            '
+        - filter: '[[[ return `drop-shadow(0 0 8px ${variables.color}aa)`; ]]]
+
+            '
+        name:
+        - font-size: 13px
+        - font-weight: 600
+        - color: white
+        custom_fields:
+          status:
+          - font-size: 11px
+          - opacity: 0.7
+          - padding-top: 4px
+      grid:
+      - grid-template-areas: '"i" "n" "status"'
+      - grid-template-rows: 1fr min-content min-content
+      custom_fields:
+        status: "[[[\n  return entity.attributes[variables.attr] || '—';\n]]]\n"

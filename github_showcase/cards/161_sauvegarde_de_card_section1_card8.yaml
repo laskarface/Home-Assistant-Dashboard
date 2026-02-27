@@ -1,0 +1,102 @@
+type: custom:button-card
+entity: sensor.openuv_maison_indice_uv_actuel
+show_name: false
+show_icon: false
+show_state: false
+styles:
+  card:
+  - padding: 0
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(10px)
+  - -webkit-backdrop-filter: blur(10px)
+  - border-radius: 20px
+  - border: "[[[\n   var uv = (entity && entity.state !== 'unknown' && entity.state\
+      \ !== 'unavailable') ? parseFloat(entity.state) : 0;\n   if (states['sun.sun']\
+      \ && states['sun.sun'].state === 'below_horizon') uv = 0;\n   if (uv >= 11)\
+      \ return '1px solid rgba(186, 85, 211, 0.5)';\n   if (uv >= 8) return '1px solid\
+      \ rgba(255, 69, 0, 0.5)';\n   if (uv >= 6) return '1px solid rgba(255, 140,\
+      \ 0, 0.5)';\n   if (uv >= 3) return '1px solid rgba(255, 215, 0, 0.3)';\n  \
+      \ return '1px solid rgba(0, 230, 118, 0.3)';\n]]]\n"
+  - box-shadow: "[[[\n  var uv = (entity && entity.state !== 'unknown' && entity.state\
+      \ !== 'unavailable') ? parseFloat(entity.state) : 0;\n  if (states['sun.sun']\
+      \ && states['sun.sun'].state === 'below_horizon') uv = 0;\n  if (uv >= 11) return\
+      \ '0 0 20px rgba(186, 85, 211, 0.3), 0 8px 32px rgba(0,0,0,0.4)';\n  if (uv\
+      \ >= 8) return '0 0 20px rgba(255, 69, 0, 0.3), 0 8px 32px rgba(0,0,0,0.4)';\n\
+      \  if (uv >= 6) return '0 0 20px rgba(255, 140, 0, 0.3), 0 8px 32px rgba(0,0,0,0.4)';\n\
+      \  return '0 8px 32px rgba(0,0,0,0.4)';\n]]]\n"
+  - overflow: hidden
+  - margin: 0px
+  - position: relative
+  - transition: box-shadow 0.8s ease-in-out, border 0.8s ease-in-out
+  grid:
+  - grid-template-areas: '"icon details"'
+  - grid-template-columns: 130px 1fr
+  - grid-template-rows: 60px
+  - gap: 0px
+  - width: 100%
+  - margin: 0
+  custom_fields:
+    icon:
+    - justify-self: stretch
+    - align-self: stretch
+    - border-right: 2px solid rgba(255, 255, 255, 0.6)
+    - border-top-left-radius: 20px
+    - border-bottom-left-radius: 20px
+    - display: flex
+    - align-items: center
+    - justify-content: center
+    - padding: 0
+    details:
+    - justify-self: stretch
+    - align-self: stretch
+    - display: flex
+    - flex-direction: column
+    - justify-content: center
+    - align-items: stretch
+    - padding: 0 20px
+    - overflow: hidden
+    - position: relative
+custom_fields:
+  icon: "[[[\n  var uv = (entity && entity.state !== 'unknown' && entity.state !==\
+    \ 'unavailable') ? parseFloat(entity.state) : 0;\n  if (states['sun.sun'] && states['sun.sun'].state\
+    \ === 'below_horizon') uv = 0;\n  \n  var color = '#00E676'; // Vert\n  if (uv\
+    \ >= 3) color = '#FFD700'; // Jaune\n  if (uv >= 6) color = '#FF8C00'; // Orange\n\
+    \  if (uv >= 8) color = '#FF4500'; // Rouge\n  if (uv >= 11) color = '#BA55D3';\
+    \ // Violet\n  \n  var anim = uv > 0 ? 'animation: spin 12s linear infinite;'\
+    \ : '';\n\n  return `\n    <div style=\"width: 100%; height: 100%; display: flex;\
+    \ align-items: center; justify-content: center; background: linear-gradient(135deg,\
+    \ ${color}33 0%, ${color}0D 100%);\">\n      <div style=\"width: 32px; height:\
+    \ 32px; filter: drop-shadow(0 0 10px ${color}80);\">\n        <svg viewBox=\"\
+    0 0 24 24\" style=\"fill: ${color}; ${anim} width: 100%; height: 100%;\">\n  \
+    \        <path d=\"M12,7A5,5 0 1,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 1,1 9,12A3,3\
+    \ 0 0,1 12,9M12,2L14.39,5.42C13.65,5.15 12.84,5 12,5C11.16,5 10.35,5.15 9.61,5.42L12,2M3.34,7L7.5,5.29C7.24,6.03\
+    \ 7.09,6.84 7.09,7.68C7.09,8.52 7.24,9.33 7.5,10.07L3.34,8.36V7M3.34,17L7.5,18.71C7.24,17.97\
+    \ 7.09,17.16 7.09,16.32C7.09,15.48 7.24,14.67 7.5,13.93L3.34,15.64V17M20.66,17L16.5,18.71C16.76,17.97\
+    \ 16.91,17.16 16.91,16.32C16.91,15.48 16.76,14.67 16.5,13.93L20.66,15.64V17M20.66,7L16.5,5.29C16.76,6.03\
+    \ 16.91,6.84 16.91,7.68C16.91,8.52 16.76,9.33 16.5,10.07L20.66,8.36V7M12,22L9.61,18.58C10.35,18.85\
+    \ 11.16,19 12,19C12.84,19 13.65,18.85 14.39,18.58L12,22Z\" />\n        </svg>\n\
+    \      </div>\n    </div>\n    <style> @keyframes spin { 100% { transform: rotate(360deg);\
+    \ } } </style>\n  `;\n]]]\n"
+  details: "[[[\n  var uv = (entity && entity.state !== 'unknown' && entity.state\
+    \ !== 'unavailable') ? parseFloat(entity.state) : 0;\n  var levelState = states['sensor.openuv_maison_niveau_uv_actuel']\
+    \ ? states['sensor.openuv_maison_niveau_uv_actuel'].state.toLowerCase() : 'low';\n\
+    \  \n  if (states['sun.sun'] && states['sun.sun'].state === 'below_horizon') {\n\
+    \    uv = 0;\n    levelState = 'low';\n  }\n  \n  var label = 'Inconnu';\n  if\
+    \ (levelState.includes('low')) label = 'Faible';\n  else if (levelState.includes('moderate'))\
+    \ label = 'Modéré';\n  else if (levelState.includes('high') && !levelState.includes('very'))\
+    \ label = 'Élevé';\n  else if (levelState.includes('very_high')) label = 'Très\
+    \ Élevé';\n  else if (levelState.includes('extreme')) label = 'Extrême';\n  else\
+    \ label = levelState; \n\n  var pct = (uv / 11) * 100;\n  if (pct > 100) pct =\
+    \ 100;\n  \n  var color = '#00E676';\n  if (uv >= 3) color = '#FFD700';\n  if\
+    \ (uv >= 6) color = '#FF8C00';\n  if (uv >= 8) color = '#FF4500';\n  if (uv >=\
+    \ 11) color = '#BA55D3';\n\n  return `\n    <div style=\"display:flex; flex-direction:column;\
+    \ justify-content:center; width: 100%;\">\n       <div style=\"display:flex; justify-content:space-between;\
+    \ align-items:flex-end; margin-bottom:8px;\">\n          <span style=\"font-size:16px;\
+    \ font-weight:900; color:white; text-shadow: 0 0 10px rgba(255,255,255,0.2);\"\
+    >UV ${uv.toFixed(1)}</span>\n          <span style=\"font-size:13px; color:${color};\
+    \ text-transform:uppercase; font-weight:800; letter-spacing: 1px; filter: drop-shadow(0\
+    \ 0 5px ${color}80);\">${label}</span>\n       </div>\n       <div style=\"width:100%;\
+    \ height:6px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;\"\
+    >\n          <div style=\"width:${pct}%; height:100%; background:${color}; box-shadow:\
+    \ 0 0 10px ${color}; transition:width 1s ease;\"></div>\n       </div>\n    </div>\n\
+    \  `;\n]]]\n"

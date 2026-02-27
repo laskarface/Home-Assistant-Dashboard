@@ -1,0 +1,4 @@
+graph: line
+type: sensor
+detail: 1
+entity: sensor.smart_temp_humidity_sensor_39000e4fa9fc_humidity

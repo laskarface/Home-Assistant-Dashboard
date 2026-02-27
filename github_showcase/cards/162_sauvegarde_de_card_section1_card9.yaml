@@ -1,0 +1,148 @@
+type: custom:button-card
+entity: weather.home
+show_name: false
+show_icon: false
+show_state: false
+tap_action:
+  action: more-info
+styles:
+  card:
+  - padding: 0
+  - background: rgba(20, 27, 38, 0.6)
+  - backdrop-filter: blur(10px)
+  - -webkit-backdrop-filter: blur(10px)
+  - border-radius: 20px
+  - overflow: hidden
+  - transition: all 0.5s ease-in-out
+  - border: "[[[\n  const alert = states['sensor.91_weather_alert'];\n  if (alert\
+      \ && alert.state !== 'Vert' && alert.state !== 'unknown') {\n    const s = String(alert.state).toLowerCase();\n\
+      \    if (s === 'rouge' || s === '4' || s === 'red') return '1px solid rgba(244,\
+      \ 67, 54, 0.8)';\n    if (s === 'orange' || s === '3') return '1px solid rgba(255,\
+      \ 152, 0, 0.8)';\n    if (s === 'jaune' || s === '2' || s === 'yellow') return\
+      \ '1px solid rgba(255, 235, 59, 0.6)';\n  }\n  return '1px solid rgba(255,255,255,0.1)';\n\
+      ]]]\n"
+  - box-shadow: 0 8px 32px rgba(0,0,0,0.4)
+  grid:
+  - grid-template-areas: '"img details"'
+  - grid-template-columns: 130px 1fr
+  - grid-template-rows: auto
+  - align-items: stretch
+  custom_fields:
+    img:
+    - justify-self: stretch
+    - align-self: stretch
+    - border-right: 2px solid rgba(255,255,255,0.6)
+    details:
+    - justify-self: stretch
+    - align-self: stretch
+    - padding: 15px 18px
+    - display: flex
+    - flex-direction: column
+    - justify-content: center
+    - gap: 12px
+custom_fields:
+  img: "[[[\n  if (!entity) return '...';\n  const state = entity.state;\n  const\
+    \ trans = {\n    'sunny': 'Ensoleillé', 'clear-night': 'Nuit claire', 'cloudy':\
+    \ 'Nuageux',\n    'fog': 'Brouillard', 'hail': 'Grêle', 'lightning': 'Orages',\n\
+    \    'lightning-rain': 'Pluie orageuse', 'partlycloudy': 'Éclaircies',\n    'pouring':\
+    \ 'Pluie forte', 'rainy': 'Pluvieux', 'snowy': 'Neige',\n    'snowy-rainy': 'Pluie\
+    \ et neige', 'windy': 'Venteux', 'windy-variant': 'Venteux'\n  };\n  const map\
+    \ = {\n    'sunny': { icon: '☀️', color: '#FFD600' }, 'clear-night': { icon: '\U0001F319\
+    ', color: '#7E57C2' },\n    'cloudy': { icon: '☁️', color: '#90A4AE' }, 'fog':\
+    \ { icon: '\U0001F32B️', color: '#B0BEC5' },\n    'hail': { icon: '\U0001F328\
+    ️', color: '#4FC3F7' }, 'lightning': { icon: '⚡', color: '#FFEB3B' },\n    'lightning-rain':\
+    \ { icon: '⛈️', color: '#FFD600' }, 'partlycloudy': { icon: '⛅', color: '#FFB74D'\
+    \ },\n    'pouring': { icon: '\U0001F327️', color: '#448AFF' }, 'rainy': { icon:\
+    \ '\U0001F326️', color: '#29B6F6' },\n    'snowy': { icon: '❄️', color: '#E1F5FE'\
+    \ }, 'snowy-rainy': { icon: '\U0001F328️', color: '#B3E5FC' },\n    'windy': {\
+    \ icon: '\U0001F4A8', color: '#81C784' }, 'windy-variant': { icon: '\U0001F343\
+    ', color: '#A5D6A7' }\n  };\n  const theme = map[state] || { icon: '\U0001F321\
+    ️', color: '#00BFFF' };\n  return `\n    <div style=\"width: 100%; height: 100%;\
+    \ display: flex; flex-direction: column; align-items: center; justify-content:\
+    \ center; background: linear-gradient(135deg, ${theme.color}33 0%, ${theme.color}0D\
+    \ 100%);\">\n      <div style=\"font-size: 50px; filter: drop-shadow(0 4px 10px\
+    \ ${theme.color}80);\">${theme.icon}</div>\n      <div style=\"font-size: 11px;\
+    \ font-weight: 900; color: white; text-transform: uppercase; letter-spacing: 1px;\
+    \ margin-top: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);\">${trans[state] ||\
+    \ state}</div>\n    </div>\n  `;\n]]]\n"
+  details: "[[[\n  if (!entity || !entity.attributes) return '...';\n  \n  // ---\
+    \ TEMPÉRATURES ---\n  const cur = parseFloat(entity.attributes.temperature ||\
+    \ 0);\n  const low = parseFloat(entity.attributes.forecast?.[0]?.templow || cur\
+    \ - 3);\n  const high = parseFloat(entity.attributes.forecast?.[0]?.temperature\
+    \ || cur + 4);\n  const range = Math.max(high - low, 1);\n  const pos = Math.min(Math.max(((cur\
+    \ - low) / range) * 100, 0), 100);\n  \n  let temp_html = `\n    <div style=\"\
+    display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 2px;\"\
+    >\n      <span style=\"font-size: 12px; font-weight: 900; color: white; min-width:\
+    \ 25px;\">${Math.round(low)}°</span>\n      <div style=\"flex: 1; height: 12px;\
+    \ background: rgba(255,255,255,0.1); border-radius: 6px; position: relative;\"\
+    >\n        <div style=\"position: absolute; width: 100%; height: 100%; background:\
+    \ linear-gradient(90deg, #4FC3F7, #FFA726); border-radius: 6px; opacity: 0.8;\"\
+    ></div>\n        <div style=\"position: absolute; left: ${pos}%; top: 50%; transform:\
+    \ translate(-50%, -50%); width: 24px; height: 24px; background: white; border-radius:\
+    \ 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.5); z-index: 2; border: 2px solid #29B6F6;\
+    \ display: flex; align-items: center; justify-content: center;\">\n          <span\
+    \ style=\"color: #141B26; font-size: 11px; font-weight: 900;\">${Math.round(cur)}°</span>\n\
+    \        </div>\n      </div>\n      <span style=\"font-size: 12px; font-weight:\
+    \ 900; color: white; min-width: 25px; text-align: right;\">${Math.round(high)}°</span>\n\
+    \    </div>\n  `;\n\n  // --- ALERTES MULTIPLES (MÉTÉO FRANCE) ---\n  const alert_ent\
+    \ = states['sensor.91_weather_alert'];\n  let alerts_html = '';\n  if (alert_ent\
+    \ && alert_ent.state !== 'Vert' && alert_ent.state !== 'unknown') {\n    const\
+    \ risks_map = {\n      'inondation': 'mdi:home-flood', 'vent': 'mdi:weather-windy',\n\
+    \      'pluie': 'mdi:weather-pouring', 'orage': 'mdi:weather-lightning',\n   \
+    \   'neige': 'mdi:weather-snowy-heavy', 'verglas': 'mdi:weather-snowy-heavy',\
+    \ \n      'canicule': 'mdi:weather-sunny-alert', 'froid': 'mdi:snowflake-alert',\
+    \ \n      'avalanche': 'mdi:terrain', 'vague': 'mdi:waves'\n    };\n    \n   \
+    \ const severity_labels = {\n      '1': 'Vert', '2': 'Jaune', '3': 'Orange', '4':\
+    \ 'Rouge',\n      'vert': 'Vert', 'jaune': 'Jaune', 'orange': 'Orange', 'rouge':\
+    \ 'Rouge',\n      'yellow': 'Jaune', 'red': 'Rouge'\n    };\n\n    let active_alerts\
+    \ = [];\n    const risk_levels = ['2', '3', '4', 'jaune', 'orange', 'rouge', 'yellow',\
+    \ 'red'];\n    \n    for (const [key, val] of Object.entries(alert_ent.attributes))\
+    \ {\n      const vs = String(val).toLowerCase();\n      if (risk_levels.includes(vs))\
+    \ {\n         let icon = 'mdi:alert-decagram';\n         const klow = key.toLowerCase();\n\
+    \         for (const [kw, ic] of Object.entries(risks_map)) {\n           if (klow.includes(kw))\
+    \ { icon = ic; break; }\n         }\n         \n         active_alerts.push({\n\
+    \           name: key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('\
+    \ '),\n           level: severity_labels[vs] || vs.toUpperCase(),\n          \
+    \ icon: icon\n         });\n      }\n    }\n    \n    const order = { 'Rouge':\
+    \ 1, 'Orange': 2, 'Jaune': 3 };\n    active_alerts.sort((a, b) => (order[a.level]\
+    \ || 99) - (order[b.level] || 99));\n\n    if (active_alerts.length === 0) {\n\
+    \       active_alerts.push({ name: 'Alerte', level: alert_ent.state, icon: 'mdi:alert-decagram'\
+    \ });\n    }\n\n    alerts_html = '<div style=\"display: flex; flex-direction:\
+    \ column; gap: 8px;\">' + active_alerts.map(a => {\n      const l = a.level.toLowerCase();\n\
+    \      const color = l.includes('rouge') || l.includes('red') ? '#F44336' : (l.includes('orange')\
+    \ ? '#FF9800' : '#FFEB3B');\n      return `\n        <div style=\"display: flex;\
+    \ justify-content: space-between; align-items: center; background: ${color}20;\
+    \ padding: 10px 15px; border-radius: 12px; border: 1px solid ${color}40;\">\n\
+    \          <div style=\"display: flex; align-items: center; gap: 10px;\">\n  \
+    \          <ha-icon icon=\"${a.icon}\" style=\"width: 20px; height: 20px; color:\
+    \ ${color}; filter: drop-shadow(0 0 5px ${color}80);\"></ha-icon>\n          \
+    \  <span style=\"font-size: 13px; font-weight: 800; color: white;\">${a.name}</span>\n\
+    \          </div>\n          <span style=\"font-size: 10px; font-weight: 900;\
+    \ color: ${color}; text-transform: uppercase;\">Vigilance ${a.level}</span>\n\
+    \        </div>\n      `;\n    }).join('') + '</div>';\n  }\n\n  // --- INDICE\
+    \ UV PREMIUM ---\n  const uv_ent = states['sensor.openuv_maison_indice_uv_actuel'];\n\
+    \  const sun = states['sun.sun'];\n  const isNight = sun?.state === 'below_horizon'\
+    \ || entity.state === 'clear-night';\n  let uv_val = parseFloat(uv_ent?.state\
+    \ || 0);\n  if (isNight) uv_val = 0;\n\n  const uv_pct = Math.min((uv_val / 12)\
+    \ * 100, 100);\n  let uv_color = '#4CAF50';\n  if (uv_val >= 3) uv_color = '#FDD835';\n\
+    \  if (uv_val >= 6) uv_color = '#FB8C00';\n  if (uv_val >= 8) uv_color = '#F44336';\n\
+    \  if (uv_val >= 11) uv_color = '#9C27B0';\n\n  let uv_html = `\n    <div style=\"\
+    display: flex; flex-direction: column; gap: 8px; width: 100%;\">\n      <div style=\"\
+    display: flex; justify-content: space-between; align-items: center; margin-bottom:\
+    \ 2px;\">\n         <span style=\"font-size: 11px; font-weight: 950; color: rgba(255,255,255,0.5);\
+    \ text-transform: uppercase; letter-spacing: 1.5px;\">Indice UV</span>\n     \
+    \ </div>\n      <div style=\"display: flex; align-items: center; gap: 10px; width:\
+    \ 100%;\">\n        <span style=\"font-size: 12px; font-weight: 900; color: white;\
+    \ min-width: 25px;\">0</span>\n        <div style=\"flex: 1; height: 12px; background:\
+    \ rgba(0,0,0,0.3); border-radius: 6px; position: relative; border: 1px solid rgba(255,255,255,0.05);\"\
+    >\n          <div style=\"position: absolute; width: 100%; height: 100%; background:\
+    \ linear-gradient(90deg, #4CAF50 0%, #FDD835 25%, #FB8C00 50%, #F44336 75%, #9C27B0\
+    \ 100%); border-radius: 6px; opacity: 0.8;\"></div>\n          <div style=\"position:\
+    \ absolute; left: ${uv_pct}%; top: 50%; transform: translate(-50%, -50%); width:\
+    \ 24px; height: 24px; background: white; border-radius: 50%; box-shadow: 0 2px\
+    \ 8px rgba(0,0,0,0.5); z-index: 2; border: 2px solid ${uv_color}; display: flex;\
+    \ align-items: center; justify-content: center;\">\n            <span style=\"\
+    color: #141B26; font-size: 11px; font-weight: 900;\">${uv_val.toFixed(1)}</span>\n\
+    \          </div>\n        </div>\n        <span style=\"font-size: 12px; font-weight:\
+    \ 900; color: white; min-width: 30px; text-align: right;\">12</span>\n      </div>\n\
+    \    </div>\n  `;\n  \n  return temp_html + alerts_html + uv_html;\n]]]\n"

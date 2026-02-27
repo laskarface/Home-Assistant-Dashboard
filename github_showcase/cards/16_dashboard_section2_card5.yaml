@@ -1,0 +1,84 @@
+type: conditional
+conditions:
+- entity: sensor.poubelle_a_sortir
+  state_not: none
+card:
+  type: custom:button-card
+  entity: sensor.poubelle_a_sortir
+  show_name: false
+  show_icon: false
+  show_state: false
+  variables:
+    color: "[[[\n  const type = entity.state.trim().toLowerCase();\n  if (type ===\
+      \ 'jaune') return '#FFEB3B';   // Jaune\n  if (type === 'verre') return '#00BCD4';\
+      \   // Bleu/Cyan (Verre)\n  return '#4CAF50';                         // Vert\
+      \ (Défaut/Verte)\n]]]\n"
+  styles:
+    card:
+    - padding: 0
+    - background: rgba(20, 27, 38, 0.6)
+    - backdrop-filter: blur(10px)
+    - -webkit-backdrop-filter: blur(10px)
+    - border-radius: 20px
+    - border: '[[[ return `1px solid ${variables.color}60`; ]]]'
+    - box-shadow: '[[[ return `0 0 20px ${variables.color}60, 0 8px 32px rgba(0,0,0,0.4)`;
+        ]]]'
+    - overflow: hidden
+    - margin: 0px
+    - box-sizing: border-box
+    - position: relative
+    - transition: box-shadow 0.8s ease-in-out, border 0.8s ease-in-out
+    - height: 85px
+    grid:
+    - grid-template-areas: '"img info"'
+    - grid-template-columns: 130px minmax(0, 1fr)
+    - grid-template-rows: 85px
+    - gap: 0px
+    - width: 100%
+    - margin: 0
+    custom_fields:
+      img:
+      - justify-self: stretch
+      - align-self: stretch
+      - border-right: 2px solid rgba(255, 255, 255, 0.6)
+      - display: flex
+      - align-items: center
+      - justify-content: center
+      - padding: 0
+      info:
+      - justify-self: stretch
+      - align-self: stretch
+      - display: flex
+      - flex-direction: column
+      - justify-content: center
+      - align-items: center
+      - text-align: center
+      - padding: 0 15px
+      - overflow: hidden
+      - position: relative
+  extra_styles: "@keyframes blink {\n  0% { opacity: 1; text-shadow: 0 0 10px var(--glow-color);\
+    \ }\n  50% { opacity: 0.35; text-shadow: 0 0 2px var(--glow-color); } \n  100%\
+    \ { opacity: 1; text-shadow: 0 0 10px var(--glow-color); }\n}\n"
+  custom_fields:
+    img: "[[[\n  const type = entity.state.trim().toLowerCase();\n  const v = new\
+      \ Date().getTime();\n  let imgUrl = `/local/green_bin.png?v=${v}`;\n  let scale\
+      \ = 1.0;\n  \n  if (type === 'jaune') {\n    imgUrl = `/local/garbage/yellow_bin.png?v=${v}`;\n\
+      \    scale = 0.85; // Reducing scale for the yellow bin image\n  }\n  if (type\
+      \ === 'verre') imgUrl = `/local/glass_bin.png?v=${v}`;\n  \n  const color =\
+      \ variables.color;\n  \n  return `\n    <div style=\"width: 100%; height: 100%;\
+      \ display: flex; flex-direction: column; align-items: center; justify-content:\
+      \ center; background: linear-gradient(135deg, ${color}33 0%, ${color}0D 100%);\
+      \ border-top-left-radius: 20px; border-bottom-left-radius: 20px; box-sizing:\
+      \ border-box; padding: 10px;\">\n      <img src=\"${imgUrl}\" style=\"width:\
+      \ 100%; max-width: 60px; height: auto; transform: scale(${scale}); filter: drop-shadow(0\
+      \ 4px 10px ${color}66); object-fit: contain;\" />\n      <div style=\"font-size:\
+      \ 8px; font-weight: 900; color: white; text-transform: uppercase; letter-spacing:\
+      \ 0.8px; margin-top: -5px;\">Poubelles</div>\n    </div>\n  `;\n]]]\n"
+    info: "[[[\n  const title = entity.attributes.original_title || \"POUBELLE À SORTIR\"\
+      ;\n  const color = variables.color;\n  \n  return `\n    <div style=\"width:\
+      \ 100%; height: 100%; display: flex; flex-direction: column; justify-content:\
+      \ center; align-items: center; --glow-color: ${color}44; padding: 0 5px; text-align:\
+      \ center;\">\n      <div style=\"font-size: 13px; font-weight: 800; color: ${color};\
+      \ text-transform: uppercase; letter-spacing: 1.2px; text-align: center; line-height:\
+      \ 1.2; white-space: normal; animation: blink 2s ease infinite;\">\n        ${title}\n\
+      \      </div>\n    </div>\n  `;\n]]]\n"

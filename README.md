@@ -136,16 +136,16 @@ This dashboard is built upon the incredible work of the following developers and
 ### 🔌 Integrations & Hardware Support
 | Integration / Brand | Usage | Developer | GitHub Repository |
 | :--- | :---: | :--- | :--- |
-| **Klipper / RatRig** | 20 | [@Klipper3d](https://github.com/Klipper3d) | [Klipper3d/klipper](https://github.com/Klipper3d/klipper) |
-| **Tesla** | 7 | [@alandtse](https://github.com/alandtse) | [alandtse/tesla](https://github.com/alandtse/tesla) |
+| **Moonraker (Klipper)** | 20 | [@marcolivierarsenault](https://github.com/marcolivierarsenault) | [marcolivierarsenault/moonraker-home-assistant](https://github.com/marcolivierarsenault/moonraker-home-assistant) |
+| **Tesla Fleet** | 7 | [@alandtse](https://github.com/alandtse) | [alandtse/tesla](https://github.com/alandtse/tesla) |
 | **Laundry Cycle** | 7 | [Manual Template] | N/A |
-| **Synology DSM** | 6 | [Home Assistant](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/synology_dsm) |
-| **Brother Printer** | 6 | [Home Assistant](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/brother) |
-| **Overkiz** (Atlantic/PAC) | 5 | [Home Assistant](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/overkiz) |
-| **Sonoff** | 4 | [@AlexxIT](https://github.com/AlexxIT) | [AlexxIT/SonoffLAN](https://github.com/AlexxIT/SonoffLAN) |
-| **Samsung TV** | 3 | [Home Assistant](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/samsungtv) |
+| **Synology DSM** | 6 | [Home Assistant Core](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/synology_dsm) |
+| **Brother Printer** | 6 | [Home Assistant Core](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/brother) |
+| **Overkiz (Atlantic/PAC)** | 5 | [Home Assistant Core](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/overkiz) |
+| **Sonoff LAN** | 4 | [@AlexxIT](https://github.com/AlexxIT) | [AlexxIT/SonoffLAN](https://github.com/AlexxIT/SonoffLAN) |
+| **Samsung TV** | 3 | [Home Assistant Core](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/samsungtv) |
 | **Orange Livebox** | 3 | [@cyr-ius](https://github.com/cyr-ius) | [cyr-ius/hass-livebox](https://github.com/cyr-ius/hass-livebox) |
-| **Waze Travel Times** | 2 | [Home Assistant](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/waze_travel_time) |
+| **Waze Travel Times** | 2 | [Home Assistant Core](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/waze_travel_time) |
 
 ### 🎨 Custom UI Components (HACS)
 | Component Name | Usage | Developer | GitHub Repository |

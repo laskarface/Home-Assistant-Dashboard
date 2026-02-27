@@ -25,11 +25,11 @@ cards:
   square: false
   cards:
   - type: custom:button-card
-    entity: sensor.chrisnas_etat_du_lecteur_0_1
+    entity: sensor.User 1nas_etat_du_lecteur_0_1
     name: HDD 1
     show_state: false
     custom_fields:
-      t: '[[[ return states[''sensor.chrisnas_temperature_du_lecteur_0_1''].state
+      t: '[[[ return states[''sensor.User 1nas_temperature_du_lecteur_0_1''].state
         + ''°'' ]]]
 
         '
@@ -68,11 +68,11 @@ cards:
         - 0.2)
         - text-transform: uppercase
   - type: custom:button-card
-    entity: sensor.chrisnas_etat_du_lecteur_0_2
+    entity: sensor.User 1nas_etat_du_lecteur_0_2
     name: HDD 2
     show_state: false
     custom_fields:
-      t: '[[[ return states[''sensor.chrisnas_temperature_du_lecteur_0_2''].state
+      t: '[[[ return states[''sensor.User 1nas_temperature_du_lecteur_0_2''].state
         + ''°'' ]]]
 
         '
@@ -112,11 +112,11 @@ cards:
         - 0.2)
         - text-transform: uppercase
   - type: custom:button-card
-    entity: sensor.chrisnas_etat_du_lecteur_0_3
+    entity: sensor.User 1nas_etat_du_lecteur_0_3
     name: HDD 3
     show_state: false
     custom_fields:
-      t: '[[[ return states[''sensor.chrisnas_temperature_du_lecteur_0_3''].state
+      t: '[[[ return states[''sensor.User 1nas_temperature_du_lecteur_0_3''].state
         + ''°'' ]]]
 
         '

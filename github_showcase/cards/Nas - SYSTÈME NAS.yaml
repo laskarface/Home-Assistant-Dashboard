@@ -1,5 +1,5 @@
 type: custom:button-card
-entity: sensor.chrisnas_etat
+entity: sensor.User 1nas_etat
 name: SYSTÈME NAS
 icon: mdi:nas
 show_state: true
@@ -49,9 +49,9 @@ styles:
     - font-size: 16px
     - color: rgba(255, 255, 255, 0.6)
 custom_fields:
-  uptime: "[[[\n  const uptime = states['sensor.chrisnas_uptime'].state;\n  return\
+  uptime: "[[[\n  const uptime = states['sensor.User 1nas_uptime'].state;\n  return\
     \ `<ha-icon icon=\"mdi:clock-outline\" style=\"width:14px;vertical-align:middle;margin-right:5px;\"\
     ></ha-icon> Uptime: ${new Date(uptime).toLocaleString()}`;\n]]]\n"
-  temp: "[[[\n  const stemp = states['sensor.chrisnas_temperature_du_systeme'].state;\n\
+  temp: "[[[\n  const stemp = states['sensor.User 1nas_temperature_du_systeme'].state;\n\
     \  return `<ha-icon icon=\"mdi:thermometer\" style=\"width:14px;vertical-align:middle;margin-right:5px;\"\
     ></ha-icon> Temp. Système: ${stemp}°C`;\n]]]\n"

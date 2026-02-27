@@ -1,10 +1,10 @@
 type: custom:button-card
-name: "[[[\n  const cpu = states['sensor.chrisnas_utilisation_du_processeur'].state;\n\
-  \  const ram = states['sensor.chrisnas_utilisation_de_la_memoire'].state;\n  return\
+name: "[[[\n  const cpu = states['sensor.User 1nas_utilisation_du_processeur'].state;\n\
+  \  const ram = states['sensor.User 1nas_utilisation_de_la_memoire'].state;\n  return\
   \ `CPU ${Math.round(cpu)}% & RAM ${Math.round(ram)}%`;\n]]]\n"
 triggers_update:
-- sensor.chrisnas_utilisation_du_processeur
-- sensor.chrisnas_utilisation_de_la_memoire
+- sensor.User 1nas_utilisation_du_processeur
+- sensor.User 1nas_utilisation_de_la_memoire
 icon: mdi:cpu-64-bit
 styles:
   card:
@@ -42,10 +42,10 @@ custom_fields:
     card:
       type: custom:mini-graph-card
       entities:
-      - entity: sensor.chrisnas_utilisation_du_processeur
+      - entity: sensor.User 1nas_utilisation_du_processeur
         name: CPU
         color: '#00ccff'
-      - entity: sensor.chrisnas_utilisation_de_la_memoire
+      - entity: sensor.User 1nas_utilisation_de_la_memoire
         name: RAM
         color: '#ff00ff'
       line_width: 4
@@ -59,9 +59,9 @@ custom_fields:
         legend: true
       style: "ha-card { \n  background: transparent !important; \n  border: none !important;\
         \ \n  box-shadow: none !important;\n  margin-top: -10px;\n}\n"
-  footer: "[[[\n  const cpu_temp = states['sensor.chrisnas_temperature_du_processeur'].state;\n\
-    \  const mem_used = states['sensor.chrisnas_memoire_utilisee'].state;\n  const\
-    \ mem_total = states['sensor.chrisnas_memory_size'].state;\n  const t_color =\
+  footer: "[[[\n  const cpu_temp = states['sensor.User 1nas_temperature_du_processeur'].state;\n\
+    \  const mem_used = states['sensor.User 1nas_memoire_utilisee'].state;\n  const\
+    \ mem_total = states['sensor.User 1nas_memory_size'].state;\n  const t_color =\
     \ cpu_temp > 55 ? '#ff1111' : '#00ff88';\n  return `\n    <div style=\"display:flex;\
     \ justify-content:space-between; align-items:center;\">\n      <span>TEMP CPU:\
     \ <span style=\"color:${t_color}\">${cpu_temp}°C</span></span>\n      <span>RAM:\

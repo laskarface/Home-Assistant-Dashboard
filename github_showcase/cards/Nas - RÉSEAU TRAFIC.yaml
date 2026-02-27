@@ -23,10 +23,10 @@ cards:
     - justify-self: start
 - type: custom:mini-graph-card
   entities:
-  - entity: sensor.chrisnas_eth0_download
+  - entity: sensor.User 1nas_eth0_download
     name: Down (0)
     color: '#00ff88'
-  - entity: sensor.chrisnas_eth0_upload
+  - entity: sensor.User 1nas_eth0_upload
     name: Up (0)
     color: '#ff9900'
   line_width: 2
@@ -59,10 +59,10 @@ cards:
       - line-height: 1.2
       - text-align: right
   custom_fields:
-    eth0: "[[[\n  const link = states['sensor.chrisnas_eth0_link'].state;\n  const\
-      \ err = states['sensor.chrisnas_eth0_packet_errors'].state;\n  return `ETH0:\
+    eth0: "[[[\n  const link = states['sensor.User 1nas_eth0_link'].state;\n  const\
+      \ err = states['sensor.User 1nas_eth0_packet_errors'].state;\n  return `ETH0:\
       \ <span style=\"color:#00ff88\">${link}</span><br>Err: ${err}`;\n]]]\n"
-    eth1: "[[[\n  const link = states['sensor.chrisnas_eth1_link'].state;\n  const\
-      \ err = states['sensor.chrisnas_eth1_packet_errors'].state;\n  return `ETH1:\
+    eth1: "[[[\n  const link = states['sensor.User 1nas_eth1_link'].state;\n  const\
+      \ err = states['sensor.User 1nas_eth1_packet_errors'].state;\n  return `ETH1:\
       \ <span style=\"color:${link === 'Up' ? '#00ff88' : '#757575'}\">${link}</span><br>Err:\
       \ ${err}`;\n]]]\n"

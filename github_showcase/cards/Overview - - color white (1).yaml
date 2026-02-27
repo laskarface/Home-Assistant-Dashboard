@@ -9,7 +9,7 @@ styles:
   - box-shadow: none
   - display: "[[[\n  // --- VISIBILITY LOGIC ---\n  const isEditMode = window.location.search.includes('edit=1')\
       \ || window.location.pathname.includes('edit');\n  \n  let count = 0;\n  const\
-      \ exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|chrisnas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;\n\
+      \ exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|User 1nas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;\n\
       \  \n  for (const s of Object.values(hass.states)) {\n    if (!s.entity_id.startsWith('sensor.'))\
       \ continue;\n    const val = parseFloat(String(s.state).replace('°C','').replace(',','.'));\n\
       \    if (!isNaN(val) && (val > 25 || val < 19)) {\n      const name = (s.attributes.friendly_name\
@@ -126,7 +126,7 @@ custom_fields:
               \ 900; color: white; text-transform: uppercase; letter-spacing: 0.8px;\
               \ margin-top: 2px; z-index: 1;\">Température</div>\n    </div>\n  `;\n\
               ]]]\n"
-            details: "[[[\n  let count = 0;\n  const exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|chrisnas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;\n\
+            details: "[[[\n  let count = 0;\n  const exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|User 1nas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;\n\
               \  for (const s of Object.values(hass.states)) {\n    if (!s.entity_id.startsWith('sensor.'))\
               \ continue;\n    const val = parseFloat(String(s.state).replace('°C','').replace(',','.'));\n\
               \    if (!isNaN(val) && (val > 25 || val < 19)) {\n      const name\
@@ -331,7 +331,7 @@ custom_fields:
             - entity_id: '*home*'
             - entity_id: '*oil*'
             - entity_id: '*diffus*'
-            - entity_id: '*chrisnas*'
+            - entity_id: '*User 1nas*'
             - entity_id: '*dhwp*'
             - entity_id: '*tesla*'
             - entity_id: '*comfort*'
@@ -341,7 +341,7 @@ custom_fields:
             - name: '*ecojoko*'
             - name: '*oil*'
             - name: '*diffus*'
-            - name: '*chrisnas*'
+            - name: '*User 1nas*'
             - name: '*dhwp*'
             - name: '*tesla*'
             - name: '*comfort*'

@@ -1024,8 +1024,8 @@ views:
                       const text = is_home ? 'RETOUR MAISON' : 'ALLER TRAVAIL';
                       const icon = is_home ? 'mdi:home' : 'mdi:office-building';
                       
-                      const a_sid = is_home ? 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';
-                      const c_sid = is_home ? 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';
+                      const a_sid = is_home ? 'sensor.User 2_travail_maison' : 'sensor.trajet_maison_travail_User 2';
+                      const c_sid = is_home ? 'sensor.User 1_travail_maison' : 'sensor.trajet_maison_travail_User 1';
                       
                       const a_val = states[a_sid] ? Math.round(states[a_sid].state) : '?';
                       const c_val = states[c_sid] ? Math.round(states[c_sid].state) : '?';
@@ -1041,8 +1041,8 @@ views:
 
                       const a_pic = states['person.user_2']?.attributes.entity_picture;
                       const c_pic = states['person.user_1']?.attributes.entity_picture;
-                      const a_color = getTrafficColor(a_val, 'input_number.aline_commute_normal');
-                      const c_color = getTrafficColor(c_val, 'input_number.chris_commute_normal');
+                      const a_color = getTrafficColor(a_val, 'input_number.User 2_commute_normal');
+                      const c_color = getTrafficColor(c_val, 'input_number.User 1_commute_normal');
                       
                       return `
                         <div style="width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; padding-right: 5px;">
@@ -1126,7 +1126,7 @@ views:
                                 const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                 const is_pm = new Date().getHours() >= 12;
                                 const is_home = (is_pm && !flip) || (!is_pm && flip);
-                                return is_home ? 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';
+                                return is_home ? 'sensor.User 2_travail_maison' : 'sensor.trajet_maison_travail_User 2';
                               ]]]
                             name: |
                               [[[
@@ -1145,10 +1145,10 @@ views:
                                 const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                 const is_pm = new Date().getHours() >= 12;
                                 const is_home = (is_pm && !flip) || (!is_pm && flip);
-                                const sid = is_home ? 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';
-                                const s1_sid = is_home ? 'sensor.trajet_aline_retour_semaine_derniere' : 'sensor.trajet_aline_semaine_derniere';
-                                const avg_sid = is_home ? 'sensor.trajet_aline_retour_moyenne' : 'sensor.trajet_aline_moyenne';
-                                const normal_sid = 'input_number.aline_commute_normal';
+                                const sid = is_home ? 'sensor.User 2_travail_maison' : 'sensor.trajet_maison_travail_User 2';
+                                const s1_sid = is_home ? 'sensor.trajet_User 2_retour_semaine_derniere' : 'sensor.trajet_User 2_semaine_derniere';
+                                const avg_sid = is_home ? 'sensor.trajet_User 2_retour_moyenne' : 'sensor.trajet_User 2_moyenne';
+                                const normal_sid = 'input_number.User 2_commute_normal';
                                 const main_entity = states[sid];
                                 if (!main_entity) return 'Chargement...';
                                 
@@ -1222,9 +1222,9 @@ views:
                                       const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                       const is_pm = new Date().getHours() >= 12;
                                       const is_home = (is_pm && !flip) || (!is_pm && flip);
-                                      const sid = is_home ? 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';
+                                      const sid = is_home ? 'sensor.User 2_travail_maison' : 'sensor.trajet_maison_travail_User 2';
                                       const duration = Math.round(parseFloat(states[sid]?.state) || 0);
-                                      const normal = Math.round(parseFloat(states['input_number.aline_commute_normal']?.state) || duration);
+                                      const normal = Math.round(parseFloat(states['input_number.User 2_commute_normal']?.state) || duration);
                                       const delay = duration - normal;
                                       if (delay > t_red) return '1px solid rgba(220, 80, 80, 0.5)';
                                       if (delay > t_orange) return '1px solid rgba(255, 165, 0, 0.5)';
@@ -1237,9 +1237,9 @@ views:
                                       const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                       const is_pm = new Date().getHours() >= 12;
                                       const is_home = (is_pm && !flip) || (!is_pm && flip);
-                                      const sid = is_home ? 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';
+                                      const sid = is_home ? 'sensor.User 2_travail_maison' : 'sensor.trajet_maison_travail_User 2';
                                       const duration = Math.round(parseFloat(states[sid]?.state) || 0);
-                                      const normal = Math.round(parseFloat(states['input_number.aline_commute_normal']?.state) || duration);
+                                      const normal = Math.round(parseFloat(states['input_number.User 2_commute_normal']?.state) || duration);
                                       const delay = duration - normal;
                                       if (delay > t_red) return 'linear-gradient(145deg, rgba(220, 80, 80, 0.3), rgba(20, 27, 38, 0.8))';
                                       if (delay > t_orange) return 'linear-gradient(145deg, rgba(255, 165, 0, 0.3), rgba(20, 27, 38, 0.8))';
@@ -1266,7 +1266,7 @@ views:
                                 const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                 const is_pm = new Date().getHours() >= 12;
                                 const is_home = (is_pm && !flip) || (!is_pm && flip);
-                                return is_home ? 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';
+                                return is_home ? 'sensor.User 1_travail_maison' : 'sensor.trajet_maison_travail_User 1';
                               ]]]
                             name: |
                               [[[
@@ -1285,10 +1285,10 @@ views:
                                 const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                 const is_pm = new Date().getHours() >= 12;
                                 const is_home = (is_pm && !flip) || (!is_pm && flip);
-                                const sid = is_home ? 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';
-                                const s1_sid = is_home ? 'sensor.trajet_chris_retour_semaine_derniere' : 'sensor.trajet_chris_semaine_derniere';
-                                const avg_sid = is_home ? 'sensor.trajet_chris_retour_moyenne' : 'sensor.trajet_chris_moyenne';
-                                const normal_sid = 'input_number.chris_commute_normal';
+                                const sid = is_home ? 'sensor.User 1_travail_maison' : 'sensor.trajet_maison_travail_User 1';
+                                const s1_sid = is_home ? 'sensor.trajet_User 1_retour_semaine_derniere' : 'sensor.trajet_User 1_semaine_derniere';
+                                const avg_sid = is_home ? 'sensor.trajet_User 1_retour_moyenne' : 'sensor.trajet_User 1_moyenne';
+                                const normal_sid = 'input_number.User 1_commute_normal';
                                 const main_entity = states[sid];
                                 if (!main_entity) return 'Chargement...';
                                 
@@ -1362,9 +1362,9 @@ views:
                                       const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                       const is_pm = new Date().getHours() >= 12;
                                       const is_home = (is_pm && !flip) || (!is_pm && flip);
-                                      const sid = is_home ? 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';
+                                      const sid = is_home ? 'sensor.User 1_travail_maison' : 'sensor.trajet_maison_travail_User 1';
                                       const duration = Math.round(parseFloat(states[sid]?.state) || 0);
-                                      const normal = Math.round(parseFloat(states['input_number.chris_commute_normal']?.state) || duration);
+                                      const normal = Math.round(parseFloat(states['input_number.User 1_commute_normal']?.state) || duration);
                                       const delay = duration - normal;
                                       if (delay > t_red) return '1px solid rgba(220, 80, 80, 0.5)';
                                       if (delay > t_orange) return '1px solid rgba(255, 165, 0, 0.5)';
@@ -1377,9 +1377,9 @@ views:
                                       const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                       const is_pm = new Date().getHours() >= 12;
                                       const is_home = (is_pm && !flip) || (!is_pm && flip);
-                                      const sid = is_home ? 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';
+                                      const sid = is_home ? 'sensor.User 1_travail_maison' : 'sensor.trajet_maison_travail_User 1';
                                       const duration = Math.round(parseFloat(states[sid]?.state) || 0);
-                                      const normal = Math.round(parseFloat(states['input_number.chris_commute_normal']?.state) || duration);
+                                      const normal = Math.round(parseFloat(states['input_number.User 1_commute_normal']?.state) || duration);
                                       const delay = duration - normal;
                                       if (delay > t_red) return 'linear-gradient(145deg, rgba(220, 80, 80, 0.3), rgba(20, 27, 38, 0.8))';
                                       if (delay > t_orange) return 'linear-gradient(145deg, rgba(255, 165, 0, 0.3), rgba(20, 27, 38, 0.8))';
@@ -3709,7 +3709,7 @@ views:
                     }
                 head:
                   type: custom:button-card
-                  entity: calendar.chris_billet_gmail_com
+                  entity: calendar.User 1_User_gmail_com
                   show_name: false
                   show_icon: false
                   tap_action:
@@ -3813,7 +3813,7 @@ views:
                         showFinishedEvents: false
                         hideFinishedEvents: true
                         entities:
-                          - entity: calendar.chris_billet_gmail_com
+                          - entity: calendar.User 1_User_gmail_com
                             blocklist: poubelle|Sortir|VERTE|JAUNE
                             blacklist: poubelle|Sortir|VERTE|JAUNE
                           - entity: calendar.icloud
@@ -3868,7 +3868,7 @@ views:
                   - type: custom:atomic-calendar-revive
                     name: ' '
                     entities:
-                      - calendar.chris_billet_gmail_com
+                      - calendar.User 1_User_gmail_com
                       - calendar.icloud
                       - calendar.paris_saint_germain
                       - calendar.jours_feries_et_autres_fetes_en_france
@@ -4116,7 +4116,7 @@ views:
                       const isEditMode = window.location.search.includes('edit=1') || window.location.pathname.includes('edit');
                       
                       let count = 0;
-                      const exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|chrisnas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;
+                      const exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|User 1nas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;
                       
                       for (const s of Object.values(hass.states)) {
                         if (!s.entity_id.startsWith('sensor.')) continue;
@@ -4256,7 +4256,7 @@ views:
                           details: |
                             [[[
                               let count = 0;
-                              const exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|chrisnas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;
+                              const exclusions = /battery|voltage|signal|ecojoko|home|oil|diffus|User 1nas|dhwp|tesla|comfort|adjust|away|extérieure|exterieure|intérieure|interieure/;
                               for (const s of Object.values(hass.states)) {
                                 if (!s.entity_id.startsWith('sensor.')) continue;
                                 const val = parseFloat(String(s.state).replace('°C','').replace(',','.'));
@@ -4465,7 +4465,7 @@ views:
                               - entity_id: '*home*'
                               - entity_id: '*oil*'
                               - entity_id: '*diffus*'
-                              - entity_id: '*chrisnas*'
+                              - entity_id: '*User 1nas*'
                               - entity_id: '*dhwp*'
                               - entity_id: '*tesla*'
                               - entity_id: '*comfort*'
@@ -4475,7 +4475,7 @@ views:
                               - name: '*ecojoko*'
                               - name: '*oil*'
                               - name: '*diffus*'
-                              - name: '*chrisnas*'
+                              - name: '*User 1nas*'
                               - name: '*dhwp*'
                               - name: '*tesla*'
                               - name: '*comfort*'
@@ -5962,7 +5962,7 @@ views:
               `;
             ]]]
       - type: custom:button-card
-        entity: sensor.chrisnas_etat
+        entity: sensor.User 1nas_etat
         show_name: false
         show_icon: false
         show_state: false
@@ -10848,11 +10848,6 @@ views:
       - user: ae15429d8056449699d5e3e93e21e2c9
       - user: b1c2a32f85334df2ab8e8d5b2299575c
       - user: 76dc484362274cbbb06167991e4e596b
-  - type: sections
-    max_columns: 1
-    title: 'User 4 '
-    path: chloe
-    sections:
       - type: grid
         cards:
           - type: custom:button-card
@@ -11078,11 +11073,6 @@ views:
       - user: 49a98c3aa3c44399a03d32437dca04ba
       - user: 76dc484362274cbbb06167991e4e596b
     cards: []
-  - type: sections
-    max_columns: 4
-    title: User 3
-    path: marley
-    sections:
       - type: grid
         cards:
           - type: custom:button-card
@@ -11363,17 +11353,6 @@ views:
         show_state: true
         show_icon: true
         entity: sensor.smart_thermostat_valve_03004482_battery
-  - type: sections
-    path: morgan
-    cards: []
-    title: User 5
-    subview: false
-    visible:
-      - user: f9c990f45267407787a685d132c3b425
-      - user: 49a98c3aa3c44399a03d32437dca04ba
-      - user: 5ee57ea8e4174d67b0a97686fe4437b5
-      - user: 76dc484362274cbbb06167991e4e596b
-    badges:
       - type: entity
         show_name: true
         show_state: true
@@ -16954,7 +16933,7 @@ views:
       - type: grid
         cards:
           - type: custom:button-card
-            entity: sensor.chrisnas_etat
+            entity: sensor.User 1nas_etat
             name: SYSTÈME NAS
             icon: mdi:nas
             show_state: true
@@ -17004,16 +16983,16 @@ views:
             custom_fields:
               uptime: |
                 [[[
-                  const uptime = states['sensor.chrisnas_uptime'].state;
+                  const uptime = states['sensor.User 1nas_uptime'].state;
                   return `<ha-icon icon="mdi:clock-outline" style="width:14px;vertical-align:middle;margin-right:5px;"></ha-icon> Uptime: ${new Date(uptime).toLocaleString()}`;
                 ]]]
               temp: |
                 [[[
-                  const stemp = states['sensor.chrisnas_temperature_du_systeme'].state;
+                  const stemp = states['sensor.User 1nas_temperature_du_systeme'].state;
                   return `<ha-icon icon="mdi:thermometer" style="width:14px;vertical-align:middle;margin-right:5px;"></ha-icon> Temp. Système: ${stemp}°C`;
                 ]]]
           - type: custom:button-card
-            entity: sensor.chrisnas_volume_utilise_datavol1
+            entity: sensor.User 1nas_volume_utilise_datavol1
             name: STOCKAGE DATAVOL1
             icon: mdi:database
             show_state: true
@@ -17065,8 +17044,8 @@ views:
                 ]]]
               stats: |
                 [[[
-                  const free = states['sensor.chrisnas_espace_libre_datavol1'].state;
-                  const total = states['sensor.chrisnas_volume_size'].state;
+                  const free = states['sensor.User 1nas_espace_libre_datavol1'].state;
+                  const total = states['sensor.User 1nas_volume_size'].state;
                   return `<span>Libre: ${Math.round(free)} GiB</span><span>Total: ${Math.round(total)} GiB</span>`;
                 ]]]
           - type: vertical-stack
@@ -17096,13 +17075,13 @@ views:
                 square: false
                 cards:
                   - type: custom:button-card
-                    entity: sensor.chrisnas_etat_du_lecteur_0_1
+                    entity: sensor.User 1nas_etat_du_lecteur_0_1
                     name: HDD 1
                     show_state: false
                     custom_fields:
                       t: >
                         [[[ return
-                        states['sensor.chrisnas_temperature_du_lecteur_0_1'].state
+                        states['sensor.User 1nas_temperature_du_lecteur_0_1'].state
                         + '°' ]]]
                       sn: >
                         [[[ return entity.attributes['Serial #'] ?
@@ -17138,13 +17117,13 @@ views:
                           - 0.2)
                           - text-transform: uppercase
                   - type: custom:button-card
-                    entity: sensor.chrisnas_etat_du_lecteur_0_2
+                    entity: sensor.User 1nas_etat_du_lecteur_0_2
                     name: HDD 2
                     show_state: false
                     custom_fields:
                       t: >
                         [[[ return
-                        states['sensor.chrisnas_temperature_du_lecteur_0_2'].state
+                        states['sensor.User 1nas_temperature_du_lecteur_0_2'].state
                         + '°' ]]]
                       sn: >
                         [[[ return entity.attributes['Serial #'] ?
@@ -17181,13 +17160,13 @@ views:
                           - 0.2)
                           - text-transform: uppercase
                   - type: custom:button-card
-                    entity: sensor.chrisnas_etat_du_lecteur_0_3
+                    entity: sensor.User 1nas_etat_du_lecteur_0_3
                     name: HDD 3
                     show_state: false
                     custom_fields:
                       t: >
                         [[[ return
-                        states['sensor.chrisnas_temperature_du_lecteur_0_3'].state
+                        states['sensor.User 1nas_temperature_du_lecteur_0_3'].state
                         + '°' ]]]
                       sn: >
                         [[[ return entity.attributes['Serial #'] ?
@@ -17228,13 +17207,13 @@ views:
           - type: custom:button-card
             name: |
               [[[
-                const cpu = states['sensor.chrisnas_utilisation_du_processeur'].state;
-                const ram = states['sensor.chrisnas_utilisation_de_la_memoire'].state;
+                const cpu = states['sensor.User 1nas_utilisation_du_processeur'].state;
+                const ram = states['sensor.User 1nas_utilisation_de_la_memoire'].state;
                 return `CPU ${Math.round(cpu)}% & RAM ${Math.round(ram)}%`;
               ]]]
             triggers_update:
-              - sensor.chrisnas_utilisation_du_processeur
-              - sensor.chrisnas_utilisation_de_la_memoire
+              - sensor.User 1nas_utilisation_du_processeur
+              - sensor.User 1nas_utilisation_de_la_memoire
             icon: mdi:cpu-64-bit
             styles:
               card:
@@ -17272,10 +17251,10 @@ views:
                 card:
                   type: custom:mini-graph-card
                   entities:
-                    - entity: sensor.chrisnas_utilisation_du_processeur
+                    - entity: sensor.User 1nas_utilisation_du_processeur
                       name: CPU
                       color: '#00ccff'
-                    - entity: sensor.chrisnas_utilisation_de_la_memoire
+                    - entity: sensor.User 1nas_utilisation_de_la_memoire
                       name: RAM
                       color: '#ff00ff'
                   line_width: 4
@@ -17296,9 +17275,9 @@ views:
                     }
               footer: |
                 [[[
-                  const cpu_temp = states['sensor.chrisnas_temperature_du_processeur'].state;
-                  const mem_used = states['sensor.chrisnas_memoire_utilisee'].state;
-                  const mem_total = states['sensor.chrisnas_memory_size'].state;
+                  const cpu_temp = states['sensor.User 1nas_temperature_du_processeur'].state;
+                  const mem_used = states['sensor.User 1nas_memoire_utilisee'].state;
+                  const mem_total = states['sensor.User 1nas_memory_size'].state;
                   const t_color = cpu_temp > 55 ? '#ff1111' : '#00ff88';
                   return `
                     <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -17334,10 +17313,10 @@ views:
                     - justify-self: start
               - type: custom:mini-graph-card
                 entities:
-                  - entity: sensor.chrisnas_eth0_download
+                  - entity: sensor.User 1nas_eth0_download
                     name: Down (0)
                     color: '#00ff88'
-                  - entity: sensor.chrisnas_eth0_upload
+                  - entity: sensor.User 1nas_eth0_upload
                     name: Up (0)
                     color: '#ff9900'
                 line_width: 2
@@ -17377,14 +17356,14 @@ views:
                 custom_fields:
                   eth0: |
                     [[[
-                      const link = states['sensor.chrisnas_eth0_link'].state;
-                      const err = states['sensor.chrisnas_eth0_packet_errors'].state;
+                      const link = states['sensor.User 1nas_eth0_link'].state;
+                      const err = states['sensor.User 1nas_eth0_packet_errors'].state;
                       return `ETH0: <span style="color:#00ff88">${link}</span><br>Err: ${err}`;
                     ]]]
                   eth1: |
                     [[[
-                      const link = states['sensor.chrisnas_eth1_link'].state;
-                      const err = states['sensor.chrisnas_eth1_packet_errors'].state;
+                      const link = states['sensor.User 1nas_eth1_link'].state;
+                      const err = states['sensor.User 1nas_eth1_packet_errors'].state;
                       return `ETH1: <span style="color:${link === 'Up' ? '#00ff88' : '#757575'}">${link}</span><br>Err: ${err}`;
                     ]]]
     subview: true
@@ -17392,7 +17371,7 @@ views:
     header:
       card:
         type: custom:button-card
-        entity: sensor.chrisnas_etat
+        entity: sensor.User 1nas_etat
         name: |
           [[[
             const date = new Date();
@@ -17410,8 +17389,8 @@ views:
 
             
             const state = entity.state;
-            const cpu = states['sensor.chrisnas_utilisation_du_processeur'].state;
-            const temp = states['sensor.chrisnas_temperature_du_systeme'].state;
+            const cpu = states['sensor.User 1nas_utilisation_du_processeur'].state;
+            const temp = states['sensor.User 1nas_temperature_du_systeme'].state;
             
             let statusMsg = "Système Opérationnel";
             let statusColor = "#00ff88"; // Vert
@@ -17427,7 +17406,7 @@ views:
             return `
               <div style="display: flex; flex-direction: column; align-items: flex-start;">
                 <span style="font-size: 26px; font-weight: 900; color: white; text-transform: uppercase; letter-spacing: -1px;">
-                  ${greeting} <span style="color: #00ccff;">Christophe</span>
+                  ${greeting} <span style="color: #00ccff;">User 1tophe</span>
                 </span>
                 <div style="display: flex; align-items: center; margin-top: 2px;">
                   <span style="font-size: 11px; font-weight: 500; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; letter-spacing: 2px;">
@@ -17443,8 +17422,8 @@ views:
             `;
           ]]]
         triggers_update:
-          - sensor.chrisnas_utilisation_du_processeur
-          - sensor.chrisnas_temperature_du_systeme
+          - sensor.User 1nas_utilisation_du_processeur
+          - sensor.User 1nas_temperature_du_systeme
         styles:
           card:
             - background: transparent
@@ -17491,12 +17470,6 @@ views:
             - font-size: 12px
             - font-weight: 700
             - color: rgba(255, 255, 255, 0.9)
-  - type: sections
-    max_columns: 4
-    title: Sauvegarde de card
-    path: sauvegarde-de-card
-    subview: true
-    sections:
       - type: grid
         cards:
           - type: conditional
@@ -17566,7 +17539,7 @@ views:
                       const flip = states['input_boolean.commute_card_flip']?.state === 'on';
                       const is_pm = new Date().getHours() >= 12;
                       const is_home = (is_pm && !flip) || (!is_pm && flip);
-                      return is_home ? 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';
+                      return is_home ? 'sensor.User 2_travail_maison' : 'sensor.trajet_maison_travail_User 2';
                     ]]]
                   name: |
                     [[[
@@ -17585,10 +17558,10 @@ views:
                       const flip = states['input_boolean.commute_card_flip']?.state === 'on';
                       const is_pm = new Date().getHours() >= 12;
                       const is_home = (is_pm && !flip) || (!is_pm && flip);
-                      const sid = is_home ? 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';
-                      const s1_sid = is_home ? 'sensor.trajet_aline_retour_semaine_derniere' : 'sensor.trajet_aline_semaine_derniere';
-                      const avg_sid = is_home ? 'sensor.trajet_aline_retour_moyenne' : 'sensor.trajet_aline_moyenne';
-                      const normal_sid = 'input_number.aline_commute_normal';
+                      const sid = is_home ? 'sensor.User 2_travail_maison' : 'sensor.trajet_maison_travail_User 2';
+                      const s1_sid = is_home ? 'sensor.trajet_User 2_retour_semaine_derniere' : 'sensor.trajet_User 2_semaine_derniere';
+                      const avg_sid = is_home ? 'sensor.trajet_User 2_retour_moyenne' : 'sensor.trajet_User 2_moyenne';
+                      const normal_sid = 'input_number.User 2_commute_normal';
                       const main_entity = states[sid];
                       if (!main_entity) return 'Chargement...';
                       
@@ -17650,9 +17623,9 @@ views:
                             const flip = states['input_boolean.commute_card_flip']?.state === 'on';
                             const is_pm = new Date().getHours() >= 12;
                             const is_home = (is_pm && !flip) || (!is_pm && flip);
-                            const sid = is_home ? 'sensor.aline_travail_maison' : 'sensor.trajet_maison_travail_aline';
+                            const sid = is_home ? 'sensor.User 2_travail_maison' : 'sensor.trajet_maison_travail_User 2';
                             const duration = Math.round(parseFloat(states[sid]?.state) || 0);
-                            const normal = Math.round(parseFloat(states['input_number.aline_commute_normal']?.state) || duration);
+                            const normal = Math.round(parseFloat(states['input_number.User 2_commute_normal']?.state) || duration);
                             const delay = duration - normal;
                             if (delay > t_red) return 'linear-gradient(145deg, rgba(220, 80, 80, 0.45), rgba(0, 0, 0, 0.8))';
                             if (delay > t_orange) return 'linear-gradient(145deg, rgba(255, 165, 0, 0.4), rgba(0, 0, 0, 0.8))';
@@ -17676,7 +17649,7 @@ views:
                       const flip = states['input_boolean.commute_card_flip']?.state === 'on';
                       const is_pm = new Date().getHours() >= 12;
                       const is_home = (is_pm && !flip) || (!is_pm && flip);
-                      return is_home ? 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';
+                      return is_home ? 'sensor.User 1_travail_maison' : 'sensor.trajet_maison_travail_User 1';
                     ]]]
                   name: |
                     [[[
@@ -17695,10 +17668,10 @@ views:
                       const flip = states['input_boolean.commute_card_flip']?.state === 'on';
                       const is_pm = new Date().getHours() >= 12;
                       const is_home = (is_pm && !flip) || (!is_pm && flip);
-                      const sid = is_home ? 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';
-                      const s1_sid = is_home ? 'sensor.trajet_chris_retour_semaine_derniere' : 'sensor.trajet_chris_semaine_derniere';
-                      const avg_sid = is_home ? 'sensor.trajet_chris_retour_moyenne' : 'sensor.trajet_chris_moyenne';
-                      const normal_sid = 'input_number.chris_commute_normal';
+                      const sid = is_home ? 'sensor.User 1_travail_maison' : 'sensor.trajet_maison_travail_User 1';
+                      const s1_sid = is_home ? 'sensor.trajet_User 1_retour_semaine_derniere' : 'sensor.trajet_User 1_semaine_derniere';
+                      const avg_sid = is_home ? 'sensor.trajet_User 1_retour_moyenne' : 'sensor.trajet_User 1_moyenne';
+                      const normal_sid = 'input_number.User 1_commute_normal';
                       const main_entity = states[sid];
                       if (!main_entity) return 'Chargement...';
                       
@@ -17760,9 +17733,9 @@ views:
                             const flip = states['input_boolean.commute_card_flip']?.state === 'on';
                             const is_pm = new Date().getHours() >= 12;
                             const is_home = (is_pm && !flip) || (!is_pm && flip);
-                            const sid = is_home ? 'sensor.chris_travail_maison' : 'sensor.trajet_maison_travail_chris';
+                            const sid = is_home ? 'sensor.User 1_travail_maison' : 'sensor.trajet_maison_travail_User 1';
                             const duration = Math.round(parseFloat(states[sid]?.state) || 0);
-                            const normal = Math.round(parseFloat(states['input_number.chris_commute_normal']?.state) || duration);
+                            const normal = Math.round(parseFloat(states['input_number.User 1_commute_normal']?.state) || duration);
                             const delay = duration - normal;
                             if (delay > t_red) return 'linear-gradient(145deg, rgba(220, 80, 80, 0.45), rgba(0, 0, 0, 0.8))';
                             if (delay > t_orange) return 'linear-gradient(145deg, rgba(255, 165, 0, 0.4), rgba(0, 0, 0, 0.8))';
@@ -18257,7 +18230,7 @@ views:
               dateFormat: DD/MM/YYYY
               dateFormatShort: DD/MM
               entities:
-                - calendar.chris_billet_gmail_com
+                - calendar.User 1_User_gmail_com
                 - calendar.icloud
                 - calendar.paris_saint_germain
                 - calendar.jours_feries_et_autres_fetes_en_france

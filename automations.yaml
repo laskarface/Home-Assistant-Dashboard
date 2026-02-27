@@ -140,7 +140,7 @@
         - data:
             title: Machine à laver
             message: ⚠️ Pensez à vider la machine
-          action: notify.mobile_app_iphone_daline
+          action: notify.mobile_app_iphone_dUser 2
         - data:
             title: Machine à laver
             message: ⚠️ Pensez à vider la machine
@@ -162,7 +162,7 @@
     data:
       title: Sèche-linge
       message: Le sèche-linge est terminé ✅
-  - action: notify.mobile_app_iphone_daline
+  - action: notify.mobile_app_iphone_dUser 2
     data:
       title: Sèche-linge
       message: Le sèche-linge est terminé ✅
@@ -252,7 +252,7 @@
         event_location %}- {{ event_location }}{% endif %}
 
         '
-    action: notify.mobile_app_iphone_daline
+    action: notify.mobile_app_iphone_dUser 2
   - data:
       title: Match du PSG aujourd'hui ⚽️
       message: '{{ event_summary }} à {{ event_start }} (fin {{ event_end }}) {% if
@@ -290,7 +290,7 @@
       message: 'Match du PSG demain à {{ event_start }}
 
         '
-    action: notify.mobile_app_iphone_daline
+    action: notify.mobile_app_iphone_dUser 2
   - data:
       title: Rappel match PSG ⚽️
       message: 'Match du PSG demain à {{ event_start }}
@@ -322,7 +322,7 @@
   - data:
       title: Machine à laver
       message: Le Lave Linge est terminé ✅
-    action: notify.mobile_app_iphone_daline
+    action: notify.mobile_app_iphone_dUser 2
   mode: single
 - id: '1764332380766'
   alias: Porte garage - Alerte ouverture + notif fermeture
@@ -357,7 +357,7 @@
       - data:
           title: Porte Garage
           message: ⚠️ La porte du garage est restée ouverte !
-        action: notify.mobile_app_iphone_daline
+        action: notify.mobile_app_iphone_dUser 2
     - conditions:
       - condition: trigger
         id: garage_fermee
@@ -372,7 +372,7 @@
       - data:
           title: Porte Garage
           message: ✅ Porte du garage fermée.
-        action: notify.mobile_app_iphone_daline
+        action: notify.mobile_app_iphone_dUser 2
       - target:
           entity_id: input_boolean.alerte_porte_garage_envoyee
         action: input_boolean.turn_off
@@ -434,7 +434,7 @@
             {{ repeat.item.tracking_number }})
 
             '
-      - action: notify.mobile_app_iphone_daline
+      - action: notify.mobile_app_iphone_dUser 2
         data:
           title: "📦 Colis livré"
           message: '{{ repeat.item.friendly_name | default(''Colis'') }} est maintenant
@@ -462,7 +462,7 @@
         data:
           title: Machine à laver
           message: ✅ Machine vidée.
-      - action: notify.mobile_app_iphone_daline
+      - action: notify.mobile_app_iphone_dUser 2
         data:
           title: Machine à laver
           message: ✅ Machine vidée.
@@ -778,7 +778,7 @@
             }}°C / Consigne : {{ target }}°C
 
             '
-        action: notify.mobile_app_iphone_daline
+        action: notify.mobile_app_iphone_dUser 2
       - delay: 00:20:00
   mode: restart
 - id: '1767607610603'
@@ -804,7 +804,7 @@
       message: 'La fenêtre a été refermée, le chauffage peut fonctionner normalement.
 
         '
-    action: notify.mobile_app_iphone_daline
+    action: notify.mobile_app_iphone_dUser 2
   - target:
       entity_id: input_boolean.fenetre_lison_notifiee
     action: input_boolean.turn_off
@@ -829,7 +829,7 @@
     trigger: time
   actions:
   - target:
-      entity_id: calendar.chris_billet_gmail_com
+      entity_id: calendar.User 1_User_gmail_com
     data:
       start_date_time: '{{ now().replace(hour=19, minute=55, second=0).isoformat()
         }}'
@@ -837,7 +837,7 @@
     response_variable: cal
     action: calendar.get_events
   - variables:
-      events: '{{ cal[''calendar.chris_billet_gmail_com''][''events''] | default([])
+      events: '{{ cal[''calendar.User 1_User_gmail_com''][''events''] | default([])
         }}'
       poubelles_list: "{{\n  events\n  | selectattr('summary','defined')\n  | selectattr('summary','search','(?i)sortir\\\\s+poubelle')\n
         \ | map(attribute='summary')\n  | list\n}}"
@@ -852,7 +852,7 @@
   - data:
       title: "Poubelles 🗑️"
       message: '{{ message_poubelles }}'
-    action: notify.mobile_app_iphone_daline
+    action: notify.mobile_app_iphone_dUser 2
   mode: single
 - id: '1769198801749'
   alias: 'Éteint lumière User 5 quand User 5 absent '
@@ -1061,7 +1061,7 @@
     - input_boolean.lison_heater_force_schedule
     - binary_sensor.fenetre_lison_contact
     trigger: state
-  - entity_id: calendar.chris_billet_gmail_com
+  - entity_id: calendar.User 1_User_gmail_com
     trigger: state
   - minutes: /1
     trigger: time_pattern
@@ -1088,7 +1088,7 @@
 
               '
         - condition: template
-          value_template: '{% set cal = ''calendar.chris_billet_gmail_com'' %} {%
+          value_template: '{% set cal = ''calendar.User 1_User_gmail_com'' %} {%
             set msg = state_attr(cal, ''message'') | default('''') %} {{ is_state(cal,
             ''on'') and (''Week-end Papa'' in msg or ''Vacances Papa'' in msg) }}
 
@@ -1143,8 +1143,8 @@
     - thu
     - fri
   - condition: template
-    value_template: '{% set actuel = states(''sensor.trajet_maison_travail_aline'')
-      | float(0) %} {% set s1 = states(''sensor.trajet_aline_semaine_derniere'') |
+    value_template: '{% set actuel = states(''sensor.trajet_maison_travail_User 2'')
+      | float(0) %} {% set s1 = states(''sensor.trajet_User 2_semaine_derniere'') |
       float(0) %} {# On ne notifie que si le capteur S1 est valide et que le trajet
       est 10% plus long #} {{ s1 > 0 and actuel > (s1 * 1.1) }}
 
@@ -1153,14 +1153,14 @@
   - data:
       title: ⚠️ Alerte Trafic Trajet
       message: "Le trajet vers ton travail est plus long ce matin !  🚗 Actuel
-        : {{ states('sensor.trajet_maison_travail_aline') | round(0) }} min 📊
-        Semaine dernière : {{ states('sensor.trajet_aline_semaine_derniere') | round(0)
+        : {{ states('sensor.trajet_maison_travail_User 2') | round(0) }} min 📊
+        Semaine dernière : {{ states('sensor.trajet_User 2_semaine_derniere') | round(0)
         }} min\n"
       data:
         push:
           sound: default
         url: https://www.waze.com/ul?ll=48.598,2.425&navigate=yes
-    action: notify.mobile_app_iphone_daline
+    action: notify.mobile_app_iphone_dUser 2
   mode: single
 - id: '1772054955163'
   alias: OpenUV - Init quotidienne 00h00 (reset + intervalle)
@@ -1301,7 +1301,7 @@
               title: "Humidité élevée 💧"
               message: Ta chambre est trop humide ({{ states('sensor.smart_temp_humidity_sensor_39000e5be749_humidity')
                 }}%), il faut aérer un peu !
-          - action: notify.mobile_app_iphone_daline
+          - action: notify.mobile_app_iphone_dUser 2
             data:
               title: "Humidité User 4 (User 4 présente) 💧"
               message: La chambre de User 4 est trop humide ({{ states('sensor.smart_temp_humidity_sensor_39000e5be749_humidity')
@@ -1311,7 +1311,7 @@
             entity_id: person.user_4
             state: not_home
           sequence:
-          - action: notify.mobile_app_iphone_daline
+          - action: notify.mobile_app_iphone_dUser 2
             data:
               title: "Humidité User 4 (User 4 absente) 💧"
               message: La chambre de User 4 est trop humide ({{ states('sensor.smart_temp_humidity_sensor_39000e5be749_humidity')
@@ -1336,7 +1336,7 @@
               title: Humidité OK ✅
               message: L'humidité dans ta chambre est redevenue normale ({{ states('sensor.smart_temp_humidity_sensor_39000e5be749_humidity')
                 }}%).
-          - action: notify.mobile_app_iphone_daline
+          - action: notify.mobile_app_iphone_dUser 2
             data:
               title: Humidité User 4 OK ✅
               message: L'humidité dans la chambre de User 4 est redevenue normale ({{
@@ -1347,7 +1347,7 @@
             entity_id: person.user_4
             state: not_home
           sequence:
-          - action: notify.mobile_app_iphone_daline
+          - action: notify.mobile_app_iphone_dUser 2
             data:
               title: Humidité User 4 OK ✅
               message: L'humidité dans la chambre de User 4 est redevenue normale ({{

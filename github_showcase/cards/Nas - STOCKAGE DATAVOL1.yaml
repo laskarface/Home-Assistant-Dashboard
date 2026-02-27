@@ -1,5 +1,5 @@
 type: custom:button-card
-entity: sensor.chrisnas_volume_utilise_datavol1
+entity: sensor.User 1nas_volume_utilise_datavol1
 name: STOCKAGE DATAVOL1
 icon: mdi:database
 show_state: true
@@ -47,7 +47,7 @@ custom_fields:
     \ : val > 75 ? '#ff9900' : '#00ff88';\n  return `<div style=\"background: ${color};\
     \ width: ${val}%; height: 100%; border-radius: 6px; box-shadow: 0 0 10px ${color};\
     \ transition: width 1s;\"></div>`;\n]]]\n"
-  stats: "[[[\n  const free = states['sensor.chrisnas_espace_libre_datavol1'].state;\n\
-    \  const total = states['sensor.chrisnas_volume_size'].state;\n  return `<span>Libre:\
+  stats: "[[[\n  const free = states['sensor.User 1nas_espace_libre_datavol1'].state;\n\
+    \  const total = states['sensor.User 1nas_volume_size'].state;\n  return `<span>Libre:\
     \ ${Math.round(free)} GiB</span><span>Total: ${Math.round(total)} GiB</span>`;\n\
     ]]]\n"

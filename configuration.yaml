@@ -55,14 +55,14 @@ input_number:
     max: 100000000
     step: 0.1
     mode: box
-  aline_commute_normal:
+  User 2_commute_normal:
     name: "Temps Normal User 2"
     min: 0
     max: 200
     step: 1
     unit_of_measurement: "min"
     icon: mdi:timer-outline
-  chris_commute_normal:
+  User 1_commute_normal:
     name: "Temps Normal User 1"
     min: 0
     max: 200
@@ -286,7 +286,7 @@ template:
           {% if days < 0 %} Avant J0 {% elif days > 365 %} Terminé {% else %} J+{{ days }} {% endif %}
         attributes:
           days_since_start: "{{ (now().date() - as_datetime('2025-10-25').date()).days }}"
-          prp_aujourdhui: "{{ 'PRP' in (state_attr('calendar.chris_billet_gmail_com', 'message') or '').upper() }}"
+          prp_aujourdhui: "{{ 'PRP' in (state_attr('calendar.User 1_User_gmail_com', 'message') or '').upper() }}"
           shampoing_aujourdhui: >
             {% set start_sh = as_datetime('2025-11-17').date() %}
             {% if now().date() < start_sh or now().date() > as_datetime('2026-10-25').date() %} false
@@ -309,7 +309,7 @@ template:
     action:
       - service: calendar.get_events
         target:
-          entity_id: calendar.chris_billet_gmail_com
+          entity_id: calendar.User 1_User_gmail_com
         data:
           duration: { hours: 24 }
         response_variable: events_today
@@ -317,7 +317,7 @@ template:
       - name: "Poubelle à sortir"
         unique_id: garbage_to_collect
         state: >
-          {% set items = events_today['calendar.chris_billet_gmail_com']['events'] | default([]) %}
+          {% set items = events_today['calendar.User 1_User_gmail_com']['events'] | default([]) %}
           {% set g = items | selectattr('summary', 'search', 'sortir poubelle', ignorecase=True) | first | default(none) %}
           {% if g and as_datetime(g.start).date() == now().date() %}
             {% if 'jaune' in g.summary.lower() %} jaune
@@ -327,7 +327,7 @@ template:
           {% else %} none {% endif %}
         attributes:
           original_title: >
-            {% set items = events_today['calendar.chris_billet_gmail_com']['events'] | default([]) %}
+            {% set items = events_today['calendar.User 1_User_gmail_com']['events'] | default([]) %}
             {% set g = items | selectattr('summary', 'search', 'sortir poubelle', ignorecase=True) | first | default(none) %}
             {{ g.summary if g and as_datetime(g.start).date() == now().date() else "none" }}
   - trigger:
@@ -378,7 +378,7 @@ template:
             days: 7
         target:
           entity_id: 
-            - calendar.chris_billet_gmail_com
+            - calendar.User 1_User_gmail_com
             - calendar.icloud
             - calendar.paris_saint_germain
             - calendar.anniversaires
@@ -464,15 +464,15 @@ sensor:
   # STATISTICS ALLER heart
   - platform: statistics
     name: "Trajet User 2 Moyenne"
-    unique_id: "trajet_aline_moyenne_uid"
-    entity_id: sensor.trajet_maison_travail_aline
+    unique_id: "trajet_User 2_moyenne_uid"
+    entity_id: sensor.trajet_maison_travail_User 2
     state_characteristic: mean
     max_age:
       days: 7
   - platform: statistics
     name: "Trajet User 1 Moyenne"
-    unique_id: "trajet_chris_moyenne_uid"
-    entity_id: sensor.trajet_maison_travail_chris
+    unique_id: "trajet_User 1_moyenne_uid"
+    entity_id: sensor.trajet_maison_travail_User 1
     state_characteristic: mean
     max_age:
       days: 7
@@ -480,16 +480,16 @@ sensor:
   # STATISTICS RETOUR heart
   - platform: statistics
     name: "Trajet User 2 Retour Moyenne"
-    unique_id: "trajet_aline_retour_moyenne_uid"
-    entity_id: sensor.aline_travail_maison  # Corrigé ici
+    unique_id: "trajet_User 2_retour_moyenne_uid"
+    entity_id: sensor.User 2_travail_maison  # Corrigé ici
     state_characteristic: mean
     max_age:
       days: 7
 
   - platform: statistics
     name: "Trajet User 1 Retour Moyenne"
-    unique_id: "trajet_chris_retour_moyenne_uid"
-    entity_id: sensor.chris_travail_maison  # Corrigé ici
+    unique_id: "trajet_User 1_retour_moyenne_uid"
+    entity_id: sensor.User 1_travail_maison  # Corrigé ici
     state_characteristic: mean
     max_age:
       days: 7
@@ -498,21 +498,21 @@ sensor:
   - platform: sql
     queries:
       - name: "Trajet User 2 Semaine Dernière"
-        unique_id: "trajet_aline_semaine_derniere_uid"
+        unique_id: "trajet_User 2_semaine_derniere_uid"
         query: >
           SELECT state FROM states 
           JOIN states_meta ON states.metadata_id = states_meta.metadata_id 
-          WHERE states_meta.entity_id = 'sensor.trajet_maison_travail_aline' 
+          WHERE states_meta.entity_id = 'sensor.trajet_maison_travail_User 2' 
           AND last_updated_ts < (strftime('%s','now') - 604800) 
           ORDER BY last_updated_ts DESC LIMIT 1;
         column: "state"
         unit_of_measurement: "min"
       - name: "Trajet User 1 Semaine Dernière"
-        unique_id: "trajet_chris_semaine_derniere_uid"
+        unique_id: "trajet_User 1_semaine_derniere_uid"
         query: >
           SELECT state FROM states 
           JOIN states_meta ON states.metadata_id = states_meta.metadata_id 
-          WHERE states_meta.entity_id = 'sensor.trajet_maison_travail_chris' 
+          WHERE states_meta.entity_id = 'sensor.trajet_maison_travail_User 1' 
           AND last_updated_ts < (strftime('%s','now') - 604800) 
           ORDER BY last_updated_ts DESC LIMIT 1;
         column: "state"
@@ -522,21 +522,21 @@ sensor:
   - platform: sql
     queries:
       - name: "Trajet User 2 Retour Semaine Dernière"
-        unique_id: "trajet_aline_retour_semaine_derniere_uid"
+        unique_id: "trajet_User 2_retour_semaine_derniere_uid"
         query: >
           SELECT state FROM states 
           JOIN states_meta ON states.metadata_id = states_meta.metadata_id 
-          WHERE states_meta.entity_id = 'sensor.trajet_travail_maison_aline' 
+          WHERE states_meta.entity_id = 'sensor.trajet_travail_maison_User 2' 
           AND last_updated_ts < (strftime('%s','now') - 604800) 
           ORDER BY last_updated_ts DESC LIMIT 1;
         column: "state"
         unit_of_measurement: "min"
       - name: "Trajet User 1 Retour Semaine Dernière"
-        unique_id: "trajet_chris_retour_semaine_derniere_uid"
+        unique_id: "trajet_User 1_retour_semaine_derniere_uid"
         query: >
           SELECT state FROM states 
           JOIN states_meta ON states.metadata_id = states_meta.metadata_id 
-          WHERE states_meta.entity_id = 'sensor.trajet_travail_maison_chris' 
+          WHERE states_meta.entity_id = 'sensor.trajet_travail_maison_User 1' 
           AND last_updated_ts < (strftime('%s','now') - 604800) 
           ORDER BY last_updated_ts DESC LIMIT 1;
         column: "state"

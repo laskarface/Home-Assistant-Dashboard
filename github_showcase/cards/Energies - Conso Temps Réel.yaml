@@ -1,3 +1,9 @@
+# CARD: Energies - Conso Temps Réel
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.ecojoko_consommation_temps_reel
+#----------------------------------------
+
 type: sensor
 entity: sensor.ecojoko_consommation_temps_reel
 name: Conso Temps Réel

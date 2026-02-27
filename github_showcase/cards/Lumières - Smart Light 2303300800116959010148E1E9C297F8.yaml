@@ -1,3 +1,9 @@
+# CARD: Lumières - Smart Light 2303300800116959010148E1E9C297F8
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.smart_light_2303300800116959010148e1e9c297f8
+#----------------------------------------
+
 type: tile
 entity: light.smart_light_2303300800116959010148e1e9c297f8
 vertical: false

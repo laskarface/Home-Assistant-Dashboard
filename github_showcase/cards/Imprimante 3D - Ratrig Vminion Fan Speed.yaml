@@ -1,3 +1,10 @@
+# CARD: Imprimante 3D - Ratrig Vminion Fan Speed
+# PREREQUISITES:
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - mod-card
+#----------------------------------------
+
 type: custom:mod-card
 card_mod:
   style: "ha-card{\n  border-radius: 6px;\n  overflow: hidden;\n  padding: 12px;\n\

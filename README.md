@@ -64,13 +64,13 @@ A state-of-the-art Home Assistant dashboard featuring a deep, immersive glassmor
 
 ---
 
-### 🛡️ Home Care & Utilities
-*Monitoring and automation for everyday tasks.*
+### 🚗 Trajets Travail & Domicile
+*Suivi en temps réel des temps de trajet pour les membres de la famille.*
 
-| **Trajets / Commutes** (Closed) | **Trajets / Commutes** (Expanded) |
+| Résumé (Fermé) | Détails du Trafic (Ouvert) |
 |:---:|:---:|
 | ![Commute Closed](github_showcase/screen/commute_closed.png) | ![Commute Expanded](github_showcase/screen/commute_expanded.png) |
-| Quick summary of travel times for multiple users. | **Expanded View**: Detailed travel times, traffic conditions (Normal/Bouché), and estimated time without traffic. |
+| Aperçu rapide des temps de trajet actuels vers le domicile ou le travail. | **Vue Étendue** : Détails par utilisateur, état du trafic (Fluide/Bouché), et comparaison avec le temps habituel. |
 
 | Lighting Overview | Lighting Controls |
 |:---:|:---:|
@@ -82,10 +82,10 @@ A state-of-the-art Home Assistant dashboard featuring a deep, immersive glassmor
 | ![Ext Cam](github_showcase/screen/cameras_ext_expanded.jpeg) | ![Int Cam](github_showcase/screen/cameras_int_expanded.jpeg) |
 | High-res thumbnail grid of external perimeters. | Real-time internal feeds and motion history. |
 
-| 3D Printer (V-Minion) | Laundry Lifecycle | Smart Calendar |
+| Imprimante Multifonction (Brother) | Laundry Lifecycle | Smart Calendar |
 |:---:|:---:|:---:|
 | ![Printer](github_showcase/screen/printer_expanded.png) | ![Laundry](github_showcase/screen/laundry_closed.png) | ![Calendar](github_showcase/screen/calendar_expanded.jpeg) |
-| Camera feed, print progress, and temps. | Complex status tracking for Washing/Dryer. | Scrollable agenda view of upcoming events. |
+| État des toners, tambours et unités de maintenance. | Complex status tracking for Washing/Dryer. | Scrollable agenda view of upcoming events. |
 
 | Battery Levels | Waste Collection | Packages (17TRACK) |
 |:---:|:---:|:---:|

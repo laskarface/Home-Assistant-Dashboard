@@ -1,3 +1,15 @@
+# CARD: Energies - Consommation  Énergie Ce jour
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.battery_charge_today
+#     - sensor.battery_discharge_today
+#     - sensor.ecojoko_consommation_reseau
+#     - sensor.grid_return_today
+#     - sensor.production_solaire_today
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 name: Consommation & Énergie (Ce jour)
 styles:

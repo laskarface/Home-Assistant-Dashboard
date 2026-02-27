@@ -1,3 +1,21 @@
+# CARD: Livebox - Livebox OS
+# PREREQUISITES:
+#   ENTITIES:
+#     - binary_sensor.livebox_w7_remote_access
+#     - binary_sensor.livebox_w7_wan_status
+#     - sensor.livebox_w7_fiber_power_rx
+#     - sensor.livebox_w7_fiber_power_tx
+#     - sensor.livebox_w7_fiber_rx
+#     - sensor.livebox_w7_fiber_tx
+#     - sensor.orange_livebox_ip_externe
+#     - sensor.orange_livebox_temps_de_fonctionnement
+#     - switch.livebox_w7_guest_wifi_switch
+#     - switch.livebox_w7_wifi_switch
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - mini-graph-card
+#----------------------------------------
+
 type: vertical-stack
 cards:
 - type: custom:button-card

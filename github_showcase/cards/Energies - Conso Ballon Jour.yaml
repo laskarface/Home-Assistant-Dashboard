@@ -1,3 +1,11 @@
+# CARD: Energies - Conso Ballon Jour
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.ballon_conso_jour_kwh_2
+#   HACS / UI COMPONENTS:
+#     - apexcharts-card
+#----------------------------------------
+
 type: custom:apexcharts-card
 grid_options:
   columns: 6

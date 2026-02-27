@@ -1,3 +1,11 @@
+# CARD: Energies - Conso PAC Jour
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.pac_conso_jour_kwh
+#   HACS / UI COMPONENTS:
+#     - apexcharts-card
+#----------------------------------------
+
 type: custom:apexcharts-card
 grid_options:
   columns: 6

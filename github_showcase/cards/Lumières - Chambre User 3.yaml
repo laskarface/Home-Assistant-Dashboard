@@ -1,3 +1,11 @@
+# CARD: Lumières - Chambre User 3
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.bar
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: separator
 name: Chambre User 3

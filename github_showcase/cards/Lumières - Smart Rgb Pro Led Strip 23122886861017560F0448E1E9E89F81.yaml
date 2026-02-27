@@ -1,3 +1,9 @@
+# CARD: Lumières - Smart Rgb Pro Led Strip 23122886861017560F0448E1E9E89F81
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.smart_rgb_pro_led_strip_23122886861017560f0448e1e9e89f81
+#----------------------------------------
+
 type: tile
 entity: light.smart_rgb_pro_led_strip_23122886861017560f0448e1e9e89f81
 vertical: false

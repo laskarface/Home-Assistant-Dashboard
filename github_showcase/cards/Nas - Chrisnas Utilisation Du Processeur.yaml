@@ -1,3 +1,12 @@
+# CARD: Nas - Chrisnas Utilisation Du Processeur
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.user
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - mini-graph-card
+#----------------------------------------
+
 type: custom:button-card
 name: "[[[\n  const cpu = states['sensor.User 1nas_utilisation_du_processeur'].state;\n\
   \  const ram = states['sensor.User 1nas_utilisation_de_la_memoire'].state;\n  return\

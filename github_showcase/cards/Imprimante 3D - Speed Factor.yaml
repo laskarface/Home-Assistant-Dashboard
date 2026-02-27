@@ -1,3 +1,9 @@
+# CARD: Imprimante 3D - Speed Factor
+# PREREQUISITES:
+#   HACS / UI COMPONENTS:
+#     - mod-card
+#----------------------------------------
+
 type: custom:mod-card
 card_mod:
   style: "ha-card{\n  border-radius: 6px;\n  overflow: hidden;\n  padding: 10px 12px;\n\

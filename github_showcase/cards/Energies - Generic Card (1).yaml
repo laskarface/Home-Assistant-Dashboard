@@ -1,3 +1,9 @@
+# CARD: Energies - Generic Card (1)
+# PREREQUISITES:
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 name: "[[[ \n  const date = new Date();\n  const jours = ['Dimanche', 'Lundi', 'Mardi',\
   \ 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];\n  const mois = ['Janvier', 'Février',\

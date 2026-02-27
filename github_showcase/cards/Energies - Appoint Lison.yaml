@@ -1,3 +1,9 @@
+# CARD: Energies - Appoint Lison
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.smart_socket_thermostat_24092307359107600802c4e7ae0be3df_power
+#----------------------------------------
+
 graph: line
 type: sensor
 name: Appoint Lison

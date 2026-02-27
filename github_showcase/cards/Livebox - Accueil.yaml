@@ -1,3 +1,9 @@
+# CARD: Livebox - Accueil
+# PREREQUISITES:
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 icon: mdi:home-variant-outline
 name: Accueil

@@ -1,3 +1,17 @@
+# CARD: Températures Et Consommations - Chauffage dAppoint Lison
+# PREREQUISITES:
+#   ENTITIES:
+#     - binary_sensor.fenetre_lison_contact
+#     - climate.smart_socket_thermostat_24092307359107600802c4e7ae0be3df
+#     - input_boolean.lison_heater_force_manual
+#     - input_boolean.lison_heater_force_schedule
+#     - input_datetime.lison_heater_force_end
+#     - input_datetime.lison_heater_force_start
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - stack-in-card
+#----------------------------------------
+
 type: custom:stack-in-card
 keep:
   margin: false

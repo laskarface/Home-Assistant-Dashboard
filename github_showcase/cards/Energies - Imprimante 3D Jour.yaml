@@ -1,3 +1,11 @@
+# CARD: Energies - Imprimante 3D Jour
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.prise_imprimante_3d_energy_today
+#   HACS / UI COMPONENTS:
+#     - apexcharts-card
+#----------------------------------------
+
 type: custom:apexcharts-card
 grid_options:
   columns: 6

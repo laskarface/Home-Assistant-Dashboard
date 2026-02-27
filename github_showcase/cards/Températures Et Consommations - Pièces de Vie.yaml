@@ -1,3 +1,11 @@
+# CARD: Températures Et Consommations - Pièces de Vie
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.bar
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: separator
 name: Pièces de Vie

@@ -1,3 +1,9 @@
+# CARD: Energies - Accueil
+# PREREQUISITES:
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: grid
 columns: 3
 square: false

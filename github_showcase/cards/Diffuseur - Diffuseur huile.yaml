@@ -1,3 +1,15 @@
+# CARD: Diffuseur - Diffuseur huile
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.smart_humidifier_24080828541213641101c4e7ae093c61
+#     - timer.cancel
+#     - timer.diffuseur_huile
+#     - timer.start
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - mod-card
+#----------------------------------------
+
 type: vertical-stack
 cards:
 - type: vertical-stack

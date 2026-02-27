@@ -1,3 +1,9 @@
+# CARD: Lumières - Interrupteur Sdb Parents
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.interrupteur_sdb_parents
+#----------------------------------------
+
 type: tile
 entity: light.interrupteur_sdb_parents
 vertical: false

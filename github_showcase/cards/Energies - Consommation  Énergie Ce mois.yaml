@@ -1,3 +1,14 @@
+# CARD: Energies - Consommation  Énergie Ce mois
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.battery_charge_mois
+#     - sensor.battery_discharge_mois
+#     - sensor.ecojoko_consommation_mois
+#     - sensor.grid_return_mois
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 name: Consommation & Énergie (Ce mois)
 styles:

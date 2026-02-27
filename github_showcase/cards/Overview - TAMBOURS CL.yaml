@@ -1,3 +1,23 @@
+# CARD: Overview - TAMBOURS CL
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.brother_mfc_l3750cdw_series
+#     - sensor.mfc_l3750cdw_duree_de_vie_restante_de_l_unite_de_courroie
+#     - sensor.mfc_l3750cdw_duree_de_vie_restante_de_l_unite_de_fusion
+#     - sensor.mfc_l3750cdw_duree_de_vie_restante_du_kit_pf_1
+#     - sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_cyan
+#     - sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_jaune
+#     - sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_magenta
+#     - sensor.mfc_l3750cdw_duree_de_vie_restante_du_tambour_noir
+#     - sensor.mfc_l3750cdw_toner_cyan_restant
+#     - sensor.mfc_l3750cdw_toner_jaune_restant
+#     - sensor.mfc_l3750cdw_toner_magenta_restant
+#     - sensor.mfc_l3750cdw_toner_noir_restant
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - fold-entity-row
+#----------------------------------------
+
 type: custom:fold-entity-row
 padding: 0
 clickable: true

@@ -1,3 +1,9 @@
+# CARD: Lumières - Meross Mss710R 3De1 Outlet
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.meross_mss710r_3de1_outlet
+#----------------------------------------
+
 type: tile
 entity: light.meross_mss710r_3de1_outlet
 vertical: false

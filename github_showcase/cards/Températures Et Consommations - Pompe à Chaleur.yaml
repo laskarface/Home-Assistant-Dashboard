@@ -1,3 +1,16 @@
+# CARD: Températures Et Consommations - Pompe à Chaleur
+# PREREQUISITES:
+#   ENTITIES:
+#     - binary_sensor.dhwp_actuator_energy_demand_status
+#     - climate.hp_actuator_thermostat
+#     - sensor.eau_chaude_du_jour_calculee
+#     - sensor.hp_actuator_io_5470820_3_temperature
+#     - sensor.hp_actuator_io_5470820_9_temperature
+#     - water_heater.temperature_ballon
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: horizontal-stack
 cards:
 - type: custom:button-card

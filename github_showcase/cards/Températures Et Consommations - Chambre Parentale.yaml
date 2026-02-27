@@ -1,3 +1,11 @@
+# CARD: Températures Et Consommations - Chambre Parentale
+# PREREQUISITES:
+#   ENTITIES:
+#     - climate.smart_thermostat_valve_0300460e
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: climate
 name: Chambre Parentale

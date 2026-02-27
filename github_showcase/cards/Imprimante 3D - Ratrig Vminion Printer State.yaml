@@ -1,3 +1,14 @@
+# CARD: Imprimante 3D - Ratrig Vminion Printer State
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.ratrig_vminion_bed_temperature
+#     - sensor.ratrig_vminion_extruder_temperature
+#     - sensor.ratrig_vminion_printer_state
+#     - sensor.ratrig_vminion_toolhead_cooling_fan
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 card_mod:
   style: "ha-card{\n  border-radius: 6px;\n  overflow: hidden;\n  padding: 12px;\n\

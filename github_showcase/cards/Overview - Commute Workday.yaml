@@ -1,3 +1,19 @@
+# CARD: Overview - Commute Workday
+# PREREQUISITES:
+#   ENTITIES:
+#     - binary_sensor.commute_workday
+#     - input_boolean.commute_card_flip
+#     - input_number.user
+#     - person.user_1
+#     - person.user_2
+#     - sensor.trajet_maison_travail_user
+#     - sensor.trajet_user
+#     - sensor.user
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - fold-entity-row
+#----------------------------------------
+
 type: conditional
 conditions:
 - condition: state

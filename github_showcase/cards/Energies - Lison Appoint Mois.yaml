@@ -1,3 +1,11 @@
+# CARD: Energies - Lison Appoint Mois
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.lison_conso_mois_kwh_2
+#   HACS / UI COMPONENTS:
+#     - mini-graph-card
+#----------------------------------------
+
 type: custom:mini-graph-card
 grid_options:
   columns: 6

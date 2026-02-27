@@ -1,3 +1,11 @@
+# CARD: Energies - Conso Lave Linge Mois
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.prise_machine_a_laver_z_energy_month
+#   HACS / UI COMPONENTS:
+#     - apexcharts-card
+#----------------------------------------
+
 type: custom:apexcharts-card
 grid_options:
   columns: 6

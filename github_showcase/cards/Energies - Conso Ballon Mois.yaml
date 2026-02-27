@@ -1,3 +1,11 @@
+# CARD: Energies - Conso Ballon Mois
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.ballon_conso_mois_kwh_2
+#   HACS / UI COMPONENTS:
+#     - apexcharts-card
+#----------------------------------------
+
 type: custom:apexcharts-card
 grid_options:
   columns: 6

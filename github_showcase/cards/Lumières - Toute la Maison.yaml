@@ -1,3 +1,12 @@
+# CARD: Lumières - Toute la Maison
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.lumieres_maison
+#   HACS / UI COMPONENTS:
+#     - auto-entities
+#     - mushroom-light-card
+#----------------------------------------
+
 type: vertical-stack
 cards:
 - type: custom:mushroom-light-card

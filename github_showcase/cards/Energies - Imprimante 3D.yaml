@@ -1,3 +1,9 @@
+# CARD: Energies - Imprimante 3D
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.prise_imprimante_3d_power
+#----------------------------------------
+
 type: sensor
 entity: sensor.prise_imprimante_3d_power
 name: Imprimante 3D

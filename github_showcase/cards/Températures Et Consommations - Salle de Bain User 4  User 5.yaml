@@ -1,3 +1,12 @@
+# CARD: Températures Et Consommations - Salle de Bain User 4  User 5
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.sonoff_acc8001cf0_humidity
+#     - sensor.sonoff_acc8001cf0_temperature
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: button
 name: Salle de Bain User 4 & User 5

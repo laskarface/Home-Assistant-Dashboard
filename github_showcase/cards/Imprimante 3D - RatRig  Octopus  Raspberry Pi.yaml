@@ -1,3 +1,17 @@
+# CARD: Imprimante 3D - RatRig  Octopus  Raspberry Pi
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.ratrig_vminion_controller_fan
+#     - sensor.ratrig_vminion_mcu_awake
+#     - sensor.ratrig_vminion_mcu_load
+#     - sensor.ratrig_vminion_memory_used
+#     - sensor.ratrig_vminion_octopus_temp
+#     - sensor.ratrig_vminion_raspberry_pi_temp
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - mod-card
+#----------------------------------------
+
 type: custom:mod-card
 card_mod:
   style: "ha-card {\n  border-radius: 6px;\n  overflow: hidden;\n  padding: 12px;\n\

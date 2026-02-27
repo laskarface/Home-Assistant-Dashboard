@@ -1,3 +1,12 @@
+# CARD: Multimédia - Samsung TV Salon
+# PREREQUISITES:
+#   ENTITIES:
+#     - media_player.samsung_tv_salon
+#     - media_player.toggle
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 entity: media_player.samsung_tv_salon
 name: Samsung TV Salon

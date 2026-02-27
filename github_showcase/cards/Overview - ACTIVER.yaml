@@ -1,3 +1,16 @@
+# CARD: Overview - ACTIVER
+# PREREQUISITES:
+#   ENTITIES:
+#     - camera.camera_boite_a_lettres
+#     - camera.camera_portail
+#     - sensor.camera_boite_a_lettre_batterie
+#     - sensor.camera_portail_batterie
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - fold-entity-row
+#     - mod-card
+#----------------------------------------
+
 type: custom:fold-entity-row
 padding: 0
 clickable: true

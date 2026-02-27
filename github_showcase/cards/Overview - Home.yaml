@@ -1,3 +1,19 @@
+# CARD: Overview - Home
+# PREREQUISITES:
+#   ENTITIES:
+#     - counter.openuv_updates_today
+#     - input_datetime.openuv_last_update
+#     - input_number.openuv_interval_seconds
+#     - input_number.openuv_last_update_ts
+#     - sensor.91_weather_alert
+#     - sensor.openuv_maison_indice_uv_actuel
+#     - sun.sun
+#     - weather.home
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - fold-entity-row
+#----------------------------------------
+
 type: entities
 card_mod:
   style: "ha-card {\n  background: transparent !important;\n  box-shadow: none !important;\n\

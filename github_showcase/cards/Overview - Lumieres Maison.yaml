@@ -1,3 +1,14 @@
+# CARD: Overview - Lumieres Maison
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.lumieres_maison
+#   HACS / UI COMPONENTS:
+#     - auto-entities
+#     - button-card
+#     - fold-entity-row
+#     - mushroom-light-card
+#----------------------------------------
+
 type: conditional
 conditions:
 - condition: state

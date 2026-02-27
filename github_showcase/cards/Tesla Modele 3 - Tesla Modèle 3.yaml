@@ -1,3 +1,45 @@
+# CARD: Tesla Modele 3 - Tesla Modèle 3
+# PREREQUISITES:
+#   ENTITIES:
+#     - binary_sensor.ci_tesla_charging
+#     - binary_sensor.tesla_model_3_charging
+#     - binary_sensor.tesla_model_3_porte_arriere_conducteur
+#     - binary_sensor.tesla_model_3_porte_arriere_passager
+#     - binary_sensor.tesla_model_3_porte_avant_conducteur
+#     - binary_sensor.tesla_model_3_porte_avant_passager
+#     - binary_sensor.tesla_model_3_status
+#     - climate.tesla_model_3_climate
+#     - climate.toggle
+#     - cover.tesla_model_3_trappe_de_charge
+#     - device_tracker.tesla_model_3_location
+#     - lock.tesla_model_3_lock
+#     - lock.toggle
+#     - script.tesla_cycle_siege_arriere_centre
+#     - script.tesla_cycle_siege_arriere_droit
+#     - script.tesla_cycle_siege_arriere_gauche
+#     - script.tesla_cycle_siege_conducteur
+#     - script.tesla_cycle_siege_passager
+#     - script.tesla_temp_moins_0_5
+#     - script.tesla_temp_plus_0_5
+#     - sensor.pression
+#     - sensor.tesla_model_3_autonomie_de_batterie
+#     - sensor.tesla_model_3_charge_energy_added
+#     - sensor.tesla_model_3_charging
+#     - sensor.tesla_model_3_compteur
+#     - sensor.tesla_model_3_niveau_de_batterie
+#     - sensor.tesla_model_3_pression_pneu_arriere_droit
+#     - sensor.tesla_model_3_pression_pneu_arriere_gauche
+#     - sensor.tesla_model_3_pression_pneu_avant_droit
+#     - sensor.tesla_model_3_pression_pneu_avant_gauche
+#     - sensor.tesla_model_3_vitesse_de_charge
+#     - switch.tesla_model_3_defrost
+#     - switch.tesla_model_3_sentry_mode_2
+#     - switch.toggle
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - vehicle-status-card
+#----------------------------------------
+
 type: custom:vehicle-status-card
 name: Tesla Modèle 3
 layout_config:

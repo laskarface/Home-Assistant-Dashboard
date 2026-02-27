@@ -1,3 +1,11 @@
+# CARD: Températures Et Consommations - Chambre User 3
+# PREREQUISITES:
+#   ENTITIES:
+#     - climate.smart_thermostat_valve_03004482
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: climate
 name: Chambre User 3

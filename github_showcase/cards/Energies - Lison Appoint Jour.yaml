@@ -1,3 +1,11 @@
+# CARD: Energies - Lison Appoint Jour
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.lison_conso_jour_kwh_2
+#   HACS / UI COMPONENTS:
+#     - mini-graph-card
+#----------------------------------------
+
 type: custom:mini-graph-card
 grid_options:
   columns: 6

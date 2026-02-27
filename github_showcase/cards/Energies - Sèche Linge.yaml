@@ -1,3 +1,9 @@
+# CARD: Energies - Sèche Linge
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.prise_seche_linge_z_power
+#----------------------------------------
+
 type: sensor
 entity: sensor.prise_seche_linge_z_power
 name: Sèche Linge

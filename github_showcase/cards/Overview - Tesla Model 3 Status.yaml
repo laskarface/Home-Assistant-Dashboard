@@ -1,3 +1,14 @@
+# CARD: Overview - Tesla Model 3 Status
+# PREREQUISITES:
+#   ENTITIES:
+#     - binary_sensor.tesla_model_3_charging
+#     - binary_sensor.tesla_model_3_status
+#     - sensor.tesla_model_3_autonomie_de_batterie
+#     - sensor.tesla_model_3_niveau_de_batterie
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 entity: binary_sensor.tesla_model_3_status
 show_icon: false

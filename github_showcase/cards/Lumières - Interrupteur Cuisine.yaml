@@ -1,3 +1,9 @@
+# CARD: Lumières - Interrupteur Cuisine
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.interrupteur_cuisine
+#----------------------------------------
+
 type: tile
 entity: light.interrupteur_cuisine
 vertical: false

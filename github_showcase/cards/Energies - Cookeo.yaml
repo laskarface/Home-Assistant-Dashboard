@@ -1,3 +1,9 @@
+# CARD: Energies - Cookeo
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.prise_cuisine_power
+#----------------------------------------
+
 graph: line
 type: sensor
 entity: sensor.prise_cuisine_power

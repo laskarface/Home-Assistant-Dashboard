@@ -1,3 +1,12 @@
+# CARD: Températures Et Consommations - Chambre Lison
+# PREREQUISITES:
+#   ENTITIES:
+#     - binary_sensor.fenetre_lison_contact
+#     - climate.smart_thermostat_valve_0300d436
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: climate
 name: Chambre Lison

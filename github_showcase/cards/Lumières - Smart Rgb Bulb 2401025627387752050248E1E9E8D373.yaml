@@ -1,3 +1,9 @@
+# CARD: Lumières - Smart Rgb Bulb 2401025627387752050248E1E9E8D373
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.smart_rgb_bulb_2401025627387752050248e1e9e8d373
+#----------------------------------------
+
 type: tile
 entity: light.smart_rgb_bulb_2401025627387752050248e1e9e8d373
 vertical: false

@@ -1,3 +1,16 @@
+# CARD: Imprimante 3D - RatRig V-Minion
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.ratrig_vminion_current_print_state
+#     - sensor.ratrig_vminion_filament_used
+#     - sensor.ratrig_vminion_print_eta
+#     - sensor.ratrig_vminion_print_time_left
+#     - sensor.ratrig_vminion_progress
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - mod-card
+#----------------------------------------
+
 type: custom:mod-card
 card_mod:
   style: "ha-card {\n  border-radius: 6px;\n  overflow: hidden;\n  padding: 12px;\n\

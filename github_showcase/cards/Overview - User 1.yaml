@@ -1,3 +1,15 @@
+# CARD: Overview - User 1
+# PREREQUISITES:
+#   ENTITIES:
+#     - person.user_1
+#     - person.user_2
+#     - person.user_3
+#     - person.user_4
+#     - person.user_5
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: grid
 columns: 5
 square: false

@@ -1,3 +1,11 @@
+# CARD: Energies - Lave Vaisselle Mois
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.lave_vaisselle_z_energy_month
+#   HACS / UI COMPONENTS:
+#     - apexcharts-card
+#----------------------------------------
+
 type: custom:apexcharts-card
 grid_options:
   columns: 6

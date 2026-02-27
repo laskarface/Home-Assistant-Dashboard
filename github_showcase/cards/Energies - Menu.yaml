@@ -1,3 +1,9 @@
+# CARD: Energies - Menu
+# PREREQUISITES:
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 name: Menu
 icon: mdi:menu

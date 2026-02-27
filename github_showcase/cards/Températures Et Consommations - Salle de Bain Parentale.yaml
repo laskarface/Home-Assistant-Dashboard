@@ -1,3 +1,12 @@
+# CARD: Températures Et Consommations - Salle de Bain Parentale
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.sonoff_acc8000899_humidity
+#     - sensor.sonoff_acc8000899_temperature
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: button
 name: Salle de Bain Parentale

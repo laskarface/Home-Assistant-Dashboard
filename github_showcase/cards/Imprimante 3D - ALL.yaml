@@ -1,3 +1,15 @@
+# CARD: Imprimante 3D - ALL
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.ratrig_vminion_object_height
+#     - sensor.ratrig_vminion_toolhead_position_x
+#     - sensor.ratrig_vminion_toolhead_position_y
+#     - sensor.ratrig_vminion_toolhead_position_z
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - mod-card
+#----------------------------------------
+
 type: custom:mod-card
 card_mod:
   style: "ha-card {\n  border-radius: 5px;\n  overflow: hidden;\n  padding: 12px;\n\

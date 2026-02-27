@@ -1,3 +1,11 @@
+# CARD: Energies - Conso Cookéeo Jour
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.prise_cuisine_energy_today
+#   HACS / UI COMPONENTS:
+#     - apexcharts-card
+#----------------------------------------
+
 type: custom:apexcharts-card
 grid_options:
   columns: 6

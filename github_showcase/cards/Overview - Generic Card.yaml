@@ -1,3 +1,16 @@
+# CARD: Overview - Generic Card
+# PREREQUISITES:
+#   ENTITIES:
+#     - binary_sensor.capteur_ouverture_lave_linge_contact
+#     - binary_sensor.machine_a_laver_en_cours
+#     - binary_sensor.seche_linge_door_status
+#     - binary_sensor.seche_linge_en_cours
+#     - input_boolean.machine_a_laver_terminee
+#     - input_boolean.seche_linge_termine
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 show_name: false
 show_icon: false

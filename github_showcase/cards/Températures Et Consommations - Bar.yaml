@@ -1,3 +1,11 @@
+# CARD: Températures Et Consommations - Bar
+# PREREQUISITES:
+#   ENTITIES:
+#     - climate.smart_thermostat_valve_03009970
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: climate
 name: 'Bar '

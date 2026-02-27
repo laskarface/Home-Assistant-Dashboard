@@ -1,3 +1,9 @@
+# CARD: Energies - Lave Linge
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.prise_machine_a_laver_z_power
+#----------------------------------------
+
 graph: line
 type: sensor
 detail: 1

@@ -1,3 +1,11 @@
+# CARD: Overview - - color white
+# PREREQUISITES:
+#   HACS / UI COMPONENTS:
+#     - auto-entities
+#     - button-card
+#     - fold-entity-row
+#----------------------------------------
+
 type: entities
 card_mod:
   style: "ha-card {\n  background: transparent !important;\n  box-shadow: none !important;\n\

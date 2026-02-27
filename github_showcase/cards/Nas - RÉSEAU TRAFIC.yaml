@@ -1,3 +1,12 @@
+# CARD: Nas - RÉSEAU TRAFIC
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.user
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - mini-graph-card
+#----------------------------------------
+
 type: vertical-stack
 cards:
 - type: custom:button-card

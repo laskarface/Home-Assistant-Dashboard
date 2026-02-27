@@ -1,3 +1,9 @@
+# CARD: Lumières - User 5
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.lumieres_morgan_z
+#----------------------------------------
+
 type: tile
 entity: light.lumieres_morgan_z
 name: User 5

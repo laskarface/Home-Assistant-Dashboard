@@ -1,3 +1,11 @@
+# CARD: Lumières - Bar
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.bar
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: button
 button_type: slider

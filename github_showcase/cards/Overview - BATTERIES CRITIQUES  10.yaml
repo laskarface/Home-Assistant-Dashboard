@@ -1,3 +1,14 @@
+# CARD: Overview - BATTERIES CRITIQUES  10
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.batteries_faibles_count
+#     - sensor.ci_tesla_battery
+#   HACS / UI COMPONENTS:
+#     - auto-entities
+#     - button-card
+#     - fold-entity-row
+#----------------------------------------
+
 type: conditional
 conditions:
 - entity: sensor.batteries_faibles_count

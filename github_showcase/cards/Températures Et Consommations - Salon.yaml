@@ -1,3 +1,12 @@
+# CARD: Températures Et Consommations - Salon
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.smart_temp_humidity_sensor_39000e5bec0f_humidity
+#     - sensor.smart_temp_humidity_sensor_39000e5bec0f_temperature
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: button
 name: Salon

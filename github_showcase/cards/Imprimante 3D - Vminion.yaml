@@ -1,3 +1,14 @@
+# CARD: Imprimante 3D - Vminion
+# PREREQUISITES:
+#   ENTITIES:
+#     - camera.vminion
+#     - sensor.ratrig_vminion_toolhead_position_x
+#     - sensor.ratrig_vminion_toolhead_position_y
+#     - sensor.ratrig_vminion_toolhead_position_z
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: picture-elements
 image: /local/blank.png
 elements:

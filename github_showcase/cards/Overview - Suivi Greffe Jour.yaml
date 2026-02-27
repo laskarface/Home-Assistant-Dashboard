@@ -1,3 +1,12 @@
+# CARD: Overview - Suivi Greffe Jour
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.suivi_greffe_jour
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - fold-entity-row
+#----------------------------------------
+
 type: entities
 card_mod:
   style: "ha-card {\n  background: none !important;\n  border: none !important;\n\

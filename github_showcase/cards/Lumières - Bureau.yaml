@@ -1,3 +1,11 @@
+# CARD: Lumières - Bureau
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.bar
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: separator
 name: Bureau

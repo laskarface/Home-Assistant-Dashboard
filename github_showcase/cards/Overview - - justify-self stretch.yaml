@@ -1,3 +1,12 @@
+# CARD: Overview - - justify-self stretch
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.colis_17track_actifs
+#   HACS / UI COMPONENTS:
+#     - button-card
+#     - fold-entity-row
+#----------------------------------------
+
 type: conditional
 conditions:
 - condition: numeric_state

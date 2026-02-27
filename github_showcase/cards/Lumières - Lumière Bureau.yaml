@@ -1,3 +1,9 @@
+# CARD: Lumières - Lumière Bureau
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.bureaux
+#----------------------------------------
+
 type: tile
 entity: light.bureaux
 name: Lumière Bureau

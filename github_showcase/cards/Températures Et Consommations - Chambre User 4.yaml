@@ -1,3 +1,12 @@
+# CARD: Températures Et Consommations - Chambre User 4
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.smart_temp_humidity_sensor_39000e5be749_humidity
+#     - sensor.smart_temp_humidity_sensor_39000e5be749_temperature
+#   HACS / UI COMPONENTS:
+#     - bubble-card
+#----------------------------------------
+
 type: custom:bubble-card
 card_type: button
 name: Chambre User 4

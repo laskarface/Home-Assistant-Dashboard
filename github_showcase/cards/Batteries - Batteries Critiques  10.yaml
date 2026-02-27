@@ -1,3 +1,11 @@
+# CARD: Batteries - Batteries Critiques  10
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.ci_tesla_battery
+#   HACS / UI COMPONENTS:
+#     - auto-entities
+#----------------------------------------
+
 type: vertical-stack
 cards:
 - type: custom:auto-entities

@@ -1,3 +1,11 @@
+# CARD: Multimédia - En Direct
+# PREREQUISITES:
+#   ENTITIES:
+#     - media_player.samsung_smart_tv
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: custom:button-card
 entity: media_player.samsung_smart_tv
 name: En Direct

@@ -1,3 +1,9 @@
+# CARD: Energies - Lave Vaisselle
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.lave_vaisselle_z_power
+#----------------------------------------
+
 graph: line
 type: sensor
 detail: 1

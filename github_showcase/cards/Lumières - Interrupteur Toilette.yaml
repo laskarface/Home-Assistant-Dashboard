@@ -1,3 +1,9 @@
+# CARD: Lumières - Interrupteur Toilette
+# PREREQUISITES:
+#   ENTITIES:
+#     - light.interrupteur_toilette
+#----------------------------------------
+
 type: tile
 entity: light.interrupteur_toilette
 vertical: false

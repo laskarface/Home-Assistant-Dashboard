@@ -1,3 +1,9 @@
+# CARD: Lumières - Sonoff A4800Fcf93
+# PREREQUISITES:
+#   ENTITIES:
+#     - switch.sonoff_a4800fcf93
+#----------------------------------------
+
 type: tile
 entity: switch.sonoff_a4800fcf93
 vertical: false

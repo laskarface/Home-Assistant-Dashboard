@@ -1,3 +1,11 @@
+# CARD: Overview - Poubelle A Sortir
+# PREREQUISITES:
+#   ENTITIES:
+#     - sensor.poubelle_a_sortir
+#   HACS / UI COMPONENTS:
+#     - button-card
+#----------------------------------------
+
 type: conditional
 conditions:
 - entity: sensor.poubelle_a_sortir

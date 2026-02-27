@@ -5,51 +5,127 @@ A state-of-the-art Home Assistant dashboard featuring a deep, immersive glassmor
 > [!NOTE]
 > This GitHub repository and the associated dashboard were designed and refined with the help of **Antigravity** and **Gemini**.
 
-## 📸 Gallery
+---
 
-### 📱 Main Tablet Interface
-| Home Overview | Full Lighting Control |
+## 📸 Interactive Dashboard Gallery
+
+### 📱 Main Overviews
+*The dashboard is designed for high-end tablet and desktop usage with a premium glassmorphic feel.*
+
+| Main Control Center | Lighting Control Dashboard |
 |:---:|:---:|
 | ![Main](github_showcase/screen/overview_tablet_main.jpeg) | ![Lights](github_showcase/screen/overview_full_lights.png) |
+| Core interface with quick access to all home subsystems. | Dedicated section for granular control of all home lighting. |
 
-### 🌍 Energy & Environment
-| Energy Management | Temperatures Overview | Humidity Tracking |
+| Temperature Monitoring | Energy Consumption |
+|:---:|:---:|
+| ![Temp](github_showcase/screen/overview_full_temperatures.png) | ![Energy](github_showcase/screen/overview_full_energy.png) |
+| Real-time temperature grid with HSL-tailored indicators. | Detailed power usage and solar/grid statistics. |
+
+| Entertainment & Apple TV | Network & Infrastructure | NAS Monitoring |
 |:---:|:---:|:---:|
-| ![Energy](github_showcase/screen/overview_full_energy.png) | ![Temp](github_showcase/screen/overview_full_temperatures.png) | ![Humidity](github_showcase/screen/humidity_expanded.png) |
-
-### 🚗 Devices & Technology
-| Tesla Model 3 | 3D Printer (V-Minion) | NAS & Infrastructure |
-|:---:|:---:|:---:|
-| ![Tesla](github_showcase/screen/tesla_expanded_climate.png) | ![Printer](github_showcase/screen/printer_expanded.png) | ![NAS](github_showcase/screen/overview_full_nas.png) |
-
-### 🗓️ Daily Life & Monitoring
-| Smart Calendar | Weather Forecast | Laundry Tracking |
-|:---:|:---:|:---:|
-| ![Calendar](github_showcase/screen/calendar_expanded.jpeg) | ![Weather](github_showcase/screen/weather_expanded.png) | ![Laundry](github_showcase/screen/laundry_closed.png) |
-
-### 🛡️ Security & Cameras
-| External Cameras | Internal Surveillance | Garage Door |
-|:---:|:---:|:---:|
-| ![Ext Cam](github_showcase/screen/cameras_ext_expanded.jpeg) | ![Int Cam](github_showcase/screen/cameras_int_expanded.jpeg) | ![Garage](github_showcase/screen/pac_closed.png) |
-
-## 🛠️ How to use this Repository
-
-This repository follows the standard Home Assistant configuration structure. To use the components, you need to understand how they are linked:
-
-### 1. The Core Files
-- **`ui-lovelace.yaml`**: Contains the complete UI structure and the `button_card_templates`.
-- **`automations.yaml`**: Over 1300 lines of logic. Many cards depend on specific automations to trigger state changes or notifications.
-- **`configuration.yaml`**: Defines the sensors, input_booleans, and other entities that provide data to the dashoard.
-- **`scripts.yaml`**: Contains action sequences used by the UI buttons.
-
-### 2. Dependencies
-- **Sensors**: Many custom cards (like the Energy or Tesla cards) require specific sensors to be defined in your `configuration.yaml` or via integrations.
-- **Custom Components**: Check the `custom_components/` folder (to be added) for necessary HACS integrations or community plugins.
-- **Assets**: All custom icons and community plugins should be placed in the `www/` folder (which maps to `/local/` in HA).
-
-### 3. Usage
-- Individual card YAML code can be found in `github_showcase/cards/`.
-- Ensure you have `browser_mod`, `button-card`, and `card-mod` installed via HACS for the premium effects.
+| ![Media](github_showcase/screen/overview_full_appletv.png) | ![Network](github_showcase/screen/overview_full_livebox.jpeg) | ![NAS](github_showcase/screen/overview_full_nas.png) |
+| Integrated remote and media management. | Livebox/Router status and network vitals. | Synology/NAS health and storage metrics. |
 
 ---
-*Developed for the Home Assistant Community.*
+
+### 🚗 Smart Mobility - Tesla Model 3
+*Deep integration providing real-time data and remote controls.*
+
+| Summary (Closed) | Detailed Controls (Expanded) |
+|:---:|:---:|
+| ![Tesla Closed](github_showcase/screen/tesla_closed.png) | ![Tesla Expanded Doors](github_showcase/screen/tesla_expanded_doors.jpeg) |
+| Displays range, charge level, and lock status. | **Expanded View**: Direct control for doors, trunk, frunk, and windows. |
+
+| Climate Management | Navigation & Map | Tire Pressure |
+|:---:|:---:|:---:|
+| ![Tesla Climate](github_showcase/screen/tesla_expanded_climate.png) | ![Tesla Map](github_showcase/screen/tesla_expanded_map.png) | ![Tesla Pressure](github_showcase/screen/tesla_expanded_pressure.jpeg) |
+| Full HVAC control and seat heating. | Real-time vehicle location and navigation status. | Granular PSI/Bar readings for each tire. |
+
+---
+
+### 🌡️ Climate & Environment
+*Advanced management of home comfort systems.*
+
+| **PAC & Hot Water** (Closed) | **PAC & Hot Water** (Expanded) |
+|:---:|:---:|
+| ![PAC Closed](github_showcase/screen/pac_closed.png) | ![PAC Expanded](github_showcase/screen/pac_expanded.png) |
+| Shows current temperature and heating status of the heat pump. | **Expanded View**: Detailed energy consumption graphs, heating power, and Hot Water (ECS) management. |
+
+| **Weather** (Closed) | **Weather** (Expanded) | **Humidity** (Expanded) |
+|:---:|:---:|:---:|
+| ![Weather Closed](github_showcase/screen/weather_closed.png) | ![Weather Expanded](github_showcase/screen/weather_expanded.png) | ![Humidity](github_showcase/screen/humidity_expanded.png) |
+| Current weather conditions and temp. | **Expanded**: 7-day detailed forecast. | **Expanded**: Historical humidity graphs per room. |
+
+| **Smart Diffuser** (Closed) | **Smart Diffuser** (Expanded) |
+|:---:|:---:|
+| ![Diffuser Closed](github_showcase/screen/diffuser_closed.png) | ![Diffuser Expanded](github_showcase/screen/diffuser_expanded.png) |
+| Current status of the diffuser. | **Expanded View**: Dynamic "smoke" animation when active, light color control, and integrated timer setting. |
+
+---
+
+### 🛡️ Home Care & Utilities
+*Monitoring and automation for everyday tasks.*
+
+| Lighting Overview | Lighting Controls |
+|:---:|:---:|
+| ![Light Closed](github_showcase/screen/light_closed.png) | ![Light Expanded](github_showcase/screen/light_expanded.png) |
+| Summary of active lights in each zone. | Granular brightness and color controls. |
+
+| External Surveillance | Internal Security |
+|:---:|:---:|
+| ![Ext Cam](github_showcase/screen/cameras_ext_expanded.jpeg) | ![Int Cam](github_showcase/screen/cameras_int_expanded.jpeg) |
+| High-res thumbnail grid of external perimeters. | Real-time internal feeds and motion history. |
+
+| 3D Printer (V-Minion) | Laundry Lifecycle | Smart Calendar |
+|:---:|:---:|:---:|
+| ![Printer](github_showcase/screen/printer_expanded.png) | ![Laundry](github_showcase/screen/laundry_closed.png) | ![Calendar](github_showcase/screen/calendar_expanded.jpeg) |
+| Camera feed, print progress, and hotend/bed temps. | Complex status tracking for Washing/Dryer. | Scrollable agenda view of upcoming events. |
+
+| Battery Levels | Waste Collection | Packages (17TRACK) |
+|:---:|:---:|:---:|
+| ![Batteries](github_showcase/screen/batteries_closed.png) | ![Trash](github_showcase/screen/trash_closed.png) | ![Deliveries](github_showcase/screen/deliveries_closed.png) |
+| Monitoring all wireless device batteries. | Trash type and pickup day reminders. | Real-time tracking of pending deliveries. |
+
+---
+
+### 🏥 Health & Medical
+*Specialized follow-up and notification logic.*
+
+| Post-Op Tracker | Medical Detail |
+|:---:|:---:|
+| ![Medical](github_showcase/screen/medical_closed.png) | ![Post Greffe](github_showcase/screen/post_greffe_expanded.png) |
+| Daily health checklist and reminders. | Specific medical protocol follow-up screen (e.g., hair transplant). |
+
+---
+
+## 🛠️ Technical Guide & Implementation
+
+This repository follows a modular structure where UI cards are deeply linked to back-end logic.
+
+### 🔗 Understanding the Dependencies
+
+To fully replicate this dashboard, you must understand how the components interact:
+
+1.  **UI Layout (`ui-lovelace.yaml`)**:
+    - Uses `button_card_templates` for consistent aesthetics.
+    - Many cards are **Dynamic**: they change appearance (animations, colors) based on entity states defined in the backend.
+
+2.  **Logic & Automations (`automations.yaml`)**:
+    - Contains the logic for the **Laundry Cycle**, **Diffuser Timers**, and **Tesla commands**.
+    - For example, the Laundry card won't show "Finished" unless the specific automation that detects 0W for 5 minutes is active.
+
+3.  **Entities & Data (`configuration.yaml` & `scripts.yaml`)**:
+    - Defines the `input_boolean`, `input_select`, and `template_sensors` required.
+    - **Sensors**: Cards like "PAC Heating" or "Energy" rely on specific sensors being present. If these sensors are missing in your setup, the cards will show 'Unavailable'.
+
+### 📦 Prerequisites
+- **HACS Components**: `button-card`, `card-mod`, `mos-graphics-card`, `layout-card`.
+- **Integrations**: `Tesla Custom Integration`, `17TRACK`, `Seventeentrack`, `Local Tuya/Zigbee2MQTT` (for various devices).
+
+### 🚀 Usage Highlights
+- The **Expanded View** logic is usually handled via `browser_mod` popups or conditional cards.
+- **Glassmorphism**: Check the `extra_styles` in the `button_card_templates` to see how the blur and refraction effects are achieved.
+
+---
+*Created with ❤️ for the Home Assistant Community.*

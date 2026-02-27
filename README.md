@@ -134,27 +134,27 @@ To fully replicate this dashboard, you must understand how the components intera
 This dashboard is built upon the incredible work of the following developers and community members. Without their integrations and custom components, this level of visual and logical depth would not be possible.
 
 ### 🔌 Integrations & Hardware Support
-| Integration / Brand | Usage in Cards |
-| :--- | :---: |
-| **Klipper / RatRig** (3D Printer) | 9 |
-| **Tesla** (Custom Integration) | 6 |
-| **Synology NAS** | 5 |
-| **Heat Pump (PAC)** | 4 |
-| **Sonoff** (eWeLink) | 3 |
-| **Samsung TV** | 2 |
-| **Orange Livebox** | 2 |
-| **Waze Travel / Google Maps** | 1 |
-| **Meross** (Local Cloud) | 1 |
-| **Tuya / Local Tuya** | 1 |
+| Integration / Brand | Usage in Cards | Developer / Maintainer |
+| :--- | :---: | :--- |
+| **Klipper / RatRig** (3D Printer) | 9 | [Klipper](https://github.com/Klipper3d) |
+| **Tesla** (Custom Integration) | 6 | [@alandtse](https://github.com/alandtse) |
+| **Synology NAS** | 5 | [Home Assistant Core](https://github.com/home-assistant/core) |
+| **Heat Pump (PAC)** | 4 | [Home Assistant Core](https://github.com/home-assistant/core) |
+| **Sonoff** (eWeLink) | 3 | [@AlexxIT](https://github.com/AlexxIT) |
+| **Samsung TV** | 2 | [Home Assistant Core](https://github.com/home-assistant/core) |
+| **Orange Livebox** | 2 | [@cyr-ius](https://github.com/cyr-ius) |
+| **Waze Travel / Google Maps** | 1 | [Home Assistant Core](https://github.com/home-assistant/core) |
+| **Meross** (Local Cloud) | 1 | [@albertogeniola](https://github.com/albertogeniola) |
+| **Tuya / Local Tuya** | 1 | [@rospogrigio](https://github.com/rospogrigio) |
 
 ### 🎨 Custom UI Components (HACS)
-| Component Name | Usage in Cards |
-| :--- | :---: |
-| **Lovelace Button Card** | 53 |
-| **Lovelace Card Mod** | 12 |
-| **Battery Monitor** (Core/Custom) | 8 |
-| **Lovelace Layout Card** | 2 |
-| **Lovelace Stack-In-Card** | 1 |
+| Component Name | Usage in Cards | Developer / Maintainer |
+| :--- | :---: | :--- |
+| **Lovelace Button Card** | 53 | [@RomRider](https://github.com/RomRider) |
+| **Lovelace Card Mod** | 12 | [@thomasloven](https://github.com/thomasloven) |
+| **Battery Monitor** (Core/Custom) | 8 | [Home Assistant Core](https://github.com/home-assistant/core) |
+| **Lovelace Layout Card** | 2 | [@thomasloven](https://github.com/thomasloven) |
+| **Lovelace Stack-In-Card** | 1 | [@RomRider](https://github.com/RomRider) |
 
 ---
 *Developed for the Home Assistant Community.*

@@ -1,7 +1,550 @@
-# Home Assistant Configuration
-# Put your configuration.yaml content here
-
+# configuration.yaml organisé, optimisé et 100% Unique ID 🦾
+# --- CORE ---
 default_config:
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.0.0.1
+    - 172.30.33.0/24
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+frontend:
+  themes: !include_dir_merge_named themes
+# --- HISTORIQUE & RECORDER ---
+recorder:
+  purge_keep_days: 30
+  auto_purge: true
+  db_url: sqlite:////config/home-assistant_v2.db
+  exclude:
+    event_types:
+      - hon_program_started
+      - hon_program_updated
+      - hon_program_state
+      - hon_device_update
+# --- INCLUDES ---
+automation: !include automations.yaml
+# --- AUTOMATIONS MANUELLES heart ---
+automation manual:
+  - alias: "Réinitialisation Minuteur Trajets (2 min)"
+    id: "reset_commute_flip_timer_id" # Corrigé : 'id' au lieu de 'unique_id'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.commute_card_flip
+        to: "on"
+        for: "00:02:00"
+    action:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.commute_card_flip
+script: !include scripts.yaml
+scene: !include scenes.yaml
+alexa: !include alexa.yaml
+# --- HELPERS (ENTRÉES) ---
+input_number:
+  eau_chaude_last:
+    name: Eau chaude last
+    min: 0
+    max: 10000000
+    step: 0.01
+  eau_chaude_total:
+    name: Eau chaude total
+    min: 0
+    max: 10000000
+    step: 0.01
+  eau_chaude_cumul_minuit:
+    name: Eau chaude cumul à minuit
+    min: 0
+    max: 100000000
+    step: 0.1
+    mode: box
+  aline_commute_normal:
+    name: "Temps Normal User 2"
+    min: 0
+    max: 200
+    step: 1
+    unit_of_measurement: "min"
+    icon: mdi:timer-outline
+  chris_commute_normal:
+    name: "Temps Normal User 1"
+    min: 0
+    max: 200
+    step: 1
+    unit_of_measurement: "min"
+    icon: mdi:timer-outline
+  heure_pleine_kwh:
+    name: "Prix Heure Pleine"
+    min: 0
+    max: 1
+    step: 0.0001
+    mode: box
+  heure_creuse_kwh:
+    name: "Prix Heure Creuse"
+    min: 0
+    max: 1
+    step: 0.0001
+    mode: box
+input_boolean:
+  lison_heater_force_manual:
+    name: "Forçage Manuel Lison"
+    icon: mdi:hand-back-right
+  lison_heater_force_schedule:
+    name: "Planification Forçage Lison"
+    icon: mdi:calendar-clock
+  machine_a_laver_terminee:
+    name: "Machine à laver terminée"
+  seche_linge_termine:
+    name: "Sèche-linge terminé"
+  commute_card_flip:
+    name: "Flip Trajet"
+    icon: mdi:swap-horizontal
+  # Bus Helpers
+  nozay_route_1_expand:
+    name: "Expand Route 4617"
+    icon: mdi:bus
+  nozay_route_2_expand:
+    name: "Expand Route 4641"
+    icon: mdi:bus
+  nozay_route_3_expand:
+    name: "Expand Route 4642"
+    icon: mdi:bus
+input_datetime:
+  lison_heater_force_start:
+    name: "Début Forçage"
+    has_date: true
+    has_time: true
+  lison_heater_force_end:
+    name: "Fin Forçage"
+    has_date: true
+    has_time: true
+    
+utility_meter:
+  # Eau
+  eau_chaude_jour:
+    source: sensor.eau_chaude_cumul_securise
+    cycle: daily
+    unique_id: "eau_chaude_jour_meter_uid"
+  eau_chaude_semaine:
+    source: sensor.eau_chaude_cumul_securise
+    cycle: weekly
+    unique_id: "eau_chaude_semaine_meter_uid"
+  eau_chaude_mois:
+    source: sensor.eau_chaude_cumul_securise
+    cycle: monthly
+    unique_id: "eau_chaude_mois_meter_uid"
+  # PAC
+  pac_conso_jour:
+    source: sensor.hp_actuator_io_5470820_6_electric_energy_consumption
+    cycle: daily
+    unique_id: "conso_PAC_jour_unique"
+  pac_conso_mois:
+    source: sensor.hp_actuator_io_5470820_6_electric_energy_consumption
+    cycle: monthly
+    unique_id: "conso_PAC_mois_unique"
 
-git:
+  conso_ballon_jour:
+    source: sensor.dhwp_actuator_io_3109718_2_electric_energy_consumption
+    cycle: daily
+    unique_id: "conso_ballon_jour_unique"
+  conso_ballon_mois:
+    source: sensor.dhwp_actuator_io_3109718_2_electric_energy_consumption
+    cycle: monthly
+    unique_id: "conso_ballon_mois_unique"
+  # Lison
+  lison_conso_jour_kwh:
+    source: sensor.lison_chauffage_kwh
+    name: "Lison Consommation Jour kWh"
+    cycle: daily
+    unique_id: "lison_conso_jour_unique_id"
+  lison_conso_mois_kwh:
+    source: sensor.lison_chauffage_kwh
+    name: "Lison Consommation Mois kWh"
+    cycle: monthly
+    unique_id: "lison_conso_mois_unique_id"
+  # Énergie
+  production_solaire_mois:
+    source: sensor.production_solaire_today
+    cycle: monthly
+    unique_id: "production_solaire_mois_meter_uid"
+  grid_return_mois:
+    source: sensor.grid_return_today
+    cycle: monthly
+    unique_id: "grid_return_mois_meter_uid"
+  ecojoko_consommation_mois:
+    source: sensor.ecojoko_consommation_reseau
+    cycle: monthly
+    unique_id: "ecojoko_consommation_mois_meter_uid"
+  battery_charge_mois:
+    source: sensor.battery_charge_today
+    cycle: monthly
+    unique_id: "battery_charge_mois_meter_uid"
+  battery_discharge_mois:
+    source: sensor.battery_discharge_today
+    cycle: monthly
+    unique_id: "battery_discharge_mois_meter_uid"
+# --- TEMPLATES ---
+template:
+  - sensor:
+      - name: "Température intérieure PAC"
+        unique_id: "temperature_interieure_pac"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: "{{ state_attr('climate.hp_actuator_thermostat', 'current_temperature') }}"
+      - name: "Période tarifaire"
+        unique_id: "periode_tarifaire_hp_hc"
+        icon: "{{ 'mdi:weather-sunny' if '06:30' <= now().strftime('%H:%M') < '22:30' else 'mdi:weather-night' }}"
+        state: "{{ 'Heures Pleines' if '06:30' <= now().strftime('%H:%M') < '22:30' else 'Heures Creuses' }}"
+      - name: "Prix du Kwh"
+        unique_id: 'prix_kwh_bleu'
+        unit_of_measurement: "EUR/kWh"
+        state_class: 'measurement'
+        icon: mdi:currency-eur
+        state: >
+          {% if '06:30' <= now().strftime('%H:%M') < '22:30' %}
+            {{ states('input_number.heure_pleine_kwh') }}
+          {% else %}
+            {{ states('input_number.heure_creuse_kwh') }}
+          {% endif %}
+      - name: "Eau chaude cumul sécurisé"
+        unique_id: eau_chaude_cumul_securise
+        unit_of_measurement: "L"
+        state_class: total_increasing
+        device_class: water
+        state: >
+          {% set current = states('sensor.dhwp_actuator_water_volume_estimation_at_40_degc') | float(0) %}
+          {% set last = states('input_number.eau_chaude_last') | float(0) %}
+          {% set total = states('input_number.eau_chaude_total') | float(0) %}
+          {% if current < last %} {{ total + current }} {% else %} {{ total + (current - last) }} {% endif %}
+      - name: "Eau chaude du jour (calculée)"
+        unique_id: eau_chaude_jour_calculee
+        unit_of_measurement: "L"
+        icon: mdi:water
+        state: >
+          {% set now_total = states('sensor.eau_chaude_cumul_securise') | float(0) %}
+          {% set midnight = states('input_number.eau_chaude_cumul_minuit') | float(0) %}
+          {{ max(0, (now_total - midnight)) | round(1) }}
+      - name: "Batteries Faibles Count"
+        unique_id: batteries_faibles_count
+        state: >
+          {{ states.sensor | selectattr('attributes.device_class', 'defined') | selectattr('attributes.device_class', 'eq', 'battery') | selectattr('state', 'is_number') | rejectattr('entity_id', 'search', 'iphone', ignorecase=true) | rejectattr('entity_id', 'eq', 'sensor.ci_tesla_battery') | map(attribute='state') | map('int') | select('le', 10) | list | length }}
+      - name: "Tesla Model 3 Status"
+        unique_id: tesla_model_3_status
+        state: >
+          {% if is_state('binary_sensor.tesla_model_3_parking_brake', 'on') %} Parked
+          {% else %}
+            {% set spd = state_attr('device_tracker.tesla_model_3_location_tracker', 'speed') %}
+            {{ spd ~ ' km/h' if spd is not none else 'Unknown' }}
+          {% endif %}
+      - name: "PAC Conso Jour kWh"
+        unique_id: pac_conso_jour_kwh_flow
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+        state: "{{ (states('sensor.pac_conso_jour') | float(0) / 1000) | round(2) }}"
+      - name: "PAC Conso Mois kWh"
+        unique_id: pac_conso_mois_kwh_flow
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+        state: "{{ (states('sensor.pac_conso_mois') | float(0) / 1000) | round(1) }}"
+      - name: "Ballon Conso Jour kWh"
+        unique_id: ballon_conso_jour_kwh_final
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: "{{ (states('sensor.conso_ballon_jour') | float(0) / 1000) | round(2) }}"
+      - name: "Ballon Conso Mois kWh"
+        unique_id: ballon_conso_mois_kwh_final
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state: "{{ (states('sensor.conso_ballon_mois') | float(0) / 1000) | round(1) }}"
+      - name: "Lave Vaisselle Jour"
+        unique_id: "lave_vaisselle_jour_kwh_net"
+        unit_of_measurement: "kWh"
+        state: "{{ states('sensor.conso_lave_vaisselle_jour') | float(0) | round(1) }}"
+      - name: "Lave Vaisselle Mois"
+        unique_id: "lave_vaisselle_mois_kwh_net"
+        unit_of_measurement: "kWh"
+        state: "{{ states('sensor.conso_lave_vaisselle_mois') | float(0) | round(1) }}"
+      - name: "Ecojoko Index Cumulé"
+        unique_id: ecojoko_index_cumule
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+        state: "{{ states('sensor.ecojoko_consommation_reseau') | float(0) }}"
+      - name: "Lison Chauffage kWh"
+        unique_id: lison_heater_energy_kwh
+        unit_of_measurement: "kWh"
+        device_class: energy
+        state_class: total_increasing
+        icon: mdi:radiator
+        state: >
+          {% set raw = states('sensor.smart_socket_thermostat_24092307359107600802c4e7ae0be3df_energy') | float(0) %}
+          {{ (raw / 1000) | round(2) }}
+      - name: "Suivi greffe jour"
+        unique_id: "suivi_greffe_jour"
+        icon: mdi:calendar-heart
+        state: >
+          {% set start = as_datetime('2025-10-25').date() %}
+          {% set days = (now().date() - start).days %}
+          {% if days < 0 %} Avant J0 {% elif days > 365 %} Terminé {% else %} J+{{ days }} {% endif %}
+        attributes:
+          days_since_start: "{{ (now().date() - as_datetime('2025-10-25').date()).days }}"
+          prp_aujourdhui: "{{ 'PRP' in (state_attr('calendar.chris_billet_gmail_com', 'message') or '').upper() }}"
+          shampoing_aujourdhui: >
+            {% set start_sh = as_datetime('2025-11-17').date() %}
+            {% if now().date() < start_sh or now().date() > as_datetime('2026-10-25').date() %} false
+            {% else %} {{ ((now().date() - start_sh).days % 5) in [0, 2] }} {% endif %}
+          vitamine_aujourdhui: "{{ as_datetime('2025-10-25').date() <= now().date() <= as_datetime('2026-04-25').date() }}"
+          serum_ozone_aujourdhui: "{{ 0 <= (now().date() - as_datetime('2025-10-25').date()).days <= 30 }}"
+          dermaroller_serum_aujourdhui: >
+            {% set days = (now().date() - as_datetime('2025-10-25').date()).days %}
+            {{ 90 <= days <= 180 and now().weekday() in [0, 2, 4] }}
+          huile_capillaire_aujourdhui: >
+            {% set days = (now().date() - as_datetime('2025-10-25').date()).days %}
+            {% set start_sh = as_datetime('2025-11-17').date() %}
+            {{ 30 <= days <= 180 and start_sh <= now().date() <= as_datetime('2026-10-25').date() and ((now().date() - start_sh).days % 5) in [0, 2] }}
+          massage_cuir_chevelu_aujourdhui: "{{ 0 <= (now().date() - as_datetime('2025-10-25').date()).days <= 180 }}"
+  - trigger:
+      - platform: homeassistant
+        event: start
+      - platform: time_pattern
+        minutes: "/30"
+    action:
+      - service: calendar.get_events
+        target:
+          entity_id: calendar.chris_billet_gmail_com
+        data:
+          duration: { hours: 24 }
+        response_variable: events_today
+    sensor:
+      - name: "Poubelle à sortir"
+        unique_id: garbage_to_collect
+        state: >
+          {% set items = events_today['calendar.chris_billet_gmail_com']['events'] | default([]) %}
+          {% set g = items | selectattr('summary', 'search', 'sortir poubelle', ignorecase=True) | first | default(none) %}
+          {% if g and as_datetime(g.start).date() == now().date() %}
+            {% if 'jaune' in g.summary.lower() %} jaune
+            {% elif 'verte' in g.summary.lower() %} verte
+            {% elif 'verre' in g.summary.lower() %} verre
+            {% else %} menagere {% endif %}
+          {% else %} none {% endif %}
+        attributes:
+          original_title: >
+            {% set items = events_today['calendar.chris_billet_gmail_com']['events'] | default([]) %}
+            {% set g = items | selectattr('summary', 'search', 'sortir poubelle', ignorecase=True) | first | default(none) %}
+            {{ g.summary if g and as_datetime(g.start).date() == now().date() else "none" }}
+  - trigger:
+      - platform: time_pattern
+        minutes: "/15"
+    action:
+      - service: seventeentrack.get_packages
+        data:
+          config_entry_id: 01KBBEN22MB5F9B7Y2BA03EVAC
+          package_state: [in_transit, ready_to_be_picked_up, undelivered, alert]
+        response_variable: colis_actifs
+    sensor:
+      - name: "Colis 17TRACK actifs"
+        unique_id: "seventeentrack_active_packages"
+        state: "{{ colis_actifs.packages | length if colis_actifs is defined else 0 }}"
+        attributes:
+          packages: "{{ colis_actifs.packages if colis_actifs is defined else [] }}"
+  - binary_sensor:
+      - name: "Machine à laver en cours"
+        unique_id: "machine_a_laver_en_cours"
+        device_class: running
+        state: "{{ states('sensor.prise_machine_a_laver_z_power') | float(0) > 10 }}"
+        delay_on: { minutes: 5 }
+        delay_off: { minutes: 11 }
+      - name: "Sèche-linge en cours"
+        unique_id: "seche_linge_en_cours"
+        device_class: running
+        state: "{{ states('sensor.prise_seche_linge_z_power') | float(0) > 10 }}"
+        delay_on: { minutes: 2 }
+        delay_off: { minutes: 11 }
+      - name: "Commute Workday"
+        unique_id: "commute_workday_mon_fri"
+        state: "{{ now().weekday() < 5 }}"
+        icon: mdi:calendar-clock
 
+
+
+  # --- BLOC CALENDRIER (DANS TA SECTION TEMPLATE) ---
+  - trigger:
+      - platform: time_pattern
+        minutes: "/5"
+      - platform: homeassistant
+        event: start
+    action:
+      - service: calendar.get_events
+        data:
+          duration:
+            days: 7
+        target:
+          entity_id: 
+            - calendar.chris_billet_gmail_com
+            - calendar.icloud
+            - calendar.paris_saint_germain
+            - calendar.anniversaires
+            - calendar.jours_feries_et_autres_fetes_en_france
+        response_variable: agenda
+    sensor:
+      - name: "Calendrier Prochain Evenement"
+        unique_id: calendrier_prochain_evenement
+        state: "OK"
+        attributes:
+          evenements_aujourdhui: >
+            {% set ns = namespace(items=[]) %}
+            {% if agenda is defined and agenda %}
+              {% for cal, data in agenda.items() %}
+                {% for ev in data.get('events', []) %}
+                  {% set start = as_datetime(ev.start) %}
+                  {% set end = as_datetime(ev.end) %}
+                  {# Évènement aujourd'hui ou en cours #}
+                  {% if start.date() == now().date() or (start.date() < now().date() and end.date() >= now().date()) %}
+                    {% if not ev.summary | lower | search("poubelle") %}
+                      {% set ns.items = ns.items + [{
+                        "summary": ev.summary,
+                        "start": ev.start,
+                        "end": ev.end,
+                        "location": ev.location | default(''),
+                        "allDay": (ev.start | length == 10)
+                      }] %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            {% endif %}
+            {{ ns.items | sort(attribute='start') | list }}
+          prochain_evenement: >
+            {% set ns = namespace(items=[]) %}
+            {% if agenda is defined and agenda %}
+              {% for cal, data in agenda.items() %}
+                {% for ev in data.get('events', []) %}
+                  {% if as_datetime(ev.end) > now() and not ev.summary | lower | search("poubelle") %}
+                    {% set ns.items = ns.items + [ev] %}
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            {% endif %}
+            {% set sorted = ns.items | sort(attribute='start') %}
+            {{ sorted[0] if sorted | length > 0 else none }}
+
+
+
+
+# --- SENSORS PLATEFORME ---
+sensor:
+  - platform: statistics
+    name: "Consommation moyenne 30j"
+    unique_id: "conso_moyenne_30j"
+    entity_id: sensor.ecojoko_consommation_temps_reel
+    state_characteristic: mean
+    max_age:
+      days: 30
+    sampling_size: 5000
+    
+  # WAZE COMMUTE heart
+  - platform: waze_travel_time
+    name: "Trajet Maison Travail User 2"
+    origin: "48.4744, 2.3333"
+    destination: "48.598, 2.425"
+    region: 'EU'
+  - platform: waze_travel_time
+    name: "Trajet Travail Maison User 2"
+    origin: "48.598, 2.425"
+    destination: "48.4744, 2.3333"
+    region: 'EU'
+  - platform: waze_travel_time
+    name: "Trajet Maison Travail User 1"
+    origin: "48.4744, 2.3333"
+    destination: "48.8322, 2.3871"
+    region: 'EU'
+  - platform: waze_travel_time
+    name: "Trajet Travail Maison User 1"
+    origin: "48.8322, 2.3871"
+    destination: "48.4744, 2.3333"
+    region: 'EU'
+  # STATISTICS ALLER heart
+  - platform: statistics
+    name: "Trajet User 2 Moyenne"
+    unique_id: "trajet_aline_moyenne_uid"
+    entity_id: sensor.trajet_maison_travail_aline
+    state_characteristic: mean
+    max_age:
+      days: 7
+  - platform: statistics
+    name: "Trajet User 1 Moyenne"
+    unique_id: "trajet_chris_moyenne_uid"
+    entity_id: sensor.trajet_maison_travail_chris
+    state_characteristic: mean
+    max_age:
+      days: 7
+      
+  # STATISTICS RETOUR heart
+  - platform: statistics
+    name: "Trajet User 2 Retour Moyenne"
+    unique_id: "trajet_aline_retour_moyenne_uid"
+    entity_id: sensor.aline_travail_maison  # Corrigé ici
+    state_characteristic: mean
+    max_age:
+      days: 7
+
+  - platform: statistics
+    name: "Trajet User 1 Retour Moyenne"
+    unique_id: "trajet_chris_retour_moyenne_uid"
+    entity_id: sensor.chris_travail_maison  # Corrigé ici
+    state_characteristic: mean
+    max_age:
+      days: 7
+
+  # SQL S-1 ALLER
+  - platform: sql
+    queries:
+      - name: "Trajet User 2 Semaine Dernière"
+        unique_id: "trajet_aline_semaine_derniere_uid"
+        query: >
+          SELECT state FROM states 
+          JOIN states_meta ON states.metadata_id = states_meta.metadata_id 
+          WHERE states_meta.entity_id = 'sensor.trajet_maison_travail_aline' 
+          AND last_updated_ts < (strftime('%s','now') - 604800) 
+          ORDER BY last_updated_ts DESC LIMIT 1;
+        column: "state"
+        unit_of_measurement: "min"
+      - name: "Trajet User 1 Semaine Dernière"
+        unique_id: "trajet_chris_semaine_derniere_uid"
+        query: >
+          SELECT state FROM states 
+          JOIN states_meta ON states.metadata_id = states_meta.metadata_id 
+          WHERE states_meta.entity_id = 'sensor.trajet_maison_travail_chris' 
+          AND last_updated_ts < (strftime('%s','now') - 604800) 
+          ORDER BY last_updated_ts DESC LIMIT 1;
+        column: "state"
+        unit_of_measurement: "min"
+
+  # SQL S-1 RETOUR
+  - platform: sql
+    queries:
+      - name: "Trajet User 2 Retour Semaine Dernière"
+        unique_id: "trajet_aline_retour_semaine_derniere_uid"
+        query: >
+          SELECT state FROM states 
+          JOIN states_meta ON states.metadata_id = states_meta.metadata_id 
+          WHERE states_meta.entity_id = 'sensor.trajet_travail_maison_aline' 
+          AND last_updated_ts < (strftime('%s','now') - 604800) 
+          ORDER BY last_updated_ts DESC LIMIT 1;
+        column: "state"
+        unit_of_measurement: "min"
+      - name: "Trajet User 1 Retour Semaine Dernière"
+        unique_id: "trajet_chris_retour_semaine_derniere_uid"
+        query: >
+          SELECT state FROM states 
+          JOIN states_meta ON states.metadata_id = states_meta.metadata_id 
+          WHERE states_meta.entity_id = 'sensor.trajet_travail_maison_chris' 
+          AND last_updated_ts < (strftime('%s','now') - 604800) 
+          ORDER BY last_updated_ts DESC LIMIT 1;
+        column: "state"
+        unit_of_measurement: "min"
+
+# --- SCRIPTS & SHELL ---
+python_script:
+shell_command:
+  export_entities: "python3 /config/export_entities.py"

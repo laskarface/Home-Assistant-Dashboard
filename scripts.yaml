@@ -1,3 +1,374 @@
-# Home Assistant Scripts
-# Put your scripts.yaml content here
 
+bonne_nuit:
+  alias: Bonne nuit
+  sequence:
+  - target:
+      entity_id: light.lumieres_maison
+    action: light.turn_off
+  - delay: 00:00:01
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.lumieres_maison
+        state: 'off'
+      sequence:
+      - data:
+          message: "\U0001F514 Mode nuit activé. Bonne nuit."
+          language: fr
+        action: assist.respond
+    - conditions:
+      - condition: state
+        entity_id: light.lumieres_maison
+        state: 'on'
+      sequence:
+      - data:
+          message: "\U0001F50A Impossible d'activer le mode nuit."
+          language: fr
+        action: assist.respond
+  mode: single
+basculer_lumiere_salon:
+  alias: Salon on/off
+  description: Allume ou éteint la lumière du salon selon son état actuel
+  mode: single
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.salon
+        state: 'on'
+      sequence:
+      - target:
+          entity_id: light.salon
+        action: light.turn_off
+    default:
+    - target:
+        entity_id: light.salon
+      action: light.turn_on
+basculer_lumiere_bureau:
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.bureaux
+        state: 'on'
+      sequence:
+      - target:
+          entity_id: light.bureaux
+        action: light.turn_off
+    default:
+    - target:
+        entity_id: light.bureaux
+      action: light.turn_on
+  alias: Bureau on/off
+  description: Allume ou éteint la lumière du bureau bureau son état actuel
+  mode: single
+toilettes_on_off:
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.interrupteur_toilette
+        state: 'on'
+      sequence:
+      - target:
+          entity_id: light.interrupteur_toilette
+        action: light.turn_off
+    default:
+    - target:
+        entity_id: light.interrupteur_toilette
+      action: light.turn_on
+  alias: Toilettes on/off
+  description: Allume ou éteint la lumière des toilettes selon son état actuel
+  mode: single
+salle_de_bain_on_off:
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: light.interrupteur_sdb_parents
+        state: 'on'
+      sequence:
+      - target:
+          entity_id: light.interrupteur_sdb_parents
+        action: light.turn_off
+    default:
+    - target:
+        entity_id: light.interrupteur_sdb_parents
+      action: light.turn_on
+  alias: Salle de bain on/off
+  description: Allume ou éteint la lumière de la SDB selon son état actuel
+  mode: single
+lit_on_off:
+  sequence:
+  - action: light.toggle
+    metadata: {}
+    target:
+      entity_id:
+      - light.smart_rgb_bulb_2401025627387752050248e1e9e8d373
+      - light.smart_rgb_bulb_2401027557586952050248e1e9e8d7b3
+    data: {}
+  alias: Lit on/off
+  description: ''
+tesla_cycle_siege_conducteur:
+  alias: Tesla - Cycle siège conducteur
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_front_left
+        state: 'off'
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_front_left
+        data:
+          option: low
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_front_left
+        state: low
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_front_left
+        data:
+          option: high
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_front_left
+        state: high
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_front_left
+        data:
+          option: 'off'
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_front_left
+        state: medium
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_front_left
+        data:
+          option: high
+        action: select.select_option
+  mode: single
+tesla_cycle_siege_passager:
+  alias: Tesla - Cycle siège passager
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_front_right
+        state: 'off'
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_front_right
+        data:
+          option: low
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_front_right
+        state: low
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_front_right
+        data:
+          option: high
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_front_right
+        state: high
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_front_right
+        data:
+          option: 'off'
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_front_right
+        state: medium
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_front_right
+        data:
+          option: high
+        action: select.select_option
+  mode: single
+  description: ''
+tesla_cycle_siege_arriere_gauche:
+  alias: Tesla - Cycle siège arrière gauche
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_left
+        state: 'off'
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_left
+        data:
+          option: low
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_left
+        state: low
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_left
+        data:
+          option: high
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_left
+        state: high
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_left
+        data:
+          option: 'off'
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_left
+        state: medium
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_left
+        data:
+          option: high
+        action: select.select_option
+  mode: single
+  description: ''
+tesla_cycle_siege_arriere_centre:
+  alias: Tesla - Cycle siège arrière centre
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_center
+        state: 'off'
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_center
+        data:
+          option: low
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_center
+        state: low
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_center
+        data:
+          option: high
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_center
+        state: high
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_center
+        data:
+          option: 'off'
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_center
+        state: medium
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_center
+        data:
+          option: high
+        action: select.select_option
+  mode: single
+  description: ''
+tesla_cycle_siege_arriere_droit:
+  alias: Tesla - Cycle siège arrière droit
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_right
+        state: 'off'
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_right
+        data:
+          option: low
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_right
+        state: low
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_right
+        data:
+          option: high
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_right
+        state: high
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_right
+        data:
+          option: 'off'
+        action: select.select_option
+    - conditions:
+      - condition: state
+        entity_id: select.tesla_model_3_seat_heater_rear_right
+        state: medium
+      sequence:
+      - target:
+          entity_id: select.tesla_model_3_seat_heater_rear_right
+        data:
+          option: high
+        action: select.select_option
+  mode: single
+  description: ''
+
+
+        
+        
+alias: Apple TV Salon Power Toggle
+sequence:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: media_player.salon
+            state: "playing"
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.salon
+            data:
+              command: suspend
+
+      - conditions:
+          - condition: state
+            entity_id: media_player.salon
+            state: "idle"
+        sequence:
+          - service: remote.send_command
+            target:
+              entity_id: remote.salon
+            data:
+              command: suspend
+
+    default:
+      - service: media_player.turn_on
+        target:
+          entity_id: media_player.salon
+mode: single

@@ -332,7 +332,7 @@ cards:
       ${innerStyle(p1)}\"></div></div>`;\n  \n  // Jauge 2 (200-400)\n  if (v >= 200)\
       \ {\n    let p2 = Math.max(0, Math.min(100, ((v - 200) / 200) * 100));\n   \
       \ gaugeOutput += `<div style=\"${barStyle()}\"><div style=\"${innerStyle(p2)}\"\
-      ></div></div>`;\n  }\n  \n  // Jauge 3 (400-600)\n  if (v >= 400) {\n    let\
+      ></div></div>`;\n  }\n  \n  
       \ p3 = Math.max(0, Math.min(100, ((v - 400) / 200) * 100));\n    gaugeOutput\
       \ += `<div style=\"${barStyle()}\"><div style=\"${innerStyle(p3)}\"></div></div>`;\n\
       \  }\n  \n  return gaugeOutput;\n]]]\n"

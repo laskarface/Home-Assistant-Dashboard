@@ -317,7 +317,7 @@ const Ot=1,kt=t=>(...e)=>({_$litDirective$:t,values:e});let Tt=class{constructor
       .box .wrapper hui-warning-element {
         display: block;
       }
-    `}};se.properties={hass:{attribute:!1},config:{state:!0}},se=te=t([Yt(It)],se);let ne=class extends se{constructor(){Gt("You are using deprecated card name 'custom:minimalistic-area-card', please update type to 'custom:better-minimalistic-area-card'. The old name will be removed in 1.3.0"),super()}};ne=t([Yt("minimalistic-area-card")],ne),window.customCards=window.customCards||[],window.customCards.push({type:It,name:"Better minimalistic area card",preview:!0,description:"Better Minimalistic Area Card"});let re=class extends St{constructor(){super(...arguments),this.yamlChange=!1}setConfig(t){var e;this.config=t,this.yamlChange||null===(e=this._yamlEditor)||void 0===e||e.setValue(t),this.yamlChange=!1}render(){return this.config?lt`
+    `}};se.properties={hass:{attribute:!1},config:{state:!0}},se=te=t([Yt(It)],se);let ne=class extends se{constructor(){Gt("You are using deprecated card name 'custom:minimalistic-area-card', please update type to 'custom:better-minimalistic-area-card'. The old name will be removed in 1.3.0"),super()}};ne=t([Yt("minimalistic-area-card")],ne),window.customCards=window.customCards||[],window.customCards.push({type:It,name:"Better minimalistic area card",preview:!0,description: ''
       <div class="instructions">
         For instructions, visit the
         <a href="https://github.com/LesTR/homeassistant-minimalistic-area-card" target="_blank"

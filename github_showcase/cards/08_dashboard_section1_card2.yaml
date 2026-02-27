@@ -5,10 +5,8 @@ card_mod:
   style: 'div#head { display: block !important; width: 100% !important; padding: 0
     !important; margin: 0 !important; --toggle-icon-width: 0px !important; }
 
-    #head { padding: 0 !important; margin: 0 !important; width: 100% !important; cursor:
     pointer !important; }
 
-    #head ha-icon { display: none !important; }
 
     div#items { padding: 0 !important; margin: 0 !important; }
 
@@ -62,7 +60,6 @@ head:
       \ />\n        </linearGradient>\n      </defs>\n      <!-- Camera Base -->\n\
       \      <path d=\"M35,80 L65,80 L60,70 L40,70 Z\" fill=\"#e0e0e0\" />\n     \
       \ <!-- Neck -->\n      <rect x=\"45\" y=\"65\" width=\"10\" height=\"8\" fill=\"\
-      #d0d0d0\" />\n      <!-- Camera Head (Spherical) -->\n      <circle cx=\"50\"\
       \ cy=\"45\" r=\"25\" fill=\"url(#camHead)\" stroke=\"#eee\" stroke-width=\"\
       0.5\" />\n      <!-- Lens Black Area -->\n      <circle cx=\"50\" cy=\"45\"\
       \ r=\"18\" fill=\"#111\" />\n      <circle cx=\"50\" cy=\"45\" r=\"12\" fill=\"\
@@ -123,7 +120,7 @@ entities:
         title: Live Salon
         content:
           type: custom:webrtc-camera
-          url: rtsp://[USER]:[PASSWORD]@192.168.1.77/stream1
+          url: rtsp:
   styles:
     card:
     - margin: 0 10px 15px 10px
@@ -143,7 +140,7 @@ entities:
     cam:
       card:
         type: custom:webrtc-camera
-        url: rtsp://[USER]:[PASSWORD]@192.168.1.77/stream1
+        url: rtsp:
         ui: false
 - type: custom:button-card
   name: CAMÉRA CHAMBRE
@@ -167,7 +164,7 @@ entities:
         title: Live Chambre
         content:
           type: custom:webrtc-camera
-          url: rtsp://[USER]:[PASSWORD]@192.168.1.79/stream1
+          url: rtsp:
   styles:
     card:
     - margin: 0 10px 15px 10px
@@ -187,7 +184,7 @@ entities:
     cam:
       card:
         type: custom:webrtc-camera
-        url: rtsp://[USER]:[PASSWORD]@192.168.1.79/stream1
+        url: rtsp:
         ui: false
 - type: custom:button-card
   name: CAMÉRA BUREAU
@@ -211,7 +208,7 @@ entities:
         title: Live Bureau
         content:
           type: custom:webrtc-camera
-          url: rtsp://[USER]:[PASSWORD]@192.168.1.70/stream1
+          url: rtsp:
   styles:
     card:
     - margin: 0 10px 15px 10px
@@ -231,5 +228,5 @@ entities:
     cam:
       card:
         type: custom:webrtc-camera
-        url: rtsp://[USER]:[PASSWORD]@192.168.1.70/stream1
+        url: rtsp:
         ui: false

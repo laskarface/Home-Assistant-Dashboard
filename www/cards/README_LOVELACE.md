@@ -1,8 +1,6 @@
-# 🎴 Bibliothèque de Cartes Lovelace (Lovelace Cards Library)
 
 Ce dossier contient les configurations YAML extraites du dashboard principal, prêtes à être utilisées de manière indépendante.
 
-## 🚀 Comment utiliser ces cartes ?
 
 1.  **Copiez le code YAML** de la carte qui vous intéresse depuis le fichier [LOVELACE_CARDS.md](./LOVELACE_CARDS.md).
 2.  Dans votre interface Home Assistant, ajoutez une nouvelle carte de type **« Manuel »**.

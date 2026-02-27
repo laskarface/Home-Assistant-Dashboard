@@ -115,7 +115,6 @@ custom_fields:
     \ 64 64\" style=\"width: 30px; height: 30px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));\
     \ transform: translateY(3px);\">\n        <path d=\"M46 34a10 10 0 0 0-4-19 14\
     \ 14 0 0 0-26 2 8 8 0 0 0-2 15h32z\" fill=\"#CFD8DC\" />\n        <g stroke=\"\
-    #90A4AE\" stroke-width=\"3\" stroke-linecap=\"round\">\n          <line x1=\"\
     16\" y1=\"44\" x2=\"48\" y2=\"44\" style=\"animation: wind_drift 2s infinite;\"\
     \ />\n          <line x1=\"20\" y1=\"50\" x2=\"44\" y2=\"50\" style=\"animation:\
     \ wind_drift 2s infinite 1s;\" />\n        </g>\n      </svg>\n    `;\n  }\n \

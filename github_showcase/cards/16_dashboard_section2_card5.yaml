@@ -63,7 +63,7 @@ card:
     img: "[[[\n  const type = entity.state.trim().toLowerCase();\n  const v = new\
       \ Date().getTime();\n  let imgUrl = `/local/green_bin.png?v=${v}`;\n  let scale\
       \ = 1.0;\n  \n  if (type === 'jaune') {\n    imgUrl = `/local/garbage/yellow_bin.png?v=${v}`;\n\
-      \    scale = 0.85; // Reducing scale for the yellow bin image\n  }\n  if (type\
+      \    scale = 0.85; 
       \ === 'verre') imgUrl = `/local/glass_bin.png?v=${v}`;\n  \n  const color =\
       \ variables.color;\n  \n  return `\n    <div style=\"width: 100%; height: 100%;\
       \ display: flex; flex-direction: column; align-items: center; justify-content:\

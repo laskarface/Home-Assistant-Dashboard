@@ -96,8 +96,8 @@ export class MeteofranceWeatherCardEditor extends LitElement {
   }
 
 
-  // Météo France
-  // Switches state
+  
+  
   get _one_hour_forecast() {
     return this._config.one_hour_forecast !== false;
   }
@@ -320,15 +320,15 @@ export class MeteofranceWeatherCardEditor extends LitElement {
     const weatherEntityNameFull = "weather." + weatherEntityName;
     const state = this.hass.states[weatherEntityNameFull];
     if (state !== undefined) {
-      // Set default Name
+      
       const friendly_name = state.attributes.friendly_name;
       this._config = {
         ...this._config,
         ["name"]: friendly_name ? friendly_name : "",
       };
 
-      // Set default Alert sensor
-      // Find Alert Sensor related to its parent device
+      
+      
       const entity = this.hass.entities[weatherEntityNameFull];
       const parent_device_id = entity.device_id;
       Object.keys(this.hass.entities).forEach(entityName => {
@@ -343,7 +343,7 @@ export class MeteofranceWeatherCardEditor extends LitElement {
       });
     };
 
-    // Set default Sensors
+    
     DefaultSensors.forEach((sensorSuffix, configAttribute) => {
       const entity = "sensor." + weatherEntityName + sensorSuffix;
       if (this.hass.states[entity] !== undefined) {

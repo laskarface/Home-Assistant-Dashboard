@@ -59,41 +59,41 @@
   ------------------------------------------------------------------------- */
 
 /* "Raptor" ASCII logo ---------------------------------------------------- */
-//                                   .,.                                          
-//                       *******                        *#### (#####              
-//                  ******                          / ########     .#####.        
-//              ,*****                          //////##########   #####  /####   
-//           .*****                           // /////*#####################  ##  
-//         ******                             //// /// ######*      *############ 
-//       ******                               ////// /   ###########,            
-//     .*****                                 ////////     ##################     
-//    ******                                  //////// #                         
-//   *****.                                  ## ////// ###                       
-//  *****,                              #########/ /// #####/                  , 
-// ,*****                           ################ /.######                  
-// *****                       (####################   (#####                  
-// ******                   #####   ########   ////////   ###                   .*
-//,******             .*** ######### #####*   /////////     # /                 *
-// *********    .******* ############ ###### ////////       ////                *
-//  ******************* (############# #####///////      *///// ##              *
-//   ****************** //// ,######### ###  /########       #########          *
-//     ****************  ////////  #####/(       #######.          ####         *
-//                       /////// /////  ##     //    (####           ###       **
-//                        ///// //////////, /////     .####       /*(##       **
-//                       ////// ///////    / ////   ## ###         ,         ,**
-//                     ////////////       // ///      #                     ***.
-//    .              /////////,         ////,/                             ***   
-//                   ///               ......                            ****    
-//       ,           ,///##              /////                         ****.     
-//         *.         // ###              ,/// /                     *****       
-//           ,*       / ####                /*/// ///             *****          
-//              **,    ####( ####             ///// ///        ******            
-//                 ****  ##### #####                      ,*******               
-//                     ******.                      **********                   
-//                           ***************************                         
-// ***************************
-//
-// ---- Raptor Bar Next Card - multi-bars w/ sliders & Raptor theme engine ----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 if (!customElements.get("raptor-bar-next-card")) {
   class RaptorBarNextCard extends HTMLElement {
@@ -108,9 +108,9 @@ if (!customElements.get("raptor-bar-next-card")) {
       this._holdFired = false;
     }
 
-    // ---------------------------------------------------------------------
-    // CONFIG
-    // ---------------------------------------------------------------------
+    
+    
+    
 
     setConfig(config) {
       if (!config.entities || !Array.isArray(config.entities) || config.entities.length === 0) {
@@ -118,7 +118,7 @@ if (!customElements.get("raptor-bar-next-card")) {
       }
 
       this._config = {
-        // thème Raptor
+        
         theme_mode: config.theme_mode || "auto", // auto | light | dark | ha | custom
         transparent: config.transparent === true,
         disc_color: config.disc_color || null,
@@ -133,7 +133,7 @@ if (!customElements.get("raptor-bar-next-card")) {
         climate_color_cool: config.climate_color_cool || null,
         climate_color_idle: config.climate_color_idle || null,
 
-        // options d’affichage globales
+        
         title: config.title || null,
         show_title: config.show_title !== false,
         orientation: (config.orientation || "horizontal").toLowerCase(), // horizontal | vertical
@@ -147,37 +147,37 @@ if (!customElements.get("raptor-bar-next-card")) {
         label_bold: config.label_bold || false,
         animation: config.animation || "smooth",
 
-        // layout (largeurs en %)
+        
         row_height: config.row_height || "2.4rem",
         row_spacing: config.row_spacing || "0.4rem",
-        name_width: config.name_width || 28,   // %
-        bar_width: config.bar_width || 52,     // %
-        value_width: config.value_width || 20, // %
+        name_width: config.name_width || 28,   
+        bar_width: config.bar_width || 52,     
+        value_width: config.value_width || 20, 
 
-        // fonts
+        
         font_label: config.font_label || 1.0,
         font_value: config.font_value || 1.0,
         font_minmax: config.font_minmax || 1.0,
         font_family: config.font_family || null,
 
-        // positions nom / valeur
+        
         name_position: config.name_position || "left",   // left | inside
         value_position: config.value_position || "right", // right | below | inside
 
-        // patterns & effets
+        
         pattern: config.pattern || "solid", // solid | stripes | dots
         bar_effect: config.bar_effect || "none", // none | wave
 
-        // inversion / direction
+        
         invert_fill: config.invert_fill === true,
         bar_direction: (config.bar_direction || "ltr").toLowerCase(), // ltr | rtl
 
-        // couleurs de barres
+        
         bar_color: config.bar_color || null,
         bar_background: config.bar_background || null,
         bar_background_off: config.bar_background_off || null,
 
-        // liste brute (string ou objet, on normalise plus tard dans render)
+        
         entities: config.entities,
       };
 
@@ -198,9 +198,9 @@ if (!customElements.get("raptor-bar-next-card")) {
       return 3;
     }
 
-    // ---------------------------------------------------------------------
-    // THEME ENGINE (inspiré de Raptor Grid / Orbit)
-    // ---------------------------------------------------------------------
+    
+    
+    
 
     _getEffectiveThemeMode() {
       if (!this._config) return "auto";
@@ -219,7 +219,7 @@ if (!customElements.get("raptor-bar-next-card")) {
         return isDarkHa ? "dark" : "light";
       }
 
-      // auto = suit le mode sombre HA
+      
       return isDarkHa ? "dark" : "light";
     }
 
@@ -264,7 +264,7 @@ if (!customElements.get("raptor-bar-next-card")) {
         return vars;
       }
 
-      // mode clair
+      
       const textMain =
         this._config.text_color || (custom ? "#000000" : "#0b1120");
       const textSecondary =
@@ -300,9 +300,9 @@ if (!customElements.get("raptor-bar-next-card")) {
       return vars;
     }
 
-    // ---------------------------------------------------------------------
-    // UTILITAIRES
-    // ---------------------------------------------------------------------
+    
+    
+    
 
     _computeIcon(entityConfig, stateObj) {
       if (entityConfig && entityConfig.icon) return entityConfig.icon;
@@ -341,7 +341,7 @@ if (!customElements.get("raptor-bar-next-card")) {
       }
 
       const toRad = (d) => (d * Math.PI) / 180;
-      const R = 6371; // km
+      const R = 6371; 
       const dLat = toRad(lat2 - lat1);
       const dLon = toRad(lon2 - lon1);
       const a =
@@ -382,7 +382,7 @@ if (!customElements.get("raptor-bar-next-card")) {
         return state;
       }
 
-      // CLIMATE
+      
       if (domain === "climate") {
         const current = attrs.current_temperature;
         const target = attrs.temperature || attrs.target_temperature || attrs.target_temp;
@@ -407,13 +407,13 @@ if (!customElements.get("raptor-bar-next-card")) {
         return modeLabel || state;
       }
 
-      // Cover en %
+      
       if (domain === "cover" && attrs.current_position != null) {
         const v = attrs.current_position;
         return `${v} %`;
       }
 
-      // Binaire lisible
+      
       if (["switch", "light", "input_boolean", "fan"].includes(domain)) {
         return state === "on"
           ? (entityConfig.label_on || "On")
@@ -711,9 +711,9 @@ if (!customElements.get("raptor-bar-next-card")) {
       return false;
     }
 
-    // ---------------------------------------------------------------------
-    // BUILD DOM
-    // ---------------------------------------------------------------------
+    
+    
+    
 
     _buildDom() {
       const cfg = this._config;
@@ -1049,7 +1049,7 @@ if (!customElements.get("raptor-bar-next-card")) {
 
       this.innerHTML = html;
 
-      // --- gestion pointer (tap/hold + slider) ----------------------------
+      
       this.querySelectorAll(".raptor-bar-row").forEach((row) => {
         row.addEventListener("pointerdown", (ev) => {
           if (ev.button !== 0) return;
@@ -1110,16 +1110,16 @@ if (!customElements.get("raptor-bar-next-card")) {
             let rel;
 
             if (orientation === "vertical") {
-              // bas -> haut
+              
               rel = (rect.bottom - ev.clientY) / rect.height;
             } else {
-              // gauche -> droite (on gère juste la position, le sens visuel est géré plus tard)
+              
               rel = (ev.clientX - rect.left) / rect.width;
             }
 
             if (!Number.isNaN(rel) && rel >= 0 && rel <= 1) {
               if (this._applySliderValue(entityId, entityConfig, rel, orientation)) {
-                return; // slider utilisé → pas de tap classique
+                return; 
               }
             }
           }
@@ -1131,9 +1131,9 @@ if (!customElements.get("raptor-bar-next-card")) {
       this._domBuilt = true;
     }
 
-    // ---------------------------------------------------------------------
-    // RENDER
-    // ---------------------------------------------------------------------
+    
+    
+    
 
     _render() {
       if (!this._config || !this._hass) return;
@@ -1159,7 +1159,7 @@ if (!customElements.get("raptor-bar-next-card")) {
         const idx = Number(row.getAttribute("data-index"));
         const entry = cfg.entities[idx];
         const entityConfigRaw = typeof entry === "string" ? { entity: entry } : entry;
-        const entityConfig = { ...entityConfigRaw }; // safe copy
+        const entityConfig = { ...entityConfigRaw }; 
         const entityId = entityConfig.entity;
         const stateObj = this._hass.states[entityId];
 
@@ -1191,7 +1191,7 @@ if (!customElements.get("raptor-bar-next-card")) {
         const icon = this._computeIcon(entityConfig, stateObj);
         const valueText = this._formatValue(stateObj, entityConfig);
 
-        // show/hide icône par entité
+        
         const showIconEntry =
           entityConfig.show_icon !== undefined ? entityConfig.show_icon : cfg.show_icon !== false;
         if (iconEl) {
@@ -1203,7 +1203,7 @@ if (!customElements.get("raptor-bar-next-card")) {
           }
         }
 
-        // show/hide name global + per entity
+        
         const showNameEntry =
           entityConfig.show_name !== undefined ? entityConfig.show_name : cfg.show_name !== false;
         if (nameEl) {
@@ -1216,12 +1216,12 @@ if (!customElements.get("raptor-bar-next-card")) {
           }
         }
 
-        // show/hide bar
+        
         const showBarEntry =
           entityConfig.show_bar !== undefined ? entityConfig.show_bar : cfg.show_bar !== false;
         row.classList.toggle("no-bar", !showBarEntry);
 
-        // texte valeur
+        
         const showValueEntry =
           entityConfig.show_value || cfg.show_value || "auto";
 
@@ -1240,7 +1240,7 @@ if (!customElements.get("raptor-bar-next-card")) {
           }
         }
 
-        // value_position / name_position (ligne + override entité)
+        
         const namePos = (entityConfig.name_position || cfg.name_position || "left").toLowerCase();
         const valuePos = (entityConfig.value_position || cfg.value_position || "right").toLowerCase();
 
@@ -1252,7 +1252,7 @@ if (!customElements.get("raptor-bar-next-card")) {
           labelInsideEl.textContent = name;
         }
 
-        // orientation & direction
+        
         const orientation = (entityConfig.orientation || cfg.orientation || "horizontal").toLowerCase();
         const barDir = (entityConfig.bar_direction || cfg.bar_direction || "ltr").toLowerCase();
         const invertFill = entityConfig.invert_fill !== undefined
@@ -1265,7 +1265,7 @@ if (!customElements.get("raptor-bar-next-card")) {
           barWrapper.classList.toggle("vertical", orientation === "vertical");
         }
 
-        // on/off pour style
+        
         let isOn = false;
         if (["switch", "light", "input_boolean", "fan"].includes(domain)) {
           isOn = stateObj.state === "on";
@@ -1278,7 +1278,7 @@ if (!customElements.get("raptor-bar-next-card")) {
         row.classList.toggle("on", isOn);
         row.classList.toggle("off", !isOn);
 
-        // valeur numérique principale
+        
         let rawValue = NaN;
         let hasNumeric = false;
 
@@ -1336,16 +1336,16 @@ if (!customElements.get("raptor-bar-next-card")) {
           pct = isOn ? 100 : 0;
         }
 
-        // inversion éventuelle
+        
         if (pct != null && invertFill) {
           pct = 100 - pct;
         }
 
-        // couleur de la barre
+        
         let barColor = entityConfig.bar_color || cfg.bar_color;
         let bgColor = cfg.bar_background || "rgba(255,255,255,0.07)";
 
-        // severities
+        
         if (hasNumeric && (entityConfig.severity || entityConfig.severities)) {
           const sevs = entityConfig.severity || entityConfig.severities;
           if (Array.isArray(sevs)) {
@@ -1360,7 +1360,7 @@ if (!customElements.get("raptor-bar-next-card")) {
           }
         }
 
-        // Cas spécifique climate (couleur selon hvac + icône)
+        
         if (domain === "climate") {
           const hvac = (attrs.hvac_action || stateObj.state || "").toLowerCase();
           if (hvac === "heating" || hvac === "heat") {
@@ -1377,7 +1377,7 @@ if (!customElements.get("raptor-bar-next-card")) {
           if (iconEl) iconEl.style.color = "";
         }
 
-        // Binaire : color_on / color_off + bar_bg_on/off
+        
         if (["switch", "light", "input_boolean", "fan", "binary_sensor"].includes(domain)) {
           if (isOn) {
             barColor =
@@ -1404,7 +1404,7 @@ if (!customElements.get("raptor-bar-next-card")) {
           }
         }
 
-        // --- NOUVEAU : barres multi-segments (stacked) ---
+        
         let stackedSegments = null;
         let stackedMax = null;
 
@@ -1435,7 +1435,7 @@ if (!customElements.get("raptor-bar-next-card")) {
           if (stackedSegments.length > 0) {
             stackedMax = entityConfig.max != null ? Number(entityConfig.max) : null;
             if (stackedMax == null || !Number.isFinite(stackedMax) || stackedMax <= 0) {
-              // si pas de max défini → somme des segments comme référence
+              
               stackedMax = stackedSegments.reduce((acc, s) => acc + s.value, 0);
             }
             if (stackedMax <= 0) {
@@ -1525,7 +1525,7 @@ if (!customElements.get("raptor-bar-next-card")) {
           }
         }
 
-        // dual marker pour entity_b
+        
         if (markerEl) {
           markerEl.style.opacity = "0";
           const secondId = entityConfig.entity_b;
@@ -1555,7 +1555,7 @@ if (!customElements.get("raptor-bar-next-card")) {
                 markerEl.style.top = "0";
                 markerEl.style.bottom = "0";
                 markerEl.style.width = "2px";
-                // en rtl, le marker suit la même logique visuelle que la barre
+                
                 if ((entityConfig.bar_direction || cfg.bar_direction || "ltr").toLowerCase() === "rtl") {
                   markerEl.style.left = "";
                   markerEl.style.right = pctB + "%";

@@ -1225,9 +1225,9 @@ class $a399cc6bbb0eb26a$export$da0658243c468832 extends (0, $ab210b2da7b39b9d$ex
  * @license
  * Copyright 2021 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */ // Although these are re-exported from lit-element.js, we add
-// them here to effectively pre-fetch them and avoid the extra
-// waterfall when loading the lit package unbundled
+ */ 
+
+
 
 
 
@@ -1443,7 +1443,7 @@ class $3fffcf1c09fcf223$export$eb0022d780a83cd2 extends (0, $ab210b2da7b39b9d$ex
     _calculateX(e) {
         let bounds = this._container.getBoundingClientRect();
         let x = e.clientX - bounds.x - e.target.clientWidth / 2;
-        // Keep the handle within the container
+        
         if (x < 0) x = 0;
         else if (x + e.target.clientWidth >= this._container.clientWidth) x = this._container.clientWidth - e.target.clientWidth;
         return x;
@@ -1504,8 +1504,8 @@ window.customCards = window.customCards || [];
 window.customCards.push({
     type: "slide-confirm-card",
     name: "Slide to Confirm Card",
-    description: "Prevent accidental button presses by requiring slide to confirm."
+    description: ''
 });
 
 
-//# sourceMappingURL=slide-confirm.js.map
+

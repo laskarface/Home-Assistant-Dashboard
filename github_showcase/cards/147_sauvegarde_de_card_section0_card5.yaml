@@ -61,7 +61,7 @@ custom_fields:
     \ === 'on';\n  const isCharging = states['binary_sensor.tesla_model_3_charging']?.state\
     \ === 'on';\n  \n  const rawBattery = states['sensor.tesla_model_3_niveau_de_batterie']?.state;\n\
     \  const rawRange   = states['sensor.tesla_model_3_autonomie_de_batterie']?.state;\n\
-    \  // Gestion des valeurs non-numériques (veille)\n  let batterie = Math.round(Number(rawBattery));\n\
+    \  
     \  let autonomie = Math.round(Number(rawRange));\n  \n  // Textes d'état\n  let\
     \ statusText = isOn ? 'Connectée' : 'Endormie (Veille)';\n  if (isCharging) statusText\
     \ = 'En Charge ⚡';\n  \n  // Barre de progression (Reste visible même si NaN,\

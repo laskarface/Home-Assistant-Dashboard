@@ -1,10 +1,8 @@
-# 📋 Configurations des Cartes (Lovelace Cards configs)
 
 Ce guide regroupe les cartes principales du tableau de bord.
 Chaque bloc de code correspond à une **carte Lovelace Manuelle** indépendante.
 Le code est prêt à être copié/collé tel quel dans Home Assistant.
 
-## 🗂️ Modèles globaux (Templates)
 
 > [!IMPORTANT]
 > À insérer au tout début de votre code Dashbord Principal (RAW Configuration) sous la balise `button_card_templates:`.
@@ -33,7 +31,7 @@ button_card_templates:
       - border-radius: 4px
       - box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6)
       - background: "[[[\n  let level = parseFloat(entity.state);\n  if (isNaN(level))\
-          \ level = 0;\n  level = Math.max(0, Math.min(100, level));\n\n  // couleur\
+          \ level = 0;\n  level = Math.max(0, Math.min(100, level));\n\n  
           \ d'encre avec 70% de transparence\n  const c = variables.color;\n\n  const\
           \ fillColor = (c.startsWith('#'))\n    ? `${c}B3`     // HEX → alpha \"\
           B3\" ≈ 70%\n    : `rgba(${{\n        cyan: '0,255,255',\n        magenta:\
@@ -790,7 +788,6 @@ card:
 
 ---
 
-## Pompe à Chaleur & Eau Chaude (PAC)
 
 <div align="center">
   <img src="images/showcase/pac_closed.png" width="45%" />
@@ -807,10 +804,8 @@ card_mod:
   style: 'div#head { display: block !important; width: 100% !important; padding: 0
     !important; margin: 0 !important; --toggle-icon-width: 0px !important; }
 
-    #head { padding: 0 !important; margin: 0 !important; width: 100% !important; cursor:
     pointer !important; }
 
-    #head ha-icon { display: none !important; }
 
     div#items { padding: 0 !important; margin: 0 !important; }
 
@@ -1283,7 +1278,7 @@ entities:
             gauge: "[[[\n  var sensorObj = states['sensor.eau_chaude_du_jour_calculee'];\n\
               \  var raw = (sensorObj && sensorObj.state) ? sensorObj.state.toString().replace(',',\
               \ '.') : '0';\n  var v = parseFloat(raw) || 0;\n  \n  var color1 = '#00B4FF';\
-              \ // Light blue\n  \n  var barStyle = function() { return `\n    width:\
+              \ 
               \ 14px; \n    height: 100%; \n    position: relative; \n    border-radius:\
               \ 10px; \n    background: rgba(0,0,0,0.3); \n    border: 1px solid rgba(255,255,255,0.1);\n\
               \    overflow: hidden;\n  `; };\n  \n  var innerStyle = function(pct,\
@@ -1293,10 +1288,10 @@ entities:
               \  var gaugeOutput = '';\n  \n  // Jauge 1 (0-200)\n  var p1 = Math.max(0,\
               \ Math.min(100, (v / 200) * 100));\n  gaugeOutput += `<div style=\"\
               ${barStyle()}\"><div style=\"${innerStyle(p1, color1)}\"></div></div>`;\n\
-              \  \n  // Jauge 2 (200-400)\n  if (v >= 200) {\n    var p2 = Math.max(0,\
+              \  \n  
               \ Math.min(100, ((v - 200) / 200) * 100));\n    gaugeOutput += `<div\
               \ style=\"${barStyle()}\"><div style=\"${innerStyle(p2, color1)}\"></div></div>`;\n\
-              \  }\n  \n  // Jauge 3 (400-600)\n  if (v >= 400) {\n    var p3 = Math.max(0,\
+              \  }\n  \n  
               \ Math.min(100, ((v - 400) / 200) * 100));\n    gaugeOutput += `<div\
               \ style=\"${barStyle()}\"><div style=\"${innerStyle(p3, color1)}\"></div></div>`;\n\
               \  }\n  \n  return gaugeOutput;\n]]]\n"
@@ -1602,7 +1597,6 @@ entities:
 
 ---
 
-## Poubelles (Trash & Recyle)
 
 <div align="center">
   <img src="images/showcase/trash_closed.png" width="45%" />
@@ -1702,7 +1696,6 @@ entities:
         \ fill=\"url(#gold-bar)\" filter=\"url(#glow)\"/>\n      <rect x=\"35\" y=\"\
         33\" width=\"130\" height=\"3\" rx=\"1.5\" fill=\"rgba(255,255,255,0.7)\"\
         />\n      <rect x=\"60\" y=\"15\" width=\"12\" height=\"30\" rx=\"6\" fill=\"\
-        #F0F0F0\" stroke=\"rgba(0,0,0,0.2)\" stroke-width=\"1\"/>\n      <rect x=\"\
         128\" y=\"15\" width=\"12\" height=\"30\" rx=\"6\" fill=\"#F0F0F0\" stroke=\"\
         rgba(0,0,0,0.2)\" stroke-width=\"1\"/>\n      <circle cx=\"100\" cy=\"120\"\
         \ r=\"25\" fill=\"none\" stroke=\"rgba(255,255,255,0.1)\" stroke-width=\"\
@@ -1802,7 +1795,6 @@ entities:
 
 ---
 
-## Alerte Températures (Temperature Alerts)
 
 <div align="center">
   <img src="images/showcase/temperature_closed.png" width="45%" />
@@ -1910,7 +1902,6 @@ cards:
 
 ---
 
-## Alerte Humidité (Humidity Alerts)
 
 <div align="center">
   <img src="images/showcase/humidity_closed.png" width="45%" />
@@ -2149,7 +2140,6 @@ entities:
 
 ---
 
-## Caméras Extérieures (External Cameras)
 
 <div align="center">
   <img src="images/showcase/cameras_ext_closed.png" width="45%" />
@@ -2166,10 +2156,8 @@ card_mod:
   style: 'div#head { display: block !important; width: 100% !important; padding: 0
     !important; margin: 0 !important; --toggle-icon-width: 0px !important; }
 
-    #head { padding: 0 !important; margin: 0 !important; width: 100% !important; cursor:
     pointer !important; }
 
-    #head ha-icon { display: none !important; }
 
     div#items { padding: 0 !important; margin: 0 !important; }
 
@@ -2361,7 +2349,6 @@ entities:
 
 ---
 
-## Caméras Intérieures (Internal Cameras)
 
 <div align="center">
   <img src="images/showcase/cameras_int_closed.jpeg" width="45%" />
@@ -2378,10 +2365,8 @@ card_mod:
   style: 'div#head { display: block !important; width: 100% !important; padding: 0
     !important; margin: 0 !important; --toggle-icon-width: 0px !important; }
 
-    #head { padding: 0 !important; margin: 0 !important; width: 100% !important; cursor:
     pointer !important; }
 
-    #head ha-icon { display: none !important; }
 
     div#items { padding: 0 !important; margin: 0 !important; }
 
@@ -2435,7 +2420,6 @@ head:
       \ />\n        </linearGradient>\n      </defs>\n      <!-- Camera Base -->\n\
       \      <path d=\"M35,80 L65,80 L60,70 L40,70 Z\" fill=\"#e0e0e0\" />\n     \
       \ <!-- Neck -->\n      <rect x=\"45\" y=\"65\" width=\"10\" height=\"8\" fill=\"\
-      #d0d0d0\" />\n      <!-- Camera Head (Spherical) -->\n      <circle cx=\"50\"\
       \ cy=\"45\" r=\"25\" fill=\"url(#camHead)\" stroke=\"#eee\" stroke-width=\"\
       0.5\" />\n      <!-- Lens Black Area -->\n      <circle cx=\"50\" cy=\"45\"\
       \ r=\"18\" fill=\"#111\" />\n      <circle cx=\"50\" cy=\"45\" r=\"12\" fill=\"\
@@ -2496,7 +2480,7 @@ entities:
         title: Live Salon
         content:
           type: custom:webrtc-camera
-          url: rtsp://chris.billet@gmail.com:Gdroa@2!@192.168.1.77/stream1
+          url: rtsp:
   styles:
     card:
     - margin: 0 10px 15px 10px
@@ -2516,7 +2500,7 @@ entities:
     cam:
       card:
         type: custom:webrtc-camera
-        url: rtsp://chris.billet@gmail.com:Gdroa@2!@192.168.1.77/stream1
+        url: rtsp:
         ui: false
 - type: custom:button-card
   name: CAMÉRA CHAMBRE
@@ -2540,7 +2524,7 @@ entities:
         title: Live Chambre
         content:
           type: custom:webrtc-camera
-          url: rtsp://chris.billet@gmail.com:Gdroa@2!@192.168.1.79/stream1
+          url: rtsp:
   styles:
     card:
     - margin: 0 10px 15px 10px
@@ -2560,7 +2544,7 @@ entities:
     cam:
       card:
         type: custom:webrtc-camera
-        url: rtsp://chris.billet@gmail.com:Gdroa@2!@192.168.1.79/stream1
+        url: rtsp:
         ui: false
 - type: custom:button-card
   name: CAMÉRA BUREAU
@@ -2584,7 +2568,7 @@ entities:
         title: Live Bureau
         content:
           type: custom:webrtc-camera
-          url: rtsp://chris.billet@gmail.com:Gdroa@2!@192.168.1.70/stream1
+          url: rtsp:
   styles:
     card:
     - margin: 0 10px 15px 10px
@@ -2604,7 +2588,7 @@ entities:
     cam:
       card:
         type: custom:webrtc-camera
-        url: rtsp://chris.billet@gmail.com:Gdroa@2!@192.168.1.70/stream1
+        url: rtsp:
         ui: false
 ```
 
@@ -2710,7 +2694,6 @@ entities:
         \ fill=\"url(#gold-bar)\" filter=\"url(#glow)\"/>\n      <rect x=\"35\" y=\"\
         33\" width=\"130\" height=\"3\" rx=\"1.5\" fill=\"rgba(255,255,255,0.7)\"\
         />\n      <rect x=\"60\" y=\"15\" width=\"12\" height=\"30\" rx=\"6\" fill=\"\
-        #F0F0F0\" stroke=\"rgba(0,0,0,0.2)\" stroke-width=\"1\"/>\n      <rect x=\"\
         128\" y=\"15\" width=\"12\" height=\"30\" rx=\"6\" fill=\"#F0F0F0\" stroke=\"\
         rgba(0,0,0,0.2)\" stroke-width=\"1\"/>\n      <circle cx=\"100\" cy=\"120\"\
         \ r=\"25\" fill=\"none\" stroke=\"rgba(255,255,255,0.1)\" stroke-width=\"\
@@ -2810,7 +2793,6 @@ entities:
 
 ---
 
-## Multimédia / Apple TV
 
 <div align="center">
   <img src="images/showcase/apple_tv_closed.png" width="45%" />
@@ -3177,7 +3159,6 @@ card:
 
 ---
 
-## Imprimante 3D (3D Printer)
 
 <div align="center">
   <img src="images/showcase/printer_closed.png" width="45%" />
@@ -3244,7 +3225,6 @@ apex_config:
 
 ---
 
-## Réseau Livebox (Router Network)
 
 <div align="center">
   <img src="images/showcase/livebox_closed.png" width="45%" />
@@ -3286,7 +3266,6 @@ styles:
 
 ---
 
-## Réseau NAS & Serveurs (Servers & NAS)
 
 <div align="center">
   <img src="images/showcase/nas_closed.png" width="45%" />
@@ -3357,7 +3336,6 @@ custom_fields:
 
 ---
 
-## Alerte Batteries Faibles (Low Batteries)
 
 <div align="center">
   <img src="images/showcase/batteries_closed.png" width="45%" />
@@ -3399,7 +3377,6 @@ styles:
 
 ---
 
-## Diffuseur Huiles Essentielles (Diffuser)
 
 <div align="center">
   <img src="images/showcase/diffuseur_closed.png" width="45%" />
@@ -3904,7 +3881,6 @@ cards:
 
 ---
 
-## Protocole Soins (Medical Care)
 
 <div align="center">
   <img src="images/showcase/post_greffe_closed.png" width="45%" />
@@ -4011,7 +3987,6 @@ entities:
         8\" fill=\"white\" opacity=\"0.4\" />\n      <!-- The Cross -->\n      <rect\
         \ x=\"46\" y=\"40\" width=\"8\" height=\"20\" rx=\"2\" fill=\"#4fc3f7\" />\n\
         \      <rect x=\"40\" y=\"46\" width=\"20\" height=\"8\" rx=\"2\" fill=\"\
-        #4fc3f7\" />\n      <!-- Glow behind cross -->\n      <circle cx=\"50\" cy=\"\
         50\" r=\"18\" fill=\"url(#crossGlow)\" />\n    </svg>\n  `;\n  return `\n\
         \    <div style=\"width: 100%; height: 100%; display: flex; flex-direction:\
         \ column; align-items: center; justify-content: center; background: linear-gradient(135deg,\
@@ -4030,7 +4005,7 @@ entities:
         \ * 12 + (now.getMonth() - start.getMonth());\n  let days = now.getDate()\
         \ - start.getDate();\n  if (days < 0) {\n    months--;\n    const prevMonthLastDay\
         \ = new Date(now.getFullYear(), now.getMonth(), 0).getDate();\n    days +=\
-        \ prevMonthLastDay;\n  }\n  \n  // Calcul J+ Global\n  const timeDiff = now.getTime()\
+        \ prevMonthLastDay;\n  }\n  \n  
         \ - start.getTime();\n  const jPlus = Math.floor(timeDiff / (1000 * 3600 *\
         \ 24));\n  \n  // Calcul \"Cela fera x mois dans x jours\"\n  let nextMonthMilestone\
         \ = new Date(start.getFullYear(), start.getMonth() + months + 1, start.getDate());\n\

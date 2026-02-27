@@ -1130,7 +1130,7 @@ views:
                               ]]]
                             name: |
                               [[[
-                                // --- RESPONSIVE ---
+                                
                                 const isMobile = window.innerWidth < 500;
                                 const carSize = isMobile ? '30px' : '38px';
                                 const titleSize = isMobile ? '12px' : '14px';
@@ -1140,7 +1140,7 @@ views:
                                 const metricSize = isMobile ? '10px' : '11px';
                                 const topMargin = isMobile ? '-4px' : '-6px';
                                 const titleLeftShift = isMobile ? '-10px' : '-14px'; 
-                                // --- LOGIC ---
+                                
                                 const t_red = 25; const t_orange = 10; const t_white = 5;
                                 const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                 const is_pm = new Date().getHours() >= 12;
@@ -1270,7 +1270,7 @@ views:
                               ]]]
                             name: |
                               [[[
-                                // --- RESPONSIVE ---
+                                
                                 const isMobile = window.innerWidth < 500;
                                 const carSize = isMobile ? '30px' : '38px';
                                 const titleSize = isMobile ? '12px' : '14px';
@@ -1280,7 +1280,7 @@ views:
                                 const metricSize = isMobile ? '10px' : '11px';
                                 const topMargin = isMobile ? '-4px' : '-6px';
                                 const titleLeftShift = isMobile ? '-10px' : '-14px'; 
-                                // --- LOGIC ---
+                                
                                 const t_red = 25; const t_orange = 10; const t_white = 5;
                                 const flip = states['input_boolean.commute_card_flip'] && states['input_boolean.commute_card_flip'].state === 'on';
                                 const is_pm = new Date().getHours() >= 12;
@@ -1409,10 +1409,8 @@ views:
                 padding: 0 !important; margin: 0 !important;
                 --toggle-icon-width: 0px !important; }
 
-                #head { padding: 0 !important; margin: 0 !important; width: 100%
                 !important; cursor: pointer !important; }
 
-                #head ha-icon { display: none !important; }
 
                 div#items { padding: 0 !important; margin: 0 !important; }
             head:
@@ -2015,17 +2013,17 @@ views:
                                 
                                 var gaugeOutput = '';
                                 
-                                // Jauge 1 (0-200)
+                                
                                 var p1 = Math.max(0, Math.min(100, (v / 200) * 100));
                                 gaugeOutput += `<div style="${barStyle()}"><div style="${innerStyle(p1, color1)}"></div></div>`;
                                 
-                                // Jauge 2 (200-400)
+                                
                                 if (v >= 200) {
                                   var p2 = Math.max(0, Math.min(100, ((v - 200) / 200) * 100));
                                   gaugeOutput += `<div style="${barStyle()}"><div style="${innerStyle(p2, color1)}"></div></div>`;
                                 }
                                 
-                                // Jauge 3 (400-600)
+                                
                                 if (v >= 400) {
                                   var p3 = Math.max(0, Math.min(100, ((v - 400) / 200) * 100));
                                   gaugeOutput += `<div style="${barStyle()}"><div style="${innerStyle(p3, color1)}"></div></div>`;
@@ -2064,7 +2062,6 @@ views:
                     :host { 
                       --toggle-icon-width: 0px !important;
                     }
-                    #head ha-icon, #head ha-icon-button { 
                       display: none !important; 
                       width: 0px !important; 
                       visibility: hidden !important; 
@@ -2536,7 +2533,7 @@ views:
                           days += prevMonthLastDay;
                         }
                         
-                        // Calcul J+ Global
+                        
                         const timeDiff = now.getTime() - start.getTime();
                         const jPlus = Math.floor(timeDiff / (1000 * 3600 * 24));
                         
@@ -2664,10 +2661,8 @@ views:
                 padding: 0 !important; margin: 0 !important;
                 --toggle-icon-width: 0px !important; }
 
-                #head { padding: 0 !important; margin: 0 !important; width: 100%
                 !important; cursor: pointer !important; }
 
-                #head ha-icon { display: none !important; }
 
                 div#items { padding: 0 !important; margin: 0 !important; }
             head:
@@ -2870,10 +2865,8 @@ views:
                 padding: 0 !important; margin: 0 !important;
                 --toggle-icon-width: 0px !important; }
 
-                #head { padding: 0 !important; margin: 0 !important; width: 100%
                 !important; cursor: pointer !important; }
 
-                #head ha-icon { display: none !important; }
 
                 div#items { padding: 0 !important; margin: 0 !important; }
             head:
@@ -2996,7 +2989,7 @@ views:
                       content:
                         type: custom:webrtc-camera
                         url: >-
-                          rtsp://[USER]:[PASSWORD]@192.168.1.77/stream1
+                          rtsp:
                 styles:
                   card:
                     - margin: 0 10px 15px 10px
@@ -3017,7 +3010,7 @@ views:
                     card:
                       type: custom:webrtc-camera
                       url: >-
-                        rtsp://[USER]:[PASSWORD]@192.168.1.77/stream1
+                        rtsp:
                       ui: false
               - type: custom:button-card
                 name: CAMÉRA CHAMBRE
@@ -3042,7 +3035,7 @@ views:
                       content:
                         type: custom:webrtc-camera
                         url: >-
-                          rtsp://[USER]:[PASSWORD]@192.168.1.79/stream1
+                          rtsp:
                 styles:
                   card:
                     - margin: 0 10px 15px 10px
@@ -3063,7 +3056,7 @@ views:
                     card:
                       type: custom:webrtc-camera
                       url: >-
-                        rtsp://[USER]:[PASSWORD]@192.168.1.79/stream1
+                        rtsp:
                       ui: false
               - type: custom:button-card
                 name: CAMÉRA BUREAU
@@ -3088,7 +3081,7 @@ views:
                       content:
                         type: custom:webrtc-camera
                         url: >-
-                          rtsp://[USER]:[PASSWORD]@192.168.1.70/stream1
+                          rtsp:
                 styles:
                   card:
                     - margin: 0 10px 15px 10px
@@ -3109,7 +3102,7 @@ views:
                     card:
                       type: custom:webrtc-camera
                       url: >-
-                        rtsp://[USER]:[PASSWORD]@192.168.1.70/stream1
+                        rtsp:
                       ui: false
           - type: custom:button-card
             entity: binary_sensor.tesla_model_3_status
@@ -3282,11 +3275,9 @@ views:
                 padding: 0 !important; margin: 0 !important;
                 --toggle-icon-width: 0px !important; }
 
-                #head { padding: 0 !important; margin: 0 !important; width: 100%
                 !important; cursor: pointer !important; pointer-events: auto
                 !important; }
 
-                #head ha-icon { display: none !important; }
 
                 div#items { padding: 0 !important; margin: 0 !important; }
             head:
@@ -3716,7 +3707,6 @@ views:
                       cursor: pointer !important;
                       pointer-events: auto !important;
                     }
-                    #head ha-icon { display: none !important; }
                 head:
                   type: custom:button-card
                   entity: calendar.chris_billet_gmail_com
@@ -4122,7 +4112,7 @@ views:
                 - box-shadow: none
                 - display: |
                     [[[
-                      // --- VISIBILITY LOGIC ---
+                      
                       const isEditMode = window.location.search.includes('edit=1') || window.location.pathname.includes('edit');
                       
                       let count = 0;
@@ -4175,7 +4165,6 @@ views:
                         style: >
                           :host { --toggle-icon-width: 0px !important; }
 
-                          #head ha-icon, #head ha-icon-button { display: none
                           !important; width: 0px !important; visibility: hidden
                           !important; }
 
@@ -4183,10 +4172,8 @@ views:
                           !important; padding: 0 !important; margin: 0
                           !important; }
 
-                          #head { padding: 0 !important; margin: 0 !important;
                           width: 100% !important; cursor: pointer !important; }
 
-                          #head > * { width: 100% !important; max-width: 100%
                           !important; }
 
                           div#items { padding: 14px 0 0 0 !important; margin: 0
@@ -4534,7 +4521,6 @@ views:
                     :host { 
                       --toggle-icon-width: 0px !important;
                     }
-                    #head ha-icon, #head ha-icon-button { 
                       display: none !important; 
                       width: 0px !important; 
                       visibility: hidden !important; 
@@ -4981,7 +4967,7 @@ views:
                     
                     if (type === 'jaune') {
                       imgUrl = `/local/garbage/yellow_bin.png?v=${v}`;
-                      scale = 0.85; // Reducing scale for the yellow bin image
+                      scale = 0.85; 
                     }
                     if (type === 'verre') imgUrl = `/local/glass_bin.png?v=${v}`;
                     
@@ -6123,7 +6109,7 @@ views:
       repeat: repeat
       attachment: fixed
       image:
-        media_content_id: media-source://image_upload/82e8e3a09e04704da00cac974571463f
+        media_content_id: media-source:
         media_content_type: image/png
         metadata:
           title: dark_geometric_neon_bg_1770561686423 2.png
@@ -6132,7 +6118,7 @@ views:
           navigateIds:
             - {}
             - media_content_type: app
-              media_content_id: media-source://image_upload
+              media_content_id: media-source:
     visible:
       - user: 5ee57ea8e4174d67b0a97686fe4437b5
       - user: 49a98c3aa3c44399a03d32437dca04ba
@@ -7290,7 +7276,7 @@ views:
       repeat: repeat
       attachment: fixed
       image:
-        media_content_id: media-source://image_upload/1fbd1aa7312757fd7a69e5684e41c66e
+        media_content_id: media-source:
         media_content_type: image/png
         metadata:
           title: dark_geometric_light_variation_bg_1770562182951.png
@@ -7299,7 +7285,7 @@ views:
           navigateIds:
             - {}
             - media_content_type: app
-              media_content_id: media-source://image_upload
+              media_content_id: media-source:
     max_columns: 3
     visible:
       - user: 5ee57ea8e4174d67b0a97686fe4437b5
@@ -7908,17 +7894,17 @@ views:
                       
                       let gaugeOutput = '';
                       
-                      // Jauge 1 (0-200)
+                      
                       let p1 = Math.max(0, Math.min(100, (v / 200) * 100));
                       gaugeOutput += `<div style="${barStyle()}"><div style="${innerStyle(p1)}"></div></div>`;
                       
-                      // Jauge 2 (200-400)
+                      
                       if (v >= 200) {
                         let p2 = Math.max(0, Math.min(100, ((v - 200) / 200) * 100));
                         gaugeOutput += `<div style="${barStyle()}"><div style="${innerStyle(p2)}"></div></div>`;
                       }
                       
-                      // Jauge 3 (400-600)
+                      
                       if (v >= 400) {
                         let p3 = Math.max(0, Math.min(100, ((v - 400) / 200) * 100));
                         gaugeOutput += `<div style="${barStyle()}"><div style="${innerStyle(p3)}"></div></div>`;
@@ -8733,7 +8719,7 @@ views:
       repeat: repeat
       attachment: fixed
       image:
-        media_content_id: media-source://image_upload/e7a3df04050746194127db6a62708a1d
+        media_content_id: media-source:
         media_content_type: image/png
         metadata:
           title: dark_geometric_temp_magenta_clean_bg_1770562789453.png
@@ -8742,7 +8728,7 @@ views:
           navigateIds:
             - {}
             - media_content_type: app
-              media_content_id: media-source://image_upload
+              media_content_id: media-source:
     visible:
       - user: 5ee57ea8e4174d67b0a97686fe4437b5
       - user: 49a98c3aa3c44399a03d32437dca04ba
@@ -10846,7 +10832,7 @@ views:
       repeat: repeat
       attachment: fixed
       image:
-        media_content_id: media-source://image_upload/b148cb5f9f801b5cb67570cf0a8ad927
+        media_content_id: media-source:
         media_content_type: image/png
         metadata:
           title: dark_geometric_energy_clean_bg_1770562387977.png
@@ -10855,7 +10841,7 @@ views:
           navigateIds:
             - {}
             - media_content_type: app
-              media_content_id: media-source://image_upload
+              media_content_id: media-source:
     visible:
       - user: 5ee57ea8e4174d67b0a97686fe4437b5
       - user: 49a98c3aa3c44399a03d32437dca04ba
@@ -12593,7 +12579,7 @@ views:
             sub_card:
               tire_card:
                 background:
-                  media_content_id: media-source://image_upload/504d2b73a9cd503bc02999ab8a71670a
+                  media_content_id: media-source:
                   media_content_type: image/png
                   metadata:
                     title: pngegg (1).png
@@ -12603,7 +12589,7 @@ views:
                     navigateIds:
                       - {}
                       - media_content_type: app
-                        media_content_id: media-source://image_upload
+                        media_content_id: media-source:
                 front_left:
                   entity: sensor.tesla_model_3_pression_pneu_avant_gauche
                   name: Avant gauche
@@ -13456,7 +13442,7 @@ views:
                       return h > 0 ? `${h}h${String(mm).padStart(2,'0')}` : `${mm} min`;
                     };
 
-                    // --- Filament utilisé ---
+                    
                     const fu = states['sensor.ratrig_vminion_filament_used'];
                     const raw = (fu?.state ?? '').toString().replace(',', '.');
                     const unit = (fu?.attributes?.unit_of_measurement ?? '').toString();
@@ -13980,7 +13966,6 @@ views:
 
                           .card-content { padding: 0 !important; }
 
-                          #states { padding: 0 !important; margin: 0 !important;
                           }
 
                           hui-generic-entity-row { margin: 0 !important; }
@@ -14074,7 +14059,6 @@ views:
 
                           .card-content { padding: 0 !important; }
 
-                          #states { padding: 0 !important; margin: 0 !important;
                           }
 
                           hui-generic-entity-row { margin: 0 !important; }
@@ -14463,11 +14447,11 @@ views:
                     };
                     const fmtPctSmart = (n) => {
                       if (n === null) return '—';
-                      // ratio 0..1 => %
+                      
                       if (n >= 0 && n <= 1) return `${(n*100).toFixed(0)}%`;
-                      // déjà en % 1..100
+                      
                       if (n > 1 && n <= 100) return `${n.toFixed(0)}%`;
-                      // au-delà : on affiche brut (ou clamp si tu préfères)
+                      
                       return `${n.toFixed(0)}%`;
                     };
 
@@ -14559,7 +14543,7 @@ views:
                     const mcuLoad = num('sensor.ratrig_vminion_mcu_load');
                     const mcuTxt = fmtPctSmart(mcuLoad);
 
-                    // 👉 Mémoire RPi (déjà en % propre)
+                    
                     const mem = num('sensor.ratrig_vminion_memory_used');
                     const memTxt = (mem === null) ? '—' : `${mem.toFixed(0)}%`;
 
@@ -14693,7 +14677,7 @@ views:
             - background: |
                 [[[
                   const s = (entity?.state || '').toLowerCase();
-                  // OFF = VERT / ON = ROUGE
+                  
                   if (s === 'off') return 'linear-gradient(145deg, rgba(40,160,40,0.95), rgba(20,110,20,0.85))';
                   if (s === 'on')  return 'linear-gradient(145deg, rgba(200,40,40,0.95), rgba(130,20,20,0.85))';
                   return 'linear-gradient(145deg, rgba(120,120,120,0.70), rgba(80,80,80,0.55))';
@@ -14721,7 +14705,7 @@ views:
       repeat: no-repeat
       attachment: fixed
       image:
-        media_content_id: media-source://image_upload/67969bc9542ce018d62413c4ebe28965
+        media_content_id: media-source:
         media_content_type: image/png
         metadata:
           title: VMINION.png
@@ -14730,7 +14714,7 @@ views:
           navigateIds:
             - {}
             - media_content_type: app
-              media_content_id: media-source://image_upload
+              media_content_id: media-source:
     header:
       layout: start
       badges_position: bottom
@@ -15774,7 +15758,7 @@ views:
       repeat: repeat
       attachment: fixed
       image:
-        media_content_id: media-source://image_upload/da239dc46997bb6ed69689a286c14dc2
+        media_content_id: media-source:
         media_content_type: image/png
         metadata:
           title: dark_geometric_energy_blue_bg_1770562365952.png
@@ -15783,7 +15767,7 @@ views:
           navigateIds:
             - {}
             - media_content_type: app
-              media_content_id: media-source://image_upload
+              media_content_id: media-source:
     badges:
       - type: custom:button-card
         icon: mdi:home-variant-outline
@@ -16927,7 +16911,7 @@ views:
                     if (pic) {
                       return `<div style="width:100%; height:100%; background: url('${pic}') center/cover no-repeat; transition: background 0.5s ease;"></div>`;
                     }
-                    // Design minimaliste quand allumé sans artwork (ex: HDMI)
+                    
                     return `
                       <div style="width:100%; height:100%; background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 100%); opacity: 0.15;"></div>
                       <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
@@ -16993,7 +16977,6 @@ views:
                 - width: 28px
                 - filter: >
                     [[[ return entity.state === 'good' ? 'drop-shadow(0 0 5px
-                    #00ff88)' : 'drop-shadow(0 0 5px #ff1111)' ]]]
               name:
                 - justify-self: start
                 - font-weight: 900
@@ -17425,7 +17408,7 @@ views:
             const dayNum = date.getDate();
             const monthName = months[date.getMonth()];
 
-            // --- LOGIQUE DE SANTÉ NAS ---
+            
             const state = entity.state;
             const cpu = states['sensor.chrisnas_utilisation_du_processeur'].state;
             const temp = states['sensor.chrisnas_temperature_du_systeme'].state;
@@ -17587,7 +17570,7 @@ views:
                     ]]]
                   name: |
                     [[[
-                      // --- RESPONSIVE ---
+                      
                       const isMobile = window.innerWidth < 500;
                       const carSize = isMobile ? '30px' : '38px';
                       const titleSize = isMobile ? '12px' : '14px';
@@ -17597,7 +17580,7 @@ views:
                       const metricSize = isMobile ? '10px' : '11px';
                       const topMargin = isMobile ? '-4px' : '-6px';
                       const titleLeftShift = isMobile ? '-10px' : '-14px'; 
-                      // --- LOGIC ---
+                      
                       const t_red = 25; const t_orange = 10; const t_white = 5;
                       const flip = states['input_boolean.commute_card_flip']?.state === 'on';
                       const is_pm = new Date().getHours() >= 12;
@@ -17697,7 +17680,7 @@ views:
                     ]]]
                   name: |
                     [[[
-                      // --- RESPONSIVE ---
+                      
                       const isMobile = window.innerWidth < 500;
                       const carSize = isMobile ? '30px' : '38px';
                       const titleSize = isMobile ? '12px' : '14px';
@@ -17707,7 +17690,7 @@ views:
                       const metricSize = isMobile ? '10px' : '11px';
                       const topMargin = isMobile ? '-4px' : '-6px';
                       const titleLeftShift = isMobile ? '-10px' : '-14px'; 
-                      // --- LOGIC ---
+                      
                       const t_red = 25; const t_orange = 10; const t_white = 5;
                       const flip = states['input_boolean.commute_card_flip']?.state === 'on';
                       const is_pm = new Date().getHours() >= 12;
@@ -18336,19 +18319,19 @@ views:
                 - transition: box-shadow 0.5s ease-in-out, border 0.5s ease-in-out
                 - border: |
                     [[[
-                      // 1. Récupération des états (avec sécurité si indisponible)
+                      
                       var chargeState = states['binary_sensor.tesla_model_3_charging'] ? states['binary_sensor.tesla_model_3_charging'].state : 'off';
-                      // Si tu as un sensor.tesla_charging_state à la place, décommente ci-dessous:
+                      
                       // var chargeState = states['sensor.tesla_model_3_charging_state']?.state === 'Charging' ? 'on' : 'off';
                       
                       var batteryState = states['sensor.tesla_model_3_niveau_de_batterie'] ? parseFloat(states['sensor.tesla_model_3_niveau_de_batterie'].state) : 0;
-                      // 2. Logique Halo
+                      
                       if (chargeState == 'on') return '1px solid rgba(0, 210, 255, 0.6)'; // BLEU CLAIR (Charge)
                       if (!isNaN(batteryState)) {
                          if (batteryState <= 20) return '1px solid rgba(255, 0, 0, 0.6)';   // ROUGE (0-20%)
                          if (batteryState <= 30) return '1px solid rgba(255, 140, 0, 0.6)'; // ORANGE (20-30%)
                       }
-                      // Sinon (Normal)
+                      
                       return '1px solid rgba(255,255,255,0.1)';
                     ]]]
                 - box-shadow: |
@@ -18396,7 +18379,7 @@ views:
                   
                   const rawBattery = states['sensor.tesla_model_3_niveau_de_batterie']?.state;
                   const rawRange   = states['sensor.tesla_model_3_autonomie_de_batterie']?.state;
-                  // Gestion des valeurs non-numériques (veille)
+                  
                   let batterie = Math.round(Number(rawBattery));
                   let autonomie = Math.round(Number(rawRange));
                   
@@ -18404,15 +18387,15 @@ views:
                   let statusText = isOn ? 'Connectée' : 'Endormie (Veille)';
                   if (isCharging) statusText = 'En Charge ⚡';
                   
-                  // Barre de progression (Reste visible même si NaN, à 0%)
+                  
                   const pct = Number.isFinite(batterie) ? Math.max(0, Math.min(100, batterie)) : 0;
                   
-                  // Couleur Barre (Logique demandée incluse)
+                  
                   let fillColor = '#28a745'; // Vert par défaut
                   if (isCharging) fillColor = '#00D2FF'; // Bleu Charge
                   else if (pct <= 20) fillColor = '#dc3545'; // Rouge
                   else if (pct <= 30) fillColor = '#ffc107'; // Orange
-                  const glow = `0 0 8px ${fillColor}80`; // 50% opacity
+                  const glow = `0 0 8px ${fillColor}80`; 
                   
                   const bar = `
                     <div style="height:10px; border-radius:999px;
@@ -18636,7 +18619,6 @@ views:
             card:
               type: markdown
               content: |
-                ### État Lave-linge & Sèche-linge
               card_mod:
                 style: |
                   ha-card {
@@ -19486,7 +19468,7 @@ views:
                     `;
                   }
                   else {
-                    // cloudy
+                    
                     color = '#9E9E9E';
                     svg = `
                       <svg viewBox="0 0 64 64" style="width: 30px; height: 30px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); transform: translateY(3px);">
@@ -20057,7 +20039,7 @@ views:
                 [[[
                   if (!entity || !entity.attributes) return '...';
                   
-                  // --- TEMPÉRATURES ---
+                  
                   const cur = parseFloat(entity.attributes.temperature || 0);
                   const low = parseFloat(entity.attributes.forecast?.[0]?.templow || cur - 3);
                   const high = parseFloat(entity.attributes.forecast?.[0]?.temperature || cur + 4);
@@ -20077,7 +20059,7 @@ views:
                     </div>
                   `;
 
-                  // --- ALERTES MULTIPLES (MÉTÉO FRANCE) ---
+                  
                   const alert_ent = states['sensor.91_weather_alert'];
                   let alerts_html = '';
                   if (alert_ent && alert_ent.state !== 'Vert' && alert_ent.state !== 'unknown') {
@@ -20137,7 +20119,7 @@ views:
                     }).join('') + '</div>';
                   }
 
-                  // --- INDICE UV PREMIUM ---
+                  
                   const uv_ent = states['sensor.openuv_maison_indice_uv_actuel'];
                   const sun = states['sun.sun'];
                   const isNight = sun?.state === 'below_horizon' || entity.state === 'clear-night';
@@ -20236,7 +20218,7 @@ views:
                   const uvReal =
                     parseFloat(states['sensor.openuv_maison_indice_uv_actuel']?.state ?? 'NaN');
 
-                  // ✅ FORÇAGE À 0 APRÈS COUCHER
+                  
                   const uv = (sunState === 'below_horizon') ? 0.0 : uvReal;
                   const uvTxt = Number.isFinite(uv) ? uv.toFixed(1) : '?';
 
@@ -20250,20 +20232,20 @@ views:
 
                   const remaining = Math.max(0, 50 - count);
 
-                  // ✅ jauge visible dès la 1ère MAJ
+                  
                   const pctRaw = Math.round((count / 50) * 100);
                   const pct = (count > 0 && pctRaw < 8) ? 8 : pctRaw;
 
-                  // ✅ Format FR: DD/MM/YYYY HH:MM
+                  
                   const pad2 = (n) => String(n).padStart(2, '0');
                   const fmtFR = (d) =>
                     `${pad2(d.getDate())}/${pad2(d.getMonth()+1)}/${d.getFullYear()} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
 
-                  // Dernière MAJ (depuis input_datetime si présent, sinon depuis ts)
+                  
                   const lastDtStr = states['input_datetime.openuv_last_update']?.state || '';
                   let lastFR = '—';
 
-                  // Timestamp fiable
+                  
                   const lastTs = parseInt(states['input_number.openuv_last_update_ts']?.state ?? '0');
 
                   if (lastTs > 0) {
@@ -20274,7 +20256,7 @@ views:
                     if (!isNaN(d.getTime())) lastFR = fmtFR(d);
                   }
 
-                  // Prochaine MAJ (uniquement le jour)
+                  
                   let nextFR = '—';
                   if (sunState === 'above_horizon' && lastTs > 0 && intervalS > 0) {
                     nextFR = fmtFR(new Date((lastTs + intervalS) * 1000));

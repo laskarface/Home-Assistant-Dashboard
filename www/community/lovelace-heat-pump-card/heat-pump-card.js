@@ -1,7 +1,7 @@
 class HeatPumpCard extends HTMLElement {
 
-  // Whenever the state changes, a new `hass` object is set. Use this to
-  // update your content.
+  
+  
   set hass(hass) {
 
     if (this.content) {
@@ -333,8 +333,8 @@ class HeatPumpCard extends HTMLElement {
     }
   }
 
-  // The user supplied configuration. Throw an exception and Home Assistant
-  // will render an error card.
+  
+  
   setConfig(config) {
     this.config = config;
     if (this.content) {
@@ -409,7 +409,7 @@ class HeatPumpCard extends HTMLElement {
   }
 
   static getConfigForm() {
-    // Define the form schema.
+    
     const SCHEMA = [
       { name: "title", selector: { text: {} } },
       {
@@ -593,11 +593,11 @@ class HeatPumpCard extends HTMLElement {
       }
     ];
 
-    // A simple assertion function to validate the configuration.
+    
     const assertConfig = (config) => {
     };
 
-    // computeLabel returns a localized label for a schema item.
+    
     const computeLabel = (schema, localize) => {
       return HeatPumpCard.localization.editor[schema.name];
     };
@@ -609,13 +609,13 @@ class HeatPumpCard extends HTMLElement {
     };
   }
 
-  // The height of your card. Home Assistant uses this to automatically
-  // distribute all cards over the available columns in masonry view
+  
+  
   getCardSize() {
     return 7;
   }
 
-  // The rules for sizing your card in the grid in sections view
+  
   getLayoutOptions() {
     return {
       grid_rows: 7,

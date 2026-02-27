@@ -49,17 +49,17 @@ custom_fields:
     \n  const count =\n    parseInt(states['counter.openuv_updates_today']?.state\
     \ ?? '0');\n\n  const intervalS =\n    parseInt(states['input_number.openuv_interval_seconds']?.state\
     \ ?? '0');\n\n  const intervalMin = intervalS ? Math.round(intervalS / 60) : 0;\n\
-    \n  const remaining = Math.max(0, 50 - count);\n\n  // ✅ jauge visible dès la\
+    \n  const remaining = Math.max(0, 50 - count);\n\n  
     \ 1ère MAJ\n  const pctRaw = Math.round((count / 50) * 100);\n  const pct = (count\
-    \ > 0 && pctRaw < 8) ? 8 : pctRaw;\n\n  // ✅ Format FR: DD/MM/YYYY HH:MM\n  const\
+    \ > 0 && pctRaw < 8) ? 8 : pctRaw;\n\n  
     \ pad2 = (n) => String(n).padStart(2, '0');\n  const fmtFR = (d) =>\n    `${pad2(d.getDate())}/${pad2(d.getMonth()+1)}/${d.getFullYear()}\
-    \ ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;\n\n  // Dernière MAJ (depuis\
+    \ ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;\n\n  
     \ input_datetime si présent, sinon depuis ts)\n  const lastDtStr = states['input_datetime.openuv_last_update']?.state\
     \ || '';\n  let lastFR = '—';\n\n  // Timestamp fiable\n  const lastTs = parseInt(states['input_number.openuv_last_update_ts']?.state\
     \ ?? '0');\n\n  if (lastTs > 0) {\n    lastFR = fmtFR(new Date(lastTs * 1000));\n\
     \  } else if (lastDtStr) {\n    // fallback si jamais le ts n'est pas encore renseigné\n\
     \    const d = new Date(lastDtStr.replace(' ', 'T'));\n    if (!isNaN(d.getTime()))\
-    \ lastFR = fmtFR(d);\n  }\n\n  // Prochaine MAJ (uniquement le jour)\n  let nextFR\
+    \ lastFR = fmtFR(d);\n  }\n\n  
     \ = '—';\n  if (sunState === 'above_horizon' && lastTs > 0 && intervalS > 0) {\n\
     \    nextFR = fmtFR(new Date((lastTs + intervalS) * 1000));\n  }\n\n  const uvColor\
     \ = (v) => {\n    if (v < 3) return \"#00C853\";\n    if (v < 6) return \"#FFEB3B\"\

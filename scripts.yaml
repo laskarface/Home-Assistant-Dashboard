@@ -28,7 +28,7 @@ bonne_nuit:
   mode: single
 basculer_lumiere_salon:
   alias: Salon on/off
-  description: Allume ou éteint la lumière du salon selon son état actuel
+  description: ''
   mode: single
   sequence:
   - choose:
@@ -60,7 +60,7 @@ basculer_lumiere_bureau:
         entity_id: light.bureaux
       action: light.turn_on
   alias: Bureau on/off
-  description: Allume ou éteint la lumière du bureau bureau son état actuel
+  description: ''
   mode: single
 toilettes_on_off:
   sequence:
@@ -78,7 +78,7 @@ toilettes_on_off:
         entity_id: light.interrupteur_toilette
       action: light.turn_on
   alias: Toilettes on/off
-  description: Allume ou éteint la lumière des toilettes selon son état actuel
+  description: ''
   mode: single
 salle_de_bain_on_off:
   sequence:
@@ -96,7 +96,7 @@ salle_de_bain_on_off:
         entity_id: light.interrupteur_sdb_parents
       action: light.turn_on
   alias: Salle de bain on/off
-  description: Allume ou éteint la lumière de la SDB selon son état actuel
+  description: ''
   mode: single
 lit_on_off:
   sequence:

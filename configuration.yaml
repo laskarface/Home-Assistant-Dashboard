@@ -1,4 +1,3 @@
-# configuration.yaml organisé, optimisé et 100% Unique ID 🦾
 # --- CORE ---
 default_config:
 http:
@@ -14,7 +13,7 @@ frontend:
 recorder:
   purge_keep_days: 30
   auto_purge: true
-  db_url: sqlite:////config/home-assistant_v2.db
+  db_url: sqlite:
   exclude:
     event_types:
       - hon_program_started
@@ -23,7 +22,6 @@ recorder:
       - hon_device_update
 # --- INCLUDES ---
 automation: !include automations.yaml
-# --- AUTOMATIONS MANUELLES heart ---
 automation manual:
   - alias: "Réinitialisation Minuteur Trajets (2 min)"
     id: "reset_commute_flip_timer_id" # Corrigé : 'id' au lieu de 'unique_id'

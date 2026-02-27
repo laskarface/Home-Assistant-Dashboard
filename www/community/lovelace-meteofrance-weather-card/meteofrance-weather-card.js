@@ -201,7 +201,7 @@ class MeteofranceWeatherCard extends LitElement {
     return diff > 3600000;
   }
 
-  // Upgrade config fields if necessary
+  
   upgradeConfig(config) {
     const upgradedConfig = { ...config };
     if (this.hass !== undefined) {

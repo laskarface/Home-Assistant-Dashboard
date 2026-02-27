@@ -38,16 +38,13 @@ custom_fields:
         card_mod:
           style: ':host { --toggle-icon-width: 0px !important; }
 
-            #head ha-icon, #head ha-icon-button { display: none !important; width:
             0px !important; visibility: hidden !important; }
 
             div#head { display: block !important; width: 100% !important; padding:
             0 !important; margin: 0 !important; }
 
-            #head { padding: 0 !important; margin: 0 !important; width: 100% !important;
             cursor: pointer !important; }
 
-            #head > * { width: 100% !important; max-width: 100% !important; }
 
             div#items { padding: 14px 0 0 0 !important; margin: 0 !important; width:
             100% !important; box-sizing: border-box !important; }

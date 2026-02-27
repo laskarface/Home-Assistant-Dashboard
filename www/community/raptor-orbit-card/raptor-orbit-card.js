@@ -24,40 +24,40 @@
 */
 
 /* Logo "Raptor" (ASCII art) --------------------------------------------- */
-//                                   .,.                                          
-//                       *******                        *#### (#####              
-//                  ******                          / ########     .#####.        
-//              ,*****                          //////##########   #####  /####   
-//           .*****                           // /////*#####################  ##  
-//         ******                             //// /// ######*      *############ 
-//       ******                               ////// /   ###########,            
-//     .*****                                 ////////     ##################     
-//    ******                                  //////// #                         
-//   *****.                                  ## ////// ###                       
-//  *****,                              #########/ /// #####/                  , 
-// ,*****                           ################ /.######                   
-// *****                       (####################   (#####                   *
-// ******                   #####   ########   ////////   ###                   .*
-//,******             .*** ######### #####*   /////////     # /                 *
-// *********    .******* ############ ###### ////////       ////                *
-//  ******************* (############# #####///////      *///// ##              *
-//   ****************** //// ,######### ###  /########       #########          *
-//     ****************  ////////  #####/(       #######.          ####         *
-//                       /////// /////  ##     //    (####           ###       **
-//                        ///// //////////, /////     .####       /*(##       **
-//                       ////// ///////    / ////   ## ###         ,         ,**
-//                     ////////////       // ///      #                     ***.
-//    .              /////////,         ////,/                             ***   
-//                   ///               ......                            ****    
-//       ,           ,///##              /////                         ****.     
-//         *.         // ###              ,/// /                     *****       
-//           ,*       / ####                /*/// ///             *****          
-//              **,    ####( ####             ///// ///        ******            
-//                 ****  ##### #####                      ,*******               
-//                     ******.                      **********                   
-//                           ***************************                         
 
-// ---- Raptor Orbit Card - multi-usage (climate / sensor / cover / switch / gauge) ----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const LitBase =
   window.LitElement ||
   Object.getPrototypeOf(
@@ -75,7 +75,7 @@ const css =
     ? LitBase.prototype.css
     : LitBase.css;
 
-// -------------------- DEFINITION DE LA CARTE --------------------
+
 
 class RaptorOrbitCard extends LitBase {
   static get properties() {
@@ -122,7 +122,7 @@ class RaptorOrbitCard extends LitBase {
     const primaryIndex = norm.findIndex((it) => it.entity === primaryEntity);
 
     this._config = {
-      // affichage global
+      
       title: config.title || "",
       compact: config.compact ?? false,
       transparent: config.transparent ?? false,
@@ -142,11 +142,11 @@ class RaptorOrbitCard extends LitBase {
         config.hint_text ||
         "Glisse de gauche à droite ou utilise les flèches pour changer d’élément. Clique sur l’élément principal pour les détails (ou selon tap_action / hold_action).",
 
-      // gestion de thème
+      
       // theme_mode: "auto" | "light" | "dark" | "ha" | "custom"
       theme_mode: config.theme_mode || "auto",
 
-      // palette logique
+      
       color_on: config.color_on || "#ff9800",
       color_off: config.color_off || "#37474f",
 
@@ -156,45 +156,45 @@ class RaptorOrbitCard extends LitBase {
 
       cover_fill_color: config.cover_fill_color ?? null,
 
-      // IMPORTANT : laissé null pour que le thème choisisse bleu (clair) ou orange (sombre) par défaut
+      
       gauge_default_color: config.gauge_default_color ?? null,
       gauge_direction: config.gauge_direction || "bottom_to_top",
 
-      // texte global
+      
       text_color: config.text_color || null,
       text_color_secondary: config.text_color_secondary || null,
 
-      // style global des bulles
+      
       shape: config.shape || "circle",          // circle | square | hex
       pattern: config.pattern || "solid",       // solid | stripes | dots
       edge_style: config.edge_style || "liquid",// liquid | straight
 
-      // orientation disque / slots
-      tilt: config.tilt ?? true,                // true = oblique, false = disque plat
+      
+      tilt: config.tilt ?? true,                
 
-      // couleurs climate (optionnelles)
+      
       climate_color_heat: config.climate_color_heat ?? null,
       climate_color_cool: config.climate_color_cool ?? null,
       climate_color_idle: config.climate_color_idle ?? null,
 
-      // couleurs switch/binary (optionnelles)
+      
       switch_color_on: config.switch_color_on ?? null,
       switch_color_off: config.switch_color_off ?? null,
 
-      // tailles de police
+      
       font_header: config.font_header ?? 1.05,
       font_label: config.font_label ?? 1.15,
       font_temp: config.font_temp ?? 1.1,
       font_current: config.font_current ?? 1.15,
       label_bold: config.label_bold ?? true,
 
-      // style des slots
+      
       slot_padding: config.slot_padding ?? 4,
       slot_radius: config.slot_radius ?? null,
       slot_border_color_on: config.slot_border_color_on || null,
       slot_border_color_off: config.slot_border_color_off || null,
 
-      // marges internes de la carte
+      
       card_inner_padding: config.card_inner_padding ?? 10,
 
       // liste d'entités
@@ -212,7 +212,7 @@ class RaptorOrbitCard extends LitBase {
     this._clearAutoTimer();
   }
 
-  // -------------------- THEMES --------------------
+  
 
   _getEffectiveThemeMode() {
     const explicit = this._config.theme_mode || "auto";
@@ -230,7 +230,7 @@ class RaptorOrbitCard extends LitBase {
       return isDarkHa ? "dark" : "light";
     }
 
-    // auto = suit le mode sombre HA
+    
     return isDarkHa ? "dark" : "light";
   }
 
@@ -286,14 +286,14 @@ class RaptorOrbitCard extends LitBase {
         switch_on: this._config.switch_color_on || "#ff9800",
         switch_off: this._config.switch_color_off || "#37474f",
         gauge_color: this._config.gauge_default_color || "#ff9800",
-        // volets : orange par défaut en sombre
+        
         cover_color:
           this._config.cover_fill_color ||
           this._config.color_on ||
           "#ff9800",
       };
 
-      // si transparent: fond de carte et wheel transparents
+      
       if (transparent) {
         vars.cardBg = "none";
         vars.wheelBg = "none";
@@ -302,7 +302,7 @@ class RaptorOrbitCard extends LitBase {
       return vars;
     }
 
-    // thème clair : bleu/blanc, texte foncé
+    
     const textMain =
       this._config.text_color || (custom ? "#000000" : "#0b1120");
     const textSecondary =
@@ -349,13 +349,13 @@ class RaptorOrbitCard extends LitBase {
       switch_on: this._config.switch_color_on || "#2196f3",
       switch_off: this._config.switch_color_off || "#cbd5e1",
       gauge_color: this._config.gauge_default_color || "#2196f3",
-      // volets : bleu par défaut en clair
+      
       cover_color:
         this._config.cover_fill_color ||
         "#2196f3",
     };
 
-    // si transparent: fond de carte et wheel transparents
+    
     if (transparent) {
       vars.cardBg = "none";
       vars.wheelBg = "none";
@@ -364,7 +364,7 @@ class RaptorOrbitCard extends LitBase {
     return vars;
   }
 
-  // -------------------- STYLES --------------------
+  
 
   static get styles() {
     return css`
@@ -669,7 +669,7 @@ class RaptorOrbitCard extends LitBase {
     `;
   }
 
-  // -------------------- HELPERS --------------------
+  
 
   _clearAutoTimer() {
     if (this._autoTimer) {
@@ -840,7 +840,7 @@ class RaptorOrbitCard extends LitBase {
     } else if (mode === "binary") {
       current = stateObj.state;
     } else {
-      // sensor : min=0 / max=100 par défaut
+      
       const raw = parseFloat(stateObj.state);
       if (!isNaN(raw)) {
         current = raw;
@@ -922,7 +922,7 @@ class RaptorOrbitCard extends LitBase {
     }
   }
 
-  // -------------------- RENDER DES BULLES --------------------
+  
 
   _renderSlots(themeVars) {
     const entities = this._config.entities;
@@ -995,7 +995,7 @@ class RaptorOrbitCard extends LitBase {
       let unitText = unit || "";
       if (unitText === "°" || unitText === "Â°") unitText = "°";
 
-      // gestion des couleurs de remplissage
+      
       let fillStyle = "";
       let fillPercent = percent;
       let fillColor = null;
@@ -1007,7 +1007,7 @@ class RaptorOrbitCard extends LitBase {
           themeVars.cover_color ||
           themeVars.logical_on;
       } else if (mode === "gauge" || mode === "sensor") {
-        // sensors traités comme gauges
+        
         fillColor =
           item.gauge_color ||
           themeVars.gauge_color ||
@@ -1046,7 +1046,7 @@ class RaptorOrbitCard extends LitBase {
         }
       }
 
-      // severities pour gauge/sensor
+      
       if (
         (mode === "gauge" || mode === "sensor") &&
         typeof current === "number" &&
@@ -1099,7 +1099,7 @@ class RaptorOrbitCard extends LitBase {
             top: 0;
             bottom: auto;
           `;
-        } else { // bottom_to_top par défaut
+        } else { 
           sizePart = `
             width: 100%;
             height: ${pct}%;
@@ -1174,7 +1174,7 @@ class RaptorOrbitCard extends LitBase {
     });
   }
 
-  // -------------------- LIFE CYCLE --------------------
+  
 
   firstUpdated() {
     const zone = this.renderRoot.querySelector(".wheel-wrapper");
@@ -1202,11 +1202,11 @@ class RaptorOrbitCard extends LitBase {
 
     const themeVars = this._getThemeVars();
 
-    // classes du ha-card
+    
     const cardClasses = [];
     if (this._config.transparent) cardClasses.push("transparent");
 
-    // classes du conteneur interne
+    
     const innerClasses = ["inner"];
     if (this._config.compact) innerClasses.push("compact");
 
@@ -1306,7 +1306,7 @@ class RaptorOrbitCard extends LitBase {
   }
 }
 
-// -------------------- ENREGISTREMENT DE LA CARTE --------------------
+
 
 if (!customElements.get("raptor-orbit-card")) {
   customElements.define("raptor-orbit-card", RaptorOrbitCard);

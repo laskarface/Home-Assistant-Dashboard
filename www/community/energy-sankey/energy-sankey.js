@@ -45,7 +45,7 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
 
-// Material Design Icons v7.4.47
+
 var mdiArrowLeft = "M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z";
 var mdiArrowRight = "M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z";
 var mdiBattery = "M16.67,4H15V2H9V4H7.33A1.33,1.33 0 0,0 6,5.33V20.67C6,21.4 6.6,22 7.33,22H16.67A1.33,1.33 0 0,0 18,20.67V5.33C18,4.6 17.4,4 16.67,4Z";
@@ -195,11 +195,11 @@ const constructFromSymbol = Symbol.for("constructDateFrom");
  * @example
  * import { constructFrom } from "./constructFrom/date-fns";
  *
- * // A function that clones a date preserving the original type
+ * 
  * function cloneDate<DateType extends Date>(date: DateType): DateType {
  *   return constructFrom(
- *     date, // Use constructor from the given date
- *     date.getTime() // Use the date value to create a new date
+ *     date, 
+ *     date.getTime() 
  *   );
  * }
  */
@@ -243,17 +243,17 @@ function constructFrom(date, value) {
  * @returns The parsed date in the local time zone
  *
  * @example
- * // Clone the date:
+ * 
  * const result = toDate(new Date(2014, 1, 11, 11, 30, 30))
- * //=> Tue Feb 11 2014 11:30:30
+ * 
  *
  * @example
- * // Convert the timestamp to date:
+ * 
  * const result = toDate(1392098430000)
- * //=> Tue Feb 11 2014 11:30:30
+ * 
  */
 function toDate$1(argument, context) {
-  // [TODO] Get rid of `toDate` or `constructFrom`?
+  
   return constructFrom(context || argument, argument);
 }
 
@@ -279,15 +279,15 @@ function toDate$1(argument, context) {
  * @returns The new date with the days added
  *
  * @example
- * // Add 10 days to 1 September 2014:
+ * 
  * const result = addDays(new Date(2014, 8, 1), 10)
- * //=> Thu Sep 11 2014 00:00:00
+ * 
  */
 function addDays(date, amount, options) {
   const _date = toDate$1(date, options?.in);
   if (isNaN(amount)) return constructFrom(options?.in || date, NaN);
 
-  // If 0 days, no-op to avoid changing times in the hour before end of DST
+  
   if (!amount) return _date;
 
   _date.setDate(_date.getDate() + amount);
@@ -316,31 +316,31 @@ function addDays(date, amount, options) {
  * @returns The new date with the months added
  *
  * @example
- * // Add 5 months to 1 September 2014:
+ * 
  * const result = addMonths(new Date(2014, 8, 1), 5)
- * //=> Sun Feb 01 2015 00:00:00
+ * 
  *
- * // Add one month to 30 January 2023:
+ * 
  * const result = addMonths(new Date(2023, 0, 30), 1)
- * //=> Tue Feb 28 2023 00:00:00
+ * 
  */
 function addMonths(date, amount, options) {
   const _date = toDate$1(date, options?.in);
   if (isNaN(amount)) return constructFrom(options?.in || date, NaN);
   if (!amount) {
-    // If 0 months, no-op to avoid changing times in the hour before end of DST
+    
     return _date;
   }
   const dayOfMonth = _date.getDate();
 
-  // The JS Date object supports date math by accepting out-of-bounds values for
-  // month, day, etc. For example, new Date(2020, 0, 0) returns 31 Dec 2019 and
-  // new Date(2020, 13, 1) returns 1 Feb 2021.  This is *almost* the behavior we
-  // want except that dates will wrap around the end of a month, meaning that
-  // new Date(2020, 13, 31) will return 3 Mar 2021 not 28 Feb 2021 as desired. So
+  
+  
+  
+  
+  
   // we'll default to the end of the desired month by adding 1 to the desired
-  // month and using a date of 0 to back up one day to the end of the desired
-  // month.
+  
+  
   const endOfDesiredMonth = constructFrom(options?.in || date, _date.getTime());
   endOfDesiredMonth.setMonth(_date.getMonth() + amount + 1, 0);
   const daysInMonth = endOfDesiredMonth.getDate();
@@ -351,11 +351,11 @@ function addMonths(date, amount, options) {
   } else {
     // Otherwise, we now know that setting the original day-of-month value won't
     // cause an overflow, so set the desired day-of-month. Note that we can't
-    // just set the date of `endOfDesiredMonth` because that object may have had
-    // its time changed in the unusual case where where a DST transition was on
-    // the last day of the month and its local time was in the hour skipped or
-    // repeated next to a DST transition.  So we use `date` instead which is
-    // guaranteed to still have the original time.
+    
+    
+    
+    
+    
     _date.setFullYear(
       endOfDesiredMonth.getFullYear(),
       endOfDesiredMonth.getMonth(),
@@ -387,9 +387,9 @@ function addMonths(date, amount, options) {
  * @returns The new date with the milliseconds added
  *
  * @example
- * // Add 750 milliseconds to 10 July 2014 12:45:30.000:
+ * 
  * const result = addMilliseconds(new Date(2014, 6, 10, 12, 45, 30, 0), 750)
- * //=> Thu Jul 10 2014 12:45:30.750
+ * 
  */
 function addMilliseconds(date, amount, options) {
   return constructFrom(date, +toDate$1(date) + amount);
@@ -417,9 +417,9 @@ function addMilliseconds(date, amount, options) {
  * @returns The new date with the hours added
  *
  * @example
- * // Add 2 hours to 10 July 2014 23:00:00:
+ * 
  * const result = addHours(new Date(2014, 6, 10, 23, 0), 2)
- * //=> Fri Jul 11 2014 01:00:00
+ * 
  */
 function addHours(date, amount, options) {
   return addMilliseconds(date, amount * millisecondsInHour);
@@ -483,9 +483,9 @@ function normalizeDates(context, ...dates) {
  * @returns The start of a day
  *
  * @example
- * // The start of a day for 2 September 2014 11:55:00:
+ * 
  * const result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
- * //=> Tue Sep 02 2014 00:00:00
+ * 
  */
 function startOfDay(date, options) {
   const _date = toDate$1(date, options?.in);
@@ -513,20 +513,20 @@ function startOfDay(date, options) {
  * @returns The number of calendar days
  *
  * @example
- * // How many calendar days are between
- * // 2 July 2011 23:00:00 and 2 July 2012 00:00:00?
+ * 
+ * 
  * const result = differenceInCalendarDays(
  *   new Date(2012, 6, 2, 0, 0),
  *   new Date(2011, 6, 2, 23, 0)
  * )
- * //=> 366
- * // How many calendar days are between
- * // 2 July 2011 23:59:00 and 3 July 2011 00:01:00?
+ * 
+ * 
+ * 
  * const result = differenceInCalendarDays(
  *   new Date(2011, 6, 3, 0, 1),
  *   new Date(2011, 6, 2, 23, 59)
  * )
- * //=> 1
+ * 
  */
 function differenceInCalendarDays(laterDate, earlierDate, options) {
   const [laterDate_, earlierDate_] = normalizeDates(
@@ -543,9 +543,9 @@ function differenceInCalendarDays(laterDate, earlierDate, options) {
   const earlierTimestamp =
     +earlierStartOfDay - getTimezoneOffsetInMilliseconds$1(earlierStartOfDay);
 
-  // Round the number of days to the nearest integer because the number of
+  
   // milliseconds in a day is not constant (e.g. it's different in the week of
-  // the daylight saving time clock shift).
+  
   return Math.round((laterTimestamp - earlierTimestamp) / millisecondsInDay);
 }
 
@@ -564,22 +564,22 @@ function differenceInCalendarDays(laterDate, earlierDate, options) {
  * @returns The result of the comparison
  *
  * @example
- * // Compare 11 February 1987 and 10 July 1989:
+ * 
  * const result = compareAsc(new Date(1987, 1, 11), new Date(1989, 6, 10))
- * //=> -1
+ * 
  *
  * @example
- * // Sort the array of dates:
+ * 
  * const result = [
  *   new Date(1995, 6, 2),
  *   new Date(1987, 1, 11),
  *   new Date(1989, 6, 10)
  * ].sort(compareAsc)
- * //=> [
- * //   Wed Feb 11 1987 00:00:00,
- * //   Mon Jul 10 1989 00:00:00,
- * //   Sun Jul 02 1995 00:00:00
- * // ]
+ * 
+ * 
+ * 
+ * 
+ * 
  */
 function compareAsc(dateLeft, dateRight) {
   const diff = +toDate$1(dateLeft) - +toDate$1(dateRight);
@@ -587,7 +587,7 @@ function compareAsc(dateLeft, dateRight) {
   if (diff < 0) return -1;
   else if (diff > 0) return 1;
 
-  // Return 0 if diff is 0; return NaN if diff is NaN
+  
   return diff;
 }
 
@@ -610,12 +610,12 @@ function compareAsc(dateLeft, dateRight) {
  * @returns The number of calendar months
  *
  * @example
- * // How many calendar months are between 31 January 2014 and 1 September 2014?
+ * 
  * const result = differenceInCalendarMonths(
  *   new Date(2014, 8, 1),
  *   new Date(2014, 0, 31)
  * )
- * //=> 8
+ * 
  */
 function differenceInCalendarMonths(laterDate, earlierDate, options) {
   const [laterDate_, earlierDate_] = normalizeDates(
@@ -657,35 +657,35 @@ function differenceInCalendarMonths(laterDate, earlierDate, options) {
  * @returns The number of full days according to the local timezone
  *
  * @example
- * // How many full days are between
- * // 2 July 2011 23:00:00 and 2 July 2012 00:00:00?
+ * 
+ * 
  * const result = differenceInDays(
  *   new Date(2012, 6, 2, 0, 0),
  *   new Date(2011, 6, 2, 23, 0)
  * )
- * //=> 365
+ * 
  *
  * @example
- * // How many full days are between
- * // 2 July 2011 23:59:00 and 3 July 2011 00:01:00?
+ * 
+ * 
  * const result = differenceInDays(
  *   new Date(2011, 6, 3, 0, 1),
  *   new Date(2011, 6, 2, 23, 59)
  * )
- * //=> 0
+ * 
  *
  * @example
- * // How many full days are between
- * // 1 March 2020 0:00 and 1 June 2020 0:00 ?
- * // Note: because local time is used, the
- * // result will always be 92 days, even in
- * // time zones where DST starts and the
- * // period has only 92*24-1 hours.
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * const result = differenceInDays(
  *   new Date(2020, 5, 1),
  *   new Date(2020, 2, 1)
  * )
- * //=> 92
+ * 
  */
 function differenceInDays(laterDate, earlierDate, options) {
   const [laterDate_, earlierDate_] = normalizeDates(
@@ -701,21 +701,21 @@ function differenceInDays(laterDate, earlierDate, options) {
 
   laterDate_.setDate(laterDate_.getDate() - sign * difference);
 
-  // Math.abs(diff in full days - diff in calendar days) === 1 if last calendar day is not full
-  // If so, result must be decreased by 1 in absolute value
+  
+  
   const isLastDayNotFull = Number(
     compareLocalAsc(laterDate_, earlierDate_) === -sign,
   );
 
   const result = sign * (difference - isLastDayNotFull);
-  // Prevent negative zero
+  
   return result === 0 ? 0 : result;
 }
 
-// Like `compareAsc` but uses local time not UTC, which is needed
-// for accurate equality comparisons of UTC timestamps that end up
-// having the same representation in local time, e.g. one hour before
-// DST ends vs. the instant that DST ends.
+
+
+
+
 function compareLocalAsc(laterDate, earlierDate) {
   const diff =
     laterDate.getFullYear() - earlierDate.getFullYear() ||
@@ -729,7 +729,7 @@ function compareLocalAsc(laterDate, earlierDate) {
   if (diff < 0) return -1;
   if (diff > 0) return 1;
 
-  // Return 0 if diff is 0; return NaN if diff is NaN
+  
   return diff;
 }
 
@@ -755,9 +755,9 @@ function compareLocalAsc(laterDate, earlierDate) {
  * @returns The end of a day
  *
  * @example
- * // The end of a day for 2 September 2014 11:55:00:
+ * 
  * const result = endOfDay(new Date(2014, 8, 2, 11, 55, 0))
- * //=> Tue Sep 02 2014 23:59:59.999
+ * 
  */
 function endOfDay(date, options) {
   const _date = toDate$1(date, options?.in);
@@ -787,9 +787,9 @@ function endOfDay(date, options) {
  * @returns The end of a month
  *
  * @example
- * // The end of a month for 2 September 2014 11:55:00:
+ * 
  * const result = endOfMonth(new Date(2014, 8, 2, 11, 55, 0))
- * //=> Tue Sep 30 2014 23:59:59.999
+ * 
  */
 function endOfMonth(date, options) {
   const _date = toDate$1(date, options?.in);
@@ -813,9 +813,9 @@ function endOfMonth(date, options) {
  * @returns The date is the last day of a month
  *
  * @example
- * // Is 28 February 2014 the last day of a month?
+ * 
  * const result = isLastDayOfMonth(new Date(2014, 1, 28))
- * //=> true
+ * 
  */
 function isLastDayOfMonth(date, options) {
   const _date = toDate$1(date, options?.in);
@@ -838,9 +838,9 @@ function isLastDayOfMonth(date, options) {
  * @returns The number of full months
  *
  * @example
- * // How many full months are between 31 January 2014 and 1 September 2014?
+ * 
  * const result = differenceInMonths(new Date(2014, 8, 1), new Date(2014, 0, 31))
- * //=> 7
+ * 
  */
 function differenceInMonths(laterDate, earlierDate, options) {
   const [laterDate_, workingLaterDate, earlierDate_] = normalizeDates(
@@ -894,9 +894,9 @@ function differenceInMonths(laterDate, earlierDate, options) {
  * @returns The date is the first day of a month
  *
  * @example
- * // Is 1 September 2014 the first day of a month?
+ * 
  * const result = isFirstDayOfMonth(new Date(2014, 8, 1))
- * //=> true
+ * 
  */
 function isFirstDayOfMonth(date, options) {
   return toDate$1(date, options?.in).getDate() === 1;
@@ -947,7 +947,7 @@ const createStore = (state) => {
                 let args = [state];
                 for (let i = 0; i < arguments.length; i++)
                     args.push(arguments[i]);
-                // @ts-ignore
+                
                 let ret = action.apply(this, args);
                 if (ret != null) {
                     return ret instanceof Promise ? ret.then(apply) : apply(ret);
@@ -974,17 +974,17 @@ const createStore = (state) => {
                 unsubscribe(listener);
             };
         },
-        // /**
-        //  * Remove a previously-registered listener function.
-        //  * @param {Function} listener	The callback previously passed to `subscribe()` that should be removed.
-        //  * @function
-        //  */
-        // unsubscribe,
+        
+        
+        
+        
+        
+        
     };
 };
 
-// Time to wait to unsubscribe from updates after last subscriber unsubscribes
-const UNSUB_GRACE_PERIOD = 5000; // 5 seconds
+
+const UNSUB_GRACE_PERIOD = 5000; 
 /**
  *
  * @param conn connection
@@ -994,9 +994,9 @@ const UNSUB_GRACE_PERIOD = 5000; // 5 seconds
  * @returns
  */
 const getCollection = (conn, key, fetchCollection, subscribeUpdates, options = { unsubGrace: true }) => {
-    // @ts-ignore
+    
     if (conn[key]) {
-        // @ts-ignore
+        
         return conn[key];
     }
     let active = 0;
@@ -1009,8 +1009,8 @@ const getCollection = (conn, key, fetchCollection, subscribeUpdates, options = {
         return fetchCollection(conn).then((state) => store.setState(state, true));
     };
     const refreshSwallow = () => refresh().catch((err) => {
-        // Swallow errors if socket is connecting, closing or closed.
-        // We will automatically call refresh again when we re-establish the connection.
+        
+        
         if (conn.connected) {
             throw err;
         }
@@ -1022,7 +1022,7 @@ const getCollection = (conn, key, fetchCollection, subscribeUpdates, options = {
             return;
         }
         if (fetchCollection) {
-            // Fetch when connection re-established.
+            
             conn.addEventListener("ready", refreshSwallow);
             refreshSwallow();
         }
@@ -1039,13 +1039,13 @@ const getCollection = (conn, key, fetchCollection, subscribeUpdates, options = {
     };
     const handleDisconnect = () => {
         // If we're going to unsubscribe and then lose connection,
-        // just unsubscribe immediately.
+        
         if (unsubTimer) {
             clearTimeout(unsubTimer);
             teardownUpdateSubscription();
         }
     };
-    // @ts-ignore
+    
     conn[key] = {
         get state() {
             return store.state;
@@ -1053,14 +1053,14 @@ const getCollection = (conn, key, fetchCollection, subscribeUpdates, options = {
         refresh,
         subscribe(subscriber) {
             active++;
-            // If this was the first subscriber, attach collection
+            
             if (active === 1) {
                 setupUpdateSubscription();
             }
             const unsub = store.subscribe(subscriber);
             if (store.state !== undefined) {
                 // Don't call it right away so that caller has time
-                // to initialize all the things.
+                
                 setTimeout(() => subscriber(store.state), 0);
             }
             return () => {
@@ -1074,7 +1074,7 @@ const getCollection = (conn, key, fetchCollection, subscribeUpdates, options = {
             };
         },
     };
-    // @ts-ignore
+    
     return conn[key];
 };
 
@@ -1117,10 +1117,10 @@ function partsOffset(dtf, date) {
 }
 function hackyOffset(dtf, date) {
     const formatted = dtf.format(date);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    
     const parsed = /(\d+)\/(\d+)\/(\d+),? (\d+):(\d+):(\d+)/.exec(formatted);
-    // const [, fMonth, fDay, fYear, fHour, fMinute, fSecond] = parsed
-    // return [fYear, fMonth, fDay, fHour, fMinute, fSecond]
+    
+    
     return [
         parseInt(parsed[3], 10),
         parseInt(parsed[1], 10),
@@ -1130,11 +1130,11 @@ function hackyOffset(dtf, date) {
         parseInt(parsed[6], 10),
     ];
 }
-// Get a cached Intl.DateTimeFormat instance for the IANA `timeZone`. This can be used
-// to get deterministic local date/time output according to the `en-US` locale which
-// can be used to extract local time parts as necessary.
+
+
+
 const dtfCache = {};
-// New browsers use `hourCycle`, IE and Chrome <73 does not support it and uses `hour12`
+
 const testDateFormatted = new Intl.DateTimeFormat('en-US', {
     hourCycle: 'h23',
     timeZone: 'America/New_York',
@@ -1196,20 +1196,20 @@ const patterns$1 = {
     timezoneHH: /^([+-]\d{2})$/,
     timezoneHHMM: /^([+-])(\d{2}):?(\d{2})$/,
 };
-// Parse constious time zone offset formats to an offset in milliseconds
+
 function tzParseTimezone(timezoneString, date, isUtcDate) {
-    // Empty string
+    
     if (!timezoneString) {
         return 0;
     }
-    // Z
+    
     let token = patterns$1.timezoneZ.exec(timezoneString);
     if (token) {
         return 0;
     }
     let hours;
     let absoluteOffset;
-    // ±hh
+    
     token = patterns$1.timezoneHH.exec(timezoneString);
     if (token) {
         hours = parseInt(token[1], 10);
@@ -1218,7 +1218,7 @@ function tzParseTimezone(timezoneString, date, isUtcDate) {
         }
         return -(hours * MILLISECONDS_IN_HOUR$1);
     }
-    // ±hh:mm or ±hhmm
+    
     token = patterns$1.timezoneHHMM.exec(timezoneString);
     if (token) {
         hours = parseInt(token[2], 10);
@@ -1229,7 +1229,7 @@ function tzParseTimezone(timezoneString, date, isUtcDate) {
         absoluteOffset = Math.abs(hours) * MILLISECONDS_IN_HOUR$1 + minutes * MILLISECONDS_IN_MINUTE$1;
         return token[1] === '+' ? -absoluteOffset : absoluteOffset;
     }
-    // IANA time zone
+    
     if (isValidTimezoneIANAString(timezoneString)) {
         date = new Date(date || Date.now());
         const utcDate = isUtcDate ? date : toUtcDate(date);
@@ -1253,15 +1253,15 @@ function calcOffset(date, timezoneString) {
 }
 function fixOffset(date, offset, timezoneString) {
     const localTS = date.getTime();
-    // Our UTC time is just a guess because our offset is just a guess
+    
     let utcGuess = localTS - offset;
-    // Test whether the zone matches the offset for this ts
+    
     const o2 = calcOffset(new Date(utcGuess), timezoneString);
     // If so, offset didn't change, and we're done
     if (offset === o2) {
         return offset;
     }
-    // If not, change the ts by the difference in the offset
+    
     utcGuess -= o2 - offset;
     // If that gives us the local time we want, we're done
     const o3 = calcOffset(new Date(utcGuess), timezoneString);
@@ -1315,20 +1315,20 @@ const patterns = {
     dateTimePattern: /^([0-9W+-]+)(T| )(.*)/,
     datePattern: /^([0-9W+-]+)(.*)/,
     plainTime: /:/,
-    // year tokens
+    
     YY: /^(\d{2})$/,
     YYY: [
-        /^([+-]\d{2})$/, // 0 additional digits
-        /^([+-]\d{3})$/, // 1 additional digit
-        /^([+-]\d{4})$/, // 2 additional digits
+        /^([+-]\d{2})$/, 
+        /^([+-]\d{3})$/, 
+        /^([+-]\d{4})$/, 
     ],
     YYYY: /^(\d{4})/,
     YYYYY: [
-        /^([+-]\d{4})/, // 0 additional digits
-        /^([+-]\d{5})/, // 1 additional digit
-        /^([+-]\d{6})/, // 2 additional digits
+        /^([+-]\d{4})/, 
+        /^([+-]\d{5})/, 
+        /^([+-]\d{6})/, 
     ],
-    // date tokens
+    
     MM: /^-(\d{2})$/,
     DDD: /^-?(\d{3})$/,
     MMDD: /^-?(\d{2})-?(\d{2})$/,
@@ -1337,7 +1337,7 @@ const patterns = {
     HH: /^(\d{2}([.,]\d*)?)$/,
     HHMM: /^(\d{2}):?(\d{2}([.,]\d*)?)$/,
     HHMMSS: /^(\d{2}):?(\d{2}):?(\d{2}([.,]\d*)?)$/,
-    // time zone tokens (to identify the presence of a tz)
+    
     timeZone: tzPattern,
 };
 /**
@@ -1374,13 +1374,13 @@ const patterns = {
  * @example
  * // Convert string '2014-02-11T11:30:30' to date:
  * const result = toDate('2014-02-11T11:30:30')
- * //=> Tue Feb 11 2014 11:30:30
+ * 
  *
  * @example
  * // Convert string '+02014101' to date,
- * // if the additional number of digits in the extended year format is 1:
+ * 
  * const result = toDate('+02014101', {additionalDigits: 1})
- * //=> Fri Apr 11 2014 00:00:00
+ * 
  */
 function toDate(argument, options = {}) {
     if (arguments.length < 1) {
@@ -1393,10 +1393,10 @@ function toDate(argument, options = {}) {
     if (additionalDigits !== 2 && additionalDigits !== 1 && additionalDigits !== 0) {
         throw new RangeError('additionalDigits must be 0, 1 or 2');
     }
-    // Clone the date
+    
     if (argument instanceof Date ||
         (typeof argument === 'object' && Object.prototype.toString.call(argument) === '[object Date]')) {
-        // Prevent the date to lose the milliseconds when passed to new Date() in IE10
+        
         return new Date(argument.getTime());
     }
     else if (typeof argument === 'number' ||
@@ -1429,7 +1429,7 @@ function toDate(argument, options = {}) {
             }
         }
         else {
-            // get offset accurate to hour in time zones that change offset
+            
             offset = getTimezoneOffsetInMilliseconds(new Date(timestamp + time));
             offset = getTimezoneOffsetInMilliseconds(new Date(timestamp + time + offset));
         }
@@ -1474,7 +1474,7 @@ function parseYear(dateString, additionalDigits) {
     if (dateString) {
         const patternYYY = patterns.YYY[additionalDigits];
         const patternYYYYY = patterns.YYYYY[additionalDigits];
-        // YYYY or ±YYYYY
+        
         let token = patterns.YYYY.exec(dateString) || patternYYYYY.exec(dateString);
         if (token) {
             const yearString = token[1];
@@ -1483,7 +1483,7 @@ function parseYear(dateString, additionalDigits) {
                 restDateString: dateString.slice(yearString.length),
             };
         }
-        // YY or ±YYY
+        
         token = patterns.YY.exec(dateString) || patternYYY.exec(dateString);
         if (token) {
             const centuryString = token[1];
@@ -1493,26 +1493,26 @@ function parseYear(dateString, additionalDigits) {
             };
         }
     }
-    // Invalid ISO-formatted year
+    
     return {
         year: null,
     };
 }
 function parseDate(dateString, year) {
-    // Invalid ISO-formatted year
+    
     if (year === null) {
         return null;
     }
     let date;
     let month;
     let week;
-    // YYYY
+    
     if (!dateString || !dateString.length) {
         date = new Date(0);
         date.setUTCFullYear(year);
         return date;
     }
-    // YYYY-MM
+    
     let token = patterns.MM.exec(dateString);
     if (token) {
         date = new Date(0);
@@ -1523,7 +1523,7 @@ function parseDate(dateString, year) {
         date.setUTCFullYear(year, month);
         return date;
     }
-    // YYYY-DDD or YYYYDDD
+    
     token = patterns.DDD.exec(dateString);
     if (token) {
         date = new Date(0);
@@ -1534,7 +1534,7 @@ function parseDate(dateString, year) {
         date.setUTCFullYear(year, 0, dayOfYear);
         return date;
     }
-    // yyyy-MM-dd or YYYYMMDD
+    
     token = patterns.MMDD.exec(dateString);
     if (token) {
         date = new Date(0);
@@ -1546,7 +1546,7 @@ function parseDate(dateString, year) {
         date.setUTCFullYear(year, month, day);
         return date;
     }
-    // YYYY-Www or YYYYWww
+    
     token = patterns.Www.exec(dateString);
     if (token) {
         week = parseInt(token[1], 10) - 1;
@@ -1555,7 +1555,7 @@ function parseDate(dateString, year) {
         }
         return dayOfISOWeekYear(year, week);
     }
-    // YYYY-Www-D or YYYYWwwD
+    
     token = patterns.WwwD.exec(dateString);
     if (token) {
         week = parseInt(token[1], 10) - 1;
@@ -1565,13 +1565,13 @@ function parseDate(dateString, year) {
         }
         return dayOfISOWeekYear(year, week, dayOfWeek);
     }
-    // Invalid ISO-formatted date
+    
     return null;
 }
 function parseTime(timeString) {
     let hours;
     let minutes;
-    // hh
+    
     let token = patterns.HH.exec(timeString);
     if (token) {
         hours = parseFloat(token[1].replace(',', '.'));
@@ -1580,7 +1580,7 @@ function parseTime(timeString) {
         }
         return (hours % 24) * MILLISECONDS_IN_HOUR;
     }
-    // hh:mm or hhmm
+    
     token = patterns.HHMM.exec(timeString);
     if (token) {
         hours = parseInt(token[1], 10);
@@ -1590,7 +1590,7 @@ function parseTime(timeString) {
         }
         return (hours % 24) * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE;
     }
-    // hh:mm:ss or hhmmss
+    
     token = patterns.HHMMSS.exec(timeString);
     if (token) {
         hours = parseInt(token[1], 10);
@@ -1601,7 +1601,7 @@ function parseTime(timeString) {
         }
         return (hours % 24) * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE + seconds * 1000;
     }
-    // Invalid ISO-formatted time
+    
     return null;
 }
 function dayOfISOWeekYear(isoWeekYear, week, day) {
@@ -1614,7 +1614,7 @@ function dayOfISOWeekYear(isoWeekYear, week, day) {
     date.setUTCDate(date.getUTCDate() + diff);
     return date;
 }
-// Validation functions
+
 const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const DAYS_IN_MONTH_LEAP_YEAR = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 function isLeapYearIndex(year) {
@@ -1693,9 +1693,9 @@ function validateTime(hours, minutes, seconds) {
  * @throws {RangeError} `options.additionalDigits` must be 0, 1 or 2
  *
  * @example
- * // In June 10am UTC is 6am in New York (-04:00)
+ * 
  * const result = toZonedTime('2014-06-25T10:00:00.000Z', 'America/New_York')
- * //=> Jun 25 2014 06:00:00
+ * 
  */
 function toZonedTime(date, timeZone, options) {
     date = toDate(date, options);
@@ -1726,9 +1726,9 @@ function toZonedTime(date, timeZone, options) {
  * @throws {RangeError} `options.additionalDigits` must be 0, 1 or 2
  *
  * @example
- * // In June 10am in Los Angeles is 5pm UTC
+ * 
  * const result = fromZonedTime(new Date(2014, 5, 25, 10, 0, 0), 'America/Los_Angeles')
- * //=> 2014-06-25T17:00:00.000Z
+ * 
  */
 function fromZonedTime(date, timeZone, options) {
     if (typeof date === 'string' && !date.match(tzPattern)) {
@@ -1885,7 +1885,7 @@ memoizeOne((locale, serverTimeZone) => new Intl.DateTimeFormat(locale.language =
     hour12: useAmPm(locale),
     timeZone: locale.time_zone === "server" ? serverTimeZone : undefined,
 }));
-// 21:15
+
 const formatTime24h = (dateObj, locale, config) => formatTime24hMem(locale, config.time_zone).format(dateObj);
 const formatTime24hMem = memoizeOne((locale, serverTimeZone) => 
 // en-GB to fix Chrome 24:59 to 0:59 https://stackoverflow.com/a/60898146
@@ -1934,7 +1934,7 @@ export const RECOVERABLE_STATES: ConfigEntry["state"][] = [
 ];
 
 export interface ConfigEntryUpdate {
-  // null means no update as is the current state
+  
   type: null | "added" | "removed" | "updated";
   entry: ConfigEntry;
 }
@@ -2113,24 +2113,24 @@ const getStatisticLabel = (hass, statisticsId, statisticsMetaData) => {
 };
 
 const energyCollectionKeys = [];
-// export interface EnergyValidationIssue {
-//   type: string;
-//   affected_entities: [string, unknown][];
-//   translation_placeholders: Record<string, string>;
-// }
-// export interface EnergyPreferencesValidation {
-//   energy_sources: EnergyValidationIssue[][];
-//   device_consumption: EnergyValidationIssue[][];
-// }
+
+
+
+
+
+
+
+
+
 const getEnergyInfo = (hass) => hass.callWS({
     type: "energy/info",
 });
-// // export const getEnergyPreferenceValidation = async (hass: HomeAssistant) => {
+
 // //   await hass.loadBackendTranslation("issues", "energy");
-// //   return hass.callWS<EnergyPreferencesValidation>({
+
 // //     type: "energy/validate",
-// //   });
-// // };
+
+
 const getEnergyPreferences = (hass) => hass.callWS({
     type: "energy/get_prefs",
 });
@@ -2169,7 +2169,7 @@ const getReferencedStatisticIds = (prefs, info, includeTypes) => {
             statIDs.push(source.stat_energy_to);
             continue;
         }
-        // grid source
+        
         for (const flowFrom of source.flow_from) {
             statIDs.push(flowFrom.stat_energy_from);
             if (flowFrom.stat_cost) {
@@ -2210,7 +2210,7 @@ const getEnergyData = async (hass, prefs, start, end, compare) => {
             if (entity.platform !== "co2signal") {
                 continue;
             }
-            // The integration offers 2 entities. We want the % one.
+            
             const co2State = hass.states[entity.entity_id];
             if (!co2State || co2State.attributes.unit_of_measurement !== "%") {
                 continue;
@@ -2221,7 +2221,7 @@ const getEnergyData = async (hass, prefs, start, end, compare) => {
     }
     const consumptionStatIDs = [];
     for (const source of prefs.energy_sources) {
-        // grid source
+        
         if (source.type === "grid") {
             for (const flowFrom of source.flow_from) {
                 consumptionStatIDs.push(flowFrom.stat_energy_from);
@@ -2265,7 +2265,7 @@ const getEnergyData = async (hass, prefs, start, end, compare) => {
     if (compare) {
         if (calcDateProperty(start, isFirstDayOfMonth, hass.locale, hass.config) &&
             calcDateProperty(end || new Date(), isLastDayOfMonth, hass.locale, hass.config)) {
-            // When comparing a month (or multiple), we want to start at the begining of the month
+            
             startCompare = calcDate(start, addMonths, hass.locale, hass.config, -calcDateDifferenceProperty(end || new Date(), start, differenceInMonths, hass.locale, hass.config) - 1);
         }
         else {
@@ -2326,23 +2326,23 @@ const getEnergyData = async (hass, prefs, start, end, compare) => {
     };
     return data;
 };
-// const clearEnergyCollectionPreferences = (hass: HomeAssistant) => {
-//   energyCollectionKeys.forEach((key) => {
-//     const energyCollection = getEnergyDataCollection(hass, { key });
-//     energyCollection.clearPrefs();
-//     if (energyCollection._active) {
-//       energyCollection.refresh();
-//     }
-//   });
-// };
+
+
+
+
+
+
+
+
+
 const scheduleHourlyRefresh = (collection) => {
     if (collection._refreshTimeout) {
         clearTimeout(collection._refreshTimeout);
     }
     if (collection._active && (!collection.end || collection.end > new Date())) {
-        // The stats are created every hour
-        // Schedule a refresh for 20 minutes past the hour
-        // If the end is larger than the current time.
+        
+        
+        
         const nextFetch = new Date();
         if (nextFetch.getMinutes() >= 20) {
             nextFetch.setHours(nextFetch.getHours() + 1);
@@ -2365,7 +2365,7 @@ const getEnergyDataCollection = (hass, options = {}) => {
     energyCollectionKeys.push(options.key);
     const collection = getCollection(hass.connection, key, async () => {
         if (!collection.prefs) {
-            // This will raise if not found.
+            
             // Detect by checking `e.code === "not_found"
             collection.prefs = await getEnergyPreferences(hass);
         }
@@ -2392,7 +2392,7 @@ const getEnergyDataCollection = (hass, options = {}) => {
     collection.prefs = options.prefs;
     const now = new Date();
     const hour = formatTime24h(now, hass.locale, hass.config).split(":")[0];
-    // Set start to start of today if we have data for today, otherwise yesterday
+    
     collection.start = calcDate(hour === "0" ? addDays(now, -1) : now, startOfDay, hass.locale, hass.config);
     collection.end = calcDate(hour === "0" ? addDays(now, -1) : now, endOfDay, hass.locale, hass.config);
     const scheduleUpdatePeriod = () => {
@@ -2401,7 +2401,7 @@ const getEnergyDataCollection = (hass, options = {}) => {
             collection.end = calcDate(new Date(), endOfDay, hass.locale, hass.config);
             scheduleUpdatePeriod();
         }, addHours(calcDate(now, endOfDay, hass.locale, hass.config), 1).getTime() -
-            Date.now() // Switch to next day an hour after the day changed
+            Date.now() 
         );
     };
     scheduleUpdatePeriod();
@@ -2429,53 +2429,53 @@ const getEnergyDataCollection = (hass, options = {}) => {
     };
     return collection;
 };
-// export const getEnergySolarForecasts = (hass: HomeAssistant) =>
-//   hass.callWS<EnergySolarForecasts>({
+
+
 //     type: "energy/solar_forecast",
-//   });
+
 // const energyGasUnitClass = ["volume", "energy"] as const;
-// export type EnergyGasUnitClass = (typeof energyGasUnitClass)[number];
-// export const getEnergyGasUnitClass = (
-//   prefs: EnergyPreferences,
-//   statisticsMetaData: Record<string, StatisticsMetaData> = {},
-//   excludeSource?: string
-// ): EnergyGasUnitClass | undefined => {
-//   for (const source of prefs.energy_sources) {
+
+
+
+
+
+
+
 //     if (source.type !== "gas") {
-//       continue;
-//     }
-//     if (excludeSource && excludeSource === source.stat_energy_from) {
-//       continue;
-//     }
-//     const statisticIdWithMeta = statisticsMetaData[source.stat_energy_from];
-//     if (
-//       energyGasUnitClass.includes(
-//         statisticIdWithMeta?.unit_class as EnergyGasUnitClass
-//       )
-//     ) {
-//       return statisticIdWithMeta.unit_class as EnergyGasUnitClass;
-//     }
-//   }
-//   return undefined;
-// };
-// export const getEnergyGasUnit = (
-//   hass: HomeAssistant,
-//   prefs: EnergyPreferences,
-//   statisticsMetaData: Record<string, StatisticsMetaData> = {}
-// ): string | undefined => {
-//   const unitClass = getEnergyGasUnitClass(prefs, statisticsMetaData);
-//   if (unitClass === undefined) {
-//     return undefined;
-//   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //   return unitClass === "energy"
 //     ? "kWh"
 //     : hass.config.unit_system.length === "km"
 //       ? "m³"
 //       : "ft³";
-// };
-// export const getEnergyWaterUnit = (hass: HomeAssistant): string =>
+
+
 //   hass.config.unit_system.length === "km" ? "L" : "gal";
-// export const energyStatisticHelpUrl =
+
 //   "/docs/energy/faq/#troubleshooting-missing-entities";
 
 function registerCustomCard(params) {
@@ -3017,36 +3017,36 @@ var pt_BR = /*#__PURE__*/Object.freeze({
 // import * as zh_Hans from "./translations/zh-Hans.json";
 // import * as zh_Hant from "./translations/zh-Hant.json";
 const languages = {
-    //   ar,
-    //   bg,
-    //   ca,
+    
+    
+    
     cs: cs$1,
     da: da$1,
     de: de$1,
-    //   el,
+    
     en: en$1,
     es: es$1,
-    //   fi,
+    
     fr: fr$1,
-    //   he,
-    //   hu,
-    //   id,
+    
+    
+    
     it: it$1,
     ja: ja$1,
     //   "ko-KR": ko_KR,
-    //   nb,
-    //   nl,
-    //   pl,
+    
+    
+    
     "pt-BR": pt_BR,
     //   "pt-PT": pt_PT,
-    //   ro,
-    //   ru,
-    //   sl,
-    //   sk,
-    //   sv,
-    //   tr,
-    //   uk,
-    //   vi,
+    
+    
+    
+    
+    
+    
+    
+    
     //   "zh-Hans": zh_Hans,
     //   "zh-Hant": zh_Hant,
 };
@@ -3118,7 +3118,7 @@ function verifyAndMigrateConfig$1(config) {
 registerCustomCard({
     type: ENERGY_CARD_NAME,
     name: "Sankey Energy Flow Card",
-    description: "Card for showing the flow of electrical energy over a time period on a sankey chart",
+    description: ''
 });
 let EnergyElecFlowCard = class EnergyElecFlowCard extends ElecFlowCardBase {
     constructor() {
@@ -3229,7 +3229,7 @@ let EnergyElecFlowCard = class EnergyElecFlowCard extends ElecFlowCardBase {
         });
         const consumers = energyData.prefs
             .device_consumption;
-        // Filter out consumers that are higher level measurements in the hierarchy
+        
         let consumerBlacklist = [];
         consumers.forEach((consumer) => {
             if (consumer.included_in_stat !== undefined) {
@@ -3317,43 +3317,43 @@ __decorate([
 EnergyElecFlowCard = __decorate([
     e$2(ENERGY_CARD_NAME)
 ], EnergyElecFlowCard);
-// Legacy element name for backwards compatibility. Keep this until
-// we are sure that noone is using pre config version 1 any more.
+
+
 let HuiEnergyElecFlowCard = class HuiEnergyElecFlowCard extends EnergyElecFlowCard {
 };
 HuiEnergyElecFlowCard = __decorate([
     e$2("hui-energy-elec-flow-card")
 ], HuiEnergyElecFlowCard);
 
-// Polymer legacy event helpers used courtesy of the Polymer project.
-//
-// Copyright (c) 2017 The Polymer Authors. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided that the following conditions are
-// met:
-//
-//    * Redistributions of source code must retain the above copyright
-// notice, this list of conditions and the following disclaimer.
-//    * Redistributions in binary form must reproduce the above
-// copyright notice, this list of conditions and the following disclaimer
-// in the documentation and/or other materials provided with the
-// distribution.
-//    * Neither the name of Google Inc. nor the names of its
-// contributors may be used to endorse or promote products derived from
-// this software without specific prior written permission.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+
+
+
+
+
+
+
 /**
  * Dispatches a custom event with an optional detail value.
  *
@@ -3371,7 +3371,7 @@ HuiEnergyElecFlowCard = __decorate([
  */
 const fireEvent = (node, type, detail, options) => {
     options = options || {};
-    // @ts-ignore
+    
     detail = detail === null || detail === undefined ? {} : detail;
     const event = new Event(type, {
         bubbles: options.bubbles === undefined ? true : options.bubbles,
@@ -3623,7 +3623,7 @@ const derivedStyles = {
     "ha-assist-chip-filled-container-color": "rgba(var(--rgb-primary-text-color),0.15)",
     "ha-assist-chip-active-container-color": "rgba(var(--rgb-primary-color),0.15)",
     "chip-background-color": "rgba(var(--rgb-primary-text-color), 0.15)",
-    // Vaadin
+    
     "material-body-text-color": "var(--primary-text-color)",
     "material-background-color": "var(--card-background-color)",
     "material-secondary-background-color": "var(--secondary-background-color)",
@@ -3656,7 +3656,7 @@ const hexBlend = (c1, c2, blend = 50) => {
     return `#${color}`;
 };
 
-// Conversion between HEX and RGB
+
 const hex2rgb = (hex) => {
     hex = expandHex(hex);
     return [
@@ -3677,11 +3677,11 @@ let PROCESSED_THEMES = {};
  */
 const applyThemesOnElement = (element, themes, selectedTheme, themeSettings, main) => {
     var _a, _b, _c;
-    // If there is no explicitly desired theme provided, and the element is the main element we automatically
-    // use the active one from `themes`.
+    
+    
     const themeToApply = selectedTheme || (undefined);
-    // If there is no explicitly desired dark mode provided, we automatically
-    // use the active one from `themes`.
+    
+    
     const darkMode = (themes === null || themes === void 0 ? void 0 : themes.darkMode) || false;
     let cacheKey = themeToApply;
     let themeRules = {};
@@ -3690,28 +3690,28 @@ const applyThemesOnElement = (element, themes, selectedTheme, themeSettings, mai
         themeRules = Object.assign({}, darkStyles);
     }
     if (themeToApply === "default") {
-        // Determine the primary and accent colors from the current settings.
-        // Fallbacks are implicitly the HA default blue and orange or the
+        
+        
         // derived "darkStyles" values, depending on the light vs dark mode.
         const primaryColor = void 0 ;
         if (darkMode && primaryColor) {
             themeRules["app-theme-color"] = hexBlend(primaryColor, "#121212", 8);
             themeRules["app-header-background-color"] = themeRules["app-theme-color"];
         }
-        // Nothing was changed
+        
         if (((_a = element.__themes) === null || _a === void 0 ? void 0 : _a.cacheKey) === cacheKey) {
             return;
         }
     }
-    // Custom theme logic (not relevant for default theme, since it would override
-    // the derived calculations from above)
+    
+    
     if (themeToApply &&
         themeToApply !== "default" &&
         themes.themes[themeToApply]) {
         // Apply theme vars that are relevant for all modes (but extract the "modes" section first)
         const _d = themes.themes[themeToApply], { modes } = _d, baseThemeRules = __rest(_d, ["modes"]);
         themeRules = Object.assign(Object.assign({}, themeRules), baseThemeRules);
-        // Apply theme vars for the specific mode if available
+        
         if (modes) {
             if (darkMode) {
                 themeRules = Object.assign(Object.assign({}, themeRules), modes.dark);
@@ -3722,22 +3722,22 @@ const applyThemesOnElement = (element, themes, selectedTheme, themeSettings, mai
         }
     }
     if (!((_b = element.__themes) === null || _b === void 0 ? void 0 : _b.keys) && !Object.keys(themeRules).length) {
-        // No styles to reset, and no styles to set
+        
         return;
     }
     const newTheme = Object.keys(themeRules).length && cacheKey
         ? PROCESSED_THEMES[cacheKey] || processTheme(cacheKey, themeRules)
         : undefined;
-    // Add previous set keys to reset them, and new theme
+    
     const styles = Object.assign(Object.assign({}, (_c = element.__themes) === null || _c === void 0 ? void 0 : _c.keys), newTheme === null || newTheme === void 0 ? void 0 : newTheme.styles);
     element.__themes = { cacheKey, keys: newTheme === null || newTheme === void 0 ? void 0 : newTheme.keys };
-    // Set and/or reset styles
+    
     if (element.updateStyles) {
-        // Use updateStyles() method of Polymer elements
+        
         element.updateStyles(styles);
     }
     else if (window.ShadyCSS) {
-        // Use ShadyCSS if available
+        
         window.ShadyCSS.styleSubtree(/** @type {!HTMLElement} */ element, styles);
     }
     else {
@@ -3763,7 +3763,7 @@ const processTheme = (cacheKey, theme) => {
         const value = String(combinedTheme[key]);
         styles[prefixedKey] = value;
         keys[prefixedKey] = "";
-        // Try to create a rgb value for this key if it is not a var
+        
         if (!value.startsWith("#")) {
             // Can't convert non hex value
             continue;
@@ -3819,212 +3819,212 @@ function hasConfigChanged(element, changedProps) {
     return false;
 }
 
-// export interface UpdateEntityRegistryEntryResult {
-//   entity_entry: ExtEntityRegistryEntry;
-//   reload_delay?: number;
-//   require_restart?: boolean;
-// }
-// export interface SensorEntityOptions {
-//   display_precision?: number | null;
-//   suggested_display_precision?: number | null;
-//   unit_of_measurement?: string | null;
-// }
-// export interface LightEntityOptions {
-//   favorite_colors?: LightColor[];
-// }
-// export interface NumberEntityOptions {
-//   unit_of_measurement?: string | null;
-// }
-// export interface LockEntityOptions {
-//   default_code?: string | null;
-// }
-// export interface WeatherEntityOptions {
-//   precipitation_unit?: string | null;
-//   pressure_unit?: string | null;
-//   temperature_unit?: string | null;
-//   visibility_unit?: string | null;
-//   wind_speed_unit?: string | null;
-// }
-// export interface SwitchAsXEntityOptions {
-//   entity_id: string;
-//   invert: boolean;
-// }
-// export interface EntityRegistryOptions {
-//   number?: NumberEntityOptions;
-//   sensor?: SensorEntityOptions;
-//   lock?: LockEntityOptions;
-//   weather?: WeatherEntityOptions;
-//   light?: LightEntityOptions;
-//   switch_as_x?: SwitchAsXEntityOptions;
-//   conversation?: Record<string, unknown>;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //   "cloud.alexa"?: Record<string, unknown>;
 //   "cloud.google_assistant"?: Record<string, unknown>;
-// }
-// export interface EntityRegistryEntryUpdateParams {
-//   name?: string | null;
-//   icon?: string | null;
-//   device_class?: string | null;
-//   area_id?: string | null;
-//   disabled_by?: string | null;
-//   hidden_by: string | null;
-//   new_entity_id?: string;
-//   options_domain?: string;
-//   options?:
-//     | SensorEntityOptions
-//     | NumberEntityOptions
-//     | LockEntityOptions
-//     | WeatherEntityOptions
-//     | LightEntityOptions;
-//   aliases?: string[];
-//   labels?: string[];
-//   categories?: { [scope: string]: string | null };
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const batteryPriorities = ["sensor", "binary_sensor"];
-// export const findBatteryEntity = <T extends { entity_id: string }>(
-//   hass: HomeAssistant,
-//   entities: T[]
-// ): T | undefined => {
-//   const batteryEntities = entities
-//     .filter(
-//       (entity) =>
-//         hass.states[entity.entity_id] &&
+
+
+
+
+
+
+
+
 //         hass.states[entity.entity_id].attributes.device_class === "battery" &&
-//         batteryPriorities.includes(computeDomain(entity.entity_id))
-//     )
-//     .sort(
-//       (a, b) =>
-//         batteryPriorities.indexOf(computeDomain(a.entity_id)) -
-//         batteryPriorities.indexOf(computeDomain(b.entity_id))
-//     );
-//   if (batteryEntities.length > 0) {
-//     return batteryEntities[0];
-//   }
-//   return undefined;
-// };
-// export const findBatteryChargingEntity = <T extends { entity_id: string }>(
-//   hass: HomeAssistant,
-//   entities: T[]
-// ): T | undefined =>
-//   entities.find(
-//     (entity) =>
-//       hass.states[entity.entity_id] &&
-//       hass.states[entity.entity_id].attributes.device_class ===
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //         "battery_charging"
-//   );
-// export const computeEntityRegistryName = (
-//   hass: HomeAssistant,
-//   entry: EntityRegistryEntry
-// ): string | null => {
-//   if (entry.name) {
-//     return entry.name;
-//   }
-//   const state = hass.states[entry.entity_id];
-//   if (state) {
-//     return computeStateName(state);
-//   }
-//   return entry.original_name ? entry.original_name : entry.entity_id;
-// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const getExtendedEntityRegistryEntry = (hass, entityId) => hass.callWS({
     type: "config/entity_registry/get",
     entity_id: entityId,
 });
-// export const getExtendedEntityRegistryEntries = (
-//   hass: HomeAssistant,
-//   entityIds: string[]
-// ): Promise<Record<string, ExtEntityRegistryEntry>> =>
-//   hass.callWS({
+
+
+
+
+
 //     type: "config/entity_registry/get_entries",
-//     entity_ids: entityIds,
-//   });
-// export const updateEntityRegistryEntry = (
-//   hass: HomeAssistant,
-//   entityId: string,
-//   updates: Partial<EntityRegistryEntryUpdateParams>
-// ): Promise<UpdateEntityRegistryEntryResult> =>
-//   hass.callWS({
+
+
+
+
+
+
+
+
 //     type: "config/entity_registry/update",
-//     entity_id: entityId,
-//     ...updates,
-//   });
-// export const removeEntityRegistryEntry = (
-//   hass: HomeAssistant,
-//   entityId: string
-// ): Promise<void> =>
-//   hass.callWS({
+
+
+
+
+
+
+
+
 //     type: "config/entity_registry/remove",
-//     entity_id: entityId,
-//   });
-// export const fetchEntityRegistry = (conn: Connection) =>
-//   conn.sendMessagePromise<EntityRegistryEntry[]>({
+
+
+
+
 //     type: "config/entity_registry/list",
-//   });
-// export const fetchEntityRegistryDisplay = (conn: Connection) =>
-//   conn.sendMessagePromise<EntityRegistryDisplayEntryResponse>({
+
+
+
 //     type: "config/entity_registry/list_for_display",
-//   });
-// const subscribeEntityRegistryUpdates = (
-//   conn: Connection,
-//   store: Store<EntityRegistryEntry[]>
-// ) =>
-//   conn.subscribeEvents(
-//     debounce(
-//       () =>
-//         fetchEntityRegistry(conn).then((entities) =>
-//           store.setState(entities, true)
-//         ),
-//       500,
-//       true
-//     ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //     "entity_registry_updated"
-//   );
-// export const subscribeEntityRegistry = (
-//   conn: Connection,
-//   onChange: (entities: EntityRegistryEntry[]) => void
-// ) =>
-//   createCollection<EntityRegistryEntry[]>(
+
+
+
+
+
+
 //     "_entityRegistry",
-//     fetchEntityRegistry,
-//     subscribeEntityRegistryUpdates,
-//     conn,
-//     onChange
-//   );
-// export const sortEntityRegistryByName = (
-//   entries: EntityRegistryEntry[],
-//   language: string
-// ) =>
-//   entries.sort((entry1, entry2) =>
+
+
+
+
+
+
+
+
+
+
 //     caseInsensitiveStringCompare(entry1.name || "", entry2.name || "", language)
-//   );
-// export const entityRegistryByEntityId = memoizeOne(
-//   (entries: EntityRegistryEntry[]) => {
-//     const entities: Record<string, EntityRegistryEntry> = {};
-//     for (const entity of entries) {
-//       entities[entity.entity_id] = entity;
-//     }
-//     return entities;
-//   }
-// );
-// export const entityRegistryById = memoizeOne(
-//   (entries: EntityRegistryEntry[]) => {
-//     const entities: Record<string, EntityRegistryEntry> = {};
-//     for (const entity of entries) {
-//       entities[entity.id] = entity;
-//     }
-//     return entities;
-//   }
-// );
-// export const getEntityPlatformLookup = (
-//   entities: EntityRegistryEntry[]
-// ): Record<string, string> => {
-//   const entityLookup = {};
-//   for (const confEnt of entities) {
-//     if (!confEnt.platform) {
-//       continue;
-//     }
-//     entityLookup[confEnt.entity_id] = confEnt.platform;
-//   }
-//   return entityLookup;
-// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const POWER_CARD_NAME = `${PREFIX_NAME}-power-flow-card`;
 const POWER_CARD_EDITOR_NAME = `${POWER_CARD_NAME}-editor`;
@@ -4058,13 +4058,13 @@ function verifyAndMigrateConfig(config) {
         newConfig.max_consumer_branches = newConfig.max_consumer_branches || 0;
     }
     if (currentVersion === 1) {
-        // Migrate from version 1 to version 2
+        
         console.log("Migrating config from version 1 to version 2");
         currentVersion = 2;
         newConfig.invert_battery_flows = false;
     }
     if (currentVersion === 2) {
-        // Migrate from version 2 to version 3
+        
         console.log("Migrating config from version 2 to version 3");
         currentVersion = 3;
         newConfig.type = `custom:${POWER_CARD_NAME}`;
@@ -4081,7 +4081,7 @@ function verifyAndMigrateConfig(config) {
 registerCustomCard({
     type: POWER_CARD_NAME,
     name: "Sankey Power Flow Card",
-    description: "Card for showing the instantaneous flow of electrical power",
+    description: ''
 });
 function computePower(stateObj) {
     /**
@@ -4124,7 +4124,7 @@ let PowerFlowCard = class PowerFlowCard extends ElecFlowCardBase {
         this._config = Object.assign({}, newConfig);
     }
     static async getExtendedEntityRegistryEntries(_hass) {
-        // Get the full list of all extended entity registry entries as a dict.
+        
         // @todo: uses multiple WS lookups - there's scope for optimising this.
         let extEntities = {};
         for (let key in _hass.entities) {
@@ -4169,8 +4169,8 @@ let PowerFlowCard = class PowerFlowCard extends ElecFlowCardBase {
             return powerEntityIds[0];
         }
         else {
-            // We have multiple power entities for this device, pick the one
-            // with the largest absolute power.
+            
+            
             let mostLikelyPowerEntityId = powerEntityIds[0];
             let maxPower = 0;
             for (let powerEntityId of powerEntityIds) {
@@ -4221,7 +4221,7 @@ let PowerFlowCard = class PowerFlowCard extends ElecFlowCardBase {
                     break;
                 case "solar":
                     let generation_entity = "";
-                    // In future we might support multiple generation entities
+                    
                     generation_entity = await this.getPowerEntityIdForEnergyEntityId(_hass, source.stat_energy_from, extEntities);
                     if (generation_entity) {
                         returnConfig.generation_entity = generation_entity;
@@ -4236,7 +4236,7 @@ let PowerFlowCard = class PowerFlowCard extends ElecFlowCardBase {
                     break;
             }
         }
-        // Filter out consumers that are higher level measurements in the hierarchy
+        
         let consumerBlacklist = [];
         const consumers = energyPrefs.device_consumption;
         for (const consumer of consumers) {
@@ -4260,8 +4260,8 @@ let PowerFlowCard = class PowerFlowCard extends ElecFlowCardBase {
         return returnConfig;
     }
     _getValues(config) {
-        // The editor only supports a single generation entity, so we need to
-        // convert the single entity to an array.
+        
+        
         config.generation_entities = config.generation_entity
             ? [config.generation_entity]
             : [];
@@ -4341,8 +4341,8 @@ let PowerFlowCard = class PowerFlowCard extends ElecFlowCardBase {
                 if (!name) {
                     name = computeStateName(stateObj);
                 }
-                // power in refers to power into the energy distribution system
-                // (i.e. out of the battery)
+                
+                
                 let powerIn = (config.invert_battery_flows ? -1 : 1) * computePower(stateObj);
                 batteryRoutes[entity.entity] = {
                     in: {
@@ -4372,8 +4372,8 @@ let PowerFlowCard = class PowerFlowCard extends ElecFlowCardBase {
         }
         const config = this._config;
         const res = this._getValues(config);
-        // If the result is an not an array, assume it is a error in the form of a
-        // TemplateResult. Show it and stop.
+        
+        
         if (!Array.isArray(res)) {
             return res;
         }
@@ -4475,8 +4475,8 @@ __decorate([
 PowerFlowCard = __decorate([
     e$2(POWER_CARD_NAME)
 ], PowerFlowCard);
-// Legacy element name for backwards compatibility
-// Can be dropped once we are sure noone is using config version 2 any more.
+
+
 let HuiPowerFlowCard = class HuiPowerFlowCard extends PowerFlowCard {
 };
 HuiPowerFlowCard = __decorate([
@@ -4822,18 +4822,18 @@ let PowerFlowCardEditor = class PowerFlowCardEditor extends s$1 {
             return A;
         }
         const customLocalize = setupCustomlocalize(this.hass);
-        // Unused feature - may be reinstated if we allow renaming sub-elements.
-        //  if (this._subElementEditorConfig) {
-        //   return html`
-        //     <hui-sub-element-editor
-        //       .hass=${this.hass}
-        //       .config=${this._subElementEditorConfig}
-        //       @go-back=${this._goBack}
-        //       @config-changed=${this._handleSubElementChanged}
-        //     >
-        //     </hui-sub-element-editor>
-        //   `;
-        // }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         const data = Object.assign({}, this._config);
         const batteryHint = data.invert_battery_flows
             ? customLocalize(`editor.card.power_sankey.battery_hint_inverted`)
@@ -4887,15 +4887,15 @@ let PowerFlowCardEditor = class PowerFlowCardEditor extends s$1 {
             : target.value || ev.detail.config || ev.detail.value;
         if (!configValue && value) {
             // A form value changed. We don't know which one.
-            // Could be title or anything else in the schema.
+            
             if (value.title !== this._config.title) {
                 configValue = "title";
                 value = value.title;
             }
-            // else if (value.theme !== this._config.theme) {
+            
             //   configValue = "theme";
-            //   value = value.theme;
-            // }
+            
+            
             else if (value.power_from_grid_entity !== this._config.power_from_grid_entity) {
                 configValue = "power_from_grid_entity";
                 value = value.power_from_grid_entity;
@@ -4968,41 +4968,41 @@ let PowerFlowCardEditor = class PowerFlowCardEditor extends s$1 {
         }
         fireEvent(this, "config-changed", { config: this._config });
     }
-    // Unused function which may be reinstated if we allow renaming sub-elements.
-    //  private _handleSubElementChanged(ev: CustomEvent): void {
-    //   ev.stopPropagation();
-    //   if (!this._config || !this.hass) {
-    //     return;
-    //   }
-    //   const configValue = this._subElementEditorConfig?.type;
-    //   const value = ev.detail.config;
+    
+    
+    
+    
+    
+    
+    
+    
     //   if (configValue === "row") {
-    //     const newConfigEntities = this._configConsumerEntities!.concat();
-    //     if (!value) {
-    //       newConfigEntities.splice(this._subElementEditorConfig!.index!, 1);
-    //       this._goBack();
-    //     } else {
-    //       newConfigEntities[this._subElementEditorConfig!.index!] = value;
-    //     }
-    //     this._config = { ...this._config!, entities: newConfigEntities };
-    //     this._configConsumerEntities = processEditorEntities(this._config!.entities);
-    //   } else if (configValue) {
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //     if (value === "") {
-    //       this._config = { ...this._config };
-    //       delete this._config[configValue!];
-    //     } else {
-    //       this._config = {
-    //         ...this._config,
-    //         [configValue]: value,
-    //       };
-    //     }
-    //   }
-    //   this._subElementEditorConfig = {
-    //     ...this._subElementEditorConfig!,
-    //     elementConfig: value,
-    //   };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //   fireEvent(this, "config-changed", { config: this._config });
-    // }
+    
     _editDetailElement(ev) {
         this._subElementEditorConfig = ev.detail.subElementConfig;
     }
@@ -5067,7 +5067,7 @@ const PAD_MULTIPLIER = 1.8;
 const GEN_COLOR = "#0d6a04";
 const GRID_IN_COLOR = "#920e83";
 const BATT_IN_COLOR = "#01f4fc";
-// The below two lengths must add up to 100.
+
 const CONSUMER_BLEND_LENGTH = 80;
 const CONSUMER_BLEND_LENGTH_PRE_FAN_OUT = 20;
 const GRID_BLEND_LENGTH = 30;
@@ -5108,7 +5108,7 @@ function mixHexes(hex1, hex2, ratio = 0.5) {
     const b = Math.round(b1 * ratio + b2 * (1 - ratio));
     return rgb2hex(r, g, b);
 }
-// End of color mixing code from SO.
+
 function mix3Hexes(hex1, hex2, hex3, ratio1, ratio2, ratio3) {
     [ratio1, ratio2, ratio3].forEach((ratio) => {
         if (ratio > 1.0 || ratio < 0) {
@@ -5135,7 +5135,7 @@ function line_intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
     // Based on https://stackoverflow.com/a/38977789
     const denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
     if (denom === 0) {
-        // eslint-disable-next-line no-console
+        
         console.warn("Warning: Lines do not intersect.");
         return null;
     }
@@ -5163,21 +5163,21 @@ function renderFlowByCorners(startLX, startLY, startRX, startRY, endLX, endLY, e
         Math.sqrt((endLX - endLY) ** 2 + (endRX - endRY) ** 2) < 1) {
         return b ``;
     }
-    // Find points to make a line along the the half way fold
+    
     // between the start and the end ('Mirror' line).
     const pointAX = (startLX + endLX) / 2;
     const pointAY = (startLY + endLY) / 2;
     const pointBX = (startRX + endRX) / 2;
     const pointBY = (startRY + endRY) / 2;
-    // The bezier points are defined by the intersection between:
-    // - the lines perpendicular to the ends
-    // - the mirror line.
+    
+    
+    
     const ret1 = line_intersect(startLX, startLY, startLX - (startRY - startLY), startLY - (startLX - startRX), pointAX, pointAY, pointBX, pointBY);
     const ret2 = line_intersect(endLX, endLY, endLX + (endRY - endLY), endLY + (endLX - endRX), pointAX, pointAY, pointBX, pointBY);
     const ret3 = line_intersect(endRX, endRY, endRX + (endRY - endLY), endRY + (endLX - endRX), pointAX, pointAY, pointBX, pointBY);
     const ret4 = line_intersect(startRX, startRY, startRX - (startRY - startLY), startRY - (startLX - startRX), pointAX, pointAY, pointBX, pointBY);
     if (ret1 == null || ret2 == null || ret3 == null || ret4 == null) {
-        // eslint-disable-next-line no-console
+        
         console.warn("Warning: render flow failed.");
         return b ``;
     }
@@ -5357,7 +5357,7 @@ let ElecSankey = class ElecSankey extends s$1 {
         this._generationToGridRate = 0;
         this._generationToConsumersRate = 0;
         this._localize = (key, fallBack) => {
-            // This is a simple localizer that can be overridden by the parent class.
+            
             return fallBack || key;
         };
     }
@@ -5451,7 +5451,7 @@ let ElecSankey = class ElecSankey extends s$1 {
          * calculated using the same algorithm, documented inline below.
          */
         const gridImport = this._gridImport(true);
-        // Determine the grid import and export
+        
         if (this.gridOutRoute) {
             this._gridExport =
                 this.gridOutRoute.rate > 0 ? this.gridOutRoute.rate : 0;
@@ -5466,7 +5466,7 @@ let ElecSankey = class ElecSankey extends s$1 {
         const consumerTrackedTotal = this._consumerTrackedTotal();
         const batteryInTotal = this._batteryInTotal();
         const batteriesOutTotal = this._batteryOutTotal();
-        // Balance the books.
+        
         let phantomGridIn = 0;
         let phantomGeneration = 0;
         let untrackedConsumer = 0;
@@ -5475,21 +5475,21 @@ let ElecSankey = class ElecSankey extends s$1 {
         let gridToBatteriesTemp = 0;
         let generationToBatteriesTemp = 0;
         let gridToConsumersTemp = 0;
-        // Check if we are exporting more than we are generating plus flowing from
-        // batteries.
+        
+        
         let x = this._gridExport - generationTrackedTotal - batteryInTotal;
         if (x > 0) {
-            // If this is the case, we create a phantom generation source
-            // of sufficient value to balance the equation, and assume that all
-            // battery power is going to the grid.
+            
+            
+            
             phantomGeneration = x;
             batteriesToGridTemp = batteryInTotal;
         }
         else {
             // If we aren't exporting more than generating + discharging, the diagram
-            // is provisionally viable without a phantom generation source.
-            // *For now* we assume the maximum possible split of battery rate that
-            // could go the grid is going to the grid, the rest goes to consumers.
+            
+            
+            
             if (this._gridExport > batteryInTotal) {
                 batteriesToGridTemp = batteryInTotal;
             }
@@ -5497,22 +5497,22 @@ let ElecSankey = class ElecSankey extends s$1 {
                 batteriesToGridTemp = this._gridExport;
             }
         }
-        // Whatever battery out is not going to the grid must be going to consumers.
+        
         let batteriesToConsumersTemp = batteryInTotal - batteriesToGridTemp;
-        // The user can specify that their batteries are only charged from
-        // generation.
+        
+        
         if (this.batteryChargeOnlyFromGeneration) {
-            // In this case, we assume that all the flow into the
-            // batteries is coming from generation, and the grid is not contributing
-            // at all.
+            
+            
+            
             gridToBatteriesTemp = 0;
             generationToBatteriesTemp = batteriesOutTotal;
         }
         else {
-            // Otherwise, we proceed on the basis that the full flow into the battery
-            // is coming from the grid (as far as the grid input allows). If there is
-            // more flow coming into the batteries than the grid would allow, we
-            // assume that the additional flow is coming from generation.
+            
+            
+            
+            
             if (gridImport > batteriesOutTotal) {
                 gridToBatteriesTemp = batteriesOutTotal;
             }
@@ -5521,8 +5521,8 @@ let ElecSankey = class ElecSankey extends s$1 {
                 generationToBatteriesTemp = batteriesOutTotal - gridToBatteriesTemp;
             }
         }
-        // If we have exceeded the total generation by doing this, we must
-        // recalculate the phantom generation source.
+        
+        
         x =
             this._gridExport +
                 generationToBatteriesTemp -
@@ -5530,28 +5530,28 @@ let ElecSankey = class ElecSankey extends s$1 {
         if (x > 0) {
             phantomGeneration = x;
         }
-        // All grid input that is not going to batteries must be going to
-        // consumers, so we calculate that next.
+        
+        
         gridToConsumersTemp = gridImport - gridToBatteriesTemp;
-        // If we are exporting more than is coming from the batteries, we
+        
         // must be generating this amount. We don't know whether it is phantom
-        // or real yet.
+        
         if (this._gridExport > batteryInTotal) {
             generationToGridTemp = this._gridExport - batteryInTotal;
         }
         else {
             generationToGridTemp = 0;
         }
-        // Now that we have generation to grid & generation to batteries, the
-        // remaining generation must be going to consumers, so we calculate that.
+        
+        
         let generationToConsumersTemp = generationTrackedTotal - generationToGridTemp - generationToBatteriesTemp;
-        // Clip negative values.
+        
         if (generationToConsumersTemp < 0) {
             generationToConsumersTemp = 0;
         }
-        // If the generation to (grid + batteries + consumers) is more than
-        // the total generation, we need to recalulate the phantom generation
-        // source.
+        
+        
+        
         x =
             generationToGridTemp +
                 generationToBatteriesTemp +
@@ -5560,14 +5560,14 @@ let ElecSankey = class ElecSankey extends s$1 {
         if (x > 0) {
             phantomGeneration = x;
         }
-        // The three items add together to give the consumer total.
+        
         let consumerTotalA = generationToConsumersTemp +
             gridToConsumersTemp +
             batteriesToConsumersTemp;
-        // Do we have an excess of consumption?
+        
         x = consumerTrackedTotal - consumerTotalA;
         if (x > ZERO_CHECK_TOLERANCE) {
-            // There is an unknown energy source.
+            
             if (this.gridInRoute === undefined && this.gridOutRoute === undefined) {
                 // If we aren't tracking grid sources, create a phantom one.
                 phantomGridIn = x;
@@ -5578,9 +5578,9 @@ let ElecSankey = class ElecSankey extends s$1 {
                         batteriesToConsumersTemp;
             }
         }
-        // If the generation to (grid + batteries + consumers) is more than
-        // the total generation, we need to recalulate the phantom generation
-        // source again
+        
+        
+        
         x =
             generationToGridTemp +
                 generationToBatteriesTemp +
@@ -5588,10 +5588,10 @@ let ElecSankey = class ElecSankey extends s$1 {
                 generationTrackedTotal;
         if (x > ZERO_CHECK_TOLERANCE) {
             phantomGeneration = x;
-            // generationToConsumersTemp =
-            //   generationTrackedTotal +
-            //   phantomGeneration -
-            //   (generationToGridTemp + generationToBatteriesTemp);
+            
+            
+            
+            
         }
         if (this._gridExport > batteryInTotal) {
             generationToGridTemp = this._gridExport - batteryInTotal;
@@ -5603,19 +5603,19 @@ let ElecSankey = class ElecSankey extends s$1 {
             generationToConsumersTemp +
                 gridToConsumersTemp +
                 batteriesToConsumersTemp;
-        // If we are still sending more to consumers than we are tracking, we must
-        // have untracked consumers (which will almost always be the case).
+        
+        
         x = consumerTotalA - consumerTrackedTotal;
         if (x > 0) {
-            // In this case, calculate the size of the untracked consumer.
+            
             untrackedConsumer = x;
         }
         else {
-            // Conversely, if we are consuming more than we are sending to consumers,
-            // we have not balanced the books - there must be more generation, so add
-            // add to the generationToConsumers flow path.
+            
+            
+            
             generationToConsumersTemp += -x;
-            // ... and recalculate the phantom generation.
+            
             phantomGeneration =
                 generationToConsumersTemp +
                     generationToBatteriesTemp +
@@ -5773,14 +5773,14 @@ let ElecSankey = class ElecSankey extends s$1 {
             phantomRate = this._phantomGenerationInRoute.rate;
         }
         let i = 0;
-        // eslint-disable-next-line guard-for-in
+        
         for (const key in routes) {
             if (Object.prototype.hasOwnProperty.call(routes, key)) {
-                // const friendlyName = routes.text;
+                
                 let width = 0;
-                const rate = routes[key].rate || 0; // Handle undefined (NaN) rates.
+                const rate = routes[key].rate || 0; 
                 // Most of the time, if the rate is zero, we don't want to draw it.
-                // Exception is if we have a >0 phantom source.
+                
                 if (rate || phantomRate > 0) {
                     width = this._rateToWidth(rate);
                     svgArray.push(renderFlowByCorners(xA + width, startTerminatorY, xA, startTerminatorY, xB + width, startTerminatorY + TERMINATOR_BLOCK_LENGTH, xB, startTerminatorY + TERMINATOR_BLOCK_LENGTH, "generation"));
@@ -6018,7 +6018,7 @@ let ElecSankey = class ElecSankey extends s$1 {
         let groupedConsumerExists = false;
         if (this.hideConsumersBelow > 0) {
             for (const key in consumerRoutes) {
-                let rate = consumerRoutes[key].rate || 0; // Treat undef/NaN as 0
+                let rate = consumerRoutes[key].rate || 0; 
                 if (rate < this.hideConsumersBelow) {
                     groupedConsumer.rate += rate;
                     groupedConsumerExists = true;
@@ -6043,7 +6043,7 @@ let ElecSankey = class ElecSankey extends s$1 {
                 }
             }
         }
-        // Re-sort the consumer routes - deleting can break the order (issue #128).
+        
         consumerRoutes = sortRoutesByRateDescending(consumerRoutes);
         if (groupedConsumerExists) {
             consumerRoutes[groupedConsumer.id] = groupedConsumer;
@@ -6097,9 +6097,9 @@ let ElecSankey = class ElecSankey extends s$1 {
         ];
     }
     renderBatteriesInOutFlow(x1, x17, x14, x15, x21, y17, y18, svgScaleX) {
-        // Bottom layer
+        
         const svgRetArray = [];
-        // Top layer
+        
         const svgRetArray2 = [];
         const divRetArray = [];
         // @todo if batteries aren't present, skip.
@@ -6252,7 +6252,7 @@ let ElecSankey = class ElecSankey extends s$1 {
     }
     render() {
         this._recalculate();
-        const [x0, y0, x1, y1, y2, y5, y10, gridOutBlendColor, toConsumersBlendColor, toBatteriesBlendColor, // TODO refactor this
+        const [x0, y0, x1, y1, y2, y5, y10, gridOutBlendColor, toConsumersBlendColor, toBatteriesBlendColor, 
         ] = this._calc_xy();
         const svgCanvasWidth = x1;
         const svgVisibleWidth = SVG_LHS_VISIBLE_WIDTH;
@@ -6509,8 +6509,8 @@ let ElecSankey = class ElecSankey extends s$1 {
     `;
     }
 };
-// Extras can be added in to the left of the consumer arrow by
-// extending this class and overriding extrasLength.
+
+
 ElecSankey.extrasLength = 0;
 __decorate([
     n$1()
@@ -6570,7 +6570,7 @@ const formatNumber = (num, localeOptions, options) => {
     const locale = localeOptions
         ? numberFormatToLocale(localeOptions)
         : undefined;
-    // Polyfill for Number.isNaN, which is more reliable than the global isNaN()
+    
     Number.isNaN =
         Number.isNaN ||
             function isNaN(input) {
@@ -6583,7 +6583,7 @@ const formatNumber = (num, localeOptions, options) => {
     if (!Number.isNaN(Number(num)) &&
         num !== "" &&
         (localeOptions === null || localeOptions === void 0 ? void 0 : localeOptions.number_format) === NumberFormat.none) {
-        // If NumberFormat is none, use en-US format without grouping.
+        
         return new Intl.NumberFormat("en-US", getDefaultFormatOptions(num, Object.assign(Object.assign({}, options), { useGrouping: false }))).format(Number(num));
     }
     if (typeof num === "string") {
@@ -6601,7 +6601,7 @@ const getDefaultFormatOptions = (num, options) => {
     if (typeof num !== "string") {
         return defaultOptions;
     }
-    // Keep decimal trailing zeros if they are present in a string numeric value
+    
     if (!options ||
         (options.minimumFractionDigits === undefined &&
             options.maximumFractionDigits === undefined)) {
@@ -6612,7 +6612,7 @@ const getDefaultFormatOptions = (num, options) => {
     return defaultOptions;
 };
 
-// end of additional items from frontend src/dialogs/more-info/ha-more-info-dialog.ts
+
 let HaElecSankey = class HaElecSankey extends ElecSankey {
     constructor() {
         super(...arguments);
@@ -6626,7 +6626,7 @@ let HaElecSankey = class HaElecSankey extends ElecSankey {
                 this._localizerIsSetup = true;
             }
             // The low level card ElecSankey doesn't know anything about the card
-            // prefix, so we need to add it here.
+            
             if (!key.startsWith("card.")) {
                 key = "card.generic." + key;
             }
@@ -6636,7 +6636,7 @@ let HaElecSankey = class HaElecSankey extends ElecSankey {
     _generateLabelDiv(id, icon, _name, valueA, valueB, valueAColor = undefined, valueBColor = undefined, displayClass = undefined, showLeftValue = true) {
         const _id = id || "";
         const numFractionDigits = this.unit === "kWh" ? 1 : 0;
-        // prettier-ignore
+        
         return x `<div
       class="label ${id ? "label-action-clickable " : ""}${displayClass}"
       id=${_id}

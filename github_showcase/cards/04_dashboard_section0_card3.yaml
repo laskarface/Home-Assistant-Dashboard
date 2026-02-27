@@ -5,10 +5,8 @@ card_mod:
   style: 'div#head { display: block !important; width: 100% !important; padding: 0
     !important; margin: 0 !important; --toggle-icon-width: 0px !important; }
 
-    #head { padding: 0 !important; margin: 0 !important; width: 100% !important; cursor:
     pointer !important; }
 
-    #head ha-icon { display: none !important; }
 
     div#items { padding: 0 !important; margin: 0 !important; }
 
@@ -481,7 +479,7 @@ entities:
             gauge: "[[[\n  var sensorObj = states['sensor.eau_chaude_du_jour_calculee'];\n\
               \  var raw = (sensorObj && sensorObj.state) ? sensorObj.state.toString().replace(',',\
               \ '.') : '0';\n  var v = parseFloat(raw) || 0;\n  \n  var color1 = '#00B4FF';\
-              \ // Light blue\n  \n  var barStyle = function() { return `\n    width:\
+              \ 
               \ 14px; \n    height: 100%; \n    position: relative; \n    border-radius:\
               \ 10px; \n    background: rgba(0,0,0,0.3); \n    border: 1px solid rgba(255,255,255,0.1);\n\
               \    overflow: hidden;\n  `; };\n  \n  var innerStyle = function(pct,\
@@ -491,10 +489,10 @@ entities:
               \  var gaugeOutput = '';\n  \n  // Jauge 1 (0-200)\n  var p1 = Math.max(0,\
               \ Math.min(100, (v / 200) * 100));\n  gaugeOutput += `<div style=\"\
               ${barStyle()}\"><div style=\"${innerStyle(p1, color1)}\"></div></div>`;\n\
-              \  \n  // Jauge 2 (200-400)\n  if (v >= 200) {\n    var p2 = Math.max(0,\
+              \  \n  
               \ Math.min(100, ((v - 200) / 200) * 100));\n    gaugeOutput += `<div\
               \ style=\"${barStyle()}\"><div style=\"${innerStyle(p2, color1)}\"></div></div>`;\n\
-              \  }\n  \n  // Jauge 3 (400-600)\n  if (v >= 400) {\n    var p3 = Math.max(0,\
+              \  }\n  \n  
               \ Math.min(100, ((v - 400) / 200) * 100));\n    gaugeOutput += `<div\
               \ style=\"${barStyle()}\"><div style=\"${innerStyle(p3, color1)}\"></div></div>`;\n\
               \  }\n  \n  return gaugeOutput;\n]]]\n"

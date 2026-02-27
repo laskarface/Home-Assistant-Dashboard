@@ -50,8 +50,8 @@ card:
       \    const n = Number(String(raw).replace(',', '.'));\n    return isFinite(n)\
       \ ? n : null;\n  };\n  const fmtPctSmart = (n) => {\n    if (n === null) return\
       \ '—';\n    // ratio 0..1 => %\n    if (n >= 0 && n <= 1) return `${(n*100).toFixed(0)}%`;\n\
-      \    // déjà en % 1..100\n    if (n > 1 && n <= 100) return `${n.toFixed(0)}%`;\n\
-      \    // au-delà : on affiche brut (ou clamp si tu préfères)\n    return `${n.toFixed(0)}%`;\n\
+      \    
+      \    
       \  };\n\n  const t = num('sensor.ratrig_vminion_octopus_temp');\n  const tempTxt\
       \ = (t === null) ? '—' : `${t.toFixed(1)}°C`;\n\n  const awake = num('sensor.ratrig_vminion_mcu_awake');\n\
       \  const awakeTxt = fmtPctSmart(awake);\n\n  const fan = num('sensor.ratrig_vminion_controller_fan');\n\
@@ -85,7 +85,7 @@ card:
       \ > 1 && n <= 100) return `${n.toFixed(0)}%`;\n    return `${n.toFixed(0)}%`;\n\
       \  };\n\n  const t = num('sensor.ratrig_vminion_raspberry_pi_temp');\n  const\
       \ tTxt = (t === null) ? '—' : `${t.toFixed(1)}°C`;\n\n  const mcuLoad = num('sensor.ratrig_vminion_mcu_load');\n\
-      \  const mcuTxt = fmtPctSmart(mcuLoad);\n\n  // \U0001F449 Mémoire RPi (déjà\
+      \  const mcuTxt = fmtPctSmart(mcuLoad);\n\n  
       \ en % propre)\n  const mem = num('sensor.ratrig_vminion_memory_used');\n  const\
       \ memTxt = (mem === null) ? '—' : `${mem.toFixed(0)}%`;\n\n  return `\n    <div\
       \ style=\"\n      height:100%;\n      border-radius:14px;\n      overflow:hidden;\n\

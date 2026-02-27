@@ -41,7 +41,7 @@ class TariffChartCard extends HTMLElement {
       script.src = "/hacsfiles/tariff-chart/chartjs/chart.js";
       
       script.onerror = () => {
-        // Fallback to manual installation path
+        
         script.src = "/local/tariff_chart/chartjs/chart.js";
         document.head.appendChild(script);
       };     
@@ -54,7 +54,7 @@ class TariffChartCard extends HTMLElement {
       annotationScript.src = "/hacsfiles/tariff-chart/chartjs/chartjs-plugin-annotation.js";
         
       annotationScript.onerror = () => {
-        // Fallback to manual installation path
+        
         annotationScript.src = "/local/tariff_chart/chartjs/chartjs-plugin-annotation.js";
         document.head.appendChild(annotationScript);
       };
@@ -177,7 +177,7 @@ class TariffChartCard extends HTMLElement {
                 color: "#ffffff"
               },
               grid: {
-                display: false // Remove grid lines
+                display: false 
               }
             },
             y: {
@@ -192,7 +192,7 @@ class TariffChartCard extends HTMLElement {
                 color: "#ffffff"
               },
               grid: {
-                display: false // Remove grid lines
+                display: false 
               }
             }
         }

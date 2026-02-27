@@ -915,7 +915,7 @@ button_cards:
   sub_card:
     tire_card:
       background:
-        media_content_id: media-source://image_upload/504d2b73a9cd503bc02999ab8a71670a
+        media_content_id: media-source:
         media_content_type: image/png
         metadata:
           title: pngegg (1).png
@@ -925,7 +925,7 @@ button_cards:
           navigateIds:
           - {}
           - media_content_type: app
-            media_content_id: media-source://image_upload
+            media_content_id: media-source:
       front_left:
         entity: sensor.tesla_model_3_pression_pneu_avant_gauche
         name: Avant gauche

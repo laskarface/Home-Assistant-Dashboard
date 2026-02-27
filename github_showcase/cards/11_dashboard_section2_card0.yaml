@@ -88,7 +88,6 @@ entities:
         \ fill=\"url(#gold-bar)\" filter=\"url(#glow)\"/>\n      <rect x=\"35\" y=\"\
         33\" width=\"130\" height=\"3\" rx=\"1.5\" fill=\"rgba(255,255,255,0.7)\"\
         />\n      <rect x=\"60\" y=\"15\" width=\"12\" height=\"30\" rx=\"6\" fill=\"\
-        #F0F0F0\" stroke=\"rgba(0,0,0,0.2)\" stroke-width=\"1\"/>\n      <rect x=\"\
         128\" y=\"15\" width=\"12\" height=\"30\" rx=\"6\" fill=\"#F0F0F0\" stroke=\"\
         rgba(0,0,0,0.2)\" stroke-width=\"1\"/>\n      <circle cx=\"100\" cy=\"120\"\
         \ r=\"25\" fill=\"none\" stroke=\"rgba(255,255,255,0.1)\" stroke-width=\"\

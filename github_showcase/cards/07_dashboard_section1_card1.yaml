@@ -5,10 +5,8 @@ card_mod:
   style: 'div#head { display: block !important; width: 100% !important; padding: 0
     !important; margin: 0 !important; --toggle-icon-width: 0px !important; }
 
-    #head { padding: 0 !important; margin: 0 !important; width: 100% !important; cursor:
     pointer !important; }
 
-    #head ha-icon { display: none !important; }
 
     div#items { padding: 0 !important; margin: 0 !important; }
 

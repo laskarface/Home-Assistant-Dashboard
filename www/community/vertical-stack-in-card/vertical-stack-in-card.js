@@ -30,7 +30,7 @@ class VerticalStackInCard extends HTMLElement {
     );
     this._refCards = await Promise.all(promises);
 
-    // Style cards
+    
     this._refCards.forEach((card) => {
       if (card.updateComplete) {
         card.updateComplete.then(() => this._styleCard(card));
@@ -39,7 +39,7 @@ class VerticalStackInCard extends HTMLElement {
       }
     });
 
-    // Create the card
+    
     const card = document.createElement('ha-card');
     const cardContent = document.createElement('div');
     card.header = config.title;
@@ -60,7 +60,7 @@ class VerticalStackInCard extends HTMLElement {
     }
     shadowRoot.appendChild(card);
 
-    // Calculate card size
+    
     this._cardSize.resolve();
   }
 
@@ -163,7 +163,7 @@ class VerticalStackInCard extends HTMLElement {
   }
 
   static async getConfigElement() {
-    // Ensure the hui-stack-card-editor is loaded.
+    
     let cls = customElements.get('hui-vertical-stack-card');
     if (!cls) {
       const helpers = await window.loadCardHelpers();
@@ -173,7 +173,7 @@ class VerticalStackInCard extends HTMLElement {
     }
     const configElement = await cls.getConfigElement();
 
-    // Patch setConfig to remove non-VSIC config options.
+    
     const originalSetConfig = configElement.setConfig;
     configElement.setConfig = (config) =>
       originalSetConfig.call(configElement, {

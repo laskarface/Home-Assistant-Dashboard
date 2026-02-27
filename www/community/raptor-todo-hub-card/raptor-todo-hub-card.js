@@ -41,7 +41,6 @@
    title: Tâches & courses – Démo
    title_mode: per_list
    lists:
-     # 1) Grocery list with presets "grocery"
      - entity: todo.courses_demo
        label: Courses démo
        icon: mdi:cart
@@ -52,7 +51,6 @@
        show_progress_bar: true
        auto_remove_completed_seconds: 86400
 
-     # 2) Personal / admin tasks with urgency mode
      - entity: todo.taches_myriam_demo
        label: Tâches Myriam démo
        icon: mdi:account-heart
@@ -64,7 +62,6 @@
        urgency_warning_color: "#f97316"
        urgency_overdue_color: "#ef4444"
 
-     # 3) House chores by room
      - entity: todo.maison_demo
        label: Maison démo
        icon: mdi:home-wrench
@@ -80,40 +77,40 @@
 */
 
 /* "Raptor" ASCII logo ---------------------------------------------------- */
-//                                   .,.                                          
-//                       *******                        *#### (#####              
-//                  ******                          / ########     .#####.        
-//              ,*****                          //////##########   #####  /####   
-//           .*****                           // /////*#####################  ##  
-//         ******                             //// /// ######*      *############ 
-//       ******                               ////// /   ###########,            
-//     .*****                                 ////////     ##################     
-//    ******                                  //////// #                         
-//   *****.                                  ## ////// ###                       
-//  *****,                              #########/ /// #####/                  , 
-// ,*****                           ################ /.######                  
-// *****                       (####################   (#####                  
-// ******                   #####   ########   ////////   ###                   .*
-//,******             .*** ######### #####*   /////////     # /                 *
-// *********    .******* ############ ###### ////////       ////                *
-//  ******************* (############# #####///////      *///// ##              *
-//   ****************** //// ,######### ###  /########       #########          *
-//     ****************  ////////  #####/(       #######.          ####         *
-//                       /////// /////  ##     //    (####           ###       **
-//                        ///// //////////, /////     .####       /*(##       **
-//                       ////// ///////    / ////   ## ###         ,         ,**
-//                     ////////////       // ///      #                     ***.
-//    .              /////////,         ////,/                             ***   
-//                   ///               ......                            ****    
-//       ,           ,///##              /////                         ****.     
-//         *.         // ###              ,/// /                     *****       
-//           ,*       / ####                /*/// ///             *****          
-//              **,    ####( ####             ///// ///        ******            
-//                 ****  ##### #####                      ,*******               
-//                     ******.                      **********                   
-//                           ***************************                         
 
-// ---- Raptor Todo Hub Card - multi-list todo hub (grocery / tasks / rooms) ----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -127,12 +124,12 @@ const LitElementBase = LovelaceView
 const html = LitElementBase.prototype.html;
 const css = LitElementBase.prototype.css;
 
-// Tag de suppression auto stocké dans le summary : #rtrm(start,delay)
+
 const AUTO_REMOVE_TAG_REGEX = /#rtrm\((\d+),(\d+)\)/;
 
-// Presets intégrés
+
 const RAPTOR_TODO_PRESETS = {
-  // ----- COURSES : ~20 RAYONS -----
+  
   grocery: [
     {
       key: "fruits_legumes",
@@ -396,7 +393,7 @@ const RAPTOR_TODO_PRESETS = {
     },
   ],
 
-  // ----- URGENCE -----
+  
   urgency: [
     {
       key: "no_due",
@@ -472,7 +469,7 @@ const RAPTOR_TODO_PRESETS = {
     },
   ],
 
-  // ----- HORIZON -----
+  
   timeframe: [
     {
       key: "anytime",
@@ -559,7 +556,7 @@ const RAPTOR_TODO_PRESETS = {
     },
   ],
 
-  // ----- PIECES -----
+  
   rooms: [
     {
       key: "salon",
@@ -707,7 +704,7 @@ const RAPTOR_TODO_PRESETS = {
   ],
 };
 
-// couleurs par défaut pour la barre de progression (en % réalisés)
+
 const DEFAULT_PROGRESS_COLORS = [
   { threshold: 90, color: "#3b82f6" }, // bleu
   { threshold: 60, color: "#22c55e" }, // vert
@@ -715,10 +712,10 @@ const DEFAULT_PROGRESS_COLORS = [
   { threshold: 0, color: "#ef4444" }, // rouge
 ];
 
-// couleur neutre (listes vides)
+
 const DEFAULT_EMPTY_LIST_COLOR = "#9ca3af";
 
-// ---- UI translations (only UI strings, not your todo content) ----
+
 const UI_LABELS = {
   en: {
     config_missing_lists: "Raptor Todo Hub Card needs a 'lists' field.",
@@ -808,7 +805,7 @@ class RaptorTodoHubCard extends LitElementBase {
     return 4;
   }
 
-  // ------------------ HELPERS LANGUE ------------------
+  
 
   _getLang() {
     if (this._config && this._config.language) {
@@ -843,7 +840,7 @@ class RaptorTodoHubCard extends LitElementBase {
     return typeof val === "function" ? val(...args) : val;
   }
 
-  // ------------------ HELPERS AUTO-REMOVE ------------------
+  
 
   _parseAutoRemoveMeta(summary) {
     if (!summary) return null;
@@ -920,7 +917,7 @@ class RaptorTodoHubCard extends LitElementBase {
     }
   }
 
-  // helper pour recréer un item avec nouveau summary + statut (compatible HA récent)
+  
   async _recreateItemWithSummaryAndStatus(entityId, item, newSummary, status) {
     const oldId = item.uid || item.summary;
     const due = item.due || item.due_date || null;
@@ -931,7 +928,7 @@ class RaptorTodoHubCard extends LitElementBase {
       item: oldId,
     });
 
-    // 2) recréer le nouvel item avec le texte mis à jour
+    
     const addData = {
       entity_id: entityId,
       item: newSummary,
@@ -941,7 +938,7 @@ class RaptorTodoHubCard extends LitElementBase {
     }
     await this.hass.callService("todo", "add_item", addData);
 
-    // 3) remettre le statut souhaité
+    
     if (status && status !== "needs_action") {
       await this.hass.callService("todo", "update_item", {
         entity_id: entityId,
@@ -951,7 +948,7 @@ class RaptorTodoHubCard extends LitElementBase {
     }
   }
 
-  // ------------------ HELPERS DUE (sort_by: due / show_due_date) ------------------
+  
 
   _getItemDueDate(item) {
     const dueStr = item?.due || item?.due_date;
@@ -989,10 +986,10 @@ class RaptorTodoHubCard extends LitElementBase {
     }
   }
 
-  // ------------------ TRI (sort_by) ------------------
+  
 
-  // Tri par urgence (preset: urgency) selon ordre A:
-  // URGENT → SOON → NORMAL → LONG TERM → NO DUE
+  
+  
   _getUrgencyRank(list, item) {
     const summary = this._stripAutoRemoveMeta(item?.summary || "");
     const cats = this._getCategories(list);
@@ -1034,7 +1031,7 @@ class RaptorTodoHubCard extends LitElementBase {
       return arr;
     }
 
-    // 2) Tri par urgence (tags/catégories), ordre A
+    
     if (mode === "urgency") {
       const arr = [...items];
       arr.sort((a, b) => {
@@ -1062,7 +1059,7 @@ class RaptorTodoHubCard extends LitElementBase {
     return items;
   }
 
-  // ------------------ STYLES ------------------
+  
 
   static get styles() {
     return css`
@@ -1266,7 +1263,7 @@ class RaptorTodoHubCard extends LitElementBase {
     `;
   }
 
-  // ------------------ RENDER ------------------
+  
 
   render() {
     if (!this.hass || !this._config) return html``;
@@ -1292,7 +1289,7 @@ class RaptorTodoHubCard extends LitElementBase {
       items = [];
     }
 
-    // Tri optionnel
+    
     const activeRaw = items.filter((it) => it.status !== "completed");
     const completedRaw = items.filter((it) => it.status === "completed");
     const active = this._sortItemsForList(list, activeRaw);
@@ -1357,7 +1354,7 @@ class RaptorTodoHubCard extends LitElementBase {
     return list.header_title || list.label || list.name || friendly;
   }
 
-  // ------------------ SOUS-RENDU ------------------
+  
 
   _renderTab(list, index) {
     const entityId = list.entity;
@@ -1555,7 +1552,7 @@ class RaptorTodoHubCard extends LitElementBase {
     }
   }
 
-  // ------------------ CATEGORIES & PRESETS ------------------
+  
 
   _getCategories(list) {
     const fromPreset = list.preset ? RAPTOR_TODO_PRESETS[list.preset] || [] : [];
@@ -1594,10 +1591,10 @@ class RaptorTodoHubCard extends LitElementBase {
     return cats.find((c) => c.key === list.default_category) || null;
   }
 
-  // ------------------ COULEURS (progress + urgence) ------------------
+  
 
   _getProgressColor(list, percent) {
-    // liste vide => couleur neutre
+    
     if (percent == null) {
       return list.empty_list_color || DEFAULT_EMPTY_LIST_COLOR;
     }
@@ -1677,7 +1674,7 @@ class RaptorTodoHubCard extends LitElementBase {
     return null;
   }
 
-  // ------------------ TODO : LECTURE / AJOUT / TOGGLE ------------------
+  
 
   async _fetchItemsFor(entityId, skipAutoRemove = false) {
     if (!this.hass || !entityId) return;

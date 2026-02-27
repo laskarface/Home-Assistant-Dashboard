@@ -84,7 +84,7 @@ custom_fields:
     \ style=\"color: #141B26; font-size: 11px; font-weight: 900;\">${Math.round(cur)}°</span>\n\
     \        </div>\n      </div>\n      <span style=\"font-size: 12px; font-weight:\
     \ 900; color: white; min-width: 25px; text-align: right;\">${Math.round(high)}°</span>\n\
-    \    </div>\n  `;\n\n  // --- ALERTES MULTIPLES (MÉTÉO FRANCE) ---\n  const alert_ent\
+    \    </div>\n  `;\n\n  
     \ = states['sensor.91_weather_alert'];\n  let alerts_html = '';\n  if (alert_ent\
     \ && alert_ent.state !== 'Vert' && alert_ent.state !== 'unknown') {\n    const\
     \ risks_map = {\n      'inondation': 'mdi:home-flood', 'vent': 'mdi:weather-windy',\n\

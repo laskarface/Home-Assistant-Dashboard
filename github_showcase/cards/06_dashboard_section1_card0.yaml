@@ -95,7 +95,6 @@ entities:
         8\" fill=\"white\" opacity=\"0.4\" />\n      <!-- The Cross -->\n      <rect\
         \ x=\"46\" y=\"40\" width=\"8\" height=\"20\" rx=\"2\" fill=\"#4fc3f7\" />\n\
         \      <rect x=\"40\" y=\"46\" width=\"20\" height=\"8\" rx=\"2\" fill=\"\
-        #4fc3f7\" />\n      <!-- Glow behind cross -->\n      <circle cx=\"50\" cy=\"\
         50\" r=\"18\" fill=\"url(#crossGlow)\" />\n    </svg>\n  `;\n  return `\n\
         \    <div style=\"width: 100%; height: 100%; display: flex; flex-direction:\
         \ column; align-items: center; justify-content: center; background: linear-gradient(135deg,\
@@ -114,7 +113,7 @@ entities:
         \ * 12 + (now.getMonth() - start.getMonth());\n  let days = now.getDate()\
         \ - start.getDate();\n  if (days < 0) {\n    months--;\n    const prevMonthLastDay\
         \ = new Date(now.getFullYear(), now.getMonth(), 0).getDate();\n    days +=\
-        \ prevMonthLastDay;\n  }\n  \n  // Calcul J+ Global\n  const timeDiff = now.getTime()\
+        \ prevMonthLastDay;\n  }\n  \n  
         \ - start.getTime();\n  const jPlus = Math.floor(timeDiff / (1000 * 3600 *\
         \ 24));\n  \n  // Calcul \"Cela fera x mois dans x jours\"\n  let nextMonthMilestone\
         \ = new Date(start.getFullYear(), start.getMonth() + months + 1, start.getDate());\n\

@@ -86,7 +86,7 @@
   mode: single
 - id: notif_machine_terminee
   alias: Machine à laver - rappels tant que non vidée
-  description: Envoie une notification toutes les 2h tant que la porte n'a pas été
+  description: ''
     ouverte
   triggers:
   - entity_id: input_boolean.machine_a_laver_terminee
@@ -150,7 +150,7 @@
   mode: restart
 - id: notif_seche_linge_termine
   alias: Notification - Sèche-linge terminé
-  description: Envoie une notification à User 1 et User 2 quand le sèche-linge est terminé
+  description: ''
   triggers:
   - trigger: state
     entity_id: input_boolean.seche_linge_termine
@@ -173,7 +173,7 @@
   mode: single
 - id: notif_suivi_greffe_mobile
   alias: Notif Suivi Greffe - iPhone 6h
-  description: Notification quotidienne du suivi greffe envoyée à l'iPhone de Kristensen
+  description: ''
   initial_state: true
   triggers:
   - trigger: time
@@ -208,7 +208,7 @@
   mode: single
 - id: '1764079641247'
   alias: Sèche-linge - reset auto après 4h
-  description: Éteint le flag 'sèche-linge terminé' 4h après la fin
+  description: ''
   triggers:
   - entity_id: input_boolean.seche_linge_termine
     to: 'on'
@@ -306,7 +306,7 @@
   mode: single
 - id: '1764317283011'
   alias: Notification - Machine à laver terminée
-  description: Envoie une notification à User 1, User 2 et User 3 quand la machine à
+  description: ''
     laver est terminée
   triggers:
   - entity_id: input_boolean.machine_a_laver_terminee
@@ -326,7 +326,7 @@
   mode: single
 - id: '1764332380766'
   alias: Porte garage - Alerte ouverture + notif fermeture
-  description: Alerte si porte ouverte 5 min, puis notif quand elle se referme (si
+  description: ''
     alerte envoyée)
   triggers:
   - id: garage_ouverte_5min
@@ -445,7 +445,7 @@
   mode: single
 - id: '1765876584300'
   alias: Machine à laver - notif Machine vidée
-  description: Reset le statut dès l'ouverture, même si aucune notif n'a été envoyée
+  description: ''
     cette nuit.
   triggers:
   - trigger: state
@@ -665,7 +665,7 @@
   mode: single
 - id: '1766395799546'
   alias: ⚠️ Home Assistant - Alertes système (hors mises à jour)
-  description: Push iPhone sur toute persistent_notification.created, sauf notifications
+  description: ''
     de MAJ
   triggers:
   - event_type: persistent_notification.created
@@ -935,7 +935,7 @@
   mode: single
 - id: '1769807065326'
   alias: Éteindre imprimante après refroidissement buse
-  description: Coupe la prise quand l'impression est terminée et la buse < 46°C
+  description: ''
   triggers:
   - entity_id: sensor.ratrig_vminion_current_print_state
     to: complete
@@ -973,7 +973,7 @@
   mode: single
 - id: '1770140041798'
   alias: Lumière User 5 - Extinction 10h (mar-ven) + minuit (tous les jours)
-  description: Éteint light.lumieres_morgan_z à 10h du mardi au vendredi et à minuit
+  description: ''
     tous les jours
   triggers:
   - at: 00:00:00
@@ -1053,7 +1053,7 @@
   mode: single
 - id: '1771076261767'
   alias: 'Lison : Contrôle Intelligent Chauffage'
-  description: Gère le chauffage à 22°C selon le calendrier ou forçages. Coupe si
+  description: ''
     fenêtre ouverte.
   triggers:
   - entity_id:
@@ -1109,7 +1109,7 @@
   mode: restart
 - id: '1771076282348'
   alias: 'Lison : Nettoyage Forçage Planifié'
-  description: Désactive le mode planification une fois la date de fin passée.
+  description: ''
   triggers:
   - minutes: /5
     trigger: time_pattern
@@ -1129,7 +1129,7 @@
   mode: single
 - id: '1771224468241'
   alias: "🚗 Notification Trafic : Trajet User 2"
-  description: Alerte User 2 si le trajet vers le travail est plus bouché que d'habitude
+  description: ''
     (comparé à S-1 même heure).
   triggers:
   - at: 07:20:00

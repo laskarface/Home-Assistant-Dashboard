@@ -21,7 +21,7 @@ button_card_templates:
       - border-radius: 4px
       - box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6)
       - background: "[[[\n  let level = parseFloat(entity.state);\n  if (isNaN(level))\
-          \ level = 0;\n  level = Math.max(0, Math.min(100, level));\n\n  // couleur\
+          \ level = 0;\n  level = Math.max(0, Math.min(100, level));\n\n  
           \ d'encre avec 70% de transparence\n  const c = variables.color;\n\n  const\
           \ fillColor = (c.startsWith('#'))\n    ? `${c}B3`     // HEX → alpha \"\
           B3\" ≈ 70%\n    : `rgba(${{\n        cyan: '0,255,255',\n        magenta:\

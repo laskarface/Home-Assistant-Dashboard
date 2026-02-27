@@ -1,4 +1,3 @@
-# 🏠 Home Assistant - Premium Glassmorphism Dashboard
 
 A state-of-the-art Home Assistant dashboard featuring a deep, immersive glassmorphism design, advanced Lovelace cards, and complex automations.
 

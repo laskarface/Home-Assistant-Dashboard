@@ -134,27 +134,27 @@ To fully replicate this dashboard, you must understand how the components intera
 This dashboard is built upon the incredible work of the following developers and community members. Without their integrations and custom components, this level of visual and logical depth would not be possible.
 
 ### 🔌 Integrations & Hardware Support
-| Integration / Brand | Usage in Cards | Exact GitHub Repository / Link |
-| :--- | :---: | :--- |
-| **Klipper / RatRig** (3D Printer) | 9 | [Klipper3d/klipper](https://github.com/Klipper3d/klipper) |
-| **Tesla** (Custom Integration) | 6 | [alandtse/tesla](https://github.com/alandtse/tesla) |
-| **Synology DSM** (NAS) | 5 | [home-assistant/core (Official)](https://github.com/home-assistant/core/tree/dev/homeassistant/components/synology_dsm) |
-| **Overkiz** (PAC / Heat Pump) | 4 | [home-assistant/core (Official)](https://github.com/home-assistant/core/tree/dev/homeassistant/components/overkiz) |
-| **Sonoff** (LAN) | 3 | [AlexxIT/SonoffLAN](https://github.com/AlexxIT/SonoffLAN) |
-| **Samsung TV** | 2 | [home-assistant/core (Official)](https://github.com/home-assistant/core/tree/dev/homeassistant/components/samsungtv) |
-| **Orange Livebox** | 2 | [cyr-ius/hass-livebox](https://github.com/cyr-ius/hass-livebox) |
-| **Waze Travel Times** | 1 | [home-assistant/core (Official)](https://github.com/home-assistant/core/tree/dev/homeassistant/components/waze_travel_time) |
-| **Meross** (Local Cloud) | 1 | [albertogeniola/MerossIot](https://github.com/albertogeniola/MerossIot) |
-| **Local Tuya** | 1 | [rospogrigio/localtuya](https://github.com/rospogrigio/localtuya) |
+| Integration / Brand | Usage | Developer | GitHub Repository |
+| :--- | :---: | :--- | :--- |
+| **Klipper / RatRig** | 9 | [@Klipper3d](https://github.com/Klipper3d) | [Klipper3d/klipper](https://github.com/Klipper3d/klipper) |
+| **Tesla** | 6 | [@alandtse](https://github.com/alandtse) | [alandtse/tesla](https://github.com/alandtse/tesla) |
+| **Synology DSM** | 5 | [Home Assistant](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/synology_dsm) |
+| **Overkiz** (Atlantic/PAC) | 4 | [Home Assistant](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/overkiz) |
+| **Sonoff** | 3 | [@AlexxIT](https://github.com/AlexxIT) | [AlexxIT/SonoffLAN](https://github.com/AlexxIT/SonoffLAN) |
+| **Samsung TV** | 2 | [Home Assistant](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/samsungtv) |
+| **Orange Livebox** | 2 | [@cyr-ius](https://github.com/cyr-ius) | [cyr-ius/hass-livebox](https://github.com/cyr-ius/hass-livebox) |
+| **Waze Travel Times** | 1 | [Home Assistant](https://github.com/home-assistant) | [home-assistant/core](https://github.com/home-assistant/core/tree/dev/homeassistant/components/waze_travel_time) |
+| **Meross** | 1 | [@albertogeniola](https://github.com/albertogeniola) | [albertogeniola/MerossIot](https://github.com/albertogeniola/MerossIot) |
+| **Local Tuya** | 1 | [@rospogrigio](https://github.com/rospogrigio) | [rospogrigio/localtuya](https://github.com/rospogrigio/localtuya) |
 
 ### 🎨 Custom UI Components (HACS)
-| Component Name | Usage in Cards | Exact GitHub Repository / Link |
-| :--- | :---: | :--- |
-| **Lovelace Button Card** | 53 | [custom-cards/button-card](https://github.com/custom-cards/button-card) |
-| **Lovelace Card Mod** | 12 | [thomasloven/lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod) |
-| **Battery Notes / Monitor** | 8 | [andrew-codechimp/HA-Battery-Notes](https://github.com/andrew-codechimp/HA-Battery-Notes) |
-| **Lovelace Layout Card** | 2 | [thomasloven/lovelace-layout-card](https://github.com/thomasloven/lovelace-layout-card) |
-| **Lovelace Stack-In-Card** | 1 | [custom-cards/stack-in-card](https://github.com/custom-cards/stack-in-card) |
+| Component Name | Usage | Developer | GitHub Repository |
+| :--- | :---: | :--- | :--- |
+| **Button Card** | 53 | [@RomRider](https://github.com/RomRider) | [custom-cards/button-card](https://github.com/custom-cards/button-card) |
+| **Card Mod** | 12 | [@thomasloven](https://github.com/thomasloven) | [thomasloven/lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod) |
+| **Battery Notes** | 8 | [@andrew-codechimp](https://github.com/andrew-codechimp) | [andrew-codechimp/HA-Battery-Notes](https://github.com/andrew-codechimp/HA-Battery-Notes) |
+| **Layout Card** | 2 | [@thomasloven](https://github.com/thomasloven) | [thomasloven/lovelace-layout-card](https://github.com/thomasloven/lovelace-layout-card) |
+| **Stack-In-Card** | 1 | [@custom-cards](https://github.com/custom-cards) | [custom-cards/stack-in-card](https://github.com/custom-cards/stack-in-card) |
 
 ---
 *Developed for the Home Assistant Community.*

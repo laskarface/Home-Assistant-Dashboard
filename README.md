@@ -50,7 +50,7 @@ A state-of-the-art Home Assistant dashboard featuring a deep, immersive glassmor
 | **PAC & Hot Water** (Closed) | **PAC & Hot Water** (Expanded) |
 |:---:|:---:|
 | ![PAC Closed](github_showcase/screen/pac_closed.png) | ![PAC Expanded](github_showcase/screen/pac_expanded.png) |
-| Shows current temperature and heating status of the heat pump. | **Expanded View**: Detailed energy consumption graphs, heating power, and Hot Water (ECS) management. |
+| Shows current temperature and heating status of the heat pump. | **Expanded View**: Detailed energy consumption graphs, heating power, and Hot Water (ECS) management with target temperatures. |
 
 | **Weather** (Closed) | **Weather** (Expanded) | **Humidity** (Expanded) |
 |:---:|:---:|:---:|
@@ -60,12 +60,17 @@ A state-of-the-art Home Assistant dashboard featuring a deep, immersive glassmor
 | **Smart Diffuser** (Closed) | **Smart Diffuser** (Expanded) |
 |:---:|:---:|
 | ![Diffuser Closed](github_showcase/screen/diffuser_closed.png) | ![Diffuser Expanded](github_showcase/screen/diffuser_expanded.png) |
-| Current status of the diffuser. | **Expanded View**: Dynamic "smoke" animation when active, light color control, and integrated timer setting. |
+| Current status of the diffuser. | **Expanded View**: Dynamic "smoke" animation and light control when active, plus integrated timer setting. |
 
 ---
 
 ### 🛡️ Home Care & Utilities
 *Monitoring and automation for everyday tasks.*
+
+| **Trajets / Commutes** (Closed) | **Trajets / Commutes** (Expanded) |
+|:---:|:---:|
+| ![Commute Closed](github_showcase/screen/commute_closed.png) | ![Commute Expanded](github_showcase/screen/commute_expanded.png) |
+| Quick summary of travel times for multiple users. | **Expanded View**: Detailed travel times, traffic conditions (Normal/Bouché), and estimated time without traffic. |
 
 | Lighting Overview | Lighting Controls |
 |:---:|:---:|
@@ -80,7 +85,7 @@ A state-of-the-art Home Assistant dashboard featuring a deep, immersive glassmor
 | 3D Printer (V-Minion) | Laundry Lifecycle | Smart Calendar |
 |:---:|:---:|:---:|
 | ![Printer](github_showcase/screen/printer_expanded.png) | ![Laundry](github_showcase/screen/laundry_closed.png) | ![Calendar](github_showcase/screen/calendar_expanded.jpeg) |
-| Camera feed, print progress, and hotend/bed temps. | Complex status tracking for Washing/Dryer. | Scrollable agenda view of upcoming events. |
+| Camera feed, print progress, and temps. | Complex status tracking for Washing/Dryer. | Scrollable agenda view of upcoming events. |
 
 | Battery Levels | Waste Collection | Packages (17TRACK) |
 |:---:|:---:|:---:|
@@ -95,7 +100,7 @@ A state-of-the-art Home Assistant dashboard featuring a deep, immersive glassmor
 | Post-Op Tracker | Medical Detail |
 |:---:|:---:|
 | ![Medical](github_showcase/screen/medical_closed.png) | ![Post Greffe](github_showcase/screen/post_greffe_expanded.png) |
-| Daily health checklist and reminders. | Specific medical protocol follow-up screen (e.g., hair transplant). |
+| Daily health checklist and reminders. | Specific medical protocol follow-up (e.g., hair transplant). |
 
 ---
 
@@ -117,15 +122,11 @@ To fully replicate this dashboard, you must understand how the components intera
 
 3.  **Entities & Data (`configuration.yaml` & `scripts.yaml`)**:
     - Defines the `input_boolean`, `input_select`, and `template_sensors` required.
-    - **Sensors**: Cards like "PAC Heating" or "Energy" rely on specific sensors being present. If these sensors are missing in your setup, the cards will show 'Unavailable'.
+    - **Sensors**: Cards like "PAC Heating" or "Energy" rely on specific sensors being present.
 
 ### 📦 Prerequisites
 - **HACS Components**: `button-card`, `card-mod`, `mos-graphics-card`, `layout-card`.
-- **Integrations**: `Tesla Custom Integration`, `17TRACK`, `Seventeentrack`, `Local Tuya/Zigbee2MQTT` (for various devices).
-
-### 🚀 Usage Highlights
-- The **Expanded View** logic is usually handled via `browser_mod` popups or conditional cards.
-- **Glassmorphism**: Check the `extra_styles` in the `button_card_templates` to see how the blur and refraction effects are achieved.
+- **Integrations**: `Tesla Custom Integration`, `17TRACK`, `Seventeentrack`, `Local Tuya/Zigbee2MQTT`.
 
 ---
-*Created with ❤️ for the Home Assistant Community.*
+*Developed for the Home Assistant Community.*
